@@ -2,6 +2,9 @@ import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import auth from '../../helpers/auth';
 import LoginForm from './LoginForm';
+import authenticateActions from '../../actions/AuthenticateActions';
+import authenticateStore from '../../stores/AuthenticateStore';
+import isEmail from 'validator/lib/isEmail';
 
 class Login extends React.Component {
     constructor() {
@@ -14,6 +17,18 @@ class Login extends React.Component {
             },
         };
     }
+
+    componentDidMount() {
+        authenticateStore.listen(this.onStoreChange);
+    }
+
+    componentWillUnmount() {
+        authenticateStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    } ;
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -35,13 +50,26 @@ class Login extends React.Component {
             });
     };
 
+    forgot = (event) => {
+        event.preventDefault();
+
+        const username = this.state.user.username;
+
+        if (!username || !isEmail(username)) {
+            alert('We need your email address to reset your password!');
+            return;
+        }
+
+        authenticateActions.resetPassword({ username });
+    };
+
     render() {
         return (
             <Col md={6} mdOffset={3}>
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
+                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} onForgot={this.forgot} />
                 </Jumbotron>
             </Col>
         );

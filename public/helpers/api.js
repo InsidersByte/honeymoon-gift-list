@@ -18,8 +18,14 @@ export default class {
         return this._request(GET_METHOD, url);
     }
 
-    post(data) {
-        return this._request(POST_METHOD, this._baseUrl, data);
+    post(data, extraUrl) {
+        let url = this._baseUrl;
+
+        if (extraUrl) {
+            url += `/${extraUrl}`;
+        }
+
+        return this._request(POST_METHOD, url, data);
     }
 
     put(data, id, extraUrl) {

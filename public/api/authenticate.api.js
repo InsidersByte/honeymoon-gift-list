@@ -6,6 +6,10 @@ class AuthenticateApi extends BaseApi {
     constructor() {
         super(apiUrl);
     }
+
+    resetPassword(user) {
+        return this.post(user, 'resetPassword');
+    }
 }
 
 export default new AuthenticateApi;
