@@ -5,6 +5,9 @@
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 140, 2],
-        "react/jsx-indent-props": [2, 4]
+        "react/jsx-indent-props": [2, 4],
+
+        // TODO: eslint fails on this (although it shouldn't) - remove it when it is fixed
+        "react/require-render-return": [0]
     }
 }
