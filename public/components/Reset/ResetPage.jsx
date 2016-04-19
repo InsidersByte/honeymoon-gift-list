@@ -1,19 +1,17 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import auth from '../../helpers/auth';
-import LoginForm from './LoginForm';
 import authenticateActions from '../../actions/PasswordResetActions';
 import authenticateStore from '../../stores/PasswordResetStore';
-import { isEmail } from 'validator';
+import ResetForm from './ResetForm';
 
-class Login extends React.Component {
+class ResetPage extends React.Component {
     constructor() {
         super();
 
         this.state = {
             user: {
-                username: '',
                 password: '',
+                confirmPassword: '',
             },
         };
     }
@@ -40,45 +38,34 @@ class Login extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        auth
-            .login(this.state.user)
-            .then(() => {
-                this.props.toastSuccess('Logged in');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error logging in', error);
-            });
-    };
-
-    forgot = (event) => {
-        event.preventDefault();
-
-        const username = this.state.user.username;
-
-        if (!username || !isEmail(username)) {
-            alert('We need your email address to reset your password!');
-            return;
+        if (this.state.user.password !== this.state.user.confirmPassword) {
+            this.props.toastError('Your new passwords must match');
         }
 
-        authenticateActions.create({ username });
+        authenticateActions.update({ token: this.props.params.token, ...this.state.user });
     };
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
                 <Jumbotron>
-                    <h1>Login</h1>
+                    <h1>Reset Password</h1>
 
-                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} onForgot={this.forgot} />
+                    <ResetForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-Login.propTypes = {
+ResetPage.propTypes = {
+    params: React.PropTypes.object.isRequired,
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-export default Login;
+ResetPage.defaultProps = {
+    params: {},
+};
+
+export default ResetPage;

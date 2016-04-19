@@ -7,8 +7,12 @@ class AuthenticateApi extends BaseApi {
         super(apiUrl);
     }
 
-    resetPassword(user) {
+    resetPasswordPost(user) {
         return this.post(user, 'resetPassword');
+    }
+
+    resetPasswordPut(data) {
+        return this.put(data, null, `resetPassword/${data.token}`);
     }
 }
 

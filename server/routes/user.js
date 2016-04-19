@@ -49,7 +49,7 @@ module.exports = (app, express) => {
         .route('/:userId')
 
         .put((wrap(function* updateUser(req, res) {
-            req.checkParams('id').equals(req.params.id);
+            req.checkBody('id').equals(req.params.id);
             req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
             req.checkBody('password').notEmpty();

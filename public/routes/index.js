@@ -30,6 +30,7 @@ import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGift
 import UsersPage from '../components/Users/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
+import ResetPage from '../components/Reset/ResetPage';
 
 function requireAuth(nextState, replace) {
     const { isLoggedIn } = loginStore.getState();
@@ -49,6 +50,7 @@ export default (
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
             <Route path="login" component={LoginPage} />
             <Route path="setup" component={SetupPage} />
+            <Route path="reset/:token" component={ResetPage} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
             <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />

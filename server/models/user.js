@@ -20,8 +20,13 @@ UserSchema.pre('save', function preSave(next) {
         return next();
     }
 
+    console.log(self.salt);
     self.salt = encryption.createSalt();
+    console.log(self.salt);
+
+    console.log(self.password);
     self.password = encryption.hashPassword(self.salt, self.password);
+    console.log(self.password);
 
     return next();
 });

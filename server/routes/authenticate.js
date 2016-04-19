@@ -56,43 +56,75 @@ module.exports = (app, express, config) => {
         });
     }));
 
-    router.post('/resetPassword', wrap(function* resetPassword(req, res) {
-        req.checkBody('username').isEmail();
+    router
+        .route('/resetPassword')
 
-        const user = yield User
-            .findOne({
+        .post(wrap(function* resetPassword(req, res) {
+            req.checkBody('username').isEmail();
+
+            const user = yield User.findOne({
                 username: req.body.username,
-            })
-            .select('name username password salt')
-            .exec();
+            });
 
-        if (!user) {
-            return res
-                .status(404)
-                .json({
-                    success: false,
-                    message: 'There is no user with that email address.',
-                });
-        }
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({
+                        success: false,
+                        message: 'There is no user with that email address.',
+                    });
+            }
 
-        user.resetPasswordToken = uuid.v4();
-        user.resetPasswordExpires = Date.now() + 86400000; // expires in 24 hours
+            user.resetPasswordToken = uuid.v4();
+            user.resetPasswordExpires = Date.now() + 86400000; // expires in 24 hours
 
-        yield user.save();
+            yield user.save();
 
-        yield mailer.send(
-            {
-                to: user.username,
-                subject: 'Reset Password',
-                resetUrl: `http://${req.headers.host}/admin/reset/${user.resetPasswordToken}`,
-            },
-            'resetPassword'
-        );
+            yield mailer.send(
+                {
+                    to: user.username,
+                    subject: 'Reset Password',
+                    resetUrl: `http://${req.headers.host}/admin/reset/${user.resetPasswordToken}`,
+                },
+                'resetPassword'
+            );
 
-        return res.json({
-            message: `A email has been sent to ${user.username} with further instructions.`,
-        });
-    }));
+            return res.json({
+                message: `A email has been sent to ${user.username} with further instructions.`,
+            });
+        }));
+
+    router
+        .route('/resetPassword/:token')
+
+        .put(wrap(function* resetPassword(req, res) {
+            req.checkBody('token').equals(req.params.token);
+            req.checkBody('password').notEmpty();
+            req.checkBody('confirmPassword').equals(req.body.password);
+
+            const user = yield User.findOne({
+                resetPasswordToken: req.body.token,
+            });
+
+            if (!user) {
+                return res
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: 'Invalid token.',
+                    });
+            }
+
+            user.resetPasswordToken = null;
+            user.resetPasswordExpires = null;
+            user.password = req.body.password;
+
+            yield user.save();
+
+            return res.json({
+                message: 'password reset',
+            });
+        }));
 
     return router;
 };
