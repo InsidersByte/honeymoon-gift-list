@@ -1,5 +1,6 @@
 import alt from '../helpers/alt';
 import authenticateActions from '../actions/PasswordResetActions';
+import history from '../helpers/history';
 
 class PasswordResetStore {
     constructor() {
@@ -31,6 +32,7 @@ class PasswordResetStore {
     updateSuccess(result) {
         this.result = result;
         this.isSaving = false;
+        history.replace('/admin/login');
     }
 
     updateError(error) {

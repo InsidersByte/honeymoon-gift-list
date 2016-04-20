@@ -39,12 +39,16 @@ module.exports = (app, express, config) => {
                 });
         }
 
-        const token = jwt.sign({
-            name: user.name,
-            username: user.username,
-        }, config.secret, {
-            expiresIn: 86400, // expires in 24 hours
-        });
+        const token = jwt.sign(
+            {
+                name: user.name,
+                username: user.username,
+            },
+            config.secret,
+            {
+                expiresIn: 86400, // expires in 24 hours
+            }
+        );
 
         user.lastLogin = Date.now();
         yield user.save();
@@ -104,6 +108,7 @@ module.exports = (app, express, config) => {
 
             const user = yield User.findOne({
                 resetPasswordToken: req.body.token,
+                resetPasswordExpires: { $gt: Date.now() },
             });
 
             if (!user) {
@@ -111,18 +116,26 @@ module.exports = (app, express, config) => {
                     .status(400)
                     .json({
                         success: false,
-                        message: 'Invalid token.',
+                        message: 'Password reset token is invalid or has expired.',
                     });
             }
 
-            user.resetPasswordToken = null;
-            user.resetPasswordExpires = null;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
             user.password = req.body.password;
 
             yield user.save();
 
+            yield mailer.send(
+                {
+                    to: user.username,
+                    subject: 'Your password has been changed',
+                },
+                'resetPasswordConfirmation'
+            );
+
             return res.json({
-                message: 'password reset',
+                message: 'Password Reset Successfully!',
             });
         }));
 

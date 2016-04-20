@@ -12,6 +12,7 @@ class AuthenticateApi extends BaseApi {
     }
 
     resetPasswordPut(data) {
+        // TODO: this is a little bit of a hack so we should work out a better way to do this
         return this.put(data, null, `resetPassword/${data.token}`);
     }
 }
