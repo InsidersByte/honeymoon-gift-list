@@ -12,7 +12,7 @@ function FontAwesome(props) {
     );
 
     return (
-        <i className={className}>
+        <i {...props} className={className}>
             {props.children}
         </i>
     );

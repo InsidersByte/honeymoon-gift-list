@@ -1,4 +1,5 @@
 import React from 'react';
+import FontAwesome from '../common/FontAwesome';
 
 import './LandingHeader.styl';
 
@@ -22,7 +23,9 @@ function LandingHeader(props) {
 
                 {daysTillIDoCountdown}
 
-                <div style={{ flex: '1 1 10%', maxHeight: '10%' }}></div>
+                <div style={{ flex: '1 1 5%', maxHeight: '5%' }}></div>
+
+                <FontAwesome className="landing-header__scroll-down" icon="chevron-down" size="lg" />
             </div>
         </header>
     );

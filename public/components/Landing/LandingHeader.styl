@@ -24,10 +24,28 @@ maximumSize()
     text-align center
     maximumSize()
 
+.landing-header__scroll-down
+    margin-bottom 45px
+    animation landing-header__bounce 4s 2s infinite
+
 .landing-header__title
     font-size 4.5em
     font-weight 700
 
 @media (max-width 736px)
+    .landing-header__scroll-down
+        margin-bottom 25px
+
     .landing-header__title
         font-size 3em
+
+@keyframes landing-header__bounce
+    0%, 20%, 50%, 80%, 100%
+        transform translateY(0)
+
+    40%
+        transform translateY(-10px)
+
+    60%
+        transform: translateY(-5px)
+
