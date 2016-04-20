@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
 import GiftTable from './GiftTable';
+import { GIFT_SETS_ROUTE } from '../../constants/routes.constants';
 
 class GiftSetPage extends React.Component {
     constructor(props, context) {
@@ -70,7 +71,7 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .delete(giftSetId)
             .then(() => {
-                this.context.router.push('admin/giftSet');
+                this.context.router.push(GIFT_SETS_ROUTE);
                 this.props.toastSuccess('Gift set deleted');
             })
             .catch((error) => {

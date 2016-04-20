@@ -3,6 +3,7 @@ import GiverDetailsForm from './GiverDetailsForm';
 import giftApi from '../../api/gift.api';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
+import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routes.constants';
 
 import './GiverDetails.styl';
 
@@ -25,7 +26,7 @@ class GiverDetailsPage extends React.Component {
         const { basketCount } = basketStore.getState();
 
         if (basketCount <= 0) {
-            this.context.router.replace('');
+            this.context.router.replace(HOME_ROUTE);
         }
     }
 
@@ -51,7 +52,7 @@ class GiverDetailsPage extends React.Component {
             .then((giftSet) => {
                 this.setState({ isSaving: false });
                 basketActions.emptyBasket();
-                this.context.router.push(`confirmation/${giftSet._id}`);
+                this.context.router.push(confirmationPageRoute(giftSet._id));
             })
             .catch((error) => {
                 this.setState({ isSaving: false });

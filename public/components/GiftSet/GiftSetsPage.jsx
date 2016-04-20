@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable';
 import GiftSetApi from '../../api/giftSet.api';
+import { giftSetRoute } from '../../constants/routes.constants';
 
 class GiftSetsPage extends React.Component {
     constructor(props, context) {
@@ -68,7 +69,7 @@ class GiftSetsPage extends React.Component {
     };
 
     view = (giftSet) => {
-        this.context.router.push(`admin/giftSet/${giftSet._id}`);
+        this.context.router.push(giftSetRoute(giftSet._id));
     };
 
     _loadGiftSets() {

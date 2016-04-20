@@ -2,6 +2,7 @@ import alt from '../helpers/alt';
 import jwtDecode from 'jwt-decode';
 import loginActions from '../actions/LoginActions';
 import history from '../helpers/history';
+import { ADMIN_ROUTE, LOGIN_ROUTE } from '../constants/routes.constants';
 
 class LoginStore {
     constructor() {
@@ -17,7 +18,7 @@ class LoginStore {
         this.isLoggedIn = true;
 
         if (redirect) {
-            history.replace('/admin');
+            history.replace(ADMIN_ROUTE);
         }
     }
 
@@ -25,7 +26,7 @@ class LoginStore {
         this.jwt = null;
         this.user = null;
         this.isLoggedIn = false;
-        history.replace('/admin/login');
+        history.replace(LOGIN_ROUTE);
     }
 }
 
