@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const weddingPartyMember = new Schema({
+    name: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    description: { type: String, required: true },
+});
+
 const WeddingProfileSchema = new Schema({
     cover: {
         title: { type: String, required: true },
@@ -21,6 +27,7 @@ const WeddingProfileSchema = new Schema({
         disclaimerMessage: { type: String },
     },
     rsvp: { type: String, required: true },
+    weddingPartyMembers: [weddingPartyMember],
 });
 
 module.exports = mongoose.model('WeddingProfile', WeddingProfileSchema);
