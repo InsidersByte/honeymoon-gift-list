@@ -1,14 +1,14 @@
 class BaseActions {
     constructor({ api, key }) {
-        this._api = api;
-        this._key = key;
+        this.api = api;
+        this.key = key;
     }
 
     fetch() {
         return (dispatch) => {
             dispatch();
 
-            this._api
+            this.api
                 .get()
                 .then(this.fetchSuccess)
                 .catch(this.fetchError);
@@ -19,12 +19,12 @@ class BaseActions {
 
     fetchError = o => o;
 
-    update({ [this._key]: data }) {
+    update({ [this.key]: data }) {
         return (dispatch) => {
             dispatch();
 
-            this._api
-                .put({ [this._key]: data })
+            this.api
+                .put({ [this.key]: data })
                 .then(this.updateSuccess)
                 .catch(this.updateError);
         };

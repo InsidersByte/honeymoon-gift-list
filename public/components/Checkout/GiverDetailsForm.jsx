@@ -53,7 +53,7 @@ function GiverDetailsForm(props) {
                     bsStyle="success"
                     disabled={props.isSaving}
                 >
-                    { props.isSaving ? 'Completing Gift...' : 'Complete Gift' }
+                    {props.isSaving ? 'Completing Gift...' : 'Complete Gift'}
                 </Button>
 
                 <Link

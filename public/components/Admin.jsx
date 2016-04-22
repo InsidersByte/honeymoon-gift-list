@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor() {
         super();
 
-        this.state = this._getLoginState();
+        this.state = this.getLoginState();
     }
 
     componentDidMount() {
@@ -20,19 +20,19 @@ class App extends React.Component {
     }
 
     onStoreChange = () => {
-        this.setState(this._getLoginState());
+        this.setState(this.getLoginState());
     };
+
+    getLoginState() {
+        return {
+            userLoggedIn: loginStore.getState().isLoggedIn,
+        };
+    }
 
     logout(event) {
         event.preventDefault();
 
         auth.logout();
-    }
-
-    _getLoginState() {
-        return {
-            userLoggedIn: loginStore.getState().isLoggedIn,
-        };
     }
 
     render() {

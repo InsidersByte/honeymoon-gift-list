@@ -20,8 +20,8 @@ const GiftSetSchema = new Schema(
 
 GiftSetSchema.pre('remove', function preRemove(next) {
     this.model('Giver').update(
-        { giftSets: this._id },
-        { $pull: { giftSets: this._id } },
+        { giftSets: this._id }, // eslint-disable-line no-underscore-dangle
+        { $pull: { giftSets: this._id } }, // eslint-disable-line no-underscore-dangle
         { multi: true },
         next
     );

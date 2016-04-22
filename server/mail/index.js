@@ -11,7 +11,7 @@ class mailer {
     constructor() {
         const options = config.mail && Object.assign({}, config.mail.options) || {};
 
-        this._transport = nodemailer.createTransport(options);
+        this.transport = nodemailer.createTransport(options);
     }
 
     get from() {
@@ -33,7 +33,7 @@ class mailer {
         );
 
         if (!templateName) {
-            return this._send(messageToSend);
+            return this.sendMail(messageToSend);
         }
 
         const template = new EmailTemplate(path.join(templatesDirectory, templateName));
@@ -44,12 +44,12 @@ class mailer {
                 messageToSend.text = result.text;
                 messageToSend.html = result.html;
 
-                return this._send(message);
+                return this.sendMail(message);
             });
     }
 
-    _send(message) {
-        return this._transport.sendMail(message);
+    sendMail(message) {
+        return this.transport.sendMail(message);
     }
 }
 

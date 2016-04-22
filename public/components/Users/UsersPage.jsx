@@ -16,7 +16,7 @@ class Users extends React.Component {
     }
 
     componentDidMount() {
-        this._loadUsers();
+        this.loadUsers();
     }
 
     setUserState = (event) => {
@@ -27,12 +27,12 @@ class Users extends React.Component {
     };
 
     save = (user) => {
-        if (user._id) {
+        if (user._id) { // eslint-disable-line no-underscore-dangle
             UserApi
-                .put(user, user._id)
+                .put(user, user._id) // eslint-disable-line no-underscore-dangle
                 .then(() => {
                     this.close();
-                    this._loadUsers();
+                    this.loadUsers();
                     this.props.toastSuccess('User saved');
                 })
                 .catch((error) => {
@@ -43,7 +43,7 @@ class Users extends React.Component {
                 .post(user)
                 .then(() => {
                     this.close();
-                    this._loadUsers();
+                    this.loadUsers();
                     this.props.toastSuccess('User saved');
                 })
                 .catch((error) => {
@@ -59,9 +59,9 @@ class Users extends React.Component {
         }
 
         UserApi
-            .delete(user._id)
+            .delete(user._id) // eslint-disable-line no-underscore-dangle
             .then(() => {
-                this._loadUsers();
+                this.loadUsers();
                 this.props.toastSuccess('User deleted');
             })
             .catch((error) => {
@@ -86,7 +86,7 @@ class Users extends React.Component {
         this.setState({ showModal: false });
     };
 
-    _loadUsers() {
+    loadUsers() {
         UserApi
             .get()
             .then((response) => {

@@ -22,7 +22,7 @@ function GiftSetTable(props) {
                     .giftSets
                     .map(giftSet => (
                         <GiftSetRow
-                            key={giftSet._id}
+                            key={giftSet._id} // eslint-disable-line no-underscore-dangle
                             giftSet={giftSet}
                             onMarkAsPaid={props.onMarkAsPaid}
                             onMarkAsDetailsSent={props.onMarkAsDetailsSent}

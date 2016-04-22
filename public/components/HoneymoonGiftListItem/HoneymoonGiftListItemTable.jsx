@@ -23,7 +23,7 @@ function HoneymoonGiftListItemTable(props) {
                     .items
                     .map(item => (
                         <HoneymoonGiftListItemRow
-                            key={item._id}
+                            key={item._id} // eslint-disable-line no-underscore-dangle
                             item={item}
                             onEdit={props.onEdit}
                             onDelete={props.onDelete}

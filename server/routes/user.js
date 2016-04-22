@@ -62,7 +62,7 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const user = yield User.findById(req.body._id);
+            const user = yield User.findById(req.body._id); // eslint-disable-line no-underscore-dangle
 
             if (!user) {
                 return res

@@ -69,7 +69,7 @@ module.exports = (app, express) => {
         .route('/:id')
 
         .put(wrap(function* updateHoneymoonGiftItem(req, res) {
-            req.checkParams('id').equals(req.body._id);
+            req.checkParams('id').equals(req.body._id); // eslint-disable-line no-underscore-dangle
             req.checkBody('imageUrl').isURL();
             req.checkBody('name').notEmpty();
             req.checkBody('description').notEmpty();

@@ -11,7 +11,7 @@ class GiftItem extends React.Component {
 
     render() {
         const item = this.props.item;
-        const id = item._id;
+        const id = item._id; // eslint-disable-line no-underscore-dangle
 
         const basketItem = this.props.basketItems[id] || { quantity: 0 };
         const outOfStock = item.remaining - basketItem.quantity <= 0;

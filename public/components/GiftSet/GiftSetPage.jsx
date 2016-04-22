@@ -19,7 +19,7 @@ class GiftSetPage extends React.Component {
     }
 
     componentDidMount() {
-        this._loadGiftSet();
+        this.loadGiftSet();
     }
 
     markAsPaid = () => {
@@ -33,7 +33,7 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .paid(this.state.giftSet, giftSetId)
             .then(() => {
-                this._loadGiftSet();
+                this.loadGiftSet();
                 this.props.toastSuccess('Gift set marked as paid');
             })
             .catch((error) => {
@@ -52,7 +52,7 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .detailsSent(this.state.giftSet, giftSetId)
             .then(() => {
-                this._loadGiftSet();
+                this.loadGiftSet();
                 this.props.toastSuccess('Gift set marked as details sent');
             })
             .catch((error) => {
@@ -79,7 +79,7 @@ class GiftSetPage extends React.Component {
             });
     };
 
-    _loadGiftSet() {
+    loadGiftSet() {
         const { giftSetId } = this.props.params;
 
         GiftSetApi

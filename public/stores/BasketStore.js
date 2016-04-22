@@ -15,7 +15,7 @@ class BasketStore {
         let basketCount = 0;
         let total = 0;
 
-        for (const key in this.items) {
+        for (const key in this.items) { // eslint-disable-line no-restricted-syntax
             if (this.items.hasOwnProperty(key)) {
                 const { quantity, price } = this.items[key];
                 basketCount += quantity;
@@ -30,7 +30,7 @@ class BasketStore {
     }
 
     addToBasket(item) {
-        const existingItem = this.items[item._id] || { quantity: 0 };
+        const existingItem = this.items[item._id] || { quantity: 0 }; // eslint-disable-line no-underscore-dangle
         existingItem.quantity += 1;
         const updatedItem = Object.assign({}, existingItem, item);
 
@@ -38,19 +38,19 @@ class BasketStore {
             updatedItem.quantity = updatedItem.remaining;
         }
 
-        this.items[item._id] = updatedItem;
+        this.items[item._id] = updatedItem; // eslint-disable-line no-underscore-dangle
     }
 
     removeFromBasket({ _id }) {
-        if (this.items[_id].quantity <= 1) {
+        if (this.items[_id].quantity <= 1) { // eslint-disable-line no-underscore-dangle
             return;
         }
 
-        this.items[_id].quantity -= 1;
+        this.items[_id].quantity -= 1; // eslint-disable-line no-underscore-dangle
     }
 
     deleteFromBasket({ _id }) {
-        delete this.items[_id];
+        delete this.items[_id]; // eslint-disable-line no-underscore-dangle
     }
 
     emptyBasket() {

@@ -16,7 +16,7 @@ class HoneymoonGiftListItemPage extends React.Component {
     }
 
     componentDidMount() {
-        this._loadItems();
+        this.loadItems();
     }
 
     setItemState = (event) => {
@@ -27,12 +27,12 @@ class HoneymoonGiftListItemPage extends React.Component {
     };
 
     save = (item) => {
-        if (item._id) {
+        if (item._id) { // eslint-disable-line no-underscore-dangle
             honeymoonGiftListItemApi
-                .put(item, item._id)
+                .put(item, item._id) // eslint-disable-line no-underscore-dangle
                 .then(() => {
                     this.close();
-                    this._loadItems();
+                    this.loadItems();
                     this.props.toastSuccess('Honeymoon gift list item saved');
                 })
                 .catch((error) => {
@@ -43,7 +43,7 @@ class HoneymoonGiftListItemPage extends React.Component {
                 .post(item)
                 .then(() => {
                     this.close();
-                    this._loadItems();
+                    this.loadItems();
                     this.props.toastSuccess('Honeymoon gift list item saved');
                 })
                 .catch((error) => {
@@ -59,10 +59,10 @@ class HoneymoonGiftListItemPage extends React.Component {
         }
 
         honeymoonGiftListItemApi
-            .delete(item._id)
+            .delete(item._id) // eslint-disable-line no-underscore-dangle
             .then(() => {
                 this.close();
-                this._loadItems();
+                this.loadItems();
                 this.props.toastSuccess('honeymoon gift list item deleted');
             })
             .catch((error) => {
@@ -70,7 +70,7 @@ class HoneymoonGiftListItemPage extends React.Component {
             });
     };
 
-    _loadItems() {
+    loadItems() {
         honeymoonGiftListItemApi
             .get()
             .then((response) => {

@@ -2,7 +2,7 @@ const environmentConstants = require('../constants/environment');
 const path = require('path');
 
 module.exports = (app, express, config, environment) => {
-    const apiRoutes = require('./api')(app, express, config);
+    const apiRoutes = require('./api')(app, express, config); // eslint-disable-line global-require
 
     app.use('/api', apiRoutes);
 

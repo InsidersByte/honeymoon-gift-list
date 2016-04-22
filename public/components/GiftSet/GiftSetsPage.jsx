@@ -14,7 +14,7 @@ class GiftSetsPage extends React.Component {
     }
 
     componentDidMount() {
-        this._loadGiftSets();
+        this.loadGiftSets();
     }
 
     markAsPaid = (giftSet) => {
@@ -24,9 +24,9 @@ class GiftSetsPage extends React.Component {
         }
 
         GiftSetApi
-            .paid(giftSet, giftSet._id)
+            .paid(giftSet, giftSet._id) // eslint-disable-line no-underscore-dangle
             .then(() => {
-                this._loadGiftSets();
+                this.loadGiftSets();
                 this.props.toastSuccess('Gift set marked as paid');
             })
             .catch((error) => {
@@ -41,9 +41,9 @@ class GiftSetsPage extends React.Component {
         }
 
         GiftSetApi
-            .detailsSent(giftSet, giftSet._id)
+            .detailsSent(giftSet, giftSet._id) // eslint-disable-line no-underscore-dangle
             .then(() => {
-                this._loadGiftSets();
+                this.loadGiftSets();
                 this.props.toastSuccess('Gift set marked as details sent');
             })
             .catch((error) => {
@@ -58,9 +58,9 @@ class GiftSetsPage extends React.Component {
         }
 
         GiftSetApi
-            .delete(giftSet._id)
+            .delete(giftSet._id) // eslint-disable-line no-underscore-dangle
             .then(() => {
-                this._loadGiftSets();
+                this.loadGiftSets();
                 this.props.toastSuccess('Gift set deleted');
             })
             .catch((error) => {
@@ -69,10 +69,10 @@ class GiftSetsPage extends React.Component {
     };
 
     view = (giftSet) => {
-        this.context.router.push(giftSetRoute(giftSet._id));
+        this.context.router.push(giftSetRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
     };
 
-    _loadGiftSets() {
+    loadGiftSets() {
         GiftSetApi
             .get()
             .then((response) => {
@@ -106,8 +106,6 @@ GiftSetsPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
-
-GiftSetsPage.defaultProps = {};
 
 GiftSetsPage.contextTypes = {
     router: React.PropTypes.object.isRequired,

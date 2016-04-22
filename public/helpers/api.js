@@ -5,31 +5,31 @@ import loginActions from '../actions/LoginActions';
 
 export default class {
     constructor(baseUrl) {
-        this._baseUrl = `${BASE_URL}${baseUrl}`;
+        this.baseUrl = `${BASE_URL}${baseUrl}`;
     }
 
     get(id) {
-        let url = this._baseUrl;
+        let url = this.baseUrl;
 
         if (id) {
             url += `/${id}`;
         }
 
-        return this._request(GET_METHOD, url);
+        return this.request(GET_METHOD, url);
     }
 
     post(data, extraUrl) {
-        let url = this._baseUrl;
+        let url = this.baseUrl;
 
         if (extraUrl) {
             url += `/${extraUrl}`;
         }
 
-        return this._request(POST_METHOD, url, data);
+        return this.request(POST_METHOD, url, data);
     }
 
     put(data, id, extraUrl) {
-        let url = this._baseUrl;
+        let url = this.baseUrl;
 
         if (id) {
             url += `/${id}`;
@@ -39,14 +39,14 @@ export default class {
             url += `/${extraUrl}`;
         }
 
-        return this._request(PUT_METHOD, url, data);
+        return this.request(PUT_METHOD, url, data);
     }
 
     delete(id) {
-        return this._request(DELETE_METHOD, `${this._baseUrl}/${id}`);
+        return this.request(DELETE_METHOD, `${this.baseUrl}/${id}`);
     }
 
-    _request(method, url, data) {
+    request(method, url, data) {
         const req = request(method, url);
         const { isLoggedIn, jwt } = loginStore.getState();
 

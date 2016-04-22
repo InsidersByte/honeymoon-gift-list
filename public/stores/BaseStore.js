@@ -2,7 +2,7 @@ class BaseStore {
     constructor({ actions, key }) {
         this.bindActions(actions);
 
-        this._key = key;
+        this.key = key;
 
         this[key] = '';
         this.errorMessage = null;
@@ -11,12 +11,12 @@ class BaseStore {
     }
 
     fetch() {
-        this[this._key] = '';
+        this[this.key] = '';
         this.loading = true;
     }
 
     fetchSuccess(data) {
-        this[this._key] = data;
+        this[this.key] = data;
         this.errorMessage = null;
         this.loading = false;
     }
@@ -31,7 +31,7 @@ class BaseStore {
     }
 
     updateSuccess(data) {
-        this[this._key] = data;
+        this[this.key] = data;
         this.errorMessage = null;
         this.saving = false;
     }

@@ -52,7 +52,7 @@ class GiverDetailsPage extends React.Component {
             .then((giftSet) => {
                 this.setState({ isSaving: false });
                 basketActions.emptyBasket();
-                this.context.router.push(confirmationPageRoute(giftSet._id));
+                this.context.router.push(confirmationPageRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
             })
             .catch((error) => {
                 this.setState({ isSaving: false });

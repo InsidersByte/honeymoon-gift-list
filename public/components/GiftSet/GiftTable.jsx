@@ -6,12 +6,12 @@ function GiftTable(props) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price (£)</th>
-                <th>Quantity</th>
-                <th>Total (£)</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Price (£)</th>
+                    <th>Quantity</th>
+                    <th>Total (£)</th>
+                </tr>
             </thead>
 
             <tbody>
@@ -19,7 +19,7 @@ function GiftTable(props) {
                 .gifts
                 .map(gift => (
                     <GiftRow
-                        key={gift._id}
+                        key={gift._id} // eslint-disable-line no-underscore-dangle
                         gift={gift}
                     />
                 ))

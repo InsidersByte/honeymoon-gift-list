@@ -4,7 +4,7 @@ const environmentConstants = require('./constants/environment');
 const environment = process.env.NODE_ENV || environmentConstants.development;
 
 if (environment === environmentConstants.development) {
-    require('dotenv').config({ silent: true });
+    require('dotenv').config({ silent: true }); // eslint-disable-line global-require
 }
 
 const app = express();

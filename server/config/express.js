@@ -18,11 +18,11 @@ module.exports = (app, environment) => {
     if (environment === environmentConstants.production) {
         app.use(express.static('./dist'));
     } else {
-        const webpack = require('webpack');
-        const webpackMiddleware = require('webpack-dev-middleware');
-        const webpackHotMiddleware = require('webpack-hot-middleware');
+        const webpack = require('webpack'); // eslint-disable-line global-require
+        const webpackMiddleware = require('webpack-dev-middleware'); // eslint-disable-line global-require
+        const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line global-require
 
-        const config = require('../../webpack.config.js');
+        const config = require('../../webpack.config.js'); // eslint-disable-line global-require
 
         const compiler = webpack(config);
         const middleware = webpackMiddleware(compiler, {

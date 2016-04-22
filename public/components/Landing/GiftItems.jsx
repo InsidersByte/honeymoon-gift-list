@@ -9,7 +9,7 @@ function GiftItems(props) {
                     .giftItems
                     .map(item => (
                         <GiftItem
-                            key={item._id}
+                            key={item._id} // eslint-disable-line no-underscore-dangle
                             item={item}
                             addToBasket={props.addToBasket}
                             basketItems={props.basketItems}

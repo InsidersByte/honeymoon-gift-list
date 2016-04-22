@@ -17,7 +17,12 @@ function UserTable(props) {
                 {props
                     .users
                     .map(user => (
-                        <UserRow key={user._id} user={user} onEdit={props.onEdit} onDelete={props.onDelete} />
+                        <UserRow
+                            key={user._id} // eslint-disable-line no-underscore-dangle
+                            user={user}
+                            onEdit={props.onEdit}
+                            onDelete={props.onDelete}
+                        />
                     ))
                 }
             </tbody>

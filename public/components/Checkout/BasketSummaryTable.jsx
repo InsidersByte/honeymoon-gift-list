@@ -6,13 +6,13 @@ function BasketSummaryTable(props) {
     return (
         <Table responsive className="basket-summary__table">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price (£)</th>
-                <th>Quantity</th>
-                <th>Remaining</th>
-                <th>Remove</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Price (£)</th>
+                    <th>Quantity</th>
+                    <th>Remaining</th>
+                    <th>Remove</th>
+                </tr>
             </thead>
 
             <tbody>
