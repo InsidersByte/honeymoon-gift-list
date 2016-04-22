@@ -27,7 +27,8 @@ export default class WeddingPartyMemberPage extends React.Component {
     };
 
     onChange = ({ target: { name, value } }) => {
-        this.setState(Object.assign(this.state.member, { [name]: value }));
+        const member = Object.assign(this.state.member, { [name]: value });
+        this.setState({ member });
     };
 
     onSubmit = (event) => {
