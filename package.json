@@ -44,7 +44,7 @@
     "mongoose": "^4.4.13",
     "nodemailer": "^2.3.2",
     "react": "^15.0.1",
-    "react-bootstrap": "^0.29.1",
+    "react-bootstrap": "^0.28.5",
     "react-dom": "^15.0.1",
     "react-markdown-renderer": "^0.2.0",
     "react-router": "^2.3.0",
