@@ -33,6 +33,8 @@ module.exports = (app, express) => {
                 description: req.body.description,
             });
 
+            weddingProfile.weddingPartyMembers.push(weddingPartyMember);
+
             yield weddingProfile.save();
 
             return res.json(weddingPartyMember);

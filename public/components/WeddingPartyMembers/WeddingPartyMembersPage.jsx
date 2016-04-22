@@ -1,6 +1,8 @@
 import React from 'react';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import { CREATE_WEDDING_PARTY_MEMBER_ROUTE } from '../../constants/routes.constants';
+import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
+import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
@@ -9,6 +11,19 @@ export default class WeddingPartyMembersPage extends React.Component {
 
     state = {
         weddingPartyMembers: [],
+    };
+
+    componentDidMount() {
+        WeddingPartyMemberStore.listen(this.onStoreChange);
+        WeddingPartyMemberActions.fetch();
+    }
+
+    componentWillUnmount() {
+        WeddingPartyMemberStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
     };
 
     create = () => {
