@@ -19,6 +19,21 @@ class BaseActions {
 
     fetchError = o => o;
 
+    query() {
+        return (dispatch) => {
+            dispatch();
+
+            this.api
+                .get()
+                .then(this.querySuccess)
+                .catch(this.queryError);
+        };
+    }
+
+    querySuccess = o => o;
+
+    queryError = o => o;
+
     create({ [this.key]: rawData }) {
         return (dispatch) => {
             dispatch();

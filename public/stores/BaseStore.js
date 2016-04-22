@@ -27,6 +27,22 @@ class BaseStore {
         this.loading = false;
     }
 
+    query() {
+        this[`${this.key}s`] = [];
+        this.loading = true;
+    }
+
+    querySuccess(data) {
+        this[`${this.key}s`] = data;
+        this.errorMessage = null;
+        this.loading = false;
+    }
+
+    queryError(errorMessage) {
+        this.errorMessage = errorMessage;
+        this.loading = false;
+    }
+
     create() {
         this.saving = true;
     }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
-import { CREATE_WEDDING_PARTY_MEMBER_ROUTE } from '../../constants/routes.constants';
+import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routes.constants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
+import WeddingPartyMembersTable from './WeddingPartyMembersTable';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
@@ -10,12 +11,12 @@ export default class WeddingPartyMembersPage extends React.Component {
     };
 
     state = {
-        weddingPartyMembers: [],
+        members: [],
     };
 
     componentDidMount() {
         WeddingPartyMemberStore.listen(this.onStoreChange);
-        WeddingPartyMemberActions.fetch();
+        WeddingPartyMemberActions.query();
     }
 
     componentWillUnmount() {
@@ -30,12 +31,18 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
     };
 
+    onSelect = (member) => {
+        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+    };
+
     render() {
         return (
             <Jumbotron>
                 <h1>Wedding Party Members&nbsp;
                     <Button bsStyle="success" bsSize="small" onClick={this.create}><Glyphicon glyph="plus" /></Button>
                 </h1>
+
+                <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} />
             </Jumbotron>
         );
     }
