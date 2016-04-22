@@ -8,6 +8,8 @@ const PATHS = {
     NODE_MODULES: path.join(__dirname, 'node_modules'),
 };
 
+process.env.BABEL_ENV = 'development';
+
 module.exports = {
     devtool: 'eval-source-map',
     entry: [

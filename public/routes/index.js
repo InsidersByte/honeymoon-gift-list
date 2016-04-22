@@ -31,7 +31,8 @@ import UsersPage from '../components/Users/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 import ResetPage from '../components/Reset/ResetPage';
-import WeddingPartyPage from '../components/WeddingParty/WeddingPartyPage.jsx';
+import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPartyMembersPage';
+import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
 
 function requireAuth(nextState, replace) {
     const { isLoggedIn } = loginStore.getState();
@@ -65,7 +66,8 @@ export default (
             <Route path="users" component={UsersPage} onEnter={requireAuth} />
             <Route path="giftSet" component={GiftSetsPage} onEnter={requireAuth} />
             <Route path="giftSet/:giftSetId" component={GiftSetPage} onEnter={requireAuth} />
-            <Route path="weddingParty" component={WeddingPartyPage} onEnter={requireAuth} />
+            <Route path="weddingPartyMember" component={WeddingPartyMembersPage} onEnter={requireAuth} />
+            <Route path="weddingPartyMember/create" component={CreateWeddingPartyMemberPage} onEnter={requireAuth} />
             <Route path="*" component={NoMatchAdmin} />
         </Route>
         <Route path="*" component={NoMatch} />

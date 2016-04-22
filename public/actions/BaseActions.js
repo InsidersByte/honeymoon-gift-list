@@ -19,6 +19,21 @@ class BaseActions {
 
     fetchError = o => o;
 
+    create({ [this.key]: data }) {
+        return (dispatch) => {
+            dispatch();
+
+            this.api
+                .post({ [this.key]: data })
+                .then(this.createSuccess)
+                .catch(this.createError);
+        };
+    }
+
+    createSuccess = o => o;
+
+    createError = o => o;
+
     update({ [this.key]: data }) {
         return (dispatch) => {
             dispatch();

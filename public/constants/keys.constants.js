@@ -5,3 +5,4 @@ export const LOCAL_FLAVOUR = 'localFlavour';
 export const ON_THE_DAY = 'onTheDay';
 export const RSVP = 'rsvp';
 export const WEDDING_PLAYLIST = 'weddingPlaylist';
+export const WEDDING_PARTY_MEMBER = 'member';
