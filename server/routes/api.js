@@ -25,6 +25,7 @@ module.exports = (app, express, config) => {
     router.use('/honeymoonGiftListItem', require('./honeymoonGiftListItem')(app, express)); // eslint-disable-line global-require
     router.use('/rsvp', require('./rsvp')(app, express)); // eslint-disable-line global-require
     router.use('/giftSet', require('./giftSet')(app, express)); // eslint-disable-line global-require
+    router.use('/weddingPartyMember', require('./weddingPartyMember')(app, express)); // eslint-disable-line global-require
 
     router.all('/*', (req, res) =>
         res.sendStatus(404)

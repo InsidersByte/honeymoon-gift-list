@@ -12,8 +12,30 @@ module.exports = (app, express) => {
             return res.json(weddingProfile.weddingPartyMembers);
         }))
 
-        .post(wrap(function* createWeddingPartyMember(/* req, res */) {
-            throw new Error('not yet implemented');
+        .post(wrap(function* createWeddingPartyMember(req, res) {
+            req.checkBody('name').notEmpty();
+            req.checkBody('imageUrl').isURL();
+            req.checkBody('description').notEmpty();
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
+
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            const weddingPartyMember = weddingProfile.weddingPartyMembers.create({
+                name: req.body.name,
+                imageUrl: req.body.imageUrl,
+                description: req.body.description,
+            });
+
+            yield weddingProfile.save();
+
+            return res.json(weddingPartyMember);
         }));
 
     router

@@ -28,7 +28,8 @@ export default function WeddingPartyMemberForm(props) {
 
             <Input
                 name="description"
-                type="text"
+                type="textarea"
+                rows="10"
                 label="Description"
                 placeholder="Enter description"
                 value={props.member.description}

@@ -24,7 +24,7 @@ class BaseActions {
             dispatch();
 
             this.api
-                .post({ [this.key]: data })
+                .post({ ...data })
                 .then(this.createSuccess)
                 .catch(this.createError);
         };
@@ -39,7 +39,7 @@ class BaseActions {
             dispatch();
 
             this.api
-                .put({ [this.key]: data })
+                .put({ ...data })
                 .then(this.updateSuccess)
                 .catch(this.updateError);
         };

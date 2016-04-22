@@ -1,17 +1,18 @@
 class BaseStore {
-    constructor({ actions, key }) {
+    constructor({ actions, key, initalValue = '' }) {
         this.bindActions(actions);
 
         this.key = key;
+        this.initalValue = initalValue;
 
-        this[key] = '';
+        this[key] = initalValue;
         this.errorMessage = null;
         this.loading = false;
         this.saving = false;
     }
 
     fetch() {
-        this[this.key] = '';
+        this[this.key] = this.initalValue;
         this.loading = true;
     }
 

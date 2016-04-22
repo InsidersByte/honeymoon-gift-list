@@ -1,11 +1,11 @@
 import BaseApi from '../helpers/api';
 
-const apiUrl = 'weddingPartyMembers';
+const apiUrl = 'weddingPartyMember';
 
-class UserApi extends BaseApi {
+class WeddingPartyMembersApi extends BaseApi {
     constructor() {
         super(apiUrl);
     }
 }
 
-export default new UserApi;
+export default new WeddingPartyMembersApi;

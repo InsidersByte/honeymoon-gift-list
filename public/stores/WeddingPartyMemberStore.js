@@ -5,13 +5,20 @@ import { WEDDING_PARTY_MEMBER as key } from '../constants/keys.constants';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes.constants';
 import history from '../helpers/history';
 
+// TODO: refactor to constant as it is repeated
+const initialValue = {
+    name: '',
+    imageUrl: '',
+    description: '',
+};
+
 class WeddingPartyMemberStore extends BaseStore {
     constructor() {
-        super({ actions, key });
+        super({ actions, key, initialValue });
     }
 
     createSuccess(data) {
-        super.updateSuccess(data);
+        super.createSuccess(data);
         history.push(WEDDING_PARTY_MEMBERS_ROUTE);
     }
 }
