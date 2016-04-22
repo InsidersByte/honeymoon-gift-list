@@ -19,9 +19,11 @@ class BaseActions {
 
     fetchError = o => o;
 
-    create({ [this.key]: data }) {
+    create({ [this.key]: rawData }) {
         return (dispatch) => {
             dispatch();
+
+            const data = typeof rawData === 'string' ? { [this.key]: rawData } : { ...rawData };
 
             this.api
                 .post({ ...data })
@@ -34,12 +36,14 @@ class BaseActions {
 
     createError = o => o;
 
-    update({ [this.key]: data }) {
+    update({ [this.key]: rawData }) {
         return (dispatch) => {
             dispatch();
 
+            const data = typeof rawData === 'string' ? { [this.key]: rawData } : { ...rawData };
+
             this.api
-                .put({ ...data })
+                .put(data)
                 .then(this.updateSuccess)
                 .catch(this.updateError);
         };
