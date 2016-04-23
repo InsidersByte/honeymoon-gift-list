@@ -102,6 +102,18 @@ class LandingPage extends React.Component {
         return null;
     };
 
+    renderWeddingPartyMembersSection = () => {
+        if (this.state.weddingProfile.weddingPartyMembers.length <= 0) {
+            return null;
+        }
+
+        const weddingPartyMembersElement = (
+            <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />
+        );
+
+        return <LandingSection title="Wedding Party Members" postContent={weddingPartyMembersElement} />;
+    };
+
     render() {
         const giftItemsElement = (
             <GiftItems
@@ -109,10 +121,6 @@ class LandingPage extends React.Component {
                 addToBasket={this.addToBasket}
                 basketItems={this.state.items}
             />
-        );
-
-        const weddingPartyMembersElement = (
-            <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />
         );
 
         return (
@@ -131,7 +139,7 @@ class LandingPage extends React.Component {
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurDay} />
                 </LandingSection>
 
-                <LandingSection title="Wedding Party Members" postContent={weddingPartyMembersElement} />
+                {this.renderWeddingPartyMembersSection()}
 
                 <LandingSection title="Local Flavour">
                     <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />
