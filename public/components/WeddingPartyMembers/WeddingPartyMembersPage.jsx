@@ -22,13 +22,8 @@ export default class WeddingPartyMembersPage extends React.Component {
     }
 
     onStoreChange = state => {
-        console.log({
-            oldState: this.state,
-            newState: state,
-        });
-
         if (this.state.removing && !state.removing) {
-            WeddingPartyMemberActions.query();
+            WeddingPartyMemberActions.query.defer();
         }
 
         this.setState(state);
