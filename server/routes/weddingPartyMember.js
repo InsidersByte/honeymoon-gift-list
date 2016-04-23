@@ -47,8 +47,24 @@ module.exports = (app, express) => {
             throw new Error('not yet implemented');
         }))
 
-        .delete(wrap(function* deleteWeddingPartyMember(/* req, res */) {
-            throw new Error('not yet implemented');
+        .delete(wrap(function* deleteWeddingPartyMember(req, res) {
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            weddingPartyMember.remove();
+
+            yield weddingProfile.save();
+
+            return res
+                .status(204)
+                .send();
         }));
 
     return router;

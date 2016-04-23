@@ -36,8 +36,6 @@ export default class WeddingPartyMembersPage extends React.Component {
             return;
         }
 
-        console.log(member)
-
         WeddingPartyMemberActions.remove(member);
     };
 
