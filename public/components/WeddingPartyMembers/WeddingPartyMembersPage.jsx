@@ -10,9 +10,7 @@ export default class WeddingPartyMembersPage extends React.Component {
         router: React.PropTypes.object.isRequired,
     };
 
-    state = {
-        members: [],
-    };
+    state = WeddingPartyMemberStore.getState();
 
     componentDidMount() {
         WeddingPartyMemberStore.listen(this.onStoreChange);
@@ -24,6 +22,11 @@ export default class WeddingPartyMembersPage extends React.Component {
     }
 
     onStoreChange = state => {
+        console.log({
+            oldState: this.state,
+            newState: state,
+        });
+
         if (this.state.removing && !state.removing) {
             WeddingPartyMemberActions.query();
         }

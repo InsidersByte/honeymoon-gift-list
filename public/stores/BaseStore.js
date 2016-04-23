@@ -1,11 +1,12 @@
 class BaseStore {
-    constructor({ actions, key, initalValue = '' }) {
+    constructor({ actions, key, initialValue = '' }) {
         this.bindActions(actions);
 
         this.key = key;
-        this.initalValue = initalValue;
+        this.initalValue = initialValue;
 
-        this[key] = initalValue;
+        this[key] = initialValue;
+        this[`${key}s`] = [];
         this.errorMessage = null;
         this.loading = false;
         this.saving = false;
