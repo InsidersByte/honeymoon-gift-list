@@ -17,6 +17,16 @@ export default function WeddingPartyMemberForm(props) {
             />
 
             <Input
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Enter title"
+                value={props.member.title}
+                onChange={props.onChange}
+                required
+            />
+
+            <Input
                 name="imageUrl"
                 type="url"
                 label="Image Url"

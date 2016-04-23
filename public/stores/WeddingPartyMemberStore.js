@@ -7,6 +7,7 @@ import history from '../helpers/history';
 
 const initialValue = {
     name: '',
+    title: '',
     imageUrl: '',
     description: '',
 };

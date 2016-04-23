@@ -21,6 +21,7 @@ export default class WeddingPartyMemberRow extends React.Component {
         return (
             <tr>
                 <th>{this.props.member.name}</th>
+                <th>{this.props.member.title}</th>
                 <th>{this.props.member.imageUrl}</th>
                 <th>{this.props.member.description}</th>
                 <th>

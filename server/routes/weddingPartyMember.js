@@ -14,6 +14,7 @@ module.exports = (app, express) => {
 
         .post(wrap(function* createWeddingPartyMember(req, res) {
             req.checkBody('name').notEmpty();
+            req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
             req.checkBody('description').notEmpty();
 
@@ -29,6 +30,7 @@ module.exports = (app, express) => {
 
             const weddingPartyMember = weddingProfile.weddingPartyMembers.create({
                 name: req.body.name,
+                title: req.body.title,
                 imageUrl: req.body.imageUrl,
                 description: req.body.description,
             });
@@ -62,6 +64,7 @@ module.exports = (app, express) => {
         .put(wrap(function* updateWeddingPartyMember(req, res) {
             req.checkBody('_id').equals(req.params.weddingPartyMemberId);
             req.checkBody('name').notEmpty();
+            req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
             req.checkBody('description').notEmpty();
 
@@ -84,6 +87,7 @@ module.exports = (app, express) => {
             }
 
             weddingPartyMember.name = req.body.name;
+            weddingPartyMember.title = req.body.title;
             weddingPartyMember.imageUrl = req.body.imageUrl;
             weddingPartyMember.description = req.body.description;
 

@@ -8,7 +8,9 @@ export default function WeddingPartyMember(props) {
             <div className="wedding-party-member__image" style={{ backgroundImage: `url(${props.weddingPartyMember.imageUrl})` }}>
             </div>
 
-            <h1>{props.weddingPartyMember.name}</h1>
+            <h1 className="wedding-party-member__name">{props.weddingPartyMember.name}</h1>
+
+            <h2 className="wedding-party-member__title">{props.weddingPartyMember.title}</h2>
 
             <p className="wedding-party-member__description">{props.weddingPartyMember.description}</p>
         </div>

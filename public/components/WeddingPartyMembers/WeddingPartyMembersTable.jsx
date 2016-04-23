@@ -8,6 +8,7 @@ export default function WeddingPartyMembersTable(props) {
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Title</th>
                     <th>Image Url</th>
                     <th>Description</th>
                     <th>Actions</th>
