@@ -1,50 +1,58 @@
 import React from 'react';
-import { Input, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 function GiverDetailsForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <div className="giver-details__content">
-                <Input
-                    name="forename"
-                    type="text"
-                    label="Forename"
-                    placeholder="Enter your forename"
-                    value={props.giver.forename}
-                    onChange={props.onChange}
-                    required
-                />
+                <FormGroup>
+                    <ControlLabel>Forename</ControlLabel>
+                    <FormControl
+                        name="forename"
+                        type="text"
+                        placeholder="Enter your forename"
+                        value={props.giver.forename}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-                <Input
-                    name="surname"
-                    type="text"
-                    label="Surname"
-                    placeholder="Enter your surname"
-                    value={props.giver.surname}
-                    onChange={props.onChange}
-                    required
-                />
+                <FormGroup>
+                    <ControlLabel>Surname</ControlLabel>
+                    <FormControl
+                        name="surname"
+                        type="text"
+                        placeholder="Enter your surname"
+                        value={props.giver.surname}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-                <Input
-                    name="email"
-                    type="email"
-                    label="Email"
-                    placeholder="Enter your email address"
-                    value={props.giver.email}
-                    onChange={props.onChange}
-                    required
-                />
+                <FormGroup>
+                    <ControlLabel>Email</ControlLabel>
+                    <FormControl
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={props.giver.email}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-                <Input
-                    name="phoneNumber"
-                    type="text"
-                    label="Telephone Number"
-                    placeholder="Enter your telephone number"
-                    value={props.giver.phoneNumber}
-                    onChange={props.onChange}
-                    required
-                />
+                <FormGroup>
+                    <ControlLabel>Telephone Number</ControlLabel>
+                    <FormControl
+                        name="phoneNumber"
+                        type="text"
+                        placeholder="Enter your telephone number"
+                        value={props.giver.phoneNumber}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
             </div>
 
             <div className="giver-details__actions">
