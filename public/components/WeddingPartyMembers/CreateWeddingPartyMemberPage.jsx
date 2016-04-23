@@ -9,6 +9,7 @@ export default class WeddingPartyMemberPage extends React.Component {
 
     componentDidMount() {
         WeddingPartyMemberStore.listen(this.onStoreChange);
+        WeddingPartyMemberActions.reset();
     }
 
     componentWillUnmount() {

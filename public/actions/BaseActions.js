@@ -72,8 +72,6 @@ class BaseActions {
         return (dispatch) => {
             dispatch();
 
-            console.log(_id);
-
             this.api
                 .delete(_id)
                 .then(this.removeSuccess)
@@ -84,6 +82,12 @@ class BaseActions {
     removeSuccess = o => o;
 
     removeError = o => o;
+
+    reset() {
+        return (dispatch) => {
+            dispatch();
+        };
+    }
 }
 
 export default BaseActions;

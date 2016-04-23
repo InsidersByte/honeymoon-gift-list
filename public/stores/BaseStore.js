@@ -3,7 +3,7 @@ class BaseStore {
         this.bindActions(actions);
 
         this.key = key;
-        this.initalValue = initialValue;
+        this.initialValue = initialValue;
 
         this[key] = initialValue;
         this[`${key}s`] = [];
@@ -14,7 +14,7 @@ class BaseStore {
     }
 
     fetch() {
-        this[this.key] = this.initalValue;
+        this.reset();
         this.loading = true;
     }
 
@@ -87,6 +87,11 @@ class BaseStore {
     removeError(errorMessage) {
         this.errorMessage = errorMessage;
         this.removing = false;
+    }
+
+    reset() {
+        this[this.key] = typeof this.initialValue === 'string' ? this.initialValue : Object.assign({}, this.initialValue);
+        this[`${this.key}s`] = [];
     }
 }
 
