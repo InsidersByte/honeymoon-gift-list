@@ -43,6 +43,20 @@ module.exports = (app, express) => {
     router
         .route('/:weddingPartyMemberId')
 
+        .get(wrap(function* getWeddingPartyMember(req, res) {
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            return res.json(weddingPartyMember);
+        }))
+
         .put(wrap(function* updateWeddingPartyMember(/* req, res */) {
             throw new Error('not yet implemented');
         }))

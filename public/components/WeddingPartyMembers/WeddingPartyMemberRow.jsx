@@ -30,7 +30,7 @@ export default class WeddingPartyMemberRow extends React.Component {
                             bsStyle="primary"
                             onClick={this.onSelect}
                         >
-                            <FontAwesome icon="eye" />
+                            <FontAwesome icon="pencil" />
                         </Button>
 
                         <Button
