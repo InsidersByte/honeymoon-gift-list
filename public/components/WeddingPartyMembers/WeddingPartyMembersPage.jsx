@@ -14,7 +14,7 @@ export default class WeddingPartyMembersPage extends React.Component {
 
     componentDidMount() {
         WeddingPartyMemberStore.listen(this.onStoreChange);
-        WeddingPartyMemberActions.query();
+        WeddingPartyMemberActions.query.defer();
     }
 
     componentWillUnmount() {
