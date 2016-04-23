@@ -24,15 +24,29 @@ export default class WeddingPartyMembersPage extends React.Component {
     }
 
     onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            WeddingPartyMemberActions.query();
+        }
+
         this.setState(state);
     };
 
-    create = () => {
-        this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
+    onDelete = (member) => {
+        if (!confirm('Are you sure you want to delete this member?')) {
+            return;
+        }
+
+        console.log(member)
+
+        WeddingPartyMemberActions.remove(member);
     };
 
     onSelect = (member) => {
         this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+    };
+
+    create = () => {
+        this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
     };
 
     render() {
@@ -42,7 +56,7 @@ export default class WeddingPartyMembersPage extends React.Component {
                     <Button bsStyle="success" bsSize="small" onClick={this.create}><Glyphicon glyph="plus" /></Button>
                 </h1>
 
-                <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} />
+                <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} onDelete={this.onDelete} />
             </Jumbotron>
         );
     }

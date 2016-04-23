@@ -67,6 +67,23 @@ class BaseActions {
     updateSuccess = o => o;
 
     updateError = o => o;
+
+    remove({ _id }) {
+        return (dispatch) => {
+            dispatch();
+
+            console.log(_id);
+
+            this.api
+                .delete(_id)
+                .then(this.removeSuccess)
+                .catch(this.removeError);
+        };
+    }
+
+    removeSuccess = o => o;
+
+    removeError = o => o;
 }
 
 export default BaseActions;

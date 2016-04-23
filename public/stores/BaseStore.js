@@ -9,6 +9,7 @@ class BaseStore {
         this.errorMessage = null;
         this.loading = false;
         this.saving = false;
+        this.removing = false;
     }
 
     fetch() {
@@ -71,6 +72,20 @@ class BaseStore {
     updateError(errorMessage) {
         this.errorMessage = errorMessage;
         this.saving = false;
+    }
+
+    remove() {
+        this.removing = true;
+    }
+
+    removeSuccess() {
+        this.errorMessage = null;
+        this.removing = false;
+    }
+
+    removeError(errorMessage) {
+        this.errorMessage = errorMessage;
+        this.removing = false;
     }
 }
 
