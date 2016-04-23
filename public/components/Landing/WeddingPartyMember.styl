@@ -1,0 +1,28 @@
+.wedding-party-member
+    flex 1 1 33%
+    max-width calc(100% / 3)
+    padding 6px 12px 0 12px
+    margin-bottom 3%
+
+.wedding-party-member__image
+    border-radius 100%
+    background-position center center
+    background-attachment scroll
+    background-repeat no-repeat
+    background-size cover
+    width 120px
+    height 120px
+    margin 0 auto
+
+.wedding-party-member__description
+    white-space pre-wrap
+
+@media (max-width 1279px)
+    .wedding-party-member
+        flex 1 1 50%
+        max-width calc(100% / 2)
+
+@media (max-width 736px)
+    .wedding-party-member
+        flex 1 1 100%
+        max-width 100%
