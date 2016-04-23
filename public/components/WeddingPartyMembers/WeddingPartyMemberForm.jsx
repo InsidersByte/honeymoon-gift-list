@@ -39,7 +39,7 @@ export default function WeddingPartyMemberForm(props) {
 
             <ButtonToolbar>
                 <Button type="submit" bsStyle="primary">Create</Button>
-                <Link className="btn btn-default" to={WEDDING_PARTY_MEMBERS_ROUTE}>Cancel</Link>
+                <Link className="btn btn-default" to={WEDDING_PARTY_MEMBERS_ROUTE}>Back</Link>
             </ButtonToolbar>
         </form>
     );

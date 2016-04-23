@@ -37,7 +37,9 @@ module.exports = (app, express) => {
 
             yield weddingProfile.save();
 
-            return res.json(weddingPartyMember);
+            return res
+                .status(201)
+                .json(weddingPartyMember);
         }));
 
     router
@@ -57,8 +59,37 @@ module.exports = (app, express) => {
             return res.json(weddingPartyMember);
         }))
 
-        .put(wrap(function* updateWeddingPartyMember(/* req, res */) {
-            throw new Error('not yet implemented');
+        .put(wrap(function* updateWeddingPartyMember(req, res) {
+            req.checkBody('_id').equals(req.params.weddingPartyMemberId);
+            req.checkBody('name').notEmpty();
+            req.checkBody('imageUrl').isURL();
+            req.checkBody('description').notEmpty();
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
+
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            weddingPartyMember.name = req.body.name;
+            weddingPartyMember.imageUrl = req.body.imageUrl;
+            weddingPartyMember.description = req.body.description;
+
+            yield weddingProfile.save();
+
+            return res.json(weddingPartyMember);
         }))
 
         .delete(wrap(function* deleteWeddingPartyMember(req, res) {

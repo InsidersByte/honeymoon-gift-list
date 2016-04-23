@@ -37,7 +37,10 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        WeddingPartyMemberActions.update(this.state);
+
+        const { id } = this.props.params;
+
+        WeddingPartyMemberActions.update({ ...this.state, id });
     };
 
     render() {

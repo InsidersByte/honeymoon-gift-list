@@ -51,14 +51,14 @@ class BaseActions {
 
     createError = o => o;
 
-    update({ [this.key]: rawData }) {
+    update({ [this.key]: rawData, id }) {
         return (dispatch) => {
             dispatch();
 
             const data = typeof rawData === 'string' ? { [this.key]: rawData } : { ...rawData };
 
             this.api
-                .put(data)
+                .put(data, id)
                 .then(this.updateSuccess)
                 .catch(this.updateError);
         };
