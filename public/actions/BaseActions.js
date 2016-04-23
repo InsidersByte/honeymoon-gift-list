@@ -4,12 +4,12 @@ class BaseActions {
         this.key = key;
     }
 
-    fetch() {
+    fetch(id) {
         return (dispatch) => {
             dispatch();
 
             this.api
-                .get()
+                .get(id)
                 .then(this.fetchSuccess)
                 .catch(this.fetchError);
         };

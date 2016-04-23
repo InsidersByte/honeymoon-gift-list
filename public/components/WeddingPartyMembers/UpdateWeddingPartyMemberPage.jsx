@@ -4,12 +4,22 @@ import WeddingPartyMemberForm from './WeddingPartyMemberForm';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 
-export default class CreateWeddingPartyMemberPage extends React.Component {
+export default class UpdateWeddingPartyMemberPage extends React.Component {
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+    };
+
+    static defaultProps = {
+        params: {},
+    };
+
     state = WeddingPartyMemberStore.getState();
 
     componentDidMount() {
+        const { id } = this.props.params;
+
         WeddingPartyMemberStore.listen(this.onStoreChange);
-        WeddingPartyMemberActions.reset();
+        WeddingPartyMemberActions.fetch(id);
     }
 
     componentWillUnmount() {
@@ -27,7 +37,7 @@ export default class CreateWeddingPartyMemberPage extends React.Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        WeddingPartyMemberActions.create(this.state);
+        WeddingPartyMemberActions.update(this.state);
     };
 
     render() {
