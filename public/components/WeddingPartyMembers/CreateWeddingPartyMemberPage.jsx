@@ -35,7 +35,7 @@ export default class CreateWeddingPartyMemberPage extends React.Component {
             <Jumbotron>
                 <h1>Create Wedding Party Member</h1>
 
-                <WeddingPartyMemberForm member={this.state.member} onChange={this.onChange} onSubmit={this.onSubmit} />
+                <WeddingPartyMemberForm member={this.state.member} title="Create" onChange={this.onChange} onSubmit={this.onSubmit} />
             </Jumbotron>
         );
     }

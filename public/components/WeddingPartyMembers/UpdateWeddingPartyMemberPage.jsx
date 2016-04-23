@@ -46,9 +46,9 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
     render() {
         return (
             <Jumbotron>
-                <h1>Create Wedding Party Member</h1>
+                <h1>Update Wedding Party Member</h1>
 
-                <WeddingPartyMemberForm member={this.state.member} onChange={this.onChange} onSubmit={this.onSubmit} />
+                <WeddingPartyMemberForm member={this.state.member} title="Update" onChange={this.onChange} onSubmit={this.onSubmit} />
             </Jumbotron>
         );
     }

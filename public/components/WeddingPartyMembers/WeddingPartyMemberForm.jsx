@@ -38,7 +38,7 @@ export default function WeddingPartyMemberForm(props) {
             />
 
             <ButtonToolbar>
-                <Button type="submit" bsStyle="primary">Create</Button>
+                <Button type="submit" bsStyle="primary">{props.title}</Button>
                 <Link className="btn btn-default" to={WEDDING_PARTY_MEMBERS_ROUTE}>Back</Link>
             </ButtonToolbar>
         </form>
@@ -47,6 +47,7 @@ export default function WeddingPartyMemberForm(props) {
 
 WeddingPartyMemberForm.propTypes = {
     member: React.PropTypes.object.isRequired,
+    title: React.PropTypes.oneOf(['Create', 'Update']),
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
