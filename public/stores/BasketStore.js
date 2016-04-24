@@ -49,7 +49,6 @@ class BasketStore {
         }
 
         item.quantity -= 1;
-        this.items.set(_id, item);
     }
 
     deleteFromBasket({ _id }) {

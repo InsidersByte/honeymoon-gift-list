@@ -17,10 +17,10 @@ function BasketSummaryTable(props) {
 
             <tbody>
             {
-                Object.keys(props.items).map(key => (
+                [...props.items.entries()].map(([key, item]) => (
                     <BasketSummaryRow
                         key={key}
-                        item={props.items[key]}
+                        item={item}
                         onAdd={props.onAdd}
                         onRemove={props.onRemove}
                         onDelete={props.onDelete}

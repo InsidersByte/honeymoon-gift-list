@@ -10,11 +10,10 @@ class GiftItem extends React.Component {
     };
 
     render() {
-        const item = this.props.item;
-        const id = item._id; // eslint-disable-line no-underscore-dangle
+        const { _id, remaining, price, imageUrl, name } = this.props.item; // eslint-disable-line no-underscore-dangle
 
-        const basketItem = this.props.basketItems[id] || { quantity: 0 };
-        const outOfStock = item.remaining - basketItem.quantity <= 0;
+        const { quantity } = this.props.basketItems.get(_id) || { quantity: 0 };
+        const outOfStock = remaining - quantity <= 0;
 
         let button;
 
@@ -23,12 +22,12 @@ class GiftItem extends React.Component {
         } else {
             button = (
                 <Button bsStyle="success" onClick={this.onClick}>
-                    <FontAwesome icon="shopping-basket" /> Add to Basket £ {item.price}
+                    <FontAwesome icon="shopping-basket" /> Add to Basket £ {price}
                 </Button>
             );
         }
 
-        const backgroundImageStyle = { backgroundImage: `url(${item.imageUrl})` };
+        const backgroundImageStyle = { backgroundImage: `url(${imageUrl})` };
 
         return (
             <div className="gift-item">
@@ -36,8 +35,8 @@ class GiftItem extends React.Component {
                 </div>
 
                 <div style={{ padding: '8px' }}>
-                    <h4>{item.name}</h4>
-                    <p>Remaining: {item.remaining}</p>
+                    <h4>{name}</h4>
+                    <p>Remaining: {remaining}</p>
 
                     {button}
                 </div>
