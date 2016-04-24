@@ -6,7 +6,7 @@ class BasketStore {
         this.on('afterEach', this.setCountAndTotal);
         this.bindActions(basketActions);
 
-        this.items = {};
+        this.items = new Map();
         this.basketCount = 0;
         this.total = 0;
     }
@@ -15,12 +15,10 @@ class BasketStore {
         let basketCount = 0;
         let total = 0;
 
-        for (const key in this.items) { // eslint-disable-line no-restricted-syntax
-            if (this.items.hasOwnProperty(key)) {
-                const { quantity, price } = this.items[key];
-                basketCount += quantity;
-                total += price * quantity;
-            }
+        for (const item of this.items.values()) {
+            const { quantity, price } = item;
+            basketCount += quantity;
+            total += price * quantity;
         }
 
         this.setState({
@@ -30,31 +28,36 @@ class BasketStore {
     }
 
     addToBasket(item) {
-        const existingItem = this.items[item._id] || { quantity: 0 }; // eslint-disable-line no-underscore-dangle
-        existingItem.quantity += 1;
-        const updatedItem = Object.assign({}, existingItem, item);
+        const { _id } = item; // eslint-disable-line no-underscore-dangle
+
+        const existingItem = this.items.get(_id) || { quantity: 0 };
+        const updatedItem = Object.assign(existingItem, item);
+        updatedItem.quantity += 1;
 
         if (updatedItem.quantity > updatedItem.remaining) {
             updatedItem.quantity = updatedItem.remaining;
         }
 
-        this.items[item._id] = updatedItem; // eslint-disable-line no-underscore-dangle
+        this.items.set(_id, updatedItem);
     }
 
     removeFromBasket({ _id }) {
-        if (this.items[_id].quantity <= 1) { // eslint-disable-line no-underscore-dangle
+        const item = this.items.get(_id);
+
+        if (item.quantity <= 1) {
             return;
         }
 
-        this.items[_id].quantity -= 1; // eslint-disable-line no-underscore-dangle
+        item.quantity -= 1;
+        this.items.set(_id, item);
     }
 
     deleteFromBasket({ _id }) {
-        delete this.items[_id]; // eslint-disable-line no-underscore-dangle
+        this.items.delete(_id);
     }
 
     emptyBasket() {
-        this.items = {};
+        this.items.clear();
     }
 }
 
