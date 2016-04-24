@@ -1,38 +1,44 @@
 import React from 'react';
-import { Input, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
 function SetupForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
-            <Input
-                name="name"
-                type="text"
-                label="Name"
-                placeholder="Enter name"
-                value={props.user.name}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Name</ControlLabel>
+                <FormControl
+                    name="name"
+                    type="text"
+                    placeholder="Enter name"
+                    value={props.user.name}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
-            <Input
-                name="username"
-                type="email"
-                label="Username"
-                placeholder="Enter username"
-                value={props.user.username}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Username</ControlLabel>
+                <FormControl
+                    name="username"
+                    type="email"
+                    placeholder="Enter username"
+                    value={props.user.username}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
-            <Input
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter password"
-                value={props.user.password}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Password</ControlLabel>
+                <FormControl
+                    name="password"
+                    type="password"
+                    placeholder="Enter password"
+                    value={props.user.password}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
             <Button type="submit" bsStyle="primary" block>Setup</Button>
         </form>

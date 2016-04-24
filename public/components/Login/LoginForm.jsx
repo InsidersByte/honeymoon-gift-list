@@ -1,33 +1,37 @@
 import React from 'react';
-import { Input, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
 
 function LoginForm(props) {
-    const innerButton = (
-        <Button bsStyle="link" onClick={props.onForgot} style={{ borderColor: '#ccc' }}>Forgot?</Button>
-    );
-
     return (
         <form onSubmit={props.onSubmit}>
-            <Input
-                name="username"
-                type="email"
-                label="Username"
-                placeholder="Enter username"
-                value={props.user.username}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Username</ControlLabel>
+                <FormControl
+                    name="username"
+                    type="email"
+                    placeholder="Enter username"
+                    value={props.user.username}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
-            <Input
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter password"
-                value={props.user.password}
-                onChange={props.onChange}
-                required
-                buttonAfter={innerButton}
-            />
+            <FormGroup>
+                <ControlLabel>Password</ControlLabel>
+                <InputGroup>
+                    <FormControl
+                        name="password"
+                        type="password"
+                        placeholder="Enter password"
+                        value={props.user.password}
+                        onChange={props.onChange}
+                        required
+                    />
+                    <InputGroup.Button>
+                        <Button bsStyle="link" onClick={props.onForgot} style={{ borderColor: '#ccc' }}>Forgot?</Button>
+                    </InputGroup.Button>
+                </InputGroup>
+            </FormGroup>
 
             <Button type="submit" bsStyle="primary" block>Login</Button>
         </form>

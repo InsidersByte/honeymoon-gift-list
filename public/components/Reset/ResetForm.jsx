@@ -1,28 +1,32 @@
 import React from 'react';
-import { Input, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
 function ResetForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
-            <Input
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter password"
-                value={props.user.password}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Password</ControlLabel>
+                <FormControl
+                    name="password"
+                    type="password"
+                    placeholder="Enter password"
+                    value={props.user.password}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
-            <Input
-                name="confirmPassword"
-                type="password"
-                label="Confirm Password"
-                placeholder="Enter confirm password"
-                value={props.user.confirmPassword}
-                onChange={props.onChange}
-                required
-            />
+            <FormGroup>
+                <ControlLabel>Confirm Password</ControlLabel>
+                <FormControl
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Enter confirm password"
+                    value={props.user.confirmPassword}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
 
             <Button type="submit" bsStyle="primary" block>Reset Password</Button>
         </form>

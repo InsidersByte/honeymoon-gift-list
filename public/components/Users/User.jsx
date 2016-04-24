@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Input } from 'react-bootstrap';
+import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class User extends React.Component {
     handleSubmit = (event) => {
@@ -16,35 +16,41 @@ class User extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Input
-                            name="name"
-                            type="text"
-                            label="Name"
-                            placeholder="Enter Name"
-                            value={this.props.user.name}
-                            onChange={this.props.onChange}
-                            required
-                        />
+                        <FormGroup>
+                            <ControlLabel>Name</ControlLabel>
+                            <FormControl
+                                name="name"
+                                type="text"
+                                placeholder="Enter name"
+                                value={this.props.user.name}
+                                onChange={this.props.onChange}
+                                required
+                            />
+                        </FormGroup>
 
-                        <Input
-                            name="username"
-                            type="email"
-                            label="Username"
-                            placeholder="Enter Username"
-                            value={this.props.user.username}
-                            onChange={this.props.onChange}
-                            required
-                        />
+                        <FormGroup>
+                            <ControlLabel>Username</ControlLabel>
+                            <FormControl
+                                name="username"
+                                type="email"
+                                placeholder="Enter username"
+                                value={this.props.user.username}
+                                onChange={this.props.onChange}
+                                required
+                            />
+                        </FormGroup>
 
-                        <Input
-                            name="password"
-                            type="password"
-                            label="Password"
-                            placeholder="Enter Password"
-                            value={this.props.user.password}
-                            onChange={this.props.onChange}
-                            required
-                        />
+                        <FormGroup>
+                            <ControlLabel>Password</ControlLabel>
+                            <FormControl
+                                name="password"
+                                type="password"
+                                placeholder="Enter password"
+                                value={this.props.user.password}
+                                onChange={this.props.onChange}
+                                required
+                            />
+                        </FormGroup>
                     </Modal.Body>
 
                     <Modal.Footer>
