@@ -47,7 +47,7 @@ class GiverDetailsPage extends React.Component {
         giftApi
             .post({
                 giver: this.state.giver,
-                items,
+                items: [...items.values()],
             })
             .then((giftSet) => {
                 this.setState({ isSaving: false });

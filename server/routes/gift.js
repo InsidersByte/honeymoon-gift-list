@@ -49,18 +49,13 @@ module.exports = (app, express) => {
             giver.giftSets.push(giftSet._id); // eslint-disable-line no-underscore-dangle
             yield giver.save();
 
-            for (const key in itemsData) { // eslint-disable-line no-restricted-syntax
-                if (!itemsData.hasOwnProperty(key)) {
-                    continue;
-                }
-
-                const item = itemsData[key];
-                const honeymoonGiftListItem = yield HoneymoonGiftListItem.findById(key);
+            for (let item of itemsData) { // eslint-disable-line prefer-const
+                const honeymoonGiftListItem = yield HoneymoonGiftListItem.findById(item._id); // eslint-disable-line no-underscore-dangle
 
                 const gift = new Gift({
                     quantity: item.quantity,
                     price: honeymoonGiftListItem.price,
-                    honeymoonGiftListItem: honeymoonGiftListItem._id, // eslint-disable-line no-underscore-dangle
+                    honeymoonGiftListItem: item._id, // eslint-disable-line no-underscore-dangle
                     giftSet: giftSet._id, // eslint-disable-line no-underscore-dangle
                 });
 
