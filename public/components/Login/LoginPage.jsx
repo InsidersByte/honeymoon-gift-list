@@ -6,17 +6,18 @@ import authenticateActions from '../../actions/PasswordResetActions';
 import authenticateStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
 
-class Login extends React.Component {
-    constructor() {
-        super();
+export default class Login extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            user: {
-                username: '',
-                password: '',
-            },
-        };
-    }
+    state = {
+        user: {
+            username: '',
+            password: '',
+        },
+    };
 
     componentDidMount() {
         authenticateStore.listen(this.onStoreChange);
@@ -75,10 +76,3 @@ class Login extends React.Component {
         );
     }
 }
-
-Login.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default Login;

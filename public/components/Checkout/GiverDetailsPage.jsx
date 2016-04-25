@@ -7,20 +7,25 @@ import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routes.consta
 
 import './GiverDetails.styl';
 
-class GiverDetailsPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiverDetailsPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            giver: {
-                forename: '',
-                surname: '',
-                email: '',
-                phoneNumber: '',
-            },
-            isSaving: false,
-        };
-    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
+    state = {
+        giver: {
+            forename: '',
+            surname: '',
+            email: '',
+            phoneNumber: '',
+        },
+        isSaving: false,
+    };
 
     componentWillMount() {
         const { basketCount } = basketStore.getState();
@@ -77,14 +82,3 @@ class GiverDetailsPage extends React.Component {
         );
     }
 }
-
-GiverDetailsPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-GiverDetailsPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiverDetailsPage;

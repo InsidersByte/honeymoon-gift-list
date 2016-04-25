@@ -13,26 +13,27 @@ import WeddingPartyMembers from './WeddingPartyMembers';
 
 import './Landing.styl';
 
-class LandingPage extends React.Component {
-    constructor() {
-        super();
+export default class LandingPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = Object.assign({
-            weddingProfile: {
-                cover: {},
-                aboutUs: '',
-                aboutOurDay: '',
-                aboutOurHoneymoon: '',
-                honeymoonGiftListItems: [],
-                honeymoonGiftList: {},
-                rsvp: '',
-                weddingPlaylist: '',
-                localFlavour: '',
-                onTheDay: '',
-                weddingPartyMembers: [],
-            },
-        }, basketStore.getState());
-    }
+    state = Object.assign({
+        weddingProfile: {
+            cover: {},
+            aboutUs: '',
+            aboutOurDay: '',
+            aboutOurHoneymoon: '',
+            honeymoonGiftListItems: [],
+            honeymoonGiftList: {},
+            rsvp: '',
+            weddingPlaylist: '',
+            localFlavour: '',
+            onTheDay: '',
+            weddingPartyMembers: [],
+        },
+    }, basketStore.getState());
 
     componentDidMount() {
         WeddingProfileApi
@@ -174,10 +175,3 @@ class LandingPage extends React.Component {
         );
     }
 }
-
-LandingPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default LandingPage;

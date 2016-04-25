@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import './Confirmation.styl';
 
-function ConfirmationPage() {
+export default function ConfirmationPage() {
     return (
         <section className="confirmation">
             <h1 className="confirmation__title">Thank you very much for your gift!</h1>
@@ -18,5 +18,3 @@ function ConfirmationPage() {
         </section>
     );
 }
-
-export default ConfirmationPage;

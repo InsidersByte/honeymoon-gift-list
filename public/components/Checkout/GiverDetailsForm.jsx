@@ -2,7 +2,7 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-function GiverDetailsForm(props) {
+export default function GiverDetailsForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <div className="giver-details__content">
@@ -83,5 +83,3 @@ GiverDetailsForm.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
-
-export default GiverDetailsForm;

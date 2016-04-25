@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import GiftRow from './GiftRow';
 
-function GiftTable(props) {
+export default function GiftTable(props) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -36,5 +36,3 @@ GiftTable.propTypes = {
 GiftTable.defaultProps = {
     gifts: [],
 };
-
-export default GiftTable;

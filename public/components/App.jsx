@@ -3,7 +3,11 @@ import { ToastContainer, ToastMessage } from 'react-toastr';
 
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
-class App extends React.Component {
+export default class App extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element.isRequired,
+    };
+
     toastSuccess = (message) => {
         this
             .refs
@@ -49,9 +53,3 @@ class App extends React.Component {
         );
     }
 }
-
-App.propTypes = {
-    children: React.PropTypes.element.isRequired,
-};
-
-export default App;

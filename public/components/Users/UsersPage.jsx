@@ -4,16 +4,17 @@ import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import UserTable from './UserTable';
 import User from './User';
 
-class Users extends React.Component {
-    constructor() {
-        super();
+export default class Users extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            users: [],
-            showModal: false,
-            user: {},
-        };
-    }
+    state = {
+        users: [],
+        showModal: false,
+        user: {},
+    };
 
     componentDidMount() {
         this.loadUsers();
@@ -121,10 +122,3 @@ class Users extends React.Component {
         );
     }
 }
-
-Users.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default Users;

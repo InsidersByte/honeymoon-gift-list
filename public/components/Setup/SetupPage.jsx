@@ -3,18 +3,19 @@ import { Jumbotron, Col } from 'react-bootstrap';
 import setupApi from '../../api/setup.api';
 import SetupForm from './SetupForm';
 
-class SetupPage extends React.Component {
-    constructor() {
-        super();
+export default class SetupPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            user: {
-                name: '',
-                username: '',
-                password: '',
-            },
-        };
-    }
+    state = {
+        user: {
+            name: '',
+            username: '',
+            password: '',
+        },
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -48,10 +49,3 @@ class SetupPage extends React.Component {
         );
     }
 }
-
-SetupPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default SetupPage;

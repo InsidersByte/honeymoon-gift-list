@@ -1,14 +1,15 @@
 import React from 'react';
 import landingApi from '../api/landing.api';
 
-class AuthenticatedLanding extends React.Component {
-    constructor() {
-        super();
+export default class AuthenticatedLanding extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            info: {},
-        };
-    }
+    state = {
+        info: {},
+    };
 
     componentDidMount() {
         landingApi
@@ -37,10 +38,3 @@ class AuthenticatedLanding extends React.Component {
         );
     }
 }
-
-AuthenticatedLanding.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default AuthenticatedLanding;

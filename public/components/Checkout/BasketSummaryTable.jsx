@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import BasketSummaryRow from './BasketSummaryRow';
 
-function BasketSummaryTable(props) {
+export default function BasketSummaryTable(props) {
     return (
         <Table responsive className="basket-summary__table">
             <thead>
@@ -39,5 +39,3 @@ BasketSummaryTable.propTypes = {
     onRemove: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
-
-export default BasketSummaryTable;

@@ -4,12 +4,14 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../helpers/auth';
 
-class App extends React.Component {
-    constructor() {
-        super();
+export default class App extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element.isRequired,
+        toastSuccess: React.PropTypes.func.isRequired,
+        toastError: React.PropTypes.func.isRequired,
+    };
 
-        this.state = this.getLoginState();
-    }
+    state = this.getLoginState();
 
     componentDidMount() {
         loginStore.listen(this.onStoreChange);
@@ -135,11 +137,3 @@ class App extends React.Component {
         );
     }
 }
-
-App.propTypes = {
-    children: React.PropTypes.element.isRequired,
-    toastSuccess: React.PropTypes.func.isRequired,
-    toastError: React.PropTypes.func.isRequired,
-};
-
-export default App;

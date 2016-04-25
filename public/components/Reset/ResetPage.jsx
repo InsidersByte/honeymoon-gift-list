@@ -4,17 +4,23 @@ import authenticateActions from '../../actions/PasswordResetActions';
 import authenticateStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
 
-class ResetPage extends React.Component {
-    constructor() {
-        super();
+export default class ResetPage extends React.Component {
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            user: {
-                password: '',
-                confirmPassword: '',
-            },
-        };
-    }
+    static defaultProps = {
+        params: {},
+    };
+
+    state = {
+        user: {
+            password: '',
+            confirmPassword: '',
+        },
+    };
 
     componentDidMount() {
         authenticateStore.listen(this.onStoreChange);
@@ -26,7 +32,7 @@ class ResetPage extends React.Component {
 
     onStoreChange = (state) => {
         this.setState(state);
-    } ;
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -57,15 +63,3 @@ class ResetPage extends React.Component {
         );
     }
 }
-
-ResetPage.propTypes = {
-    params: React.PropTypes.object.isRequired,
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-ResetPage.defaultProps = {
-    params: {},
-};
-
-export default ResetPage;

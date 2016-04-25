@@ -4,7 +4,13 @@ import FontAwesome from '../common/FontAwesome';
 
 import './GiftItem.styl';
 
-class GiftItem extends React.Component {
+export default class GiftItem extends React.Component {
+    static propTypes = {
+        item: React.PropTypes.object.isRequired,
+        addToBasket: React.PropTypes.func.isRequired,
+        basketItems: React.PropTypes.object.isRequired,
+    };
+
     onClick = (event) => {
         this.props.addToBasket(this.props.item, event);
     };
@@ -44,11 +50,3 @@ class GiftItem extends React.Component {
         );
     }
 }
-
-GiftItem.propTypes = {
-    item: React.PropTypes.object.isRequired,
-    addToBasket: React.PropTypes.func.isRequired,
-    basketItems: React.PropTypes.object.isRequired,
-};
-
-export default GiftItem;

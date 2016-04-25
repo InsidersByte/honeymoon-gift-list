@@ -2,12 +2,15 @@ import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 
-class MarkdownEditorPage extends React.Component {
-    constructor(props) {
-        super(props);
+export default class MarkdownEditorPage extends React.Component {
+    static propTypes = {
+        propKey: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        store: React.PropTypes.object.isRequired,
+        actions: React.PropTypes.object.isRequired,
+    };
 
-        this.state = this.props.store.getState();
-    }
+    state = this.props.store.getState();
 
     componentDidMount() {
         this.props.store.listen(this.onStoreChange);
@@ -45,12 +48,3 @@ class MarkdownEditorPage extends React.Component {
         );
     }
 }
-
-MarkdownEditorPage.propTypes = {
-    propKey: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    store: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-};
-
-export default MarkdownEditorPage;

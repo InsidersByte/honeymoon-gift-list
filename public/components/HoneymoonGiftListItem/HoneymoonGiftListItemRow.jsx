@@ -2,7 +2,13 @@ import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
-class HoneymoonGiftListItemRow extends React.Component {
+export default class HoneymoonGiftListItemRow extends React.Component {
+    static propTypes = {
+        item: React.PropTypes.object.isRequired,
+        onEdit: React.PropTypes.func.isRequired,
+        onDelete: React.PropTypes.func.isRequired,
+    };
+
     onDelete = () => {
         this.props.onDelete(this.props.item);
     };
@@ -43,11 +49,3 @@ class HoneymoonGiftListItemRow extends React.Component {
         );
     }
 }
-
-HoneymoonGiftListItemRow.propTypes = {
-    item: React.PropTypes.object.isRequired,
-    onEdit: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-};
-
-export default HoneymoonGiftListItemRow;

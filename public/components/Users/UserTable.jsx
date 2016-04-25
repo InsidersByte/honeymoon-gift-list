@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import UserRow from './UserRow';
 
-function UserTable(props) {
+export default function UserTable(props) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -35,5 +35,3 @@ UserTable.propTypes = {
     onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
-
-export default UserTable;

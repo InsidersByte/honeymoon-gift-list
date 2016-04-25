@@ -4,14 +4,19 @@ import GiftSetTable from './GiftSetTable';
 import GiftSetApi from '../../api/giftSet.api';
 import { giftSetRoute } from '../../constants/routes.constants';
 
-class GiftSetsPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiftSetsPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            giftSets: [],
-        };
-    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
+    state = {
+        giftSets: [],
+    };
 
     componentDidMount() {
         this.loadGiftSets();
@@ -101,14 +106,3 @@ class GiftSetsPage extends React.Component {
         );
     }
 }
-
-GiftSetsPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-GiftSetsPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiftSetsPage;
