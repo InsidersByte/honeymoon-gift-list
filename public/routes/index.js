@@ -15,6 +15,7 @@ import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
 import LoginPage from '../components/Login/LoginPage';
+import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import Admin from '../components/Admin';
 import AuthenticatedLanding from '../components/AuthenticatedLanding';
@@ -55,6 +56,7 @@ export default (
             <Route path="login" component={LoginPage} />
             <Route path="setup" component={SetupPage} />
             <Route path="reset/:token" component={ResetPage} />
+            <Route path="profile" component={ProfilePage} onEnter={requireAuth} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
             <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />

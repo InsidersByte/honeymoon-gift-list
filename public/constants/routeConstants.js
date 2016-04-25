@@ -5,6 +5,7 @@ export const GIVER_ROUTE = 'giver';
 
 export const ADMIN_ROUTE = '/admin';
 export const LOGIN_ROUTE = `${ADMIN_ROUTE}/login`;
+export const PROFILE_ROUTE = `${ADMIN_ROUTE}/profile`;
 
 export const COVER_ROUTE = `${ADMIN_ROUTE}/cover`;
 export const ABOUT_US_ROUTE = `${ADMIN_ROUTE}/aboutUs`;

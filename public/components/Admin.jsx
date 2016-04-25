@@ -12,7 +12,7 @@ export default class App extends React.Component {
         toastError: React.PropTypes.func.isRequired,
     };
 
-    state = this.getLoginState();
+    state = loginStore.getState();
 
     componentDidMount() {
         loginStore.listen(this.onStoreChange);
@@ -22,15 +22,9 @@ export default class App extends React.Component {
         loginStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = () => {
-        this.setState(this.getLoginState());
+    onStoreChange = state => {
+        this.setState(state);
     };
-
-    getLoginState() {
-        return {
-            userLoggedIn: loginStore.getState().isLoggedIn,
-        };
-    }
 
     logout(event) {
         event.preventDefault();
@@ -47,7 +41,7 @@ export default class App extends React.Component {
             </li>
         );
 
-        if (!this.state.userLoggedIn) {
+        if (!this.state.isLoggedIn) {
             headerItems = (
                 <Nav pullRight>
                     {viewSiteLink}
@@ -60,7 +54,7 @@ export default class App extends React.Component {
         } else {
             headerItems = (
                 <Nav pullRight>
-                    <NavDropdown title="Wedding Profile" id="weddingProfileDropdown">
+                    <NavDropdown id="weddingProfile" title="Wedding Profile">
                         <li>
                             <Link to={routes.COVER_ROUTE}>Cover</Link>
                         </li>
@@ -106,9 +100,14 @@ export default class App extends React.Component {
 
                     {viewSiteLink}
 
-                    <li>
-                        <a href="#" onClick={this.logout}>Logout</a>
-                    </li>
+                    <NavDropdown id="userProfile" title={this.state.user.name}>
+                        <li>
+                            <Link to={routes.PROFILE_ROUTE}>Your Profile</Link>
+                        </li>
+                        <li>
+                            <a href="#" onClick={this.logout}>Logout</a>
+                        </li>
+                    </NavDropdown>
                 </Nav>
             );
         }
