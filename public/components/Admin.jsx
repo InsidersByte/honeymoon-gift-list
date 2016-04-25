@@ -41,16 +41,16 @@ export default class App extends React.Component {
     render() {
         let headerItems;
 
-        const backToSiteLink = (
+        const viewSiteLink = (
             <li>
-                <Link to={routes.HOME_ROUTE}>Back to Site</Link>
+                <Link to={routes.HOME_ROUTE} target="_blank">View Site</Link>
             </li>
         );
 
         if (!this.state.userLoggedIn) {
             headerItems = (
                 <Nav pullRight>
-                    {backToSiteLink}
+                    {viewSiteLink}
 
                     <li>
                         <Link to={routes.LOGIN_ROUTE}>Login</Link>
@@ -104,7 +104,7 @@ export default class App extends React.Component {
                         <Link to={routes.USERS_ROUTE}>Users</Link>
                     </li>
 
-                    {backToSiteLink}
+                    {viewSiteLink}
 
                     <li>
                         <a href="#" onClick={this.logout}>Logout</a>
