@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-function SetupForm(props) {
+export default function SetupForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <FormGroup>
@@ -50,5 +50,3 @@ SetupForm.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
-
-export default SetupForm;

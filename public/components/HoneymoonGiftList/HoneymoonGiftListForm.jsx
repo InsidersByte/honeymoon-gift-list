@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 
-function HoneymoonGiftListForm(props) {
+export default function HoneymoonGiftListForm(props) {
     let offlinePaymentMessageInput = null;
     let disclaimerMessageInput = null;
 
@@ -86,5 +86,3 @@ HoneymoonGiftListForm.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
-
-export default HoneymoonGiftListForm;

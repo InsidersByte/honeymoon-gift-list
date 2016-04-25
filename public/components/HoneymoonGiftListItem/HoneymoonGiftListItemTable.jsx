@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import HoneymoonGiftListItemRow from './HoneymoonGiftListItemRow';
 
-function HoneymoonGiftListItemTable(props) {
+export default function HoneymoonGiftListItemTable(props) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -40,5 +40,3 @@ HoneymoonGiftListItemTable.propTypes = {
     onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
-
-export default HoneymoonGiftListItemTable;

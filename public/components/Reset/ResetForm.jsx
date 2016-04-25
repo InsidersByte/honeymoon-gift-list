@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-function ResetForm(props) {
+export default function ResetForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <FormGroup>
@@ -38,5 +38,3 @@ ResetForm.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
-
-export default ResetForm;

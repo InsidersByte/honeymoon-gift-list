@@ -1,7 +1,15 @@
 import React from 'react';
 import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class HoneymoonGiftListItem extends React.Component {
+export default class HoneymoonGiftListItem extends React.Component {
+    static propTypes = {
+        item: React.PropTypes.object.isRequired,
+        show: React.PropTypes.bool.isRequired,
+        onHide: React.PropTypes.func.isRequired,
+        onSubmit: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.props.item);
@@ -87,13 +95,3 @@ class HoneymoonGiftListItem extends React.Component {
         );
     }
 }
-
-HoneymoonGiftListItem.propTypes = {
-    item: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onHide: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-};
-
-export default HoneymoonGiftListItem;

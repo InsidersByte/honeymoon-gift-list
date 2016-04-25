@@ -1,7 +1,15 @@
 import React from 'react';
 import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class User extends React.Component {
+export default class User extends React.Component {
+    static propTypes = {
+        user: React.PropTypes.object.isRequired,
+        show: React.PropTypes.bool.isRequired,
+        onHide: React.PropTypes.func.isRequired,
+        onSubmit: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.props.user);
@@ -62,13 +70,3 @@ class User extends React.Component {
         );
     }
 }
-
-User.propTypes = {
-    user: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onHide: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-};
-
-export default User;

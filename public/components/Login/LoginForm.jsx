@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
 
-function LoginForm(props) {
+export default function LoginForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <FormGroup>
@@ -44,5 +44,3 @@ LoginForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onForgot: React.PropTypes.func.isRequired,
 };
-
-export default LoginForm;

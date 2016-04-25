@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-function CoverForm(props) {
+export default function CoverForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <FormGroup>
@@ -50,5 +50,3 @@ CoverForm.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
-
-export default CoverForm;

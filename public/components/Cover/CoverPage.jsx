@@ -4,18 +4,19 @@ import { Jumbotron } from 'react-bootstrap';
 import CoverForm from './CoverForm';
 import moment from 'moment';
 
-class CoverPage extends React.Component {
-    constructor() {
-        super();
+export default class CoverPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            cover: {
-                title: '',
-                imageUrl: '',
-                weddingDate: '',
-            },
-        };
-    }
+    state = {
+        cover: {
+            title: '',
+            imageUrl: '',
+            weddingDate: '',
+        },
+    };
 
     componentDidMount() {
         CoverApi
@@ -67,10 +68,3 @@ class CoverPage extends React.Component {
         );
     }
 }
-
-CoverPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default CoverPage;

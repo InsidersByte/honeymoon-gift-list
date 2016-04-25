@@ -3,20 +3,21 @@ import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
 import { Jumbotron } from 'react-bootstrap';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
 
-class HoneymoonGiftListPage extends React.Component {
-    constructor() {
-        super();
+export default class HoneymoonGiftListPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            honeymoonGiftList: {
-                content: '',
-                showOfflinePaymentMessage: false,
-                showDisclaimerMessage: false,
-                offlinePaymentMessage: '',
-                disclaimerMessage: '',
-            },
-        };
-    }
+    state = {
+        honeymoonGiftList: {
+            content: '',
+            showOfflinePaymentMessage: false,
+            showDisclaimerMessage: false,
+            offlinePaymentMessage: '',
+            disclaimerMessage: '',
+        },
+    };
 
     componentDidMount() {
         HoneymoonGiftListApi
@@ -72,10 +73,3 @@ class HoneymoonGiftListPage extends React.Component {
         );
     }
 }
-
-HoneymoonGiftListPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default HoneymoonGiftListPage;

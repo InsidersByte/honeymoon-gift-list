@@ -4,16 +4,17 @@ import HoneymoonGiftListItem from './HoneymoonGiftListItem';
 import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api';
 import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
 
-class HoneymoonGiftListItemPage extends React.Component {
-    constructor() {
-        super();
+export default class HoneymoonGiftListItemPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+    };
 
-        this.state = {
-            items: [],
-            showModal: false,
-            item: {},
-        };
-    }
+    state = {
+        items: [],
+        showModal: false,
+        item: {},
+    };
 
     componentDidMount() {
         this.loadItems();
@@ -127,10 +128,3 @@ class HoneymoonGiftListItemPage extends React.Component {
         );
     }
 }
-
-HoneymoonGiftListItemPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default HoneymoonGiftListItemPage;

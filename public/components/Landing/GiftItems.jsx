@@ -1,7 +1,7 @@
 import React from 'react';
 import GiftItem from './GiftItem';
 
-function GiftItems(props) {
+export default function GiftItems(props) {
     return (
         <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
             {
@@ -25,5 +25,3 @@ GiftItems.propTypes = {
     addToBasket: React.PropTypes.func.isRequired,
     basketItems: React.PropTypes.object.isRequired,
 };
-
-export default GiftItems;

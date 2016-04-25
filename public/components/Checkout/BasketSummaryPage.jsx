@@ -7,12 +7,8 @@ import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routeConstants';
 
 import './BasketSummary.styl';
 
-class BasketSummaryPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = basketStore.getState();
-    }
+export default class BasketSummaryPage extends React.Component {
+    state = basketStore.getState();
 
     componentDidMount() {
         basketStore.listen(this.onStoreChange);
@@ -98,5 +94,3 @@ class BasketSummaryPage extends React.Component {
         );
     }
 }
-
-export default BasketSummaryPage;

@@ -4,7 +4,7 @@ import { HOME_ROUTE } from '../constants/routeConstants';
 
 import './NoMatch.styl';
 
-function NoMatch() {
+export default function NoMatch() {
     return (
         <div className="no-match">
             <h1 className="no-match__title">Page not found</h1>
@@ -17,5 +17,3 @@ function NoMatch() {
         </div>
     );
 }
-
-export default NoMatch;

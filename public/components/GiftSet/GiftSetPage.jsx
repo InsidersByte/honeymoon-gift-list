@@ -6,17 +6,27 @@ import moment from 'moment';
 import GiftTable from './GiftTable';
 import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
 
-class GiftSetPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiftSetPage extends React.Component {
+    static propTypes = {
+        toastSuccess: React.PropTypes.func,
+        toastError: React.PropTypes.func,
+        params: React.PropTypes.object.isRequired,
+    };
 
-        this.state = {
-            giftSet: {
-                giver: {},
-                gifts: [],
-            },
-        };
-    }
+    static defaultProps = {
+        params: {},
+    };
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
+    state = {
+        giftSet: {
+            giver: {},
+            gifts: [],
+        },
+    };
 
     componentDidMount() {
         this.loadGiftSet();
@@ -186,19 +196,3 @@ class GiftSetPage extends React.Component {
         );
     }
 }
-
-GiftSetPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-    params: React.PropTypes.object.isRequired,
-};
-
-GiftSetPage.defaultProps = {
-    params: {},
-};
-
-GiftSetPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiftSetPage;

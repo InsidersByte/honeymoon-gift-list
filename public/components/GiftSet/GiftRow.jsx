@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GiftRow(props) {
+export default function GiftRow(props) {
     return (
         <tr>
             <th>{props.gift.honeymoonGiftListItem.name}</th>
@@ -18,5 +18,3 @@ GiftRow.propTypes = {
 GiftRow.defaultProps = {
     gift: {},
 };
-
-export default GiftRow;

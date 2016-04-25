@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function FontAwesome(props) {
+export default function FontAwesome(props) {
     const className = classNames(
         props.className,
         {
@@ -24,5 +24,3 @@ FontAwesome.propTypes = {
     icon: React.PropTypes.string.isRequired,
     size: React.PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x']),
 };
-
-export default FontAwesome;

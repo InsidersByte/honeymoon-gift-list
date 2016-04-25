@@ -3,7 +3,19 @@ import moment from 'moment';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
-class GiftSetRow extends React.Component {
+export default class GiftSetRow extends React.Component {
+    static propTypes = {
+        giftSet: React.PropTypes.object.isRequired,
+        onDelete: React.PropTypes.func.isRequired,
+        onMarkAsPaid: React.PropTypes.func.isRequired,
+        onMarkAsDetailsSent: React.PropTypes.func.isRequired,
+        onSelect: React.PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+        giftSet: {},
+    };
+
     onDelete = () => {
         this.props.onDelete(this.props.giftSet);
     };
@@ -74,17 +86,3 @@ class GiftSetRow extends React.Component {
         );
     }
 }
-
-GiftSetRow.propTypes = {
-    giftSet: React.PropTypes.object.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-    onMarkAsPaid: React.PropTypes.func.isRequired,
-    onMarkAsDetailsSent: React.PropTypes.func.isRequired,
-    onSelect: React.PropTypes.func.isRequired,
-};
-
-GiftSetRow.defaultProps = {
-    giftSet: {},
-};
-
-export default GiftSetRow;

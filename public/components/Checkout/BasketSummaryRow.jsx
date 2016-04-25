@@ -2,7 +2,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
-class BasketSummaryRow extends React.Component {
+export default class BasketSummaryRow extends React.Component {
+    static propTypes = {
+        item: React.PropTypes.object.isRequired,
+        onAdd: React.PropTypes.func.isRequired,
+        onRemove: React.PropTypes.func.isRequired,
+        onDelete: React.PropTypes.func.isRequired,
+    };
+
     onAdd = () => {
         this.props.onAdd(this.props.item);
     };
@@ -57,12 +64,3 @@ class BasketSummaryRow extends React.Component {
         );
     }
 }
-
-BasketSummaryRow.propTypes = {
-    item: React.PropTypes.object.isRequired,
-    onAdd: React.PropTypes.func.isRequired,
-    onRemove: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-};
-
-export default BasketSummaryRow;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { ADMIN_ROUTE } from '../constants/routeConstants';
 
-function NoMatchAdmin() {
+export default function NoMatchAdmin() {
     return (
         <div>
             <h1>Page not found</h1>
@@ -13,5 +13,3 @@ function NoMatchAdmin() {
         </div>
     );
 }
-
-export default NoMatchAdmin;

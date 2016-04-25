@@ -3,7 +3,7 @@ import FontAwesome from '../common/FontAwesome';
 
 import './LandingHeader.styl';
 
-function LandingHeader(props) {
+export default function LandingHeader(props) {
     const backgroundImageStyle = { backgroundImage: `url(${props.cover.imageUrl})` };
     let daysTillIDoCountdown = null;
 
@@ -38,5 +38,3 @@ LandingHeader.propTypes = {
 LandingHeader.defaultProps = {
     cover: {},
 };
-
-export default LandingHeader;
