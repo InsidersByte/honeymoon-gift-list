@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import authenticateActions from '../../actions/PasswordResetActions';
-import authenticateStore from '../../stores/PasswordResetStore';
+import passwordResetActions from '../../actions/PasswordResetActions';
+import passwordResetStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
 
 export default class ResetPage extends React.Component {
@@ -23,11 +23,11 @@ export default class ResetPage extends React.Component {
     };
 
     componentDidMount() {
-        authenticateStore.listen(this.onStoreChange);
+        passwordResetStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        authenticateStore.unlisten(this.onStoreChange);
+        passwordResetStore.unlisten(this.onStoreChange);
     }
 
     onStoreChange = (state) => {
@@ -48,12 +48,12 @@ export default class ResetPage extends React.Component {
             this.props.toastError('Your new passwords must match');
         }
 
-        authenticateActions.update({ token: this.props.params.token, ...this.state.user });
+        passwordResetActions.update({ token: this.props.params.token, ...this.state.user });
     };
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Reset Password</h1>
 

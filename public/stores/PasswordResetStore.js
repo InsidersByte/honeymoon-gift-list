@@ -1,11 +1,11 @@
 import alt from '../helpers/alt';
-import authenticateActions from '../actions/PasswordResetActions';
+import passwordResetActions from '../actions/PasswordResetActions';
 import history from '../helpers/history';
 import { LOGIN_ROUTE } from '../constants/routeConstants';
 
 class PasswordResetStore {
     constructor() {
-        this.bindActions(authenticateActions);
+        this.bindActions(passwordResetActions);
 
         this.result = null;
         this.error = null;

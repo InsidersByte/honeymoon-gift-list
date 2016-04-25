@@ -39,7 +39,7 @@ export default class SetupPage extends React.Component {
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Setup</h1>
 
