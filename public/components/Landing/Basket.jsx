@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import FontAwesome from '../common/FontAwesome';
+import { BASKET_ROUTE } from '../../constants/routeConstants';
 
 import './Basket.styl';
 
@@ -23,7 +24,7 @@ class Basket extends React.Component {
                         £{this.props.total}
                     </div>
 
-                    <Link to="basket" className="btn btn-success btn-sm">
+                    <Link to={BASKET_ROUTE} className="btn btn-success btn-sm">
                         Basket
                     </Link>
                 </section>

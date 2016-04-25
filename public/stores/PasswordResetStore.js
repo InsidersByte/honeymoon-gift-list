@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import authenticateActions from '../actions/PasswordResetActions';
 import history from '../helpers/history';
-import { LOGIN_ROUTE } from '../constants/routes.constants';
+import { LOGIN_ROUTE } from '../constants/routeConstants';
 
 class PasswordResetStore {
     constructor() {

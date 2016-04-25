@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { BASKET_ROUTE } from '../../constants/routeConstants';
 
 function GiverDetailsForm(props) {
     return (
@@ -65,7 +66,7 @@ function GiverDetailsForm(props) {
                 </Button>
 
                 <Link
-                    to="/basket"
+                    to={BASKET_ROUTE}
                     className="btn btn-default"
                     role="button"
                     disabled={props.isSaving}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable';
 import GiftSetApi from '../../api/giftSet.api';
-import { giftSetRoute } from '../../constants/routes.constants';
+import { giftSetRoute } from '../../constants/routeConstants';
 
 class GiftSetsPage extends React.Component {
     constructor(props, context) {

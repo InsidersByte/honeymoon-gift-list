@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+import { LOGIN_ROUTE } from '../constants/routeConstants';
 
 import loginStore from '../stores/LoginStore';
 
@@ -39,7 +40,7 @@ function requireAuth(nextState, replace) {
     const { isLoggedIn } = loginStore.getState();
 
     if (!isLoggedIn) {
-        replace('admin/login');
+        replace(LOGIN_ROUTE);
     }
 }
 

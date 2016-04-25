@@ -2,7 +2,7 @@ import alt from '../helpers/alt';
 import jwtDecode from 'jwt-decode';
 import loginActions from '../actions/LoginActions';
 import history from '../helpers/history';
-import { ADMIN_ROUTE, LOGIN_ROUTE } from '../constants/routes.constants';
+import { ADMIN_ROUTE, LOGIN_ROUTE } from '../constants/routeConstants';
 
 class LoginStore {
     constructor() {

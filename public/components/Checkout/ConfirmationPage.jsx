@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { HOME_ROUTE } from '../../constants/routeConstants';
 
 import './Confirmation.styl';
 
@@ -14,7 +15,7 @@ function ConfirmationPage() {
                 <p>We will then be in touch with our bank transfer details, as all payments are offline.</p>
             </div>
 
-            <Link to="" className="btn btn-success" role="button">Back to Home</Link>
+            <Link to={HOME_ROUTE} className="btn btn-success" role="button">Back to Home</Link>
         </section>
     );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import BasketSummaryTable from './BasketSummaryTable';
+import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routeConstants';
 
 import './BasketSummary.styl';
 
@@ -58,10 +59,10 @@ class BasketSummaryPage extends React.Component {
                     </div>
 
                     <div className="basket-summary__actions">
-                        <Link to="giver" className="btn btn-success" role="button">Proceed to Checkout</Link>
+                        <Link to={GIVER_ROUTE} className="btn btn-success" role="button">Proceed to Checkout</Link>
 
                         <Link
-                            to="/"
+                            to={HOME_ROUTE}
                             className="btn btn-default"
                             role="button"
                         >
@@ -79,7 +80,7 @@ class BasketSummaryPage extends React.Component {
 
                     <div className="basket-summary__actions">
                         <Link
-                            to="/"
+                            to={HOME_ROUTE}
                             className="btn btn-success"
                             role="button"
                         >

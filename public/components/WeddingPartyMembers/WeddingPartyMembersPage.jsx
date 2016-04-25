@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
-import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routes.constants';
+import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routeConstants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 import WeddingPartyMembersTable from './WeddingPartyMembersTable';

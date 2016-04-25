@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
 import GiftTable from './GiftTable';
-import { GIFT_SETS_ROUTE } from '../../constants/routes.constants';
+import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
 
 class GiftSetPage extends React.Component {
     constructor(props, context) {
@@ -158,7 +158,7 @@ class GiftSetPage extends React.Component {
                 <GiftTable gifts={this.state.giftSet.gifts} />
 
                 <ButtonToolbar>
-                    <Link to="admin/giftSet" className="btn btn-primary" role="button">Back to Gift Sets</Link>
+                    <Link to={GIFT_SETS_ROUTE} className="btn btn-primary" role="button">Back to Gift Sets</Link>
 
                     <Button
                         onClick={this.markAsDetailsSent}
