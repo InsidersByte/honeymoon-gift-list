@@ -59,6 +59,18 @@ export default class User extends React.Component {
                                 required
                             />
                         </FormGroup>
+
+                        <FormGroup>
+                            <ControlLabel>Confirm Password</ControlLabel>
+                            <FormControl
+                                name="confirmPassword"
+                                type="password"
+                                placeholder="Enter confirm password"
+                                value={this.props.user.confirmPassword}
+                                onChange={this.props.onChange}
+                                required
+                            />
+                        </FormGroup>
                     </Modal.Body>
 
                     <Modal.Footer>

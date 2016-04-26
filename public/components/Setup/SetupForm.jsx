@@ -40,6 +40,18 @@ export default function SetupForm(props) {
                 />
             </FormGroup>
 
+            <FormGroup>
+                <ControlLabel>Confirm Password</ControlLabel>
+                <FormControl
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Enter confirm password"
+                    value={props.user.confirmPassword}
+                    onChange={props.onChange}
+                    required
+                />
+            </FormGroup>
+
             <Button type="submit" bsStyle="primary" block>Setup</Button>
         </form>
     );

@@ -64,6 +64,7 @@ export default class Users extends React.Component {
                 name: '',
                 username: '',
                 password: '',
+                confirmPassword: '',
             },
         });
     };

@@ -14,6 +14,7 @@ export default class SetupPage extends React.Component {
             name: '',
             username: '',
             password: '',
+            confirmPassword: '',
         },
     };
 
