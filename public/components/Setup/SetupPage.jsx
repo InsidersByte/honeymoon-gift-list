@@ -28,6 +28,11 @@ export default class SetupPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
+        if (this.state.user.password !== this.state.user.confirmPassword) {
+            this.props.toastError('Your new passwords must match');
+            return;
+        }
+
         setupApi
             .post(this.state.user)
             .then(() => {

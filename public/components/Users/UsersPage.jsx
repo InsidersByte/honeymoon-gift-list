@@ -28,6 +28,11 @@ export default class Users extends React.Component {
     };
 
     save = (user) => {
+        if (user.password !== user.confirmPassword) {
+            this.props.toastError('Passwords must match');
+            return;
+        }
+
         UserApi
             .post(user)
             .then(() => {
