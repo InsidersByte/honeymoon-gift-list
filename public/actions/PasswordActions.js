@@ -1,12 +1,12 @@
 import alt from '../helpers/alt';
-import authenticateApi from '../api/authenticate.api';
+import userApi from '../api/user.api';
 
 class PasswordResetActions {
     update(user) {
         return (dispatch) => {
             dispatch();
 
-            authenticateApi
+            userApi
                 .passwordPut(user)
                 .then(this.updateSuccess)
                 .catch(this.updateError);

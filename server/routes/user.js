@@ -47,6 +47,56 @@ module.exports = (app, express) => {
         }));
 
     router
+        .route('/password')
+
+        .put(wrap(function* resetPassword(req, res) {
+            req.checkBody('username').notEmpty();
+            req.checkBody('currentPassword').notEmpty();
+            req.checkBody('newPassword').notEmpty().equals(req.body.confirmPassword);
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
+
+            if (req.user.username !== req.body.username) {
+                return res.status(401).send();
+            }
+
+            const user = yield User
+                .findOne({
+                    username: req.body.username,
+                })
+                .select('name username password salt')
+                .exec();
+
+            if (!user) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            const validPassword = user.comparePassword(req.body.currentPassword);
+
+            if (!validPassword) {
+                return res
+                    .status(400)
+                    .json({ message: 'Your password is incorrect.' });
+            }
+
+            user.password = req.body.newPassword;
+
+            yield user.save();
+
+            return res.json({
+                message: 'Password Changed Successfully!',
+            });
+        }));
+
+    router
         .route('/:userId')
 
         .put((wrap(function* updateUser(req, res) {

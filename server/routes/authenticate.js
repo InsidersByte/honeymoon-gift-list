@@ -12,6 +12,14 @@ module.exports = (app, express, config) => {
         req.checkBody('username').isEmail();
         req.checkBody('password').notEmpty();
 
+        const errors = req.validationErrors();
+
+        if (errors) {
+            return res
+                .status(400)
+                .send(errors);
+        }
+
         const user = yield User
             .findOne({
                 username: req.body.username,
@@ -66,6 +74,14 @@ module.exports = (app, express, config) => {
         .post(wrap(function* resetPassword(req, res) {
             req.checkBody('username').isEmail();
 
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
+
             const user = yield User.findOne({
                 username: req.body.username,
             });
@@ -105,6 +121,14 @@ module.exports = (app, express, config) => {
             req.checkBody('token').equals(req.params.token);
             req.checkBody('password').notEmpty();
             req.checkBody('confirmPassword').equals(req.body.password);
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
 
             const user = yield User.findOne({
                 resetPasswordToken: req.body.token,
