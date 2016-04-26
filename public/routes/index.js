@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import { LOGIN_ROUTE } from '../constants/routeConstants';
+import { LOGIN_ROUTE, ADMIN_ROUTE } from '../constants/routeConstants';
 
 import loginStore from '../stores/LoginStore';
 
@@ -45,6 +45,14 @@ function requireAuth(nextState, replace) {
     }
 }
 
+function ifLoggedInRedirectToAdmin(nextState, replace) {
+    const { isLoggedIn } = loginStore.getState();
+
+    if (isLoggedIn) {
+        replace(ADMIN_ROUTE);
+    }
+}
+
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={LandingPage} />
@@ -53,8 +61,8 @@ export default (
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
-            <Route path="login" component={LoginPage} />
-            <Route path="setup" component={SetupPage} />
+            <Route path="login" component={LoginPage} onEnter={ifLoggedInRedirectToAdmin} />
+            <Route path="setup" component={SetupPage} onEnter={ifLoggedInRedirectToAdmin} />
             <Route path="reset/:token" component={ResetPage} />
             <Route path="profile" component={ProfilePage} onEnter={requireAuth} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
