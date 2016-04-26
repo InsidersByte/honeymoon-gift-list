@@ -63,7 +63,7 @@ export default (
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
             <Route path="login" component={LoginPage} onEnter={ifLoggedInRedirectToAdmin} />
             <Route path="setup" component={SetupPage} onEnter={ifLoggedInRedirectToAdmin} />
-            <Route path="reset/:token" component={ResetPage} />
+            <Route path="reset/:token" component={ResetPage} onEnter={ifLoggedInRedirectToAdmin} />
             <Route path="profile" component={ProfilePage} onEnter={requireAuth} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
