@@ -15,7 +15,7 @@ module.exports = (app, express) => {
         .post(wrap(function* createUser(req, res) {
             req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
-            req.checkBody('password').notEmpty();
+            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
