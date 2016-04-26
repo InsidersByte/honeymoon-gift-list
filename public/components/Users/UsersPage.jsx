@@ -28,29 +28,16 @@ export default class Users extends React.Component {
     };
 
     save = (user) => {
-        if (user._id) { // eslint-disable-line no-underscore-dangle
-            UserApi
-                .put(user, user._id) // eslint-disable-line no-underscore-dangle
-                .then(() => {
-                    this.close();
-                    this.loadUsers();
-                    this.props.toastSuccess('User saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving a user', error);
-                });
-        } else {
-            UserApi
-                .post(user)
-                .then(() => {
-                    this.close();
-                    this.loadUsers();
-                    this.props.toastSuccess('User saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving a user', error);
-                });
-        }
+        UserApi
+            .post(user)
+            .then(() => {
+                this.close();
+                this.loadUsers();
+                this.props.toastSuccess('User saved');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error saving a user', error);
+            });
     };
 
     delete = (user) => {
@@ -71,16 +58,14 @@ export default class Users extends React.Component {
     };
 
     add = () => {
-        this.open({
-            name: '',
-            username: '',
-            password: '',
+        this.setState({
+            showModal: true,
+            user: {
+                name: '',
+                username: '',
+                password: '',
+            },
         });
-    };
-
-    open = (userToEdit) => {
-        const user = Object.assign({ password: '' }, userToEdit);
-        this.setState({ showModal: true, user });
     };
 
     close = () => {

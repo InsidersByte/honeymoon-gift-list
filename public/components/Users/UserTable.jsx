@@ -20,7 +20,6 @@ export default function UserTable(props) {
                         <UserRow
                             key={user._id} // eslint-disable-line no-underscore-dangle
                             user={user}
-                            onEdit={props.onEdit}
                             onDelete={props.onDelete}
                         />
                     ))
@@ -32,6 +31,5 @@ export default function UserTable(props) {
 
 UserTable.propTypes = {
     users: React.PropTypes.array.isRequired,
-    onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
