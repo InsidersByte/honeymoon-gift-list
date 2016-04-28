@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import BaseActions from './BaseActions';
-import api from '../api/onTheDay.api';
-import { ON_THE_DAY as key } from '../constants/keys.constants';
+import api from '../api/OnTheDayApi';
+import { ON_THE_DAY as key } from '../constants/KeyConstants';
 
 class OnTheDayActions extends BaseActions {
     constructor() {

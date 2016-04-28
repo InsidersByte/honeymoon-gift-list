@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import actions from '../actions/WeddingPartyMemberActions';
 import BaseStore from './BaseStore';
-import { WEDDING_PARTY_MEMBER as key } from '../constants/keys.constants';
+import { WEDDING_PARTY_MEMBER as key } from '../constants/KeyConstants';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routeConstants';
 import history from '../helpers/history';
 

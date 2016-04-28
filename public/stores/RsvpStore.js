@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import actions from '../actions/RsvpActions';
 import BaseStore from './BaseStore';
-import { RSVP as key } from '../constants/keys.constants';
+import { RSVP as key } from '../constants/KeyConstants';
 
 class RsvpStore extends BaseStore {
     constructor() {

@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import BaseActions from './BaseActions';
-import api from '../api/weddingPlaylist.api';
-import { WEDDING_PLAYLIST as key } from '../constants/keys.constants';
+import api from '../api/WeddingPlaylistApi';
+import { WEDDING_PLAYLIST as key } from '../constants/KeyConstants';
 
 class WeddingPlaylistActions extends BaseActions {
     constructor() {

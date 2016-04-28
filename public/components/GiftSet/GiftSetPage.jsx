@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
-import GiftSetApi from '../../api/giftSet.api';
+import GiftSetApi from '../../api/GiftSetApi';
 import moment from 'moment';
 import GiftTable from './GiftTable';
 import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';

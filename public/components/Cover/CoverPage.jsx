@@ -1,5 +1,5 @@
 import React from 'react';
-import CoverApi from '../../api/cover.api';
+import CoverApi from '../../api/CoverApi';
 import { Jumbotron } from 'react-bootstrap';
 import CoverForm from './CoverForm';
 import moment from 'moment';

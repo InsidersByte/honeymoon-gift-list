@@ -1,6 +1,6 @@
 import request from 'superagent';
 import loginStore from '../stores/LoginStore';
-import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants';
+import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/ApiConstants';
 import loginActions from '../actions/LoginActions';
 
 export default class {

@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import actions from '../actions/WeddingPlaylistActions';
 import BaseStore from './BaseStore';
-import { WEDDING_PLAYLIST as key } from '../constants/keys.constants';
+import { WEDDING_PLAYLIST as key } from '../constants/KeyConstants';
 
 class WeddingPlaylistStore extends BaseStore {
     constructor() {

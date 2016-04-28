@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import setupApi from '../../api/setup.api';
+import setupApi from '../../api/SetupApi';
 import SetupForm from './SetupForm';
 
 export default class SetupPage extends React.Component {

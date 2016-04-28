@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
-import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api';
+import honeymoonGiftListItemApi from '../../api/HoneymoonGiftListItemApi';
 import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
 
 export default class HoneymoonGiftListItemPage extends React.Component {

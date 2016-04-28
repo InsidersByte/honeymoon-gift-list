@@ -1,5 +1,5 @@
 import alt from '../helpers/alt';
-import userApi from '../api/user.api';
+import userApi from '../api/UserApi';
 
 class PasswordResetActions {
     update(user) {

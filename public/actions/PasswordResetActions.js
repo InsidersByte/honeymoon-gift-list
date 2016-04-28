@@ -1,5 +1,5 @@
 import alt from '../helpers/alt';
-import authenticateApi from '../api/authenticate.api';
+import authenticateApi from '../api/AuthenticateApi';
 
 class PasswordResetActions {
     create(user) {

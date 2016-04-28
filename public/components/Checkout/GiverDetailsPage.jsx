@@ -1,6 +1,6 @@
 import React from 'react';
 import GiverDetailsForm from './GiverDetailsForm';
-import giftApi from '../../api/gift.api';
+import giftApi from '../../api/GiftApi';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routeConstants';

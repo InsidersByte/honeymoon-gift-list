@@ -1,6 +1,6 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
-import WeddingProfileApi from '../../api/weddingProfile.api';
+import WeddingProfileApi from '../../api/WeddingProfileApi';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import GiftItems from './GiftItems';

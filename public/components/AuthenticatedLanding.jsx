@@ -1,5 +1,5 @@
 import React from 'react';
-import landingApi from '../api/landing.api';
+import landingApi from '../api/LandingApi';
 
 export default class AuthenticatedLanding extends React.Component {
     static propTypes = {

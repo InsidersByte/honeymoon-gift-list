@@ -1,5 +1,5 @@
 import React from 'react';
-import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
+import HoneymoonGiftListApi from '../../api/HoneymoonGiftListApi';
 import { Jumbotron } from 'react-bootstrap';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
 

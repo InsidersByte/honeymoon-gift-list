@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import actions from '../actions/OnTheDayActions';
 import BaseStore from './BaseStore';
-import { ON_THE_DAY as key } from '../constants/keys.constants';
+import { ON_THE_DAY as key } from '../constants/KeyConstants';
 
 class OnTheDayStore extends BaseStore {
     constructor() {

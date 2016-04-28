@@ -1,4 +1,4 @@
-import authenticateApi from '../api/authenticate.api';
+import authenticateApi from '../api/AuthenticateApi';
 import loginActions from '../actions/LoginActions';
 
 class Auth {
