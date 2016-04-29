@@ -6,7 +6,7 @@ module.exports = (app, express, config, environment) => {
 
     app.use('/api', apiRoutes);
 
-    if (environment === environmentConstants.production) {
+    if (environment === environmentConstants.PRODUCTION) {
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, '../../', 'dist/index.html'));
         });

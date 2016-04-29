@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line strict
-
 const GiftSet = require('../models/giftSet');
 const User = require('../models/user');
 const wrap = require('../utilities/wrap');
