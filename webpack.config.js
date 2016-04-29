@@ -26,7 +26,7 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                loaders: ['style', 'css', 'stylus'],
+                loaders: ['style', 'css?modules', 'stylus'],
                 include: PATHS.PUBLIC,
             },
             {

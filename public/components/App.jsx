@@ -1,6 +1,8 @@
 import React from 'react';
 import { ToastContainer, ToastMessage } from 'react-toastr';
 
+import css from './App.styl';
+
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 export default class App extends React.Component {
@@ -36,8 +38,8 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div className="maximum-size">
-                <div className="maximum-size">
+            <div className={css.root}>
+                <div className={css.container}>
                     {this.props.children && React.cloneElement(this.props.children, {
                         toastSuccess: this.toastSuccess,
                         toastError: this.toastError,
