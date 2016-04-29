@@ -34,7 +34,7 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
+                loader: extractStyl.extract('style', ['css?modules', 'postcss', 'stylus']),
             },
             {
                 test: /\.(js|jsx)$/,
