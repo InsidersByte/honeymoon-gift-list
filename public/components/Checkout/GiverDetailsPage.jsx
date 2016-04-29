@@ -5,7 +5,7 @@ import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routeConstants';
 
-import './GiverDetails.styl';
+import css from './GiverDetailsPage.styl';
 
 export default class GiverDetailsPage extends React.Component {
     static propTypes = {
@@ -67,9 +67,9 @@ export default class GiverDetailsPage extends React.Component {
 
     render() {
         return (
-            <section className="giver-details">
-                <div className="giver-details__container">
-                    <h1 className="giver-details__title">Your Details</h1>
+            <section className={css.root}>
+                <div className={css.container}>
+                    <h1 className={css.title}>Your Details</h1>
 
                     <GiverDetailsForm
                         giver={this.state.giver}

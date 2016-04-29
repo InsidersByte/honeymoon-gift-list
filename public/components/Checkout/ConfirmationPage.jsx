@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router';
 import { HOME_ROUTE } from '../../constants/routeConstants';
 
-import './Confirmation.styl';
+import css from './ConfirmationPage.styl';
 
 export default function ConfirmationPage() {
     return (
-        <section className="confirmation">
-            <h1 className="confirmation__title">Thank you very much for your gift!</h1>
+        <section className={css.root}>
+            <h1 className={css.title}>Thank you very much for your gift!</h1>
 
-            <div className="confirmation__content">
+            <div className={css.content}>
                 <p>You will receive an email (this is still a work in progress) with your gift confirmation.</p>
 
                 <p>We will then be in touch with our bank transfer details, as all payments are offline.</p>
