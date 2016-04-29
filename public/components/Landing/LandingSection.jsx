@@ -1,13 +1,13 @@
 import React from 'react';
 
-import './LandingSection.styl';
+import css from './LandingSection.styl';
 
 export default function LandingSection(props) {
     return (
-        <section className="landing-section">
-            <h1 className="landing-section__title">{props.title} <span></span></h1>
+        <section className={css.root}>
+            <h1 className={css.title}>{props.title}</h1>
 
-            <div className="landing-section__content">
+            <div className={css.content}>
                 {props.children}
             </div>
 

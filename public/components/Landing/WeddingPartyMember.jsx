@@ -1,18 +1,18 @@
 import React from 'react';
 
-import './WeddingPartyMember.styl';
+import css from './WeddingPartyMember.styl';
 
 export default function WeddingPartyMember(props) {
     return (
-        <div className="wedding-party-member">
-            <div className="wedding-party-member__image" style={{ backgroundImage: `url(${props.weddingPartyMember.imageUrl})` }}>
+        <div className={css.root}>
+            <div className={css.image} style={{ backgroundImage: `url(${props.weddingPartyMember.imageUrl})` }}>
             </div>
 
-            <h1 className="wedding-party-member__name">{props.weddingPartyMember.name}</h1>
+            <h1 className={css.name}>{props.weddingPartyMember.name}</h1>
 
-            <h2 className="wedding-party-member__title">{props.weddingPartyMember.title}</h2>
+            <h2 className={css.title}>{props.weddingPartyMember.title}</h2>
 
-            <p className="wedding-party-member__description">{props.weddingPartyMember.description}</p>
+            <p className={css.description}>{props.weddingPartyMember.description}</p>
         </div>
     );
 }

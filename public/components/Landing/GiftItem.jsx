@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
-import './GiftItem.styl';
+import css from './GiftItem.styl';
 
 export default class GiftItem extends React.Component {
     static propTypes = {
@@ -36,8 +36,8 @@ export default class GiftItem extends React.Component {
         const backgroundImageStyle = { backgroundImage: `url(${imageUrl})` };
 
         return (
-            <div className="gift-item">
-                <div className="gift-item__avatar" style={backgroundImageStyle}>
+            <div className={css.root}>
+                <div className={css.avatar} style={backgroundImageStyle}>
                 </div>
 
                 <div style={{ padding: '8px' }}>
