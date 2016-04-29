@@ -3,9 +3,11 @@ import React from 'react';
 import css from './WeddingPartyMember.styl';
 
 export default function WeddingPartyMember(props) {
+    const backgroundImageStyle = { backgroundImage: `url(${props.weddingPartyMember.imageUrl})` };
+
     return (
         <div className={css.root}>
-            <div className={css.image} style={{ backgroundImage: `url(${props.weddingPartyMember.imageUrl})` }}>
+            <div className={css.image} style={backgroundImageStyle}>
             </div>
 
             <h1 className={css.name}>{props.weddingPartyMember.name}</h1>

@@ -91,7 +91,7 @@ export default class LandingPage extends React.Component {
     renderDisclaimerMessage = () => {
         if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
             return (
-                <span style={{ marginBottom: '10px' }}>
+                <span className={css.disclaimerMessage}>
                     <br />
                     <br />
 
@@ -160,7 +160,7 @@ export default class LandingPage extends React.Component {
 
                 <LandingSection title="Gift List" postContent={giftItemsElement}>
                     <div>
-                        <span style={{ whiteSpace: 'pre-wrap' }}>
+                        <span className={css.content}>
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 

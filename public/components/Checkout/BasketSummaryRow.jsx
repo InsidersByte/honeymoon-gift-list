@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
+import css from './BasketSummaryRow.styl';
 
 export default class BasketSummaryRow extends React.Component {
     static propTypes = {
@@ -37,7 +38,7 @@ export default class BasketSummaryRow extends React.Component {
                         <FontAwesome icon="minus" />
                     </Button>
 
-                    <span style={{ margin: '0 10px' }}>
+                    <span className={css.quantity}>
                         {this.props.item.quantity}
                     </span>
 

@@ -40,7 +40,7 @@ export default class GiftItem extends React.Component {
                 <div className={css.avatar} style={backgroundImageStyle}>
                 </div>
 
-                <div style={{ padding: '8px' }}>
+                <div className={css.content}>
                     <h4>{name}</h4>
                     <p>Remaining: {remaining}</p>
 
