@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
+import jwtDecode from 'jwt-decode';
 
 import history from './helpers/history';
 import routes from './routes';
 import alt from './helpers/alt';
-import jwtDecode from 'jwt-decode';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'animate.css/animate.css';

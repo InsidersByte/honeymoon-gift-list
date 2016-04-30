@@ -9,7 +9,7 @@ export default class AuthenticatedLanding extends React.Component {
 
     componentDidMount() {
         landingStore.listen(this.onStoreChange);
-        landingActions.fetch();
+        landingActions.fetch.defer();
     }
 
     componentWillUnmount() {
