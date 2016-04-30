@@ -1,10 +1,8 @@
 import React from 'react';
 import NotificationSystem from 'react-notification-system';
 import NotificationStore from '../stores/NotificationStore';
-import { ToastContainer, ToastMessage } from 'react-toastr';
 import css from './App.styl';
 
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 let notificationSystem;
 
 export default class App extends React.Component {
@@ -26,49 +24,14 @@ export default class App extends React.Component {
         notificationSystem.addNotification(notification);
     }
 
-    toastSuccess = (message) => {
-        this
-            .refs
-            .container
-            .success(
-                message,
-                'Success',
-                { closeButton: true }
-            );
-    };
-
-    toastError = (message, error) => {
-        if (error) {
-            console.error(error);
-        }
-
-        this
-            .refs
-            .container
-            .error(
-                message,
-                'Error',
-                { closeButton: true }
-            );
-    };
-
     render() {
         return (
             <div className={css.root}>
                 <div className={css.container}>
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        toastSuccess: this.toastSuccess,
-                        toastError: this.toastError,
-                    })}
+                    {this.props.children}
                 </div>
 
                 <NotificationSystem ref="notificationSystem" />
-
-                <ToastContainer
-                    ref="container"
-                    toastMessageFactory={ToastMessageFactory}
-                    className="toast-bottom-left"
-                />
             </div>
         );
     }

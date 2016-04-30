@@ -8,8 +8,6 @@ import * as routes from '../constants/routeConstants';
 export default class Admin extends React.Component {
     static propTypes = {
         children: React.PropTypes.element.isRequired,
-        toastSuccess: React.PropTypes.func.isRequired,
-        toastError: React.PropTypes.func.isRequired,
     };
 
     state = loginStore.getState();
@@ -127,10 +125,7 @@ export default class Admin extends React.Component {
                 </Navbar>
 
                 <div className="container">
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        toastSuccess: this.props.toastSuccess,
-                        toastError: this.props.toastError,
-                    })}
+                    {this.props.children}
                 </div>
             </div>
         );
