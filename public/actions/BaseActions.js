@@ -19,7 +19,11 @@ export default class BaseActions {
 
     fetchSuccess = o => o;
 
-    fetchError = o => o;
+    fetchError = error => {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    };
 
     query() {
         return (dispatch) => {
@@ -34,7 +38,11 @@ export default class BaseActions {
 
     querySuccess = o => o;
 
-    queryError = o => o;
+    queryError = error => {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    };
 
     create({ [this.key]: rawData }) {
         return (dispatch) => {

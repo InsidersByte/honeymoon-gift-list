@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import auth from '../../helpers/auth';
 import LoginForm from './LoginForm';
+import NotificationActions from '../../actions/NotificationActions';
 import authenticateActions from '../../actions/PasswordResetActions';
 import authenticateStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
@@ -57,7 +58,7 @@ export default class Login extends React.Component {
         const username = this.state.user.username;
 
         if (!username || !isEmail(username)) {
-            alert('We need your email address to reset your password!');
+            NotificationActions.error({ message: 'We need your email address to reset your password!' });
             return;
         }
 

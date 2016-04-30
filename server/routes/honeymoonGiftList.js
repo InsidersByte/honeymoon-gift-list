@@ -35,7 +35,7 @@ module.exports = (app, express) => {
 
             yield weddingProfile.save();
 
-            return res.json(weddingProfile.cover);
+            return res.json(weddingProfile.honeymoonGiftList);
         }));
 
     return router;

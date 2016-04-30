@@ -10,3 +10,4 @@ export const COVER = 'cover';
 export const LANDING = 'landing';
 export const SETUP = 'user';
 export const USER = 'user';
+export const HONEYMOON_GIFT_LIST = 'honeymoonGiftList';

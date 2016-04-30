@@ -1,36 +1,24 @@
 import React from 'react';
-import HoneymoonGiftListApi from '../../api/HoneymoonGiftListApi';
 import { Jumbotron } from 'react-bootstrap';
+import HoneymoonGiftListActions from '../../actions/HoneymoonGiftListActions';
+import HoneymoonGiftListStore from '../../stores/HoneymoonGiftListStore';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
 
 export default class HoneymoonGiftListPage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
-    state = {
-        honeymoonGiftList: {
-            content: '',
-            showOfflinePaymentMessage: false,
-            showDisclaimerMessage: false,
-            offlinePaymentMessage: '',
-            disclaimerMessage: '',
-        },
-    };
+    state = HoneymoonGiftListStore.getState();
 
     componentDidMount() {
-        HoneymoonGiftListApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    honeymoonGiftList: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the honeymoonGiftList data', error);
-            });
+        HoneymoonGiftListStore.listen(this.onStoreChange);
+        HoneymoonGiftListActions.fetch();
     }
+
+    componentWillUnmount() {
+        HoneymoonGiftListStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
+    };
 
     setHoneymoonGiftListState = (event) => {
         const field = event.target.name;
@@ -46,15 +34,7 @@ export default class HoneymoonGiftListPage extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-
-        HoneymoonGiftListApi
-            .put(this.state.honeymoonGiftList)
-            .then(() => {
-                this.props.toastSuccess('HoneymoonGiftList updated');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving honeymoonGiftList', error);
-            });
+        HoneymoonGiftListActions.update(this.state);
     };
 
     render() {
