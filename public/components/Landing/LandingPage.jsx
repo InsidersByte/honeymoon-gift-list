@@ -1,6 +1,7 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
-import WeddingProfileApi from '../../api/WeddingProfileApi';
+import WeddingProfileActions from '../../actions/WeddingProfileActions';
+import WeddingProfileStore from '../../stores/WeddingProfileStore';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import GiftItems from './GiftItems';
@@ -14,59 +15,36 @@ import WeddingPartyMembers from './WeddingPartyMembers';
 import css from './LandingPage.styl';
 
 export default class LandingPage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
-    state = Object.assign({
-        weddingProfile: {
-            cover: {},
-            aboutUs: '',
-            aboutOurDay: '',
-            aboutOurHoneymoon: '',
-            honeymoonGiftListItems: [],
-            honeymoonGiftList: {},
-            rsvp: '',
-            weddingPlaylist: '',
-            localFlavour: '',
-            onTheDay: '',
-            weddingPartyMembers: [],
-        },
-    }, basketStore.getState());
+    state = { ...basketStore.getState(), ...WeddingProfileStore.getState() };
 
     componentDidMount() {
-        WeddingProfileApi
-            .get()
-            .then((response) => {
-                const weddingProfile = response;
-
-                if (weddingProfile.cover && weddingProfile.cover.weddingDate) {
-                    const weddingDate = moment(weddingProfile.cover.weddingDate);
-                    const now = moment.now();
-
-                    const daysToGo = weddingDate.diff(now, 'days');
-
-                    weddingProfile.cover.daysToGo = daysToGo;
-                }
-
-                this.setState({
-                    weddingProfile,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the profile data', error);
-            });
-
-        basketStore.listen(this.onStoreChange);
+        WeddingProfileStore.listen(this.onWeddingProfilesStoreChange);
+        basketStore.listen(this.onBasketStoreChange);
+        WeddingProfileActions.fetch();
     }
 
     componentWillUnmount() {
-        basketStore.unlisten(this.onStoreChange);
+        WeddingProfileStore.unlisten(this.onWeddingProfilesStoreChange);
+        basketStore.unlisten(this.onBasketStoreChange);
     }
 
-    onStoreChange = (state) => {
+    onBasketStoreChange = state => {
         this.setState(state);
+    };
+
+    onWeddingProfilesStoreChange = state => {
+        const newState = Object.assign({}, state);
+
+        if (newState.weddingProfile && newState.weddingProfile.cover && newState.weddingProfile.cover.weddingDate) {
+            const weddingDate = moment(newState.weddingProfile.cover.weddingDate);
+            const now = moment.now();
+
+            const daysToGo = weddingDate.diff(now, 'days');
+
+            newState.weddingProfile.cover.daysToGo = daysToGo;
+        }
+
+        this.setState(newState);
     };
 
     addToBasket(item) {

@@ -11,3 +11,4 @@ export const LANDING = 'landing';
 export const SETUP = 'user';
 export const USER = 'user';
 export const HONEYMOON_GIFT_LIST = 'honeymoonGiftList';
+export const WEDDING_PROFILE = 'weddingProfile';
