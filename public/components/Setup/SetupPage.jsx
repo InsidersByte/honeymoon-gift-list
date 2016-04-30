@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import setupApi from '../../api/SetupApi';
+import setupActions from '../../actions/SetupActions';
+import setupStore from '../../stores/SetupStore';
 import SetupForm from './SetupForm';
 
 export default class SetupPage extends React.Component {
@@ -18,6 +19,18 @@ export default class SetupPage extends React.Component {
         },
     };
 
+    componentDidMount() {
+        setupStore.listen(this.onStoreChange);
+    }
+
+    componentWillUnmount() {
+        setupStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    };
+
     setUserState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
@@ -33,14 +46,7 @@ export default class SetupPage extends React.Component {
             return;
         }
 
-        setupApi
-            .post(this.state.user)
-            .then(() => {
-                this.props.toastSuccess('Setup successful');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error setting up', error);
-            });
+        setupActions.create(this.state);
     };
 
     render() {

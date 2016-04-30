@@ -8,3 +8,4 @@ export const WEDDING_PLAYLIST = 'weddingPlaylist';
 export const WEDDING_PARTY_MEMBER = 'member';
 export const COVER = 'cover';
 export const LANDING = 'landing';
+export const SETUP = 'user';
