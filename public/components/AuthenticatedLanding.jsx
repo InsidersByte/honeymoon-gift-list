@@ -5,11 +5,6 @@ import landingStore from '../stores/LandingStore';
 import css from './AuthenticatedLanding.styl';
 
 export default class AuthenticatedLanding extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
     state = landingStore.getState();
 
     componentDidMount() {

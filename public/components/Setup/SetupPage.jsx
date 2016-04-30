@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import setupActions from '../../actions/SetupActions';
 import setupStore from '../../stores/SetupStore';
+import NotificationActions from '../../actions/NotificationActions';
 import SetupForm from './SetupForm';
 
 export default class SetupPage extends React.Component {
@@ -42,7 +43,7 @@ export default class SetupPage extends React.Component {
         event.preventDefault();
 
         if (this.state.user.password !== this.state.user.confirmPassword) {
-            this.props.toastError('Your new passwords must match');
+            NotificationActions.error({ message: 'Your new passwords must match' });
             return;
         }
 
