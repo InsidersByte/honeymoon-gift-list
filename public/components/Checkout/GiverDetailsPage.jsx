@@ -1,9 +1,9 @@
 import React from 'react';
 import GiverDetailsForm from './GiverDetailsForm';
-import giftApi from '../../api/GiftApi';
-import basketActions from '../../actions/BasketActions';
+import GiftActions from '../../actions/GiftActions';
+import GiftStore from '../../stores/GiftStore';
 import basketStore from '../../stores/BasketStore';
-import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routeConstants';
+import { HOME_ROUTE } from '../../constants/routeConstants';
 
 import css from './GiverDetailsPage.styl';
 
@@ -24,7 +24,7 @@ export default class GiverDetailsPage extends React.Component {
             email: '',
             phoneNumber: '',
         },
-        isSaving: false,
+        saving: false,
     };
 
     componentWillMount() {
@@ -34,6 +34,18 @@ export default class GiverDetailsPage extends React.Component {
             this.context.router.replace(HOME_ROUTE);
         }
     }
+
+    componentDidMount() {
+        GiftStore.listen(this.onStoreChange);
+    }
+
+    componentWillUnmount() {
+        GiftStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
+    };
 
     setGiverState = (event) => {
         const field = event.target.name;
@@ -45,24 +57,12 @@ export default class GiverDetailsPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        this.setState({ isSaving: true });
-
         const { items } = basketStore.getState();
 
-        giftApi
-            .post({
-                giver: this.state.giver,
-                items: [...items.values()],
-            })
-            .then((giftSet) => {
-                this.setState({ isSaving: false });
-                basketActions.emptyBasket();
-                this.context.router.push(confirmationPageRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
-            })
-            .catch((error) => {
-                this.setState({ isSaving: false });
-                this.props.toastError('There was an error', error);
-            });
+        GiftActions.create({
+            giver: this.state.giver,
+            items: [...items.values()],
+        });
     };
 
     render() {
@@ -73,7 +73,7 @@ export default class GiverDetailsPage extends React.Component {
 
                     <GiverDetailsForm
                         giver={this.state.giver}
-                        isSaving={this.state.isSaving}
+                        isSaving={this.state.saving}
                         onChange={this.setGiverState}
                         onSubmit={this.submit}
                     />
