@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
+import NotificationActions from '../../actions/NotificationActions';
 import passwordResetActions from '../../actions/PasswordResetActions';
 import passwordResetStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
@@ -7,8 +8,6 @@ import ResetForm from './ResetForm';
 export default class ResetPage extends React.Component {
     static propTypes = {
         params: React.PropTypes.object.isRequired,
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
     };
 
     static defaultProps = {
@@ -45,7 +44,7 @@ export default class ResetPage extends React.Component {
         event.preventDefault();
 
         if (this.state.user.password !== this.state.user.confirmPassword) {
-            this.props.toastError('Your new passwords must match');
+            NotificationActions.error({ message: 'Your new passwords must match' });
         }
 
         passwordResetActions.update({ token: this.props.params.token, ...this.state.user });

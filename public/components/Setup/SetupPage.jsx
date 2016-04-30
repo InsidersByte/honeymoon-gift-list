@@ -6,11 +6,6 @@ import NotificationActions from '../../actions/NotificationActions';
 import SetupForm from './SetupForm';
 
 export default class SetupPage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
     state = {
         user: {
             name: '',
