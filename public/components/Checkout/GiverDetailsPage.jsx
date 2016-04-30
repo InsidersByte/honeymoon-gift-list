@@ -8,11 +8,6 @@ import { HOME_ROUTE } from '../../constants/routeConstants';
 import css from './GiverDetailsPage.styl';
 
 export default class GiverDetailsPage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
     };
