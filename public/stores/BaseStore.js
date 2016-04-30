@@ -91,7 +91,6 @@ class BaseStore {
 
     reset() {
         this[this.key] = typeof this.initialValue === 'string' ? this.initialValue : Object.assign({}, this.initialValue);
-        this[`${this.key}s`] = [];
     }
 }
 

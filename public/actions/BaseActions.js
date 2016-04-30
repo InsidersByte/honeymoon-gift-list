@@ -60,13 +60,13 @@ export default class BaseActions {
     createSuccess(response) {
         NotificationActions.success({ message: 'Created Successfully!' });
         return response;
-    };
+    }
 
     createError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 
     update({ [this.key]: rawData, id }) {
         return (dispatch) => {

@@ -12,3 +12,4 @@ export const SETUP = 'user';
 export const USER = 'user';
 export const HONEYMOON_GIFT_LIST = 'honeymoonGiftList';
 export const WEDDING_PROFILE = 'weddingProfile';
+export const HONEYMOON_GIFT_LIST_ITEM = 'item';

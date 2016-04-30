@@ -1,24 +1,34 @@
 import React from 'react';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
+import HoneymoonGiftListItemActions from '../../actions/HoneymoonGiftListItemActions';
+import HoneymoonGiftListItemStore from '../../stores/HoneymoonGiftListItemStore';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
-import honeymoonGiftListItemApi from '../../api/HoneymoonGiftListItemApi';
 import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
 
 export default class HoneymoonGiftListItemPage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
-    state = {
-        items: [],
-        showModal: false,
-        item: {},
-    };
+    state = { ...HoneymoonGiftListItemStore.getState(), showModal: false };
 
     componentDidMount() {
-        this.loadItems();
+        HoneymoonGiftListItemStore.listen(this.onStoreChange);
+        HoneymoonGiftListItemActions.query.defer();
     }
+
+    componentWillUnmount() {
+        HoneymoonGiftListItemStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            HoneymoonGiftListItemActions.query.defer();
+        }
+
+        if (this.state.saving && !state.saving) {
+            HoneymoonGiftListItemActions.query.defer();
+            this.close();
+        }
+
+        this.setState(state);
+    };
 
     setItemState = (event) => {
         const field = event.target.name;
@@ -28,28 +38,10 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     };
 
     save = (item) => {
-        if (item._id) { // eslint-disable-line no-underscore-dangle
-            honeymoonGiftListItemApi
-                .put(item, item._id) // eslint-disable-line no-underscore-dangle
-                .then(() => {
-                    this.close();
-                    this.loadItems();
-                    this.props.toastSuccess('Honeymoon gift list item saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving honeymoon gift list item', error);
-                });
+        if (!item._id) { // eslint-disable-line no-underscore-dangle
+            HoneymoonGiftListItemActions.create({ item });
         } else {
-            honeymoonGiftListItemApi
-                .post(item)
-                .then(() => {
-                    this.close();
-                    this.loadItems();
-                    this.props.toastSuccess('Honeymoon gift list item saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving honeymoon gift list item', error);
-                });
+            HoneymoonGiftListItemActions.update({ item, id: item._id }); // eslint-disable-line no-underscore-dangle
         }
     };
 
@@ -59,39 +51,12 @@ export default class HoneymoonGiftListItemPage extends React.Component {
             return;
         }
 
-        honeymoonGiftListItemApi
-            .delete(item._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.close();
-                this.loadItems();
-                this.props.toastSuccess('honeymoon gift list item deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting honeymoon gift list item', error);
-            });
+        HoneymoonGiftListItemActions.remove(item);
     };
 
-    loadItems() {
-        honeymoonGiftListItemApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    items: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error getting honeymoon gift list items', error);
-            });
-    }
-
     add = () => {
-        this.open({
-            imageUrl: '',
-            name: '',
-            description: '',
-            requested: '',
-            price: '',
-        });
+        HoneymoonGiftListItemActions.reset();
+        this.setState({ showModal: true });
     };
 
     close = () => {
