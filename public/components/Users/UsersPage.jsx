@@ -1,25 +1,35 @@
 import React from 'react';
-import UserApi from '../../api/UserApi';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
-import UserTable from './UserTable';
 import NotificationActions from '../../actions/NotificationActions';
+import UserActions from '../../actions/UserActions';
+import UserStore from '../../stores/UserStore';
+import UserTable from './UserTable';
 import User from './User';
 
 export default class Users extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
-    state = {
-        users: [],
-        showModal: false,
-        user: {},
-    };
+    state = { ...UserStore.getState(), showModal: false };
 
     componentDidMount() {
-        this.loadUsers();
+        UserStore.listen(this.onStoreChange);
+        UserActions.query.defer();
     }
+
+    componentWillUnmount() {
+        UserStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            UserActions.query.defer();
+        }
+
+        if (this.state.saving && !state.saving) {
+            UserActions.query.defer();
+            this.close();
+        }
+
+        this.setState(state);
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -34,16 +44,7 @@ export default class Users extends React.Component {
             return;
         }
 
-        UserApi
-            .post(user)
-            .then(() => {
-                this.close();
-                this.loadUsers();
-                this.props.toastSuccess('User saved');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving a user', error);
-            });
+        UserActions.create({ user });
     };
 
     delete = (user) => {
@@ -52,45 +53,17 @@ export default class Users extends React.Component {
             return;
         }
 
-        UserApi
-            .delete(user._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.loadUsers();
-                this.props.toastSuccess('User deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting a user', error);
-            });
+        UserActions.remove(user);
     };
 
     add = () => {
-        this.setState({
-            showModal: true,
-            user: {
-                name: '',
-                username: '',
-                password: '',
-                confirmPassword: '',
-            },
-        });
+        UserActions.reset();
+        this.setState({ showModal: true });
     };
 
     close = () => {
         this.setState({ showModal: false });
     };
-
-    loadUsers() {
-        UserApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    users: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error getting users', error);
-            });
-    }
 
     render() {
         return (
