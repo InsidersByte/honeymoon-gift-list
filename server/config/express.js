@@ -6,7 +6,7 @@ const expressValidator = require('express-validator');
 const environmentConstants = require('../constants/environment');
 
 module.exports = (app, environment) => {
-    if (environment !== environmentConstants.production) {
+    if (environment !== environmentConstants.PRODUCTION) {
         app.use(logger('dev'));
         app.use(errorhandler());
     }
@@ -15,7 +15,7 @@ module.exports = (app, environment) => {
     app.use(bodyParser.json());
     app.use(expressValidator());
 
-    if (environment === environmentConstants.production) {
+    if (environment === environmentConstants.PRODUCTION) {
         app.use(express.static('./dist'));
     } else {
         const webpack = require('webpack'); // eslint-disable-line global-require

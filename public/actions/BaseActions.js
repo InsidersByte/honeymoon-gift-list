@@ -1,4 +1,6 @@
-class BaseActions {
+import NotificationActions from './NotificationActions';
+
+export default class BaseActions {
     constructor({ api, key }) {
         this.api = api;
         this.key = key;
@@ -47,9 +49,16 @@ class BaseActions {
         };
     }
 
-    createSuccess = o => o;
+    createSuccess = response => {
+        NotificationActions.success({ message: 'Created Successfully!' });
+        return response;
+    };
 
-    createError = o => o;
+    createError = error => {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    };
 
     update({ [this.key]: rawData, id }) {
         return (dispatch) => {
@@ -64,9 +73,16 @@ class BaseActions {
         };
     }
 
-    updateSuccess = o => o;
+    updateSuccess = response => {
+        NotificationActions.success({ message: 'Updated Successfully!' });
+        return response;
+    };
 
-    updateError = o => o;
+    updateError = error => {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    };
 
     remove({ _id }) {
         return (dispatch) => {
@@ -79,9 +95,16 @@ class BaseActions {
         };
     }
 
-    removeSuccess = o => o;
+    removeSuccess = response => {
+        NotificationActions.success({ message: 'Deleted Successfully!' });
+        return response;
+    };
 
-    removeError = o => o;
+    removeError = error => {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    };
 
     reset() {
         return (dispatch) => {
@@ -89,5 +112,3 @@ class BaseActions {
         };
     }
 }
-
-export default BaseActions;

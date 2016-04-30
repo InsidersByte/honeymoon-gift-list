@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line strict
-
 const nodemailer = require('nodemailer');
 const EmailTemplate = require('email-templates').EmailTemplate;
 const path = require('path');

@@ -1,4 +1,4 @@
 module.exports = {
-    production: 'production',
-    development: 'development',
+    PRODUCTION: 'production',
+    DEVELOPMENT: 'development',
 };

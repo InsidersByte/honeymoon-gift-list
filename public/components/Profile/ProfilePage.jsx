@@ -3,14 +3,10 @@ import { Jumbotron, Col } from 'react-bootstrap';
 import passwordActions from '../../actions/PasswordActions';
 import passwordStore from '../../stores/PasswordStore';
 import loginStore from '../../stores/LoginStore';
+import NotificationActions from '../../actions/NotificationActions';
 import ProfileForm from './ProfileForm';
 
 export default class ProfilePage extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
     state = {
         user: {
             username: loginStore.getState().user.username,
@@ -41,7 +37,7 @@ export default class ProfilePage extends React.Component {
         event.preventDefault();
 
         if (this.state.user.newPassword !== this.state.user.confirmPassword) {
-            this.props.toastError('Your new passwords must match');
+            NotificationActions.error({ message: 'Your new passwords must match!' });
         }
 
         passwordActions.update(this.state.user);

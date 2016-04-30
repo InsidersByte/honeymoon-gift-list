@@ -11,7 +11,7 @@ import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
 import WeddingPartyMembers from './WeddingPartyMembers';
 
-import './Landing.styl';
+import css from './LandingPage.styl';
 
 export default class LandingPage extends React.Component {
     static propTypes = {
@@ -91,7 +91,7 @@ export default class LandingPage extends React.Component {
     renderDisclaimerMessage = () => {
         if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
             return (
-                <span style={{ marginBottom: '10px' }}>
+                <span className={css.disclaimerMessage}>
                     <br />
                     <br />
 
@@ -125,7 +125,7 @@ export default class LandingPage extends React.Component {
         );
 
         return (
-            <div className="landing">
+            <div className={css.root}>
                 <LandingHeader cover={this.state.weddingProfile.cover} />
 
                 <LandingSection title="A little bit about us">
@@ -160,7 +160,7 @@ export default class LandingPage extends React.Component {
 
                 <LandingSection title="Gift List" postContent={giftItemsElement}>
                     <div>
-                        <span style={{ whiteSpace: 'pre-wrap' }}>
+                        <span className={css.content}>
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 

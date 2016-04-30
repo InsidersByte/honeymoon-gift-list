@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
+import css from './LoginForm.styl';
 
 export default function LoginForm(props) {
     return (
@@ -28,7 +29,7 @@ export default function LoginForm(props) {
                         required
                     />
                     <InputGroup.Button>
-                        <Button bsStyle="link" onClick={props.onForgot} style={{ borderColor: '#ccc' }}>Forgot?</Button>
+                        <Button className={css.forgottenLink} bsStyle="link" onClick={props.onForgot}>Forgot?</Button>
                     </InputGroup.Button>
                 </InputGroup>
             </FormGroup>

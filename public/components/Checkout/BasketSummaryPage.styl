@@ -1,0 +1,29 @@
+.root
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    min-height 75%
+    margin 0 10px
+
+.container
+    min-width 50%
+    max-width 100%
+
+.title
+    text-align center
+    margin-bottom 30px
+    font-size 2em
+
+.content
+    margin-bottom 20px
+
+.actions
+    text-align center
+
+    *:not(:first-child)
+        margin-left 5px
+
+@media (max-width 736px)
+    .root
+        font-size smaller

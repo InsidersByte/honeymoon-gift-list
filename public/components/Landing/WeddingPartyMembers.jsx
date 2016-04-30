@@ -1,9 +1,11 @@
 import React from 'react';
 import WeddingPartyMember from './WeddingPartyMember';
 
+import css from './WeddingPartyMembers.styl';
+
 export default function WeddingPartyMembers(props) {
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
+        <div className={css.root}>
             {
                 props
                     .weddingPartyMembers

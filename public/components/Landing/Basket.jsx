@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import FontAwesome from '../common/FontAwesome';
 import { BASKET_ROUTE } from '../../constants/routeConstants';
 
-import './Basket.styl';
+import css from './Basket.styl';
 
 export default class Basket extends React.Component {
     static propTypes = {
@@ -18,7 +18,7 @@ export default class Basket extends React.Component {
         }
 
         return (
-            <section className="basket">
+            <section className={css.root}>
                 <div>
                     <FontAwesome icon="shopping-basket" />
                 </div>

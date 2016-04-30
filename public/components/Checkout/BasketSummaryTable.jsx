@@ -4,7 +4,7 @@ import BasketSummaryRow from './BasketSummaryRow';
 
 export default function BasketSummaryTable(props) {
     return (
-        <Table responsive className="basket-summary__table">
+        <Table responsive>
             <thead>
                 <tr>
                     <th>Name</th>

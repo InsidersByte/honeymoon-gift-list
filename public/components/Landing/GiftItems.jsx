@@ -1,9 +1,11 @@
 import React from 'react';
 import GiftItem from './GiftItem';
 
+import css from './GiftItems.styl';
+
 export default function GiftItems(props) {
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
+        <div className={css.root}>
             {
                 props
                     .giftItems

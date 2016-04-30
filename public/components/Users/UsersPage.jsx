@@ -2,6 +2,7 @@ import React from 'react';
 import UserApi from '../../api/UserApi';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import UserTable from './UserTable';
+import NotificationActions from '../../actions/NotificationActions';
 import User from './User';
 
 export default class Users extends React.Component {
@@ -29,7 +30,7 @@ export default class Users extends React.Component {
 
     save = (user) => {
         if (user.password !== user.confirmPassword) {
-            this.props.toastError('Passwords must match');
+            NotificationActions.error({ message: 'Passwords must match!' });
             return;
         }
 

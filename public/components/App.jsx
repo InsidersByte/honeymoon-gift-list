@@ -1,12 +1,30 @@
 import React from 'react';
+import NotificationSystem from 'react-notification-system';
+import NotificationStore from '../stores/NotificationStore';
 import { ToastContainer, ToastMessage } from 'react-toastr';
+import css from './App.styl';
 
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+let notificationSystem;
 
 export default class App extends React.Component {
     static propTypes = {
         children: React.PropTypes.element.isRequired,
     };
+
+    componentDidMount() {
+        NotificationStore.listen(this.onStoreChange);
+        notificationSystem = this.refs.notificationSystem;
+    }
+
+    componentWillUnmount() {
+        NotificationStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange() {
+        const { notification } = NotificationStore.getState();
+        notificationSystem.addNotification(notification);
+    }
 
     toastSuccess = (message) => {
         this
@@ -36,13 +54,15 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div className="maximum-size">
-                <div className="maximum-size">
+            <div className={css.root}>
+                <div className={css.container}>
                     {this.props.children && React.cloneElement(this.props.children, {
                         toastSuccess: this.toastSuccess,
                         toastError: this.toastError,
                     })}
                 </div>
+
+                <NotificationSystem ref="notificationSystem" />
 
                 <ToastContainer
                     ref="container"

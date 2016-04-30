@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line strict
-
 const Giver = require('../models/giver');
 const GiftSet = require('../models/giftSet');
 const Gift = require('../models/gift');
@@ -49,7 +47,7 @@ module.exports = (app, express) => {
             giver.giftSets.push(giftSet._id); // eslint-disable-line no-underscore-dangle
             yield giver.save();
 
-            for (let item of itemsData) { // eslint-disable-line prefer-const
+            for (const item of itemsData) {
                 const honeymoonGiftListItem = yield HoneymoonGiftListItem.findById(item._id); // eslint-disable-line no-underscore-dangle
 
                 const gift = new Gift({
