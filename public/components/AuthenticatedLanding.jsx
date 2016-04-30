@@ -1,5 +1,6 @@
 import React from 'react';
-import landingApi from '../api/LandingApi';
+import landingActions from '../actions/LandingActions';
+import landingStore from '../stores/LandingStore';
 
 export default class AuthenticatedLanding extends React.Component {
     static propTypes = {
@@ -7,25 +8,23 @@ export default class AuthenticatedLanding extends React.Component {
         toastError: React.PropTypes.func,
     };
 
-    state = {
-        info: {},
-    };
+    state = landingStore.getState();
 
     componentDidMount() {
-        landingApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    info: response,
-                });
-            })
-            .catch(() => {
-                this.props.toastError('There was an error loading the landing info');
-            });
+        landingStore.listen(this.onStoreChange);
+        landingActions.fetch();
     }
 
+    componentWillUnmount() {
+        landingStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    };
+
     render() {
-        const giftSetCount = this.state.info.giftSetCount || 0;
+        const giftSetCount = this.state.landing.giftSetCount || 0;
 
         const message = giftSetCount <= 0 ?
             'There have been no new gift sets since you last logged in' :
