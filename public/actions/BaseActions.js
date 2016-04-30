@@ -1,4 +1,6 @@
-class BaseActions {
+import NotificationActions from './NotificationActions';
+
+export default class BaseActions {
     constructor({ api, key }) {
         this.api = api;
         this.key = key;
@@ -64,7 +66,10 @@ class BaseActions {
         };
     }
 
-    updateSuccess = o => o;
+    updateSuccess = o => {
+        NotificationActions.success({ message: 'Saved Successfully!' });
+        return o;
+    };
 
     updateError = o => o;
 
@@ -89,5 +94,3 @@ class BaseActions {
         };
     }
 }
-
-export default BaseActions;
