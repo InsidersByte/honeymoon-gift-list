@@ -43,6 +43,12 @@ module.exports = (app, express) => {
                 .findById(req.params.giftSetId)
                 .populate('gifts');
 
+            if (giftSet.paid) {
+                return res
+                    .status(400)
+                    .json({ message: 'a gift set marked as paid cannot be deleted' });
+            }
+
             if (!giftSet) {
                 return res
                     .status(404)
@@ -75,7 +81,12 @@ module.exports = (app, express) => {
             }
 
             const giftSet = yield GiftSet
-                .findById(req.params.giftSetId);
+                .findById(req.params.giftSetId)
+                .populate({
+                    path: 'gifts',
+                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                })
+                .populate('giver');
 
             if (!giftSet) {
                 return res
@@ -105,7 +116,12 @@ module.exports = (app, express) => {
             }
 
             const giftSet = yield GiftSet
-                .findById(req.params.giftSetId);
+                .findById(req.params.giftSetId)
+                .populate({
+                    path: 'gifts',
+                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                })
+                .populate('giver');
 
             if (!giftSet) {
                 return res
