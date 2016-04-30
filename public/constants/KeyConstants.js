@@ -14,3 +14,4 @@ export const HONEYMOON_GIFT_LIST = 'honeymoonGiftList';
 export const WEDDING_PROFILE = 'weddingProfile';
 export const HONEYMOON_GIFT_LIST_ITEM = 'item';
 export const GIFT = 'giftSet';
+export const GIFT_SET = 'giftSet';

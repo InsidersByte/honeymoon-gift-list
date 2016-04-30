@@ -1,8 +1,10 @@
 import React from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
-import GiftSetApi from '../../api/GiftSetApi';
 import moment from 'moment';
+import GiftSetActions from '../../actions/GiftSetActions';
+import GiftSetStore from '../../stores/GiftSetStore';
+import GiftSetApi from '../../api/GiftSetApi';
 import GiftTable from './GiftTable';
 import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
 
@@ -21,16 +23,21 @@ export default class GiftSetPage extends React.Component {
         router: React.PropTypes.object.isRequired,
     };
 
-    state = {
-        giftSet: {
-            giver: {},
-            gifts: [],
-        },
-    };
+    state = GiftSetStore.getState();
 
     componentDidMount() {
-        this.loadGiftSet();
+        GiftSetStore.listen(this.onStoreChange);
+        const { giftSetId } = this.props.params;
+        GiftSetActions.fetch(giftSetId);
     }
+
+    componentWillUnmount() {
+        GiftSetStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
+    };
 
     markAsPaid = () => {
         // TODO: Use a confirmation model instead of confirm
