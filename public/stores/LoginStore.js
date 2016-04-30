@@ -8,18 +8,30 @@ class LoginStore {
     constructor() {
         this.bindActions(loginActions);
 
+        this.errorMessage = null;
+        this.saving = false;
         this.user = null;
         this.jwt = null;
     }
 
-    loginUser({ jwt, redirect }) {
+    login() {
+        this.saving = true;
+    }
+
+    loginSuccess({ jwt, redirect }) {
         this.jwt = jwt;
         this.user = jwtDecode(jwt);
         this.isLoggedIn = true;
+        this.saving = true;
 
         if (redirect) {
             history.replace(ADMIN_ROUTE);
         }
+    }
+
+    loginError(errorMessage) {
+        this.errorMessage = errorMessage;
+        this.saving = false;
     }
 
     logoutUser() {

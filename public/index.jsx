@@ -16,7 +16,8 @@ import './index.styl';
 
 const jwt = localStorage.getItem('jwt');
 
-if (jwt) {
+// TODO: Wrap local storage to return undefined in this instance
+if (jwt !== 'undefined') {
     // TODO: maybe use final store here? http://survivejs.com/webpack_react/react_and_flux/
     alt.bootstrap(JSON.stringify({
         LoginStore: {

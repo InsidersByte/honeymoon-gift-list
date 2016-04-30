@@ -16,11 +16,11 @@ class PasswordResetActions {
 
     updateSuccess = o => o;
 
-    updateError = error => {
+    updateError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 }
 
 export default alt.createActions(PasswordResetActions);

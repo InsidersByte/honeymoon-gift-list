@@ -19,11 +19,11 @@ export default class BaseActions {
 
     fetchSuccess = o => o;
 
-    fetchError = error => {
+    fetchError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 
     query() {
         return (dispatch) => {
@@ -38,11 +38,11 @@ export default class BaseActions {
 
     querySuccess = o => o;
 
-    queryError = error => {
+    queryError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 
     create({ [this.key]: rawData }) {
         return (dispatch) => {
@@ -57,12 +57,12 @@ export default class BaseActions {
         };
     }
 
-    createSuccess = response => {
+    createSuccess(response) {
         NotificationActions.success({ message: 'Created Successfully!' });
         return response;
     };
 
-    createError = error => {
+    createError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
@@ -81,16 +81,16 @@ export default class BaseActions {
         };
     }
 
-    updateSuccess = response => {
+    updateSuccess(response) {
         NotificationActions.success({ message: 'Updated Successfully!' });
         return response;
-    };
+    }
 
-    updateError = error => {
+    updateError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 
     remove({ _id }) {
         return (dispatch) => {
@@ -103,10 +103,10 @@ export default class BaseActions {
         };
     }
 
-    removeSuccess = response => {
+    removeSuccess(response) {
         NotificationActions.success({ message: 'Deleted Successfully!' });
         return response;
-    };
+    }
 
     removeError = error => {
         console.error(error);

@@ -16,7 +16,11 @@ class PasswordResetActions {
 
     createSuccess = o => o;
 
-    createError = o => o;
+    createError(error) {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    }
 
     update(data) {
         return (dispatch) => {
@@ -31,11 +35,11 @@ class PasswordResetActions {
 
     updateSuccess = o => o;
 
-    updateError = error => {
+    updateError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;
-    };
+    }
 }
 
 export default alt.createActions(PasswordResetActions);
