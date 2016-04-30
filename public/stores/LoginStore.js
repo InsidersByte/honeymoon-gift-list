@@ -18,15 +18,12 @@ class LoginStore {
         this.saving = true;
     }
 
-    loginSuccess({ jwt, redirect }) {
+    loginSuccess(jwt) {
         this.jwt = jwt;
         this.user = jwtDecode(jwt);
         this.isLoggedIn = true;
         this.saving = true;
-
-        if (redirect) {
-            history.replace(ADMIN_ROUTE);
-        }
+        history.replace(ADMIN_ROUTE);
     }
 
     loginError(errorMessage) {

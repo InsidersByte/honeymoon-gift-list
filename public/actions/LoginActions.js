@@ -15,17 +15,9 @@ class LoginActions {
     }
 
     loginSuccess({ token: jwt }) {
-        const savedJwt = localStorage.getItem('jwt');
-        let redirect = false;
-
-        if (savedJwt !== jwt) {
-            localStorage.setItem('jwt', jwt);
-            redirect = true;
-        }
-
         NotificationActions.success({ message: 'Logged in' });
-
-        return { jwt, redirect };
+        localStorage.setItem('jwt', jwt);
+        return jwt;
     }
 
     loginError(error) {
