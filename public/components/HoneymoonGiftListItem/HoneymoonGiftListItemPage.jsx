@@ -4,6 +4,7 @@ import HoneymoonGiftListItemActions from '../../actions/HoneymoonGiftListItemAct
 import HoneymoonGiftListItemStore from '../../stores/HoneymoonGiftListItemStore';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
 import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
+import Loader from '../common/Loader';
 
 export default class HoneymoonGiftListItemPage extends React.Component {
     state = { ...HoneymoonGiftListItemStore.getState(), showModal: false };
@@ -79,7 +80,9 @@ export default class HoneymoonGiftListItemPage extends React.Component {
                         </Button>
                     </h1>
 
-                    <HoneymoonGiftListItemTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
+                    <Loader loading={this.state.loading}>
+                        <HoneymoonGiftListItemTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
+                    </Loader>
                 </Jumbotron>
 
                 <HoneymoonGiftListItem
