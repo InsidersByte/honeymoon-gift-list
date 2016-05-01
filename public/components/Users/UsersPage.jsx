@@ -5,6 +5,7 @@ import UserActions from '../../actions/UserActions';
 import UserStore from '../../stores/UserStore';
 import UserTable from './UserTable';
 import User from './User';
+import Loader from '../common/Loader';
 
 export default class Users extends React.Component {
     state = { ...UserStore.getState(), showModal: false };
@@ -76,13 +77,15 @@ export default class Users extends React.Component {
                     <UserTable users={this.state.users} onEdit={this.open} onDelete={this.delete} />
                 </Jumbotron>
 
-                <User
-                    user={this.state.user}
-                    show={this.state.showModal}
-                    onHide={this.close}
-                    onSubmit={this.save}
-                    onChange={this.setUserState}
-                />
+                <Loader loading={this.state.loading}>
+                    <User
+                        user={this.state.user}
+                        show={this.state.showModal}
+                        onHide={this.close}
+                        onSubmit={this.save}
+                        onChange={this.setUserState}
+                    />
+                </Loader>
             </div>
         );
     }

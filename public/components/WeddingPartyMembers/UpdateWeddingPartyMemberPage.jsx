@@ -3,6 +3,7 @@ import { Jumbotron } from 'react-bootstrap';
 import WeddingPartyMemberForm from './WeddingPartyMemberForm';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
+import Loader from '../common/Loader';
 
 export default class UpdateWeddingPartyMemberPage extends React.Component {
     static propTypes = {
@@ -48,7 +49,9 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
             <Jumbotron>
                 <h1>Update Wedding Party Member</h1>
 
-                <WeddingPartyMemberForm member={this.state.member} title="Update" onChange={this.onChange} onSubmit={this.onSubmit} />
+                <Loader loading={this.state.loading}>
+                    <WeddingPartyMemberForm member={this.state.member} title="Update" onChange={this.onChange} onSubmit={this.onSubmit} />
+                </Loader>
             </Jumbotron>
         );
     }

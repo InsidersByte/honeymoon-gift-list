@@ -4,6 +4,7 @@ import GiftSetTable from './GiftSetTable';
 import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
 import { giftSetRoute } from '../../constants/routeConstants';
+import Loader from '../common/Loader';
 
 export default class GiftSetsPage extends React.Component {
     static contextTypes = {
@@ -71,13 +72,15 @@ export default class GiftSetsPage extends React.Component {
             <Jumbotron>
                 <h1>Gift Sets</h1>
 
-                <GiftSetTable
-                    giftSets={this.state.giftSets}
-                    onMarkAsPaid={this.markAsPaid}
-                    onMarkAsDetailsSent={this.markAsDetailsSent}
-                    onDelete={this.delete}
-                    onSelect={this.view}
-                />
+                <Loader loading={this.state.loading}>
+                    <GiftSetTable
+                        giftSets={this.state.giftSets}
+                        onMarkAsPaid={this.markAsPaid}
+                        onMarkAsDetailsSent={this.markAsDetailsSent}
+                        onDelete={this.delete}
+                        onSelect={this.view}
+                    />
+                </Loader>
             </Jumbotron>
         );
     }

@@ -4,6 +4,7 @@ import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 import WeddingPartyMembersTable from './WeddingPartyMembersTable';
+import Loader from '../common/Loader';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
@@ -52,7 +53,9 @@ export default class WeddingPartyMembersPage extends React.Component {
                     <Button bsStyle="success" bsSize="small" onClick={this.create}><Glyphicon glyph="plus" /></Button>
                 </h1>
 
-                <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} onDelete={this.onDelete} />
+                <Loader loading={this.state.loading}>
+                    <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} onDelete={this.onDelete} />
+                </Loader>
             </Jumbotron>
         );
     }

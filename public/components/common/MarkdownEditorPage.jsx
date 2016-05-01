@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
+import Loader from '../common/Loader';
 
 export default class MarkdownEditorPage extends React.Component {
     static propTypes = {
@@ -39,11 +40,13 @@ export default class MarkdownEditorPage extends React.Component {
             <Jumbotron>
                 <h1>{this.props.title}</h1>
 
-                <form onSubmit={this.submit}>
-                    <MarkdownEditor value={this.state[this.props.propKey]} onChange={this.onChange} />
+                <Loader loading={this.state.loading}>
+                    <form onSubmit={this.submit}>
+                        <MarkdownEditor value={this.state[this.props.propKey]} onChange={this.onChange} />
 
-                    <Button type="submit" bsStyle="primary" block disabled={this.state.saving}>Update</Button>
-                </form>
+                        <Button type="submit" bsStyle="primary" block disabled={this.state.saving}>Update</Button>
+                    </form>
+                </Loader>
             </Jumbotron>
         );
     }
