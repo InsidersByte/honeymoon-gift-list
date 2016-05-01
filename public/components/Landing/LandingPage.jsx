@@ -11,6 +11,7 @@ import LandingSection from './LandingSection';
 import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
 import WeddingPartyMembers from './WeddingPartyMembers';
+import Loader from '../common/Loader';
 
 import css from './LandingPage.styl';
 
@@ -103,7 +104,7 @@ export default class LandingPage extends React.Component {
         );
 
         return (
-            <div className={css.root}>
+            <Loader className={css.root} loading={this.state.loading}>
                 <LandingHeader cover={this.state.weddingProfile.cover} />
 
                 <LandingSection title="A little bit about us">
@@ -149,7 +150,7 @@ export default class LandingPage extends React.Component {
                 </LandingSection>
 
                 <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
-            </div>
+            </Loader>
         );
     }
 }
