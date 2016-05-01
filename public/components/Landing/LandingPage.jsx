@@ -48,6 +48,13 @@ export default class LandingPage extends React.Component {
         this.setState(newState);
     };
 
+    onScrollDown = event => {
+        event.preventDefault();
+
+        const aboutUs = this.refs.aboutUs;
+        aboutUs.scrollTo();
+    };
+
     addToBasket(item) {
         basketActions.addToBasket(item);
     }
@@ -105,9 +112,9 @@ export default class LandingPage extends React.Component {
 
         return (
             <Loader className={css.root} loading={this.state.loading}>
-                <LandingHeader cover={this.state.weddingProfile.cover} />
+                <LandingHeader cover={this.state.weddingProfile.cover} onScrollDown={this.onScrollDown} />
 
-                <LandingSection title="A little bit about us">
+                <LandingSection ref="aboutUs" title="A little bit about us">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
                 </LandingSection>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
-
 import css from './LandingHeader.styl';
 
 export default function LandingHeader(props) {
@@ -25,7 +24,9 @@ export default function LandingHeader(props) {
 
                 <div className={css.spacer}></div>
 
-                <FontAwesome className={css.scrollDown} icon="chevron-down" size="lg" />
+                <a className={css.scrollDown} href="#" onClick={props.onScrollDown}>
+                    <FontAwesome icon="chevron-down" size="lg" />
+                </a>
             </div>
         </header>
     );
@@ -33,6 +34,7 @@ export default function LandingHeader(props) {
 
 LandingHeader.propTypes = {
     cover: React.PropTypes.object.isRequired,
+    onScrollDown: React.PropTypes.func.isRequired,
 };
 
 LandingHeader.defaultProps = {

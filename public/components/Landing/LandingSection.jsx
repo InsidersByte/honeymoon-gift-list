@@ -1,23 +1,30 @@
 import React from 'react';
-
+import smoothscroll from 'smoothscroll';
 import css from './LandingSection.styl';
 
-export default function LandingSection(props) {
-    return (
-        <section className={css.root}>
-            <h1 className={css.title}>{props.title}</h1>
+export default class LandingSection extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element,
+        postContent: React.PropTypes.element,
+        title: React.PropTypes.string.isRequired,
+    };
 
-            <div className={css.content}>
-                {props.children}
-            </div>
+    scrollTo = () => {
+        const container = this.refs.container;
+        smoothscroll(container);
+    };
 
-            {props.postContent}
-        </section>
-    );
+    render() {
+        return (
+            <section ref="container" className={css.root}>
+                <h1 className={css.title}>{this.props.title}</h1>
+
+                <div className={css.content}>
+                    {this.props.children}
+                </div>
+
+                {this.props.postContent}
+            </section>
+        );
+    }
 }
-
-LandingSection.propTypes = {
-    children: React.PropTypes.element,
-    postContent: React.PropTypes.element,
-    title: React.PropTypes.string.isRequired,
-};

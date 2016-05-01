@@ -51,6 +51,7 @@
     "react-markdown-renderer": "^1.0.0",
     "react-notification-system": "^0.2.7",
     "react-router": "^2.4.0",
+    "smoothscroll": "^0.2.2",
     "superagent": "^1.8.3",
     "toastr": "^2.1.2",
     "uuid": "^2.0.2",
