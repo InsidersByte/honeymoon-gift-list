@@ -14,7 +14,10 @@ class PasswordResetActions {
         };
     }
 
-    updateSuccess = o => o;
+    updateSuccess(response) {
+        NotificationActions.success({ message: 'Password Changed' });
+        return response;
+    }
 
     updateError(error) {
         console.error(error);

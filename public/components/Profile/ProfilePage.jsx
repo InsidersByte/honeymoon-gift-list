@@ -38,6 +38,7 @@ export default class ProfilePage extends React.Component {
 
         if (this.state.user.newPassword !== this.state.user.confirmPassword) {
             NotificationActions.error({ message: 'Your new passwords must match!' });
+            return;
         }
 
         passwordActions.update(this.state.user);

@@ -14,7 +14,10 @@ class PasswordResetActions {
         };
     }
 
-    createSuccess = o => o;
+    createSuccess(response) {
+        NotificationActions.success({ message: 'Please check your email for instructions' });
+        return response;
+    }
 
     createError(error) {
         console.error(error);
@@ -33,7 +36,10 @@ class PasswordResetActions {
         };
     }
 
-    updateSuccess = o => o;
+    updateSuccess(response) {
+        NotificationActions.success({ message: 'Password Reset Successfully' });
+        return response;
+    }
 
     updateError(error) {
         console.error(error);

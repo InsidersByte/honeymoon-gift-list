@@ -9,17 +9,32 @@ class mailer {
     constructor() {
         const options = config.mail && Object.assign({}, config.mail.options) || {};
 
+        // if a service hasn't been set, send the mail directly
+        if (!options.service) {
+            options.direct = true;
+        }
+
         this.transport = nodemailer.createTransport(options);
     }
 
     get from() {
         let from = config.mail && config.mail.from;
 
+        // if no from has been set then default it
+        if (!from) {
+            from = `our-wedding-heroes@${this.getDomain()}`;
+        }
+
         if (config.siteTitle) {
             from = `${config.siteTitle} <${from}>`;
         }
 
         return from;
+    }
+
+    getDomain() {
+        const domain = config.url.match(new RegExp('^https?://([^/:?#]+)(?:[/:?#]|$)', 'i'));
+        return domain && domain[1];
     }
 
     send(message, templateName) {
