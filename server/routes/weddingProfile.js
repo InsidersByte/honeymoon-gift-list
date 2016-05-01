@@ -10,6 +10,11 @@ module.exports = (app, express) => {
 
         .get(wrap(function* getWeddingProfile(req, res) {
             const weddingProfile = yield WeddingProfile.findOne({}).lean();
+
+            if (!weddingProfile) {
+                return res.status(404).send();
+            }
+
             const honeymoonGiftList = yield HoneymoonGiftListItem
                 .find({})
                 .populate('gifts', 'quantity')

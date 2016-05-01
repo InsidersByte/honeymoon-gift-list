@@ -14,6 +14,6 @@ module.exports = (config) => {
 
     databaseInitialiser()
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });
 };
