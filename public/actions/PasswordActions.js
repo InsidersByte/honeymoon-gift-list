@@ -9,7 +9,11 @@ class PasswordResetActions {
 
             userApi
                 .passwordPut(user)
-                .then(this.updateSuccess)
+                .then(o => {
+                    setTimeout(() => {
+                        this.updateSuccess(o);
+                    }, 2000);
+                })
                 .catch(this.updateError);
         };
     }

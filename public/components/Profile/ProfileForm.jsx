@@ -1,9 +1,9 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default function ProfileForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <div>
             <FormGroup>
                 <ControlLabel>Current Password</ControlLabel>
                 <FormControl
@@ -36,14 +36,11 @@ export default function ProfileForm(props) {
                     required
                 />
             </FormGroup>
-
-            <Button type="submit" bsStyle="primary" block>Change Password</Button>
-        </form>
+        </div>
     );
 }
 
 ProfileForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
 };

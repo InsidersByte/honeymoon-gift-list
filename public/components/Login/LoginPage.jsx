@@ -3,7 +3,6 @@ import { Jumbotron, Col } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import NotificationActions from '../../actions/NotificationActions';
 import LoginActions from '../../actions/LoginActions';
-// import LoginStore from '../../stores/LoginStore';
 import PasswordResetActions from '../../actions/PasswordResetActions';
 import PasswordResetStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
@@ -18,12 +17,10 @@ export default class Login extends React.Component {
 
     componentDidMount() {
         PasswordResetStore.listen(this.onStoreChange);
-        // LoginStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
         PasswordResetStore.unlisten(this.onStoreChange);
-        // LoginStore.unlisten(this.onStoreChange);
     }
 
     onStoreChange = (state) => {

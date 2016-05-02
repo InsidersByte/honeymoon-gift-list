@@ -7,21 +7,21 @@ class PasswordStore {
 
         this.result = null;
         this.error = null;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     update() {
-        this.isSaving = true;
+        this.saving = true;
     }
 
     updateSuccess(result) {
         this.result = result;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     updateError(error) {
         this.error = error;
-        this.isSaving = false;
+        this.saving = false;
     }
 }
 
