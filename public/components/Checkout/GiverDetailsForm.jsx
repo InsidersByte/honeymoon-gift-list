@@ -8,72 +8,74 @@ import css from './GiverDetailsForm.styl';
 export default function GiverDetailsForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
-            <FormGroup>
-                <ControlLabel>Forename</ControlLabel>
-                <FormControl
-                    name="forename"
-                    type="text"
-                    placeholder="Enter your forename"
-                    value={props.giver.forename}
-                    onChange={props.onChange}
-                    required
-                />
-            </FormGroup>
+            <fieldset disabled={props.isSaving}>
+                <FormGroup>
+                    <ControlLabel>Forename</ControlLabel>
+                    <FormControl
+                        name="forename"
+                        type="text"
+                        placeholder="Enter your forename"
+                        value={props.giver.forename}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-            <FormGroup>
-                <ControlLabel>Surname</ControlLabel>
-                <FormControl
-                    name="surname"
-                    type="text"
-                    placeholder="Enter your surname"
-                    value={props.giver.surname}
-                    onChange={props.onChange}
-                    required
-                />
-            </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Surname</ControlLabel>
+                    <FormControl
+                        name="surname"
+                        type="text"
+                        placeholder="Enter your surname"
+                        value={props.giver.surname}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-            <FormGroup>
-                <ControlLabel>Email</ControlLabel>
-                <FormControl
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={props.giver.email}
-                    onChange={props.onChange}
-                    required
-                />
-            </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Email</ControlLabel>
+                    <FormControl
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={props.giver.email}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-            <FormGroup>
-                <ControlLabel>Telephone Number</ControlLabel>
-                <FormControl
-                    name="phoneNumber"
-                    type="text"
-                    placeholder="Enter your telephone number"
-                    value={props.giver.phoneNumber}
-                    onChange={props.onChange}
-                    required
-                />
-            </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Telephone Number</ControlLabel>
+                    <FormControl
+                        name="phoneNumber"
+                        type="text"
+                        placeholder="Enter your telephone number"
+                        value={props.giver.phoneNumber}
+                        onChange={props.onChange}
+                        required
+                    />
+                </FormGroup>
 
-            <div className={css.actions}>
-                <Button
-                    type="submit"
-                    bsStyle="success"
-                    disabled={props.isSaving}
-                >
-                    {props.isSaving ? 'Completing Gift...' : 'Complete Gift'}
-                </Button>
+                <div className={css.actions}>
+                    <Button
+                        type="submit"
+                        bsStyle="success"
+                        disabled={props.isSaving}
+                    >
+                        {props.isSaving ? 'Completing Gift...' : 'Complete Gift'}
+                    </Button>
 
-                <Link
-                    to={BASKET_ROUTE}
-                    className="btn btn-default"
-                    role="button"
-                    disabled={props.isSaving}
-                >
-                    Back to Basket
-                </Link>
-            </div>
+                    <Link
+                        to={BASKET_ROUTE}
+                        className="btn btn-default"
+                        role="button"
+                        disabled={props.isSaving}
+                    >
+                        Back to Basket
+                    </Link>
+                </div>
+            </fieldset>
         </form>
     );
 }
