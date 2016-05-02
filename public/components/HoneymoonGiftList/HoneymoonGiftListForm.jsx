@@ -1,5 +1,6 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default function HoneymoonGiftListForm(props) {
     let offlinePaymentMessageInput = null;
@@ -40,7 +41,7 @@ export default function HoneymoonGiftListForm(props) {
     }
 
     return (
-        <div>
+        <Form onSubmit={props.onSubmit} loading={props.loading} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Content</ControlLabel>
                 <FormControl
@@ -75,11 +76,16 @@ export default function HoneymoonGiftListForm(props) {
             </Checkbox>
 
             {disclaimerMessageInput}
-        </div>
+
+            <Button type="submit" bsStyle="primary" block>Update</Button>
+        </Form>
     );
 }
 
 HoneymoonGiftListForm.propTypes = {
     honeymoonGiftList: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

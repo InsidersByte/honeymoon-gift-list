@@ -43,12 +43,13 @@ export default class HoneymoonGiftListPage extends React.Component {
             <Jumbotron>
                 <h1>Honeymoon Gift List</h1>
 
-                <Form onSubmit={this.submit} loading={this.state.loading} saving={this.state.saving}>
-                    <HoneymoonGiftListForm
-                        honeymoonGiftList={this.state.honeymoonGiftList}
-                        onChange={this.setHoneymoonGiftListState}
-                    />
-                </Form>
+                <HoneymoonGiftListForm
+                    honeymoonGiftList={this.state.honeymoonGiftList}
+                    onChange={this.setHoneymoonGiftListState}
+                    onSubmit={this.submit}
+                    loading={this.state.loading}
+                    saving={this.state.saving}
+                />
             </Jumbotron>
         );
     }

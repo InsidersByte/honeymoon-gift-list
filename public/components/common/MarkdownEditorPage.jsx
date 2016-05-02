@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 import Form from '../common/Form';
 
@@ -42,6 +42,8 @@ export default class MarkdownEditorPage extends React.Component {
 
                 <Form onSubmit={this.submit} loading={this.state.loading} saving={this.state.saving}>
                     <MarkdownEditor value={this.state[this.props.propKey]} onChange={this.onChange} />
+
+                    <Button type="submit" bsStyle="primary" block>Update</Button>
                 </Form>
             </Jumbotron>
         );

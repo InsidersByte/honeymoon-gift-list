@@ -1,13 +1,16 @@
 import React from 'react';
 import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default class HoneymoonGiftListItem extends React.Component {
     static propTypes = {
         item: React.PropTypes.object.isRequired,
         show: React.PropTypes.bool.isRequired,
         onHide: React.PropTypes.func.isRequired,
-        onSubmit: React.PropTypes.func.isRequired,
         onChange: React.PropTypes.func.isRequired,
+        onSubmit: React.PropTypes.func.isRequired,
+        loading: React.PropTypes.bool.isRequired,
+        saving: React.PropTypes.bool.isRequired,
     };
 
     handleSubmit = (event) => {
@@ -18,7 +21,7 @@ export default class HoneymoonGiftListItem extends React.Component {
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} loading={this.props.loading} saving={this.props.saving}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Item</Modal.Title>
                     </Modal.Header>
@@ -90,7 +93,7 @@ export default class HoneymoonGiftListItem extends React.Component {
                         <Button bsStyle="primary" type="submit">Save</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
-                </form>
+                </Form>
             </Modal>
         );
     }

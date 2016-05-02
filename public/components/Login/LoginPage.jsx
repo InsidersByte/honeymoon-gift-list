@@ -7,7 +7,6 @@ import LoginStore from '../../stores/LoginStore';
 import PasswordResetActions from '../../actions/PasswordResetActions';
 import PasswordResetStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
-import Form from '../common/Form';
 
 export default class Login extends React.Component {
     state = {
@@ -64,9 +63,13 @@ export default class Login extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <Form onSubmit={this.submit} loading={false} saving={this.state.saving} saveButtonText="Login">
-                        <LoginForm user={this.state.user} onChange={this.setUserState} onForgot={this.forgot} />
-                    </Form>
+                    <LoginForm
+                        user={this.state.user}
+                        onChange={this.setUserState}
+                        onForgot={this.forgot}
+                        onSubmit={this.submit}
+                        saving={this.state.saving}
+                    />
                 </Jumbotron>
             </Col>
         );

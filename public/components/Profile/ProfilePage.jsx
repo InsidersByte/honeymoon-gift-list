@@ -52,9 +52,12 @@ export default class ProfilePage extends React.Component {
                 <Jumbotron>
                     <h1>Change Your Password</h1>
 
-                    <Form onSubmit={this.submit} loading={false} saving={this.state.saving} saveButtonText="Change Password">
-                        <ProfileForm user={this.state.user} onChange={this.onChange} onSubmit={this.submit} />
-                    </Form>
+                    <ProfileForm
+                        user={this.state.user}
+                        onChange={this.onChange}
+                        onSubmit={this.submit}
+                        saving={this.state.saving}
+                    />
                 </Jumbotron>
             </Col>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import Form from '../common/Form';
 
 export default function CoverForm(props) {
@@ -40,6 +40,8 @@ export default function CoverForm(props) {
                     required
                 />
             </FormGroup>
+
+            <Button type="submit" bsStyle="primary" block>Update</Button>
         </Form>
     );
 }
