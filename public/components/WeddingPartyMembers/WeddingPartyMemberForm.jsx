@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, ButtonToolbar } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default function WeddingPartyMemberForm(props) {
     return (

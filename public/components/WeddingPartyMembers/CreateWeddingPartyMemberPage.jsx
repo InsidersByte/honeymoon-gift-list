@@ -31,7 +31,7 @@ export default class CreateWeddingPartyMemberPage extends React.Component {
         event.preventDefault();
         WeddingPartyMemberActions.create(this.state);
     };
-    
+
     render() {
         return (
             <Jumbotron>

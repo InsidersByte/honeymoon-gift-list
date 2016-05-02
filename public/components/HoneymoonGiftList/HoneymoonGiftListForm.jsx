@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 
 export default function HoneymoonGiftListForm(props) {
     let offlinePaymentMessageInput = null;
