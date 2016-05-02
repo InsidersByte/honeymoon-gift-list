@@ -9,36 +9,36 @@ class PasswordResetStore {
 
         this.result = null;
         this.error = null;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     create() {
-        this.isSaving = true;
+        this.saving = true;
     }
 
     createSuccess(result) {
         this.result = result;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     createError(error) {
         this.error = error;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     update() {
-        this.isSaving = true;
+        this.saving = true;
     }
 
     updateSuccess(result) {
         this.result = result;
-        this.isSaving = false;
+        this.saving = false;
         history.replace(LOGIN_ROUTE);
     }
 
     updateError(error) {
         this.error = error;
-        this.isSaving = false;
+        this.saving = false;
     }
 }
 

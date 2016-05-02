@@ -22,7 +22,7 @@ class LoginStore {
         this.jwt = jwt;
         this.user = jwtDecode(jwt);
         this.isLoggedIn = true;
-        this.saving = true;
+        this.saving = false;
         history.replace(ADMIN_ROUTE);
     }
 

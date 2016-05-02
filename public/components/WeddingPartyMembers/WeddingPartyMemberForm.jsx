@@ -60,5 +60,4 @@ WeddingPartyMemberForm.propTypes = {
     member: React.PropTypes.object.isRequired,
     title: React.PropTypes.oneOf(['Create', 'Update']),
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
 };

@@ -1,27 +1,27 @@
 import alt from '../helpers/alt';
-import passwordActions from '../actions/PasswordActions';
+import SetupActions from '../actions/SetupActions';
 
 class SetupStore {
     constructor() {
-        this.bindActions(passwordActions);
+        this.bindActions(SetupActions);
 
         this.result = null;
         this.error = null;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     create() {
-        this.isSaving = true;
+        this.saving = true;
     }
 
     createSuccess(result) {
         this.result = result;
-        this.isSaving = false;
+        this.saving = false;
     }
 
     createError(error) {
         this.error = error;
-        this.isSaving = false;
+        this.saving = false;
     }
 }
 

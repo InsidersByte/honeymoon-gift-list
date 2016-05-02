@@ -3,9 +3,11 @@ import { Jumbotron, Col } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import NotificationActions from '../../actions/NotificationActions';
 import LoginActions from '../../actions/LoginActions';
+import LoginStore from '../../stores/LoginStore';
 import PasswordResetActions from '../../actions/PasswordResetActions';
 import PasswordResetStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
+import Form from '../common/Form';
 
 export default class Login extends React.Component {
     state = {
@@ -13,18 +15,22 @@ export default class Login extends React.Component {
             username: '',
             password: '',
         },
+        saving: false,
     };
 
     componentDidMount() {
         PasswordResetStore.listen(this.onStoreChange);
+        LoginStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
         PasswordResetStore.unlisten(this.onStoreChange);
+        LoginStore.unlisten(this.onStoreChange);
     }
 
     onStoreChange = (state) => {
-        this.setState(state);
+        const newState = { ...state, user: this.state.user };
+        this.setState(newState);
     };
 
     setUserState = (event) => {
@@ -58,7 +64,9 @@ export default class Login extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} onForgot={this.forgot} />
+                    <Form onSubmit={this.submit} loading={false} saving={this.state.saving} saveButtonText="Login">
+                        <LoginForm user={this.state.user} onChange={this.setUserState} onForgot={this.forgot} />
+                    </Form>
                 </Jumbotron>
             </Col>
         );

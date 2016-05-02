@@ -4,7 +4,7 @@ import css from './LoginForm.styl';
 
 export default function LoginForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <div>
             <FormGroup>
                 <ControlLabel>Username</ControlLabel>
                 <FormControl
@@ -33,15 +33,12 @@ export default function LoginForm(props) {
                     </InputGroup.Button>
                 </InputGroup>
             </FormGroup>
-
-            <Button type="submit" bsStyle="primary" block>Login</Button>
-        </form>
+        </div>
     );
 }
 
 LoginForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
     onForgot: React.PropTypes.func.isRequired,
 };

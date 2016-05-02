@@ -7,7 +7,7 @@ export default function Form(props) {
     let buttons;
 
     if (!props.routeBack) {
-        buttons = <Button type="submit" bsStyle="primary" block disabled={props.saving}>Update</Button>;
+        buttons = <Button type="submit" bsStyle="primary" block disabled={props.saving}>{props.saveButtonText}</Button>;
     } else {
         buttons = (
             <ButtonToolbar>
