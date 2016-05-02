@@ -3,7 +3,7 @@ import { Jumbotron } from 'react-bootstrap';
 import HoneymoonGiftListActions from '../../actions/HoneymoonGiftListActions';
 import HoneymoonGiftListStore from '../../stores/HoneymoonGiftListStore';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
-import Loader from '../common/Loader';
+import Form from '../common/Form';
 
 export default class HoneymoonGiftListPage extends React.Component {
     state = HoneymoonGiftListStore.getState();
@@ -40,19 +40,16 @@ export default class HoneymoonGiftListPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <Jumbotron>
-                    <h1>Honeymoon Gift List</h1>
+            <Jumbotron>
+                <h1>Honeymoon Gift List</h1>
 
-                    <Loader loading={this.state.loading}>
-                        <HoneymoonGiftListForm
-                            honeymoonGiftList={this.state.honeymoonGiftList}
-                            onChange={this.setHoneymoonGiftListState}
-                            onSubmit={this.submit}
-                        />
-                    </Loader>
-                </Jumbotron>
-            </div>
+                <Form onSubmit={this.submit} loading={this.state.loading} saving={this.state.saving}>
+                    <HoneymoonGiftListForm
+                        honeymoonGiftList={this.state.honeymoonGiftList}
+                        onChange={this.setHoneymoonGiftListState}
+                    />
+                </Form>
+            </Jumbotron>
         );
     }
 }

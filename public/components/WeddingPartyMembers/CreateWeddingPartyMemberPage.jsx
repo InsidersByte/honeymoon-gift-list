@@ -3,6 +3,8 @@ import { Jumbotron } from 'react-bootstrap';
 import WeddingPartyMemberForm from './WeddingPartyMemberForm';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
+import Form from '../common/Form';
+import { WEDDING_PARTY_MEMBERS_ROUTE } from '../../constants/routeConstants';
 
 export default class CreateWeddingPartyMemberPage extends React.Component {
     state = WeddingPartyMemberStore.getState();
@@ -29,13 +31,21 @@ export default class CreateWeddingPartyMemberPage extends React.Component {
         event.preventDefault();
         WeddingPartyMemberActions.create(this.state);
     };
-
+    
     render() {
         return (
             <Jumbotron>
                 <h1>Create Wedding Party Member</h1>
 
-                <WeddingPartyMemberForm member={this.state.member} title="Create" onChange={this.onChange} onSubmit={this.onSubmit} />
+                <Form
+                    onSubmit={this.onSubmit}
+                    loading={this.state.loading}
+                    saving={this.state.saving}
+                    routeBack={WEDDING_PARTY_MEMBERS_ROUTE}
+                    saveButtonText="Create"
+                >
+                    <WeddingPartyMemberForm member={this.state.member} title="Create" onChange={this.onChange} />
+                </Form>
             </Jumbotron>
         );
     }

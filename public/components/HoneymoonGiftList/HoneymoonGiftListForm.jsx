@@ -40,7 +40,7 @@ export default function HoneymoonGiftListForm(props) {
     }
 
     return (
-        <form onSubmit={props.onSubmit}>
+        <div>
             <FormGroup>
                 <ControlLabel>Content</ControlLabel>
                 <FormControl
@@ -75,14 +75,11 @@ export default function HoneymoonGiftListForm(props) {
             </Checkbox>
 
             {disclaimerMessageInput}
-
-            <Button type="submit" bsStyle="primary" block>Update</Button>
-        </form>
+        </div>
     );
 }
 
 HoneymoonGiftListForm.propTypes = {
     honeymoonGiftList: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
 };

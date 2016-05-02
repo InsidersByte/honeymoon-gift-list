@@ -1,11 +1,10 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { WEDDING_PARTY_MEMBERS_ROUTE } from '../../constants/routeConstants';
 
 export default function WeddingPartyMemberForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <div>
             <FormGroup>
                 <ControlLabel>Name</ControlLabel>
                 <FormControl
@@ -54,12 +53,7 @@ export default function WeddingPartyMemberForm(props) {
                     required
                 />
             </FormGroup>
-
-            <ButtonToolbar>
-                <Button type="submit" bsStyle="primary">{props.title}</Button>
-                <Link className="btn btn-default" to={WEDDING_PARTY_MEMBERS_ROUTE}>Back</Link>
-            </ButtonToolbar>
-        </form>
+        </div>
     );
 }
 
