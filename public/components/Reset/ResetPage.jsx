@@ -4,7 +4,6 @@ import NotificationActions from '../../actions/NotificationActions';
 import passwordResetActions from '../../actions/PasswordResetActions';
 import passwordResetStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
-import Form from '../common/Form';
 
 export default class ResetPage extends React.Component {
     static propTypes = {
@@ -58,9 +57,7 @@ export default class ResetPage extends React.Component {
                 <Jumbotron>
                     <h1>Reset Password</h1>
 
-                    <Form onSubmit={this.submit} loading={false} saving={this.state.saving} saveButtonText="Reset Password">
-                        <ResetForm user={this.state.user} onChange={this.setUserState} />
-                    </Form>
+                    <ResetForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} saving={this.state.saving} />
                 </Jumbotron>
             </Col>
         );

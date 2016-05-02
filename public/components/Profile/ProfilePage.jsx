@@ -5,7 +5,6 @@ import passwordStore from '../../stores/PasswordStore';
 import loginStore from '../../stores/LoginStore';
 import NotificationActions from '../../actions/NotificationActions';
 import ProfileForm from './ProfileForm';
-import Form from '../common/Form';
 
 export default class ProfilePage extends React.Component {
     state = {

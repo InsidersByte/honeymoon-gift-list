@@ -9,7 +9,6 @@ export default class HoneymoonGiftListItem extends React.Component {
         onHide: React.PropTypes.func.isRequired,
         onChange: React.PropTypes.func.isRequired,
         onSubmit: React.PropTypes.func.isRequired,
-        loading: React.PropTypes.bool.isRequired,
         saving: React.PropTypes.bool.isRequired,
     };
 
@@ -21,7 +20,7 @@ export default class HoneymoonGiftListItem extends React.Component {
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Form onSubmit={this.handleSubmit} loading={this.props.loading} saving={this.props.saving}>
+                <Form onSubmit={this.handleSubmit} loading={false} saving={this.props.saving}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Item</Modal.Title>
                     </Modal.Header>

@@ -1,6 +1,4 @@
 import React from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap';
-import { Link } from 'react-router';
 import Loader from './Loader';
 
 export default function Form(props) {

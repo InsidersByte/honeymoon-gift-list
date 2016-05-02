@@ -91,7 +91,6 @@ export default class HoneymoonGiftListItemPage extends React.Component {
                     onHide={this.close}
                     onChange={this.setItemState}
                     onSubmit={this.save}
-                    loading={this.state.loading}
                     saving={this.state.saving}
                 />
             </div>

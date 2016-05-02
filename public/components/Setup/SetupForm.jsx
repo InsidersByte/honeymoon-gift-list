@@ -1,9 +1,10 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default function SetupForm(props) {
     return (
-        <div>
+        <Form onSubmit={props.onSubmit} loading={false} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Name</ControlLabel>
                 <FormControl
@@ -51,11 +52,15 @@ export default function SetupForm(props) {
                     required
                 />
             </FormGroup>
-        </div>
+
+            <Button type="submit" bsStyle="primary" block>Setup</Button>
+        </Form>
     );
 }
 
 SetupForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

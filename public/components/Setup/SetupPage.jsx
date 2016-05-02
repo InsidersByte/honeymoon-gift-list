@@ -4,7 +4,6 @@ import setupActions from '../../actions/SetupActions';
 import setupStore from '../../stores/SetupStore';
 import NotificationActions from '../../actions/NotificationActions';
 import SetupForm from './SetupForm';
-import Form from '../common/Form';
 
 export default class SetupPage extends React.Component {
     state = {
@@ -53,9 +52,7 @@ export default class SetupPage extends React.Component {
                 <Jumbotron>
                     <h1>Setup</h1>
 
-                    <Form onSubmit={this.submit} loading={false} saving={this.state.saving} saveButtonText="Setup">
-                        <SetupForm user={this.state.user} onChange={this.setUserState} />
-                    </Form>
+                    <SetupForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} saving={this.state.saving} />
                 </Jumbotron>
             </Col>
         );

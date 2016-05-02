@@ -1,9 +1,12 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, ButtonToolbar } from 'react-bootstrap';
+import { Link } from 'react-router';
+import { WEDDING_PARTY_MEMBERS_ROUTE } from '../../constants/routeConstants';
+import Form from '../common/Form';
 
 export default function WeddingPartyMemberForm(props) {
     return (
-        <div>
+        <Form onSubmit={props.onSubmit} loading={props.loading} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Name</ControlLabel>
                 <FormControl
@@ -52,7 +55,12 @@ export default function WeddingPartyMemberForm(props) {
                     required
                 />
             </FormGroup>
-        </div>
+
+            <ButtonToolbar>
+                <Button type="submit" bsStyle="primary">{props.title}</Button>
+                <Link className="btn btn-default" to={WEDDING_PARTY_MEMBERS_ROUTE}>Back</Link>
+            </ButtonToolbar>
+        </Form>
     );
 }
 
@@ -60,4 +68,7 @@ WeddingPartyMemberForm.propTypes = {
     member: React.PropTypes.object.isRequired,
     title: React.PropTypes.oneOf(['Create', 'Update']),
     onChange: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };
