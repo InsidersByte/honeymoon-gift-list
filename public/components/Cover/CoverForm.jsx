@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default function CoverForm(props) {
     return (
-        <div>
+        <Form onSubmit={props.onSubmit} loading={props.loading} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Title</ControlLabel>
                 <FormControl
@@ -39,11 +40,14 @@ export default function CoverForm(props) {
                     required
                 />
             </FormGroup>
-        </div>
+        </Form>
     );
 }
 
 CoverForm.propTypes = {
     cover: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

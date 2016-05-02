@@ -4,7 +4,6 @@ import CoverForm from './CoverForm';
 import moment from 'moment';
 import CoverActions from '../../actions/CoverActions';
 import CoverStore from '../../stores/CoverStore';
-import Form from '../common/Form';
 
 export default class CoverPage extends React.Component {
     state = CoverStore.getState();
@@ -44,9 +43,13 @@ export default class CoverPage extends React.Component {
             <Jumbotron>
                 <h1>Cover</h1>
 
-                <Form onSubmit={this.submit} loading={this.state.loading} saving={this.state.saving}>
-                    <CoverForm cover={this.state.cover} onChange={this.onChange} />
-                </Form>
+                <CoverForm
+                    cover={this.state.cover}
+                    onChange={this.onChange}
+                    onSubmit={this.submit}
+                    loading={this.state.loading}
+                    saving={this.state.saving}
+                />
             </Jumbotron>
         );
     }
