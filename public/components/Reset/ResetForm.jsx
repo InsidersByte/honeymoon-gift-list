@@ -1,9 +1,9 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default function ResetForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <div>
             <FormGroup>
                 <ControlLabel>Password</ControlLabel>
                 <FormControl
@@ -27,14 +27,11 @@ export default function ResetForm(props) {
                     required
                 />
             </FormGroup>
-
-            <Button type="submit" bsStyle="primary" block>Reset Password</Button>
-        </form>
+        </div>
     );
 }
 
 ResetForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
 };
