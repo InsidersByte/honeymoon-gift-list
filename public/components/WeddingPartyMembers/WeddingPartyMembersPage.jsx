@@ -1,10 +1,12 @@
 import React from 'react';
-import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
+import Sortable from 'react-sortablejs';
 import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routeConstants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
-import WeddingPartyMembersTable from './WeddingPartyMembersTable';
 import Loader from '../common/Loader';
+import WeddingPartyMember from './WeddingPartyMember';
+import FontAwesome from '../common/FontAwesome';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
@@ -30,6 +32,10 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.setState(state);
     };
 
+    onSelect = (member) => {
+        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+    };
+
     onDelete = (member) => {
         if (!confirm('Are you sure you want to delete this member?')) {
             return;
@@ -38,23 +44,30 @@ export default class WeddingPartyMembersPage extends React.Component {
         WeddingPartyMemberActions.remove(member);
     };
 
-    onSelect = (member) => {
-        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
-    };
-
     create = () => {
         this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
     };
 
     render() {
+        const membersList = this.state.members.map((member) => (
+            <WeddingPartyMember
+                key={member._id} // eslint-disable-line no-underscore-dangle
+                member={member}
+                onSelect={this.onSelect}
+                onDelete={this.onDelete}
+            />
+        ));
+
         return (
             <Jumbotron>
                 <h1>Wedding Party Members&nbsp;
-                    <Button bsStyle="success" bsSize="small" onClick={this.create}><Glyphicon glyph="plus" /></Button>
+                    <Button bsStyle="success" bsSize="small" onClick={this.create}><FontAwesome icon="plus" /></Button>
                 </h1>
 
                 <Loader loading={this.state.loading}>
-                    <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} onDelete={this.onDelete} />
+                    <Sortable>
+                        {membersList}
+                    </Sortable>
                 </Loader>
             </Jumbotron>
         );
