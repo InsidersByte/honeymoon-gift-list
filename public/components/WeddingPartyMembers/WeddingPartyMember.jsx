@@ -21,7 +21,7 @@
      render() {
          return (
              <div className={css.root}>
-                 <img className={css.avatar} src={this.props.member.imageUrl} alt={this.props.member.name}/>
+                 <img className={css.avatar} src={this.props.member.imageUrl} alt={this.props.member.name} />
 
                  <div className={css.textContainer}>
                      <h3 className={css.name}>{this.props.member.name}</h3>
