@@ -156,7 +156,7 @@ export default class LandingPage extends React.Component {
                     </div>
                 </LandingSection>
 
-                <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
+                <Basket basketCount={this.state.basketCount} total={this.state.total} />
             </Loader>
         );
     }

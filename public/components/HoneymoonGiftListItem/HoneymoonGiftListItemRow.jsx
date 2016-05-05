@@ -4,7 +4,14 @@ import FontAwesome from '../common/FontAwesome';
 
 export default class HoneymoonGiftListItemRow extends React.Component {
     static propTypes = {
-        item: React.PropTypes.object.isRequired,
+        item: React.PropTypes.shape({
+            imageUrl: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string.isRequired,
+            description: React.PropTypes.string.isRequired,
+            requested: React.PropTypes.number.isRequired,
+            remaining: React.PropTypes.number.isRequired,
+            price: React.PropTypes.number.isRequired,
+        }).isRequired,
         onEdit: React.PropTypes.func.isRequired,
         onDelete: React.PropTypes.func.isRequired,
     };

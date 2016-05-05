@@ -7,7 +7,6 @@ import css from './Basket.styl';
 
 export default class Basket extends React.Component {
     static propTypes = {
-        items: React.PropTypes.object.isRequired,
         basketCount: React.PropTypes.number.isRequired,
         total: React.PropTypes.number.isRequired,
     };

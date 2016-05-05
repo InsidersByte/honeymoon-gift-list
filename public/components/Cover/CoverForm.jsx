@@ -47,7 +47,11 @@ export default function CoverForm(props) {
 }
 
 CoverForm.propTypes = {
-    cover: React.PropTypes.object.isRequired,
+    cover: React.PropTypes.shape({
+        title: React.PropTypes.string.isRequired,
+        imageUrl: React.PropTypes.string.isRequired,
+        weddingDate: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
     loading: React.PropTypes.bool.isRequired,

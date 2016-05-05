@@ -31,11 +31,9 @@ export default class HoneymoonGiftListItemPage extends React.Component {
         this.setState(state);
     };
 
-    setItemState = (event) => {
-        const field = event.target.name;
-        const value = event.target.value;
-        this.state.item[field] = value;
-        return this.setState({ item: this.state.item });
+    onChange = ({ target: { name, value } }) => {
+        const item = Object.assign(this.state.item, { [name]: value });
+        this.setState({ item });
     };
 
     save = (item) => {
@@ -89,7 +87,7 @@ export default class HoneymoonGiftListItemPage extends React.Component {
                     item={this.state.item}
                     show={this.state.showModal}
                     onHide={this.close}
-                    onChange={this.setItemState}
+                    onChange={this.onChange}
                     onSubmit={this.save}
                     saving={this.state.saving}
                 />

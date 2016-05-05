@@ -77,7 +77,12 @@ export default function GiverDetailsForm(props) {
 }
 
 GiverDetailsForm.propTypes = {
-    giver: React.PropTypes.object.isRequired,
+    giver: React.PropTypes.shape({
+        forename: React.PropTypes.string.isRequired,
+        surname: React.PropTypes.string.isRequired,
+        email: React.PropTypes.string.isRequired,
+        phoneNumber: React.PropTypes.string.isRequired,
+    }).isRequired,
     isSaving: React.PropTypes.bool.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,

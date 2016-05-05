@@ -10,7 +10,9 @@ import Loader from '../common/Loader';
 
 export default class GiftSetPage extends React.Component {
     static propTypes = {
-        params: React.PropTypes.object.isRequired,
+        params: React.PropTypes.shape({
+            giftSetId: React.PropTypes.string.isRequired,
+        }).isRequired,
     };
 
     static defaultProps = {

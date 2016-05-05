@@ -5,7 +5,18 @@ import FontAwesome from '../common/FontAwesome';
 
 export default class GiftSetRow extends React.Component {
     static propTypes = {
-        giftSet: React.PropTypes.object.isRequired,
+        giftSet: React.PropTypes.shape({
+            giver: React.PropTypes.shape({
+                forename: React.PropTypes.string.isRequired,
+                surname: React.PropTypes.string.isRequired,
+                email: React.PropTypes.string.isRequired,
+                phoneNumber: React.PropTypes.string.isRequired,
+            }).isRequired,
+            createdAt: React.PropTypes.string.isRequired,
+            total: React.PropTypes.number.isRequired,
+            paid: React.PropTypes.bool.isRequired,
+            detailsSent: React.PropTypes.bool.isRequired,
+        }).isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onMarkAsPaid: React.PropTypes.func.isRequired,
         onMarkAsDetailsSent: React.PropTypes.func.isRequired,

@@ -4,7 +4,19 @@ import Form from '../common/Form';
 
 export default class HoneymoonGiftListItem extends React.Component {
     static propTypes = {
-        item: React.PropTypes.object.isRequired,
+        item: React.PropTypes.shape({
+            imageUrl: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string.isRequired,
+            description: React.PropTypes.string.isRequired,
+            requested: React.PropTypes.oneOfType([
+                React.PropTypes.string.isRequired,
+                React.PropTypes.number.isRequired,
+            ]).isRequired,
+            price: React.PropTypes.oneOfType([
+                React.PropTypes.string.isRequired,
+                React.PropTypes.number.isRequired,
+            ]).isRequired,
+        }).isRequired,
         show: React.PropTypes.bool.isRequired,
         onHide: React.PropTypes.func.isRequired,
         onChange: React.PropTypes.func.isRequired,
