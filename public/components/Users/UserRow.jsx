@@ -4,7 +4,10 @@ import FontAwesome from '../common/FontAwesome';
 
 export default class UserRow extends React.Component {
     static propTypes = {
-        user: React.PropTypes.object.isRequired,
+        user: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+            username: React.PropTypes.string.isRequired,
+        }).isRequired,
         onDelete: React.PropTypes.func.isRequired,
     };
 

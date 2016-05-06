@@ -6,7 +6,13 @@ import css from './GiftItem.styl';
 
 export default class GiftItem extends React.Component {
     static propTypes = {
-        item: React.PropTypes.object.isRequired,
+        item: React.PropTypes.shape({
+            _id: React.PropTypes.string.isRequired,
+            remaining: React.PropTypes.number.isRequired,
+            price: React.PropTypes.number.isRequired,
+            imageUrl: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string.isRequired,
+        }).isRequired,
         addToBasket: React.PropTypes.func.isRequired,
         basketItems: React.PropTypes.object.isRequired,
     };

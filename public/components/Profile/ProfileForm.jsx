@@ -44,7 +44,11 @@ export default function ProfileForm(props) {
 }
 
 ProfileForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.shape({
+        currentPassword: React.PropTypes.string.isRequired,
+        newPassword: React.PropTypes.string.isRequired,
+        confirmPassword: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
     saving: React.PropTypes.bool.isRequired,

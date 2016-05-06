@@ -4,7 +4,12 @@ import FontAwesome from '../common/FontAwesome';
 
 export default class WeddingPartyMemberRow extends React.Component {
     static propTypes = {
-        member: React.PropTypes.object.isRequired,
+        member: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+            title: React.PropTypes.string.isRequired,
+            imageUrl: React.PropTypes.string.isRequired,
+            description: React.PropTypes.string.isRequired,
+        }).isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onSelect: React.PropTypes.func.isRequired,
     };
