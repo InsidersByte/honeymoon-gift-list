@@ -1,13 +1,42 @@
  import React from 'react';
  import { Button } from 'react-bootstrap';
+ import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
+ import { WEDDING_PARTY_MEMBER } from '../../constants/itemTypes';
  import FontAwesome from '../common/FontAwesome';
  import css from './WeddingPartyMember.styl';
 
+ const weddingPartyMemberSource = {
+     beginDrag({ member: { _id } }) {
+         return { id: _id };
+     },
+ };
+
+ const weddingPartyMemberTarget = {
+     hover(targetProps, monitor) {
+         const targetId = targetProps.member._id; // eslint-disable-line no-underscore-dangle
+         const sourceProps = monitor.getItem();
+         const sourceId = sourceProps.id;
+
+         if (sourceId !== targetId) {
+             targetProps.onMove({ sourceId, targetId });
+         }
+     },
+ };
+
+ @dragSource(WEDDING_PARTY_MEMBER, weddingPartyMemberSource, (connect) => ({
+     connectDragSource: connect.dragSource(),
+ }))
+ @dropTarget(WEDDING_PARTY_MEMBER, weddingPartyMemberTarget, (connect) => ({
+     connectDropTarget: connect.dropTarget(),
+ }))
  export default class WeddingPartyMember extends React.Component {
      static propTypes = {
+         connectDragSource: React.PropTypes.func.isRequired,
+         connectDropTarget: React.PropTypes.func.isRequired,
          member: React.PropTypes.object.isRequired,
          onDelete: React.PropTypes.func.isRequired,
          onSelect: React.PropTypes.func.isRequired,
+         onMove: React.PropTypes.func.isRequired,
      };
 
      onDelete = () => {
@@ -19,14 +48,16 @@
      };
 
      render() {
-         return (
+         const { connectDragSource, connectDropTarget, member: { imageUrl, name, title, description } } = this.props;
+
+         return connectDragSource(connectDropTarget(
              <div className={css.root}>
-                 <img className={css.avatar} src={this.props.member.imageUrl} alt={this.props.member.name} />
+                 <img className={css.avatar} src={imageUrl} alt={name} />
 
                  <div className={css.textContainer}>
-                     <h3 className={css.name}>{this.props.member.name}</h3>
-                     <h4 className={css.title}>{this.props.member.title}</h4>
-                     <p className={css.description}>{this.props.member.description}</p>
+                     <h3 className={css.name}>{name}</h3>
+                     <h4 className={css.title}>{title}</h4>
+                     <p className={css.description}>{description}</p>
                  </div>
 
                  <div className={css.actionContainer}>
@@ -39,6 +70,6 @@
                      </Button>
                  </div>
              </div>
-         );
+         ));
      }
  }

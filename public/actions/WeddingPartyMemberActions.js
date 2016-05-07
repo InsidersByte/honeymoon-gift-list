@@ -6,6 +6,7 @@ import { WEDDING_PARTY_MEMBER as key } from '../constants/KeyConstants';
 class WeddingPartyMemberActions extends BaseActions {
     constructor() {
         super({ api, key });
+        this.generateActions('move');
     }
 }
 
