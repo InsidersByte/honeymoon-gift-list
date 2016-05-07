@@ -1,5 +1,7 @@
 const WeddingProfile = require('../models/weddingProfile');
 const wrap = require('../utilities/wrap');
+const { integer } = require('../utilities/random');
+const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -28,11 +30,16 @@ module.exports = (app, express) => {
 
             const weddingProfile = yield WeddingProfile.findOne({});
 
+            const positions = weddingProfile.weddingPartyMembers.map(o => o.position);
+            const maximumPosition = positions.length > 0 ? Math.max(...positions) : 0;
+            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
+
             const weddingPartyMember = weddingProfile.weddingPartyMembers.create({
                 name: req.body.name,
                 title: req.body.title,
                 imageUrl: req.body.imageUrl,
                 description: req.body.description,
+                position,
             });
 
             weddingProfile.weddingPartyMembers.push(weddingPartyMember);

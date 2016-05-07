@@ -21,6 +21,10 @@
              targetProps.onMove({ sourceId, targetId });
          }
      },
+     drop(targetProps, monitor) {
+         const { id } = monitor.getItem();
+         targetProps.onDrop(id);
+     },
  };
 
  @dragSource(WEDDING_PARTY_MEMBER, weddingPartyMemberSource, (connect, monitor) => ({
@@ -38,6 +42,7 @@
          onDelete: React.PropTypes.func.isRequired,
          onSelect: React.PropTypes.func.isRequired,
          onMove: React.PropTypes.func.isRequired,
+         onDrop: React.PropTypes.func.isRequired,
          isDragging: React.PropTypes.bool.isRequired,
      };
 

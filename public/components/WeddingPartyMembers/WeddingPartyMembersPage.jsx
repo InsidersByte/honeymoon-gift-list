@@ -46,6 +46,10 @@ export default class WeddingPartyMembersPage extends React.Component {
         WeddingPartyMemberActions.remove(member);
     }
 
+    onDrop(id) {
+        console.log(id);
+    }
+
     create = () => {
         this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
     };
@@ -58,6 +62,7 @@ export default class WeddingPartyMembersPage extends React.Component {
                 onSelect={this.onSelect}
                 onDelete={this.onDelete}
                 onMove={WeddingPartyMemberActions.move}
+                onDrop={this.onDrop}
             />
         ));
 

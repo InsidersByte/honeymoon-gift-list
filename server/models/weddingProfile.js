@@ -6,6 +6,7 @@ const weddingPartyMember = new Schema({
     title: { type: String, required: true },
     imageUrl: { type: String, required: true },
     description: { type: String, required: true },
+    position: { type: Number, required: true, index: { unique: true } },
 });
 
 const WeddingProfileSchema = new Schema({
