@@ -7,11 +7,7 @@ export default function LandingHeader(props) {
     let daysTillIDoCountdown = null;
 
     if (props.cover.weddingDate) {
-        daysTillIDoCountdown = (
-            <h2>
-                {props.cover.daysToGo} Days until I Do
-            </h2>
-        );
+        daysTillIDoCountdown = <h2>{props.cover.daysToGo} Days until I Do</h2>;
     }
 
     return (

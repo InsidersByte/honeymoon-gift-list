@@ -21,14 +21,14 @@ export default function HoneymoonGiftListItemTable(props) {
             {
                 props
                     .items
-                    .map(item => (
+                    .map(item =>
                         <HoneymoonGiftListItemRow
                             key={item._id} // eslint-disable-line no-underscore-dangle
                             item={item}
                             onEdit={props.onEdit}
                             onDelete={props.onDelete}
                         />
-                    ))
+                    )
             }
             </tbody>
         </Table>

@@ -17,7 +17,7 @@ export default function BasketSummaryTable(props) {
 
             <tbody>
             {
-                [...props.items.entries()].map(([key, item]) => (
+                [...props.items.entries()].map(([key, item]) =>
                     <BasketSummaryRow
                         key={key}
                         item={item}
@@ -25,7 +25,7 @@ export default function BasketSummaryTable(props) {
                         onRemove={props.onRemove}
                         onDelete={props.onDelete}
                     />
-                ))
+                )
             }
             </tbody>
         </Table>

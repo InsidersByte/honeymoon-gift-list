@@ -94,15 +94,13 @@ export default class LandingPage extends React.Component {
             return null;
         }
 
-        const weddingPartyMembersElement = (
-            <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />
-        );
+        const weddingPartyMembersElement = <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />;
 
         return <LandingSection title="Wedding Party Members" postContent={weddingPartyMembersElement} />;
     };
 
     render() {
-        const giftItemsElement = (
+        const giftItemsElement = ( // eslint-disable-line no-extra-parens
             <GiftItems
                 giftItems={this.state.weddingProfile.honeymoonGiftListItems}
                 addToBasket={this.addToBasket}

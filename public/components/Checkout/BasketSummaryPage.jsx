@@ -38,7 +38,7 @@ export default class BasketSummaryPage extends React.Component {
         let content;
 
         if (this.state.basketCount > 0) {
-            content = (
+            content = ( // eslint-disable-line no-extra-parens
                 <div className={css.container}>
                     <h1 className={css.title}>
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
@@ -68,7 +68,7 @@ export default class BasketSummaryPage extends React.Component {
                 </div>
             );
         } else {
-            content = (
+            content = ( // eslint-disable-line no-extra-parens
                 <div className={css.container}>
                     <h1 className={css.title}>
                         Your Basket is empty!

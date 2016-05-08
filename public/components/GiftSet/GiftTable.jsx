@@ -17,12 +17,12 @@ export default function GiftTable(props) {
             <tbody>
             {props
                 .gifts
-                .map(gift => (
+                .map(gift =>
                     <GiftRow
                         key={gift._id} // eslint-disable-line no-underscore-dangle
                         gift={gift}
                     />
-                ))
+                )
             }
             </tbody>
         </Table>

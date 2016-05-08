@@ -32,14 +32,10 @@ export default class Admin extends React.Component {
     render() {
         let headerItems;
 
-        const viewSiteLink = (
-            <li>
-                <Link to={routes.HOME_ROUTE} target="_blank">View Site</Link>
-            </li>
-        );
+        const viewSiteLink = <li><Link to={routes.HOME_ROUTE} target="_blank">View Site</Link></li>;
 
         if (!this.state.isLoggedIn) {
-            headerItems = (
+            headerItems = ( // eslint-disable-line no-extra-parens
                 <Nav pullRight>
                     {viewSiteLink}
 
@@ -49,7 +45,7 @@ export default class Admin extends React.Component {
                 </Nav>
             );
         } else {
-            headerItems = (
+            headerItems = ( // eslint-disable-line no-extra-parens
                 <Nav pullRight>
                     <NavDropdown id="weddingProfile" title="Wedding Profile">
                         <li>

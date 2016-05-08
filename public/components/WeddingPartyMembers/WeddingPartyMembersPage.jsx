@@ -56,7 +56,7 @@ export default class WeddingPartyMembersPage extends React.Component {
     };
 
     render() {
-        const membersList = this.state.members.map((member) => (
+        const membersList = this.state.members.map((member) =>
             <WeddingPartyMember
                 key={member._id} // eslint-disable-line no-underscore-dangle
                 member={member}
@@ -65,7 +65,7 @@ export default class WeddingPartyMembersPage extends React.Component {
                 onMove={WeddingPartyMemberActions.move}
                 onDrop={this.onDrop}
             />
-        ));
+        );
 
         return (
             <Jumbotron>

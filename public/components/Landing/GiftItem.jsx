@@ -26,7 +26,7 @@ export default class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
-            button = (
+            button = ( // eslint-disable-line no-extra-parens
                 <Button bsStyle="success" onClick={this.onClick}>
                     <FontAwesome icon="shopping-basket" /> Add to Basket £ {price}
                 </Button>

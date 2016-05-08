@@ -16,13 +16,13 @@ export default function UserTable(props) {
             <tbody>
                 {props
                     .users
-                    .map(user => (
+                    .map(user =>
                         <UserRow
                             key={user._id} // eslint-disable-line no-underscore-dangle
                             user={user}
                             onDelete={props.onDelete}
                         />
-                    ))
+                    )
                 }
             </tbody>
         </Table>

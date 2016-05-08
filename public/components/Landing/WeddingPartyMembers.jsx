@@ -9,12 +9,12 @@ export default function WeddingPartyMembers(props) {
             {
                 props
                     .weddingPartyMembers
-                    .map(weddingPartyMember => (
+                    .map(weddingPartyMember =>
                         <WeddingPartyMember
                             key={weddingPartyMember._id} // eslint-disable-line no-underscore-dangle
                             weddingPartyMember={weddingPartyMember}
                         />
-                    ))
+                    )
             }
         </div>
     );

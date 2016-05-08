@@ -20,7 +20,7 @@ export default function GiftSetTable(props) {
             <tbody>
                 {props
                     .giftSets
-                    .map(giftSet => (
+                    .map(giftSet =>
                         <GiftSetRow
                             key={giftSet._id} // eslint-disable-line no-underscore-dangle
                             giftSet={giftSet}
@@ -29,7 +29,7 @@ export default function GiftSetTable(props) {
                             onDelete={props.onDelete}
                             onSelect={props.onSelect}
                         />
-                    ))
+                    )
                 }
             </tbody>
         </Table>
