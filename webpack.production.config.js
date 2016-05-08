@@ -7,6 +7,7 @@ const autoprefixer = require('autoprefixer');
 
 const PATHS = {
     PUBLIC: path.join(__dirname, 'public'),
+    LIB: path.join(__dirname, 'lib'),
     DIST: path.join(__dirname, 'dist'),
     NODE_MODULES: path.join(__dirname, 'node_modules'),
 };
@@ -39,7 +40,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
-                include: PATHS.PUBLIC,
+                include: [PATHS.PUBLIC, PATHS.LIB],
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,

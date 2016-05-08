@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
     PUBLIC: path.join(__dirname, 'public'),
+    LIB: path.join(__dirname, 'lib'),
     BUILD: path.join(__dirname, 'build'),
     NODE_MODULES: path.join(__dirname, 'node_modules'),
 };
@@ -32,7 +33,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
-                include: PATHS.PUBLIC,
+                include: [PATHS.PUBLIC, PATHS.LIB],
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,

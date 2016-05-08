@@ -46,9 +46,9 @@ export default class WeddingPartyMembersPage extends React.Component {
         WeddingPartyMemberActions.remove(member);
     }
 
-    onDrop(id) {
-        console.log(id);
-    }
+    onDrop = () => {
+        console.log(this.state.members.map(o => o.position));
+    };
 
     create = () => {
         this.context.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);

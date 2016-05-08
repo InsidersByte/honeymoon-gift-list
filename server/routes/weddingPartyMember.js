@@ -1,6 +1,6 @@
 const WeddingProfile = require('../models/weddingProfile');
 const wrap = require('../utilities/wrap');
-const { integer } = require('../utilities/random');
+const { integer } = require('../../lib/random');
 const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
 
 module.exports = (app, express) => {
@@ -10,7 +10,11 @@ module.exports = (app, express) => {
         .route('/')
 
         .get(wrap(function* getWeddingPartyMembers(req, res) {
-            const weddingProfile = yield WeddingProfile.findOne({});
+            const weddingProfile = yield WeddingProfile
+                .findOne({})
+                .sort('position')
+                .exec();
+
             return res.json(weddingProfile.weddingPartyMembers);
         }))
 
@@ -74,6 +78,7 @@ module.exports = (app, express) => {
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
             req.checkBody('description').notEmpty();
+            req.checkBody('position').isFloat();
 
             const errors = req.validationErrors();
 
@@ -97,6 +102,7 @@ module.exports = (app, express) => {
             weddingPartyMember.title = req.body.title;
             weddingPartyMember.imageUrl = req.body.imageUrl;
             weddingPartyMember.description = req.body.description;
+            weddingPartyMember.position = req.body.position;
 
             yield weddingProfile.save();
 
