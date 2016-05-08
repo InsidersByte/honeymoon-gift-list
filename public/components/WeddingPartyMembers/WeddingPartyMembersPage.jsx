@@ -1,15 +1,14 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
-import { DragDropContext as dragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routeConstants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 import Loader from '../common/Loader';
 import WeddingPartyMember from './WeddingPartyMember';
 import FontAwesome from '../common/FontAwesome';
+import SortableContainer from '../common/SortableContainer';
+import SortableItem from '../common/SortableItem';
 
-@dragDropContext(HTML5Backend)
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
@@ -57,26 +56,32 @@ export default class WeddingPartyMembersPage extends React.Component {
 
     render() {
         const membersList = this.state.members.map((member) =>
-            <WeddingPartyMember
+            <SortableItem
                 key={member._id} // eslint-disable-line no-underscore-dangle
-                member={member}
-                onSelect={this.onSelect}
-                onDelete={this.onDelete}
+                id={member._id} // eslint-disable-line no-underscore-dangle
                 onMove={WeddingPartyMemberActions.move}
                 onDrop={this.onDrop}
-            />
+            >
+                <WeddingPartyMember
+                    member={member}
+                    onSelect={this.onSelect}
+                    onDelete={this.onDelete}
+                />
+            </SortableItem>
         );
 
         return (
-            <Jumbotron>
-                <h1>Wedding Party Members&nbsp;
-                    <Button bsStyle="success" bsSize="small" onClick={this.create}><FontAwesome icon="plus" /></Button>
-                </h1>
+            <SortableContainer>
+                <Jumbotron>
+                    <h1>Wedding Party Members&nbsp;
+                        <Button bsStyle="success" bsSize="small" onClick={this.create}><FontAwesome icon="plus" /></Button>
+                    </h1>
 
-                <Loader loading={this.state.loading}>
-                    {membersList}
-                </Loader>
-            </Jumbotron>
+                    <Loader loading={this.state.loading}>
+                        {membersList}
+                    </Loader>
+                </Jumbotron>
+            </SortableContainer>
         );
     }
 }

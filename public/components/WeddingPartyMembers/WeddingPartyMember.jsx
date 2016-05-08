@@ -1,49 +1,13 @@
  import React from 'react';
  import { Button } from 'react-bootstrap';
- import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
- import { WEDDING_PARTY_MEMBER } from '../../constants/itemTypes';
  import FontAwesome from '../common/FontAwesome';
  import css from './WeddingPartyMember.styl';
 
- const weddingPartyMemberSource = {
-     beginDrag({ member: { _id: id } }) {
-         return { id };
-     },
- };
-
- const weddingPartyMemberTarget = {
-     hover(targetProps, monitor) {
-         const targetId = targetProps.member._id; // eslint-disable-line no-underscore-dangle
-         const sourceProps = monitor.getItem();
-         const sourceId = sourceProps.id;
-
-         if (sourceId !== targetId) {
-             targetProps.onMove({ sourceId, targetId });
-         }
-     },
-     drop(targetProps, monitor) {
-         const { id } = monitor.getItem();
-         targetProps.onDrop({ id });
-     },
- };
-
- @dragSource(WEDDING_PARTY_MEMBER, weddingPartyMemberSource, (connect, monitor) => ({
-     connectDragSource: connect.dragSource(),
-     isDragging: monitor.isDragging(),
- }))
- @dropTarget(WEDDING_PARTY_MEMBER, weddingPartyMemberTarget, (connect) => ({
-     connectDropTarget: connect.dropTarget(),
- }))
  export default class WeddingPartyMember extends React.Component {
      static propTypes = {
-         connectDragSource: React.PropTypes.func.isRequired,
-         connectDropTarget: React.PropTypes.func.isRequired,
          member: React.PropTypes.object.isRequired,
          onDelete: React.PropTypes.func.isRequired,
          onSelect: React.PropTypes.func.isRequired,
-         onMove: React.PropTypes.func.isRequired,
-         onDrop: React.PropTypes.func.isRequired,
-         isDragging: React.PropTypes.bool.isRequired,
      };
 
      onDelete = () => {
@@ -54,21 +18,11 @@
          this.props.onSelect(this.props.member);
      };
 
-     rootClassName = () => {
-         let className = css.root;
-
-         if (this.props.isDragging) {
-             className += ` ${css.hidden}`;
-         }
-
-         return className;
-     };
-
      render() {
-         const { connectDragSource, connectDropTarget, member: { imageUrl, name, title, description } } = this.props;
+         const { member: { imageUrl, name, title, description } } = this.props;
 
-         return connectDragSource(connectDropTarget(
-             <div className={this.rootClassName()}>
+         return (
+             <div className={css.root}>
                  <img className={css.avatar} src={imageUrl} alt={name} />
 
                  <div className={css.textContainer}>
@@ -87,6 +41,6 @@
                      </Button>
                  </div>
              </div>
-         ));
+         );
      }
  }

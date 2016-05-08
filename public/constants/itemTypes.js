@@ -1,1 +1,1 @@
-export const WEDDING_PARTY_MEMBER = 'WeddingPartyMember';
+export const SORTABLE_ITEM = 'SortableItem';
