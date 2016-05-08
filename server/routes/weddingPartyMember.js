@@ -10,12 +10,12 @@ module.exports = (app, express) => {
         .route('/')
 
         .get(wrap(function* getWeddingPartyMembers(req, res) {
-            const weddingProfile = yield WeddingProfile
-                .findOne({})
-                .sort('position')
-                .exec();
+            const weddingProfile = yield WeddingProfile.findOne({});
 
-            return res.json(weddingProfile.weddingPartyMembers);
+            const weddingPartyMembers = weddingProfile.weddingPartyMembers || [];
+            const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+
+            return res.json(sortedWeddingPartyMembers);
         }))
 
         .post(wrap(function* createWeddingPartyMember(req, res) {

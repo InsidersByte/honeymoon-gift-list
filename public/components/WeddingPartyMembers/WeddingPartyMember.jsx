@@ -6,8 +6,8 @@
  import css from './WeddingPartyMember.styl';
 
  const weddingPartyMemberSource = {
-     beginDrag({ member }) {
-         return { id: member._id, member }; // eslint-disable-line no-underscore-dangle
+     beginDrag({ member: { _id: id } }) {
+         return { id };
      },
  };
 
@@ -22,8 +22,8 @@
          }
      },
      drop(targetProps, monitor) {
-         const { id, member } = monitor.getItem();
-         targetProps.onDrop({ id, member });
+         const { id } = monitor.getItem();
+         targetProps.onDrop({ id });
      },
  };
 

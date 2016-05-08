@@ -46,8 +46,9 @@ export default class WeddingPartyMembersPage extends React.Component {
         WeddingPartyMemberActions.remove(member);
     }
 
-    onDrop = () => {
-        console.log(this.state.members.map(o => o.position));
+    onDrop = ({ id }) => {
+        const member = this.state.members.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        WeddingPartyMemberActions.update({ member, id });
     };
 
     create = () => {
