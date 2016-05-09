@@ -1,7 +1,7 @@
 .root
+    color rgb(154, 156, 167)
     padding 50px 0
     text-align center
-    color rgb(154, 156, 167)
 
     h1, h2, h3, h4, h5, h6
         color rgb(82, 105, 120)
@@ -14,8 +14,8 @@
             color rgb(0, 173, 237)
 
     &:nth-child(even)
+        background rgb(0, 173, 237)
         color white
-        background #00aded
 
         h1, h2, h3, h4, h5, h6
             color white
@@ -27,31 +27,32 @@
                 color white
 
     &:before
-        display table
         content ' '
+        display table
 
     &:after
-        display table
-        content ' '
         clear both
+        content ' '
+        display table
+
 
     &:last-of-type
         padding-bottom 0
 
 .content
-    padding-top 10px
-    font-size 0.9em
+    font-size .9em
     margin 0 25%
+    padding-top 10px
 
     img
-        width 100%
-        max-width 500px
         height auto
+        max-width 500px
+        width 100%
 
 .title
+    font-size 2.5em
     text-transform capitalize
     text-align center
-    font-size 2.5em
 
 @media (max-width 736px)
     .content

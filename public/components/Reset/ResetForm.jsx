@@ -35,7 +35,10 @@ export default function ResetForm(props) {
 }
 
 ResetForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.shape({
+        password: React.PropTypes.string.isRequired,
+        confirmPassword: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
     saving: React.PropTypes.bool.isRequired,

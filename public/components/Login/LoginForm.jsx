@@ -41,7 +41,10 @@ export default function LoginForm(props) {
 }
 
 LoginForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.shape({
+        username: React.PropTypes.string.isRequired,
+        password: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onForgot: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,

@@ -83,7 +83,13 @@ export default function HoneymoonGiftListForm(props) {
 }
 
 HoneymoonGiftListForm.propTypes = {
-    honeymoonGiftList: React.PropTypes.object.isRequired,
+    honeymoonGiftList: React.PropTypes.shape({
+        showOfflinePaymentMessage: React.PropTypes.bool.isRequired,
+        showDisclaimerMessage: React.PropTypes.bool.isRequired,
+        offlinePaymentMessage: React.PropTypes.string.isRequired,
+        disclaimerMessage: React.PropTypes.string.isRequired,
+        content: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
     loading: React.PropTypes.bool.isRequired,

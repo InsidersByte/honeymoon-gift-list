@@ -12,7 +12,14 @@ export default function GiftRow(props) {
 }
 
 GiftRow.propTypes = {
-    gift: React.PropTypes.object.isRequired,
+    gift: React.PropTypes.shape({
+        honeymoonGiftListItem: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+        }).isRequired,
+        price: React.PropTypes.number.isRequired,
+        quantity: React.PropTypes.number.isRequired,
+        total: React.PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 GiftRow.defaultProps = {

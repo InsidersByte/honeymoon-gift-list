@@ -20,5 +20,10 @@ export default function WeddingPartyMember(props) {
 }
 
 WeddingPartyMember.propTypes = {
-    weddingPartyMember: React.PropTypes.object.isRequired,
+    weddingPartyMember: React.PropTypes.shape({
+        imageUrl: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        description: React.PropTypes.string.isRequired,
+    }).isRequired,
 };

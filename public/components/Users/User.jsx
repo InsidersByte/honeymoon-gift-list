@@ -4,7 +4,12 @@ import Form from '../common/Form';
 
 export default class User extends React.Component {
     static propTypes = {
-        user: React.PropTypes.object.isRequired,
+        user: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+            username: React.PropTypes.string.isRequired,
+            password: React.PropTypes.string.isRequired,
+            confirmPassword: React.PropTypes.string.isRequired,
+        }).isRequired,
         show: React.PropTypes.bool.isRequired,
         onHide: React.PropTypes.func.isRequired,
         onChange: React.PropTypes.func.isRequired,

@@ -4,7 +4,12 @@ import BaseStore from './BaseStore';
 import { WEDDING_PROFILE as key } from '../constants/KeyConstants';
 
 const initialValue = {
-    cover: {},
+    cover: {
+        title: '',
+        imageUrl: '',
+        weddingDate: '',
+        daysToGo: 0,
+    },
     aboutUs: '',
     aboutOurDay: '',
     aboutOurHoneymoon: '',

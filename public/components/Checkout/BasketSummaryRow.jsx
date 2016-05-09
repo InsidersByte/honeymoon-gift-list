@@ -5,7 +5,12 @@ import css from './BasketSummaryRow.styl';
 
 export default class BasketSummaryRow extends React.Component {
     static propTypes = {
-        item: React.PropTypes.object.isRequired,
+        item: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+            price: React.PropTypes.number.isRequired,
+            quantity: React.PropTypes.number.isRequired,
+            remaining: React.PropTypes.number.isRequired,
+        }).isRequired,
         onAdd: React.PropTypes.func.isRequired,
         onRemove: React.PropTypes.func.isRequired,
         onDelete: React.PropTypes.func.isRequired,

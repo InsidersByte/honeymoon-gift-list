@@ -59,7 +59,12 @@ export default function SetupForm(props) {
 }
 
 SetupForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        username: React.PropTypes.string.isRequired,
+        password: React.PropTypes.string.isRequired,
+        confirmPassword: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
     saving: React.PropTypes.bool.isRequired,
