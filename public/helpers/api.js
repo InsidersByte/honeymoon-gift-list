@@ -59,13 +59,13 @@ export default class {
         }
 
         return new Promise((resolve, reject) => {
-            req.end((err, response) => {
-                if (err) {
-                    if (response.status === 401) {
+            req.end((error, response) => {
+                if (error) {
+                    if (error.status === 401) {
                         loginActions.logoutUser();
                     }
 
-                    return reject(response.statusText);
+                    return reject(error);
                 }
 
                 return resolve(response.body ? response.body : response.text);
