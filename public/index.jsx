@@ -17,13 +17,20 @@ const jwt = localStorage.getItem('jwt');
 
 if (jwt !== null) {
     // TODO: maybe use final store here? http://survivejs.com/webpack_react/react_and_flux/
-    alt.bootstrap(JSON.stringify({
-        LoginStore: {
-            jwt,
-            user: jwtDecode(jwt),
-            isLoggedIn: true,
-        },
-    }));
+    const user = jwtDecode(jwt);
+    const expiryDate = new Date(0);
+    expiryDate.setUTCSeconds(user.exp);
+
+    // Check if the token is expired
+    if (new Date() < expiryDate) {
+        alt.bootstrap(JSON.stringify({
+            LoginStore: {
+                jwt,
+                user,
+                isLoggedIn: true,
+            },
+        }));
+    }
 }
 
 ReactDOM.render(
