@@ -2,36 +2,88 @@
     "reporter": "stylint-stylish",
 
     "blocks": false,
-    "brackets": "never",
-    "colons": "never",
-    "colors": "always",
-    "commaSpace": "always",
-    "commentSpace": "always",
+    "brackets": {
+        "expect": "never",
+        "error": true
+    },
+    "colons": {
+        "expect": "never",
+        "error": true
+    },
+    "colors": {
+        "expect": "always",
+        "error": true
+    },
+    "commaSpace": {
+        "expect": "always",
+        "error": true
+    },
+    "commentSpace": {
+        "expect": "always",
+        "error": true
+    },
     "cssLiteral": "never",
     "depthLimit": false,
-    "duplicates": true,
-    "efficient": "always",
+    "duplicates": {
+        "expect": true,
+        "error": true
+    },
+    "efficient": {
+        "expect": "always",
+        "error": true
+    },
+    "exclude": [],
     "extendPref": false,
     "globalDupe": false,
     "indentPref": false,
-    "leadingZero": "never",
+    "leadingZero": {
+        "expect": "never",
+        "error": true
+    },
     "maxErrors": false,
     "maxWarnings": false,
     "mixed": false,
     "namingConvention": false,
     "namingConventionStrict": false,
-    "none": "never",
-    "noImportant": true,
+    "none": {
+        "expect": "never",
+        "error": true
+    },
+    "noImportant": {
+        "expect": true,
+        "error": true
+    },
     "parenSpace": false,
     "placeholders": "always",
-    "prefixVarsWithDollar": "always",
-    "quotePref": false,
-    "semicolons": "never",
+    "prefixVarsWithDollar": {
+        "expect": "always",
+        "error": true
+    },
+    "quotePref": {
+        "expect": "single",
+        "error": true
+    },
+    "semicolons": {
+        "expect": "never",
+        "error": true
+    },
     "sortOrder": "alphabetical",
-    "stackedProperties": "never",
-    "trailingWhitespace": "never",
+    "stackedProperties": {
+        "expect": "never",
+        "error": true
+    },
+    "trailingWhitespace": {
+        "expect": "never",
+        "error": true
+    },
     "universal": false,
-    "valid": true,
-    "zeroUnits": "never",
+    "valid": {
+        "expect": true,
+        "error": true
+    },
+    "zeroUnits": {
+        "expect": "never",
+        "error": true
+    },
     "zIndexNormalize": false
 }

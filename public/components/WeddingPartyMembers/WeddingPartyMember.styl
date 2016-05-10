@@ -1,17 +1,17 @@
-avatar-width = 60px
-top-bottom-margin = 12px
+$avatar-width = 60px
+$top-bottom-margin = 12px
 
 .root
-    display flex
     align-items stretch
-    padding 0 16px
     cursor move
+    display flex
+    padding 0 16px
 
 .avatar
-    width avatar-width
-    height avatar-width
-    margin top-bottom-margin 16px top-bottom-margin 0
     border-radius 50%
+    height $avatar-width
+    margin $top-bottom-margin 16px $top-bottom-margin 0
+    width $avatar-width
 
 .textContainer
     flex 1
@@ -19,18 +19,18 @@ top-bottom-margin = 12px
 
 .name
     font-size 16px
-    margin top-bottom-margin 0
+    margin $top-bottom-margin 0
 
 .title
     font-size 14px
 
 .description
+    color rgba(0, 0, 0, .54)
     font-size 14px
-    color rgba(0,0,0,0.54)
 
 .actionContainer
-    display flex
     align-items center
+    display flex
 
     button:last-child
         margin-left 6px
