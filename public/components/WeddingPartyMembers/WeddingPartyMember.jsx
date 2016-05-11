@@ -5,30 +5,33 @@
 
  export default class WeddingPartyMember extends React.Component {
      static propTypes = {
-         member: React.PropTypes.object.isRequired,
-         onDelete: React.PropTypes.func.isRequired,
+         member: React.PropTypes.shape({
+             imageUrl: React.PropTypes.string.isRequired,
+             name: React.PropTypes.string.isRequired,
+             title: React.PropTypes.string.isRequired,
+             description: React.PropTypes.string.isRequired,
+         }).isRequired,
          onSelect: React.PropTypes.func.isRequired,
-     };
-
-     onDelete = () => {
-         this.props.onDelete(this.props.member);
+         onDelete: React.PropTypes.func.isRequired,
      };
 
      onSelect = () => {
          this.props.onSelect(this.props.member);
      };
 
-     render() {
-         const { member: { imageUrl, name, title, description } } = this.props;
+     onDelete = () => {
+         this.props.onDelete(this.props.member);
+     };
 
+     render() {
          return (
              <div className={css.root}>
-                 <img className={css.avatar} src={imageUrl} alt={name} />
+                 <img className={css.avatar} src={this.props.member.imageUrl} alt={this.props.member.name} />
 
                  <div className={css.textContainer}>
-                     <h3 className={css.name}>{name}</h3>
-                     <h4 className={css.title}>{title}</h4>
-                     <p className={css.description}>{description}</p>
+                     <h3 className={css.name}>{this.props.member.name}</h3>
+                     <h4 className={css.title}>{this.props.member.title}</h4>
+                     <p className={css.description}>{this.props.member.description}</p>
                  </div>
 
                  <div className={css.actionContainer}>

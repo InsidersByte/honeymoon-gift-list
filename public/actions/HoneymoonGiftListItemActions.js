@@ -6,6 +6,7 @@ import { HONEYMOON_GIFT_LIST_ITEM as key } from '../constants/KeyConstants';
 class HoneymoonGiftListItemActions extends BaseActions {
     constructor() {
         super({ api, key });
+        this.generateActions('move');
     }
 }
 
