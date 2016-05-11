@@ -31,16 +31,16 @@ export default class HoneymoonGiftListItemListItem extends React.Component {
     };
 
     render() {
-        const { item: { imageUrl, name, description /* , requested, price */ } } = this.props;
-
         return (
             <div className={css.root}>
-                <img className={css.avatar} src={imageUrl} alt={name} />
+                <img className={css.avatar} src={this.props.item.imageUrl} alt={this.props.item.name} />
 
                 <div className={css.textContainer}>
-                    <h3 className={css.name}>{name}</h3>
-                    <h4 className={css.title}>{name}</h4>
-                    <p className={css.description}>{description}</p>
+                    <h3 className={css.name}>{this.props.item.name}</h3>
+                    <h4 className={css.title}>Price: £{this.props.item.price}</h4>
+                    <h4 className={css.title}>Requested: {this.props.item.requested}</h4>
+                    <h4 className={css.title}>Remaining: COMING SOON!</h4>
+                    <p className={css.description}>{this.props.item.description}</p>
                 </div>
 
                 <div className={css.actionContainer}>
