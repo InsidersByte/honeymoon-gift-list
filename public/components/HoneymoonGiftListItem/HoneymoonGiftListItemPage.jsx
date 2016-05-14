@@ -39,10 +39,11 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     };
 
     onDrop = ({ id }) => {
-        console.log('dropped', id);
+        const item = this.state.items.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        HoneymoonGiftListItemActions.update({ item, id });
     };
 
-    save = (item) => {
+    onSubmit = (item) => {
         if (!item._id) { // eslint-disable-line no-underscore-dangle
             HoneymoonGiftListItemActions.create({ item });
         } else {
@@ -111,7 +112,7 @@ export default class HoneymoonGiftListItemPage extends React.Component {
                     show={this.state.showModal}
                     onHide={this.close}
                     onChange={this.onChange}
-                    onSubmit={this.save}
+                    onSubmit={this.onSubmit}
                     saving={this.state.saving}
                 />
             </div>

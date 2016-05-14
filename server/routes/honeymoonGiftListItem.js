@@ -1,5 +1,7 @@
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const wrap = require('../utilities/wrap');
+const { integer } = require('../../lib/random');
+const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -11,6 +13,7 @@ module.exports = (app, express) => {
             const honeymoonGiftList = yield HoneymoonGiftListItem
                 .find({})
                 .populate('gifts', 'quantity')
+                .sort('position')
                 .lean()
                 .exec();
 
@@ -48,6 +51,8 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
+            // TODO: Work out the max position and add to it
+
             const honeymoonGiftItem = new HoneymoonGiftListItem({
                 imageUrl: req.body.imageUrl,
                 name: req.body.name,
@@ -73,6 +78,7 @@ module.exports = (app, express) => {
             req.checkBody('description').notEmpty();
             req.checkBody('requested').isInt();
             req.checkBody('price').isInt();
+            req.checkBody('position').isFloat();
 
             const errors = req.validationErrors();
 
@@ -96,6 +102,7 @@ module.exports = (app, express) => {
             honeymoonGiftItem.description = req.body.description;
             honeymoonGiftItem.requested = req.body.requested;
             honeymoonGiftItem.price = req.body.price;
+            honeymoonGiftItem.position = req.body.position;
 
             yield honeymoonGiftItem.save();
 

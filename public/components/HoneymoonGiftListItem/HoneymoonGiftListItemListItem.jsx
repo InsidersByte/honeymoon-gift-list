@@ -9,14 +9,9 @@ export default class HoneymoonGiftListItemListItem extends React.Component {
             imageUrl: React.PropTypes.string.isRequired,
             name: React.PropTypes.string.isRequired,
             description: React.PropTypes.string.isRequired,
-            requested: React.PropTypes.oneOfType([
-                React.PropTypes.string.isRequired,
-                React.PropTypes.number.isRequired,
-            ]).isRequired,
-            price: React.PropTypes.oneOfType([
-                React.PropTypes.string.isRequired,
-                React.PropTypes.number.isRequired,
-            ]).isRequired,
+            requested: React.PropTypes.number.isRequired,
+            remaining: React.PropTypes.number.isRequired,
+            price: React.PropTypes.number.isRequired,
         }).isRequired,
         onSelect: React.PropTypes.func.isRequired,
         onDelete: React.PropTypes.func.isRequired,
@@ -39,7 +34,7 @@ export default class HoneymoonGiftListItemListItem extends React.Component {
                     <h3 className={css.name}>{this.props.item.name}</h3>
                     <h4 className={css.title}>Price: £{this.props.item.price}</h4>
                     <h4 className={css.title}>Requested: {this.props.item.requested}</h4>
-                    <h4 className={css.title}>Remaining: COMING SOON!</h4>
+                    <h4 className={css.title}>Remaining: {this.props.item.remaining}</h4>
                     <p className={css.description}>{this.props.item.description}</p>
                 </div>
 
