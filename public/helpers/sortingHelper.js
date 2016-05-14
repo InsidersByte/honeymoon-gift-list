@@ -34,4 +34,4 @@ export function move({ sourceId, targetId, data }) {
     items.splice(targetIndex, 0, item);
 
     return items;
-};
+}
