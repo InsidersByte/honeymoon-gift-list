@@ -15,9 +15,13 @@ module.exports = (app, express) => {
                 return res.status(404).send();
             }
 
+            const weddingPartyMembers = weddingProfile.weddingPartyMembers || [];
+            weddingProfile.weddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+
             const honeymoonGiftList = yield HoneymoonGiftListItem
                 .find({})
                 .populate('gifts', 'quantity')
+                .sort('position')
                 .lean()
                 .exec();
 
