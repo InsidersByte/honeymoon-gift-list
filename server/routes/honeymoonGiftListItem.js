@@ -51,7 +51,14 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            // TODO: Work out the max position and add to it
+            const maximumPositionItem = yield HoneymoonGiftListItem
+                .findOne({})
+                .sort('-position')
+                .limit(1)
+                .exec();
+
+            const maximumPosition = maximumPositionItem && maximumPositionItem.position || 0;
+            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
             const honeymoonGiftItem = new HoneymoonGiftListItem({
                 imageUrl: req.body.imageUrl,
@@ -59,6 +66,7 @@ module.exports = (app, express) => {
                 description: req.body.description,
                 requested: req.body.requested,
                 price: req.body.price,
+                position,
             });
 
             yield honeymoonGiftItem.save();
