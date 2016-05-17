@@ -6,6 +6,7 @@ const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const wrap = require('../utilities/wrap');
 const Mailer = require('../mail');
 const mailer = new Mailer();
+const { PAYMENT_METHODS } = require('../../lib/constants');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -19,6 +20,7 @@ module.exports = (app, express) => {
             req.checkBody('giver.surname').notEmpty();
             req.checkBody('giver.email').isEmail();
             req.checkBody('giver.phoneNumber').notEmpty();
+            req.checkBody('giver.paymentMethod').isIn([PAYMENT_METHODS.PAYPAL, PAYMENT_METHODS.BANK_TRANSFER]);
             req.checkBody('items').notEmpty();
 
             const errors = req.validationErrors();
@@ -29,8 +31,8 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const giverData = req.body.giver;
-            const itemsData = req.body.items;
+            const { giver: giverData, items: itemsData } = req.body;
+            const { paymentMethod } = giverData;
 
             let giver = yield Giver.findOne({ email: giverData.email });
 
@@ -42,6 +44,7 @@ module.exports = (app, express) => {
 
             const giftSet = yield GiftSet.create({
                 giver: giver._id, // eslint-disable-line no-underscore-dangle
+                paymentMethod,
             });
 
             giver.giftSets.push(giftSet._id); // eslint-disable-line no-underscore-dangle

@@ -8,6 +8,7 @@ const GiftSetSchema = new Schema(
         detailsSent: { type: Boolean, default: false },
         gifts: [{ type: Schema.Types.ObjectId, ref: 'Gift' }],
         giver: { type: Schema.Types.ObjectId, ref: 'Giver' },
+        paymentMethod: { type: Schema.Types.String, required: true },
     },
     {
         timestamps: true,

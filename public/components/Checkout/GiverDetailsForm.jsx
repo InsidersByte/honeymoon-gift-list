@@ -4,9 +4,10 @@ import { Link } from 'react-router';
 import { BASKET_ROUTE } from '../../constants/routeConstants';
 import Form from '../common/Form';
 import css from './GiverDetailsForm.styl';
+import { PAYMENT_METHODS } from '../../../lib/constants';
 
 function renderPaymentMethodAlert(paymentMethod) {
-    if (paymentMethod !== 'paypal') {
+    if (paymentMethod !== PAYMENT_METHODS.PAYPAL) {
         return null;
     }
 
@@ -73,8 +74,8 @@ export default function GiverDetailsForm(props) {
 
                 <Radio
                     name="paymentMethod"
-                    value="paypal"
-                    checked={props.giver.paymentMethod === 'paypal'}
+                    value={PAYMENT_METHODS.PAYPAL}
+                    checked={props.giver.paymentMethod === PAYMENT_METHODS.PAYPAL}
                     onChange={props.onChange}
                 >
                     Paypal
@@ -82,8 +83,8 @@ export default function GiverDetailsForm(props) {
 
                 <Radio
                     name="paymentMethod"
-                    value="bankTransfer"
-                    checked={props.giver.paymentMethod === 'bankTransfer'}
+                    value={PAYMENT_METHODS.BANK_TRANSFER}
+                    checked={props.giver.paymentMethod === PAYMENT_METHODS.BANK_TRANSFER}
                     onChange={props.onChange}
                 >
                     Bank Transfer
