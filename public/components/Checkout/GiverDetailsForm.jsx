@@ -1,9 +1,21 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Radio, Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { BASKET_ROUTE } from '../../constants/routeConstants';
 import Form from '../common/Form';
 import css from './GiverDetailsForm.styl';
+
+function renderPaymentMethodAlert(paymentMethod) {
+    if (paymentMethod !== 'paypal') {
+        return null;
+    }
+
+    return (
+        <Alert bsStyle="info">
+            You will be redirected to <a target="_blank" href="https://www.paypal.me/">paypal.me</a> after completing your gift.
+        </Alert>
+    );
+}
 
 export default function GiverDetailsForm(props) {
     return (
@@ -56,6 +68,30 @@ export default function GiverDetailsForm(props) {
                 />
             </FormGroup>
 
+            <FormGroup>
+                <ControlLabel>Payment Method</ControlLabel>
+
+                <Radio
+                    name="paymentMethod"
+                    value="paypal"
+                    checked={props.giver.paymentMethod === 'paypal'}
+                    onChange={props.onChange}
+                >
+                    Paypal
+                </Radio>
+
+                <Radio
+                    name="paymentMethod"
+                    value="bankTransfer"
+                    checked={props.giver.paymentMethod === 'bankTransfer'}
+                    onChange={props.onChange}
+                >
+                    Bank Transfer
+                </Radio>
+            </FormGroup>
+
+            {renderPaymentMethodAlert(props.giver.paymentMethod)}
+
             <div className={css.actions}>
                 <Button
                     type="submit"
@@ -82,6 +118,7 @@ GiverDetailsForm.propTypes = {
         surname: React.PropTypes.string.isRequired,
         email: React.PropTypes.string.isRequired,
         phoneNumber: React.PropTypes.string.isRequired,
+        paymentMethod: React.PropTypes.string.isRequired,
     }).isRequired,
     isSaving: React.PropTypes.bool.isRequired,
     onChange: React.PropTypes.func.isRequired,

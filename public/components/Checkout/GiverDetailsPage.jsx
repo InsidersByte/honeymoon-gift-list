@@ -18,6 +18,7 @@ export default class GiverDetailsPage extends React.Component {
             surname: '',
             email: '',
             phoneNumber: '',
+            paymentMethod: '',
         },
         saving: false,
     };
@@ -42,7 +43,7 @@ export default class GiverDetailsPage extends React.Component {
         this.setState(state);
     };
 
-    setGiverState = (event) => {
+    onChange = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.giver[field] = value;
@@ -69,7 +70,7 @@ export default class GiverDetailsPage extends React.Component {
                     <GiverDetailsForm
                         giver={this.state.giver}
                         isSaving={this.state.saving}
-                        onChange={this.setGiverState}
+                        onChange={this.onChange}
                         onSubmit={this.submit}
                     />
                 </div>
