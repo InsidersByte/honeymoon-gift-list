@@ -11,7 +11,7 @@ function renderPaymentMethodAlert(paymentMethod) {
     }
 
     return (
-        <Alert bsStyle="info">
+        <Alert bsStyle="success">
             You will be redirected to <a target="_blank" href="https://www.paypal.me/">paypal.me</a> after completing your gift.
         </Alert>
     );
