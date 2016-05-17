@@ -4,6 +4,8 @@ export default class BaseActions {
     constructor({ api, key }) {
         this.api = api;
         this.key = key;
+
+        this.generateActions('fetchSuccess', 'querySuccess');
     }
 
     fetch(id) {
@@ -16,8 +18,6 @@ export default class BaseActions {
                 .catch(this.fetchError);
         };
     }
-
-    fetchSuccess = o => o;
 
     fetchError(error) {
         console.error(error);
@@ -35,8 +35,6 @@ export default class BaseActions {
                 .catch(this.queryError);
         };
     }
-
-    querySuccess = o => o;
 
     queryError(error) {
         console.error(error);

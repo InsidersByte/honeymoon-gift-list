@@ -4,6 +4,27 @@ import NotificationActions from './NotificationActions';
 import GiftApi from '../api/GiftApi';
 
 class LoginActions {
+    constructor() {
+        this.generateActions('fetchSuccess');
+    }
+
+    fetch(id) {
+        return (dispatch) => {
+            dispatch();
+
+            GiftApi
+                .get(id)
+                .then(this.fetchSuccess)
+                .catch(this.fetchError);
+        };
+    }
+
+    fetchError(error) {
+        console.error(error);
+        NotificationActions.error({ message: 'An Error Occurred' });
+        return error;
+    }
+
     create({ giver, items }) {
         return (dispatch) => {
             dispatch();

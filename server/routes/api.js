@@ -6,7 +6,7 @@ module.exports = (app, express, config) => {
     router.use('/setup', require('./setup')(app, express, config)); // eslint-disable-line global-require
     router.use('/authenticate', require('./authenticate')(app, express, config)); // eslint-disable-line global-require
     router.use('/weddingProfile', require('./weddingProfile')(app, express)); // eslint-disable-line global-require
-    router.use('/gift', require('./gift')(app, express)); // eslint-disable-line global-require
+    router.use('/gift', require('./gift')(app, express, config)); // eslint-disable-line global-require
 
     router.use(expressJwt({
         secret: config.secret,
