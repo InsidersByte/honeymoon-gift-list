@@ -23,8 +23,8 @@ const WeddingProfileSchema = new Schema({
     aboutOurHoneymoon: { type: String, required: true },
     honeymoonGiftList: {
         content: { type: String, required: true },
-        showOfflinePaymentMessage: { type: Boolean, required: true },
-        offlinePaymentMessage: { type: String },
+        showPaymentMessage: { type: Boolean, required: true },
+        paymentMessage: { type: String },
         showDisclaimerMessage: { type: Boolean, required: true },
         disclaimerMessage: { type: String },
     },

@@ -59,14 +59,14 @@ export default class LandingPage extends React.Component {
         basketActions.addToBasket(item);
     }
 
-    renderOfflineMessage = () => {
-        if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
+    renderPaymentMessage = () => {
+        if (this.state.weddingProfile.honeymoonGiftList.showPaymentMessage) {
             return (
                 <span>
                     <br />
                     <br />
 
-                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.offlinePaymentMessage}
+                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.paymentMessage}
                 </span>
             );
         }
@@ -148,7 +148,7 @@ export default class LandingPage extends React.Component {
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
-                        {this.renderOfflineMessage()}
+                        {this.renderPaymentMessage()}
 
                         {this.renderDisclaimerMessage()}
                     </div>

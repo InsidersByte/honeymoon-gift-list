@@ -5,9 +5,9 @@ import { HONEYMOON_GIFT_LIST as key } from '../constants/KeyConstants';
 
 const initialValue = {
     content: '',
-    showOfflinePaymentMessage: false,
+    showPaymentMessage: false,
     showDisclaimerMessage: false,
-    offlinePaymentMessage: '',
+    paymentMessage: '',
     disclaimerMessage: '',
 };
 

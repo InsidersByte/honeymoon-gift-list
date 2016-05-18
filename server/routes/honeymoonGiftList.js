@@ -14,7 +14,7 @@ module.exports = (app, express) => {
 
         .put(wrap(function* updateHoneymoonGiftList(req, res) {
             req.checkBody('content').notEmpty();
-            req.sanitizeBody('showOfflinePaymentMessage').toBoolean();
+            req.sanitizeBody('showPaymentMessage').toBoolean();
             req.sanitizeBody('showDisclaimerMessage').toBoolean();
 
             const errors = req.validationErrors();
@@ -28,8 +28,8 @@ module.exports = (app, express) => {
             const weddingProfile = yield WeddingProfile.findOne({});
 
             weddingProfile.honeymoonGiftList.content = req.body.content;
-            weddingProfile.honeymoonGiftList.showOfflinePaymentMessage = req.body.showOfflinePaymentMessage;
-            weddingProfile.honeymoonGiftList.offlinePaymentMessage = req.body.offlinePaymentMessage;
+            weddingProfile.honeymoonGiftList.showPaymentMessage = req.body.showPaymentMessage;
+            weddingProfile.honeymoonGiftList.paymentMessage = req.body.paymentMessage;
             weddingProfile.honeymoonGiftList.showDisclaimerMessage = req.body.showDisclaimerMessage;
             weddingProfile.honeymoonGiftList.disclaimerMessage = req.body.disclaimerMessage;
 

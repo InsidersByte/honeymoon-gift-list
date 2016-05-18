@@ -16,6 +16,7 @@ export default class GiftSetRow extends React.Component {
             total: React.PropTypes.number.isRequired,
             paid: React.PropTypes.bool.isRequired,
             detailsSent: React.PropTypes.bool.isRequired,
+            paymentMethod: React.PropTypes.string.isRequired,
         }).isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onMarkAsPaid: React.PropTypes.func.isRequired,
@@ -53,6 +54,7 @@ export default class GiftSetRow extends React.Component {
                 <th>{this.props.giftSet.giver.email}</th>
                 <th>{this.props.giftSet.giver.phoneNumber}</th>
                 <th>{this.props.giftSet.total}</th>
+                <th>{this.props.giftSet.paymentMethod}</th>
                 <th>{createdAtFormatted}</th>
                 <th>{this.props.giftSet.paid ? 'Yes' : 'No'}</th>
                 <th>

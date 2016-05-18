@@ -78,7 +78,7 @@ export default function GiverDetailsForm(props) {
                     checked={props.giver.paymentMethod === PAYMENT_METHODS.PAYPAL}
                     onChange={props.onChange}
                 >
-                    Paypal
+                    PayPal
                 </Radio>
 
                 <Radio

@@ -3,14 +3,12 @@ html
     body
         h1 Thank you very much for your gift!
 
+        p Your chosen payment method was #{giftSet.paymentMethod}.
+
         if giftSet.paymentMethod === PAYMENT_METHODS.PAYPAL
-            p Your chosen payment method was by Paypal.
             p Here is the link #{paypalLink}.
-        else if giftSet.paymentMethod === PAYMENT_METHODS.BANK_TRANSFER
-            p Your chosen payment method was by Bank Transfer.
-            p If you do change you mind and want to pay with Paypal, here is the link #{paypalLink}.
         else
-            p Your chosen payment method is not supported??
+            p If you do change you mind and want to pay with PayPal, here is the link #{paypalLink}.
 
         table(style="text-align: left;")
             thead
