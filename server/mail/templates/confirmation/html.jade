@@ -23,6 +23,21 @@ html
                                                 else
                                                     p If you do change you mind and want to pay with PayPal, here is the link #{paypalLink}.
 
+                                                table.breakdown
+                                                    thead
+                                                        tr
+                                                            th Name
+                                                            th Price (£)
+                                                            th Quantity
+                                                            th Total (£)
+                                                    tbody
+                                                        each gift in giftSet.gifts
+                                                            tr
+                                                                td #{gift.honeymoonGiftListItem.name}
+                                                                td #{gift.price}
+                                                                td #{gift.quantity}
+                                                                td #{gift.total}
+
                                                 p
                                                     strong Total £#{giftSet.total}
 
