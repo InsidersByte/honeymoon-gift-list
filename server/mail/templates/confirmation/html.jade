@@ -1,5 +1,7 @@
 doctype html
-html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
     body(bgcolor='#ffffff', topmargin='0' leftmargin='0', marginheight='0', marginwidth='0')
         table(width='100%' cellpadding='0', cellspacing='0', border='0' bgcolor='#ffffff')
             tr
@@ -16,12 +18,13 @@ html
                                                 p
                                                     strong Thank you very much for your gift!
 
-                                                p Your chosen payment method was #{giftSet.paymentMethod}.
+                                                p Your chosen payment method was #{giftSet.paymentMethod}
 
                                                 if giftSet.paymentMethod === PAYMENT_METHODS.PAYPAL
-                                                    p Here is the link #{paypalLink}.
+                                                    p
+                                                        a(href=paypalLink) Click here to pay with PayPal.Me
                                                 else
-                                                    p If you do change you mind and want to pay with PayPal, here is the link #{paypalLink}.
+                                                    p If you do change you mind and want to pay with PayPal, then #[a(href=paypalLink) click here to pay with PayPal.Me]
 
                                                 table.breakdown
                                                     thead
@@ -45,7 +48,7 @@ html
 
                                                 //- END OF EMAIL CONTENT
                                 div.container
-                                    table.footer(width="100%" border="0" cellspacing="0" cellpadding="0")
+                                    table.footer(width='100%' border='0' cellspacing='0' cellpadding='0')
                                         tr
                                             td.footer-cell(align='right')
                                                 | Sent by Our Wedding Heroes
