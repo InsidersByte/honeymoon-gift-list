@@ -85,12 +85,9 @@ module.exports = (app, express, config) => {
             const users = yield User.find({}, 'username');
             const userEmails = users.map(user => user.username);
 
-            yield mailer
-                .send({
-                    to: userEmails,
-                    subject: 'Woop we just got a gift!',
-                    text: `${giver.forename} ${giver.surname} has just confirmed a gift set worth £${giftSet.total}!`,
-                });
+            console.log(giver);
+
+            yield mailer.send({ to: userEmails, subject: 'Woop we just got a gift!', giver, giftSet }, 'adminConfirmation');
 
             giftSet.emailSent = true;
 

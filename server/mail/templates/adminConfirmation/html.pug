@@ -1,0 +1,28 @@
+extends ../../layout.pug
+
+block content
+    p
+        strong Woop we just got a gift!
+
+    p
+        | #{giver.forename} #{giver.surname} has just confirmed a gift set worth £#{giftSet.total}!
+
+    p Their chosen payment method was #{giftSet.paymentMethod}
+
+    table.breakdown
+        thead
+            tr
+                th.text-column Name
+                th.numeric-column Price (£)
+                th.numeric-column Quantity
+                th.numeric-column Total (£)
+        tbody
+            each gift in giftSet.gifts
+                tr
+                    td.text-column #{gift.honeymoonGiftListItem.name}
+                    td.numeric-column #{gift.price}
+                    td.numeric-column #{gift.quantity}
+                    td.numeric-column #{gift.total}
+
+    p
+        strong Total £#{giftSet.total}
