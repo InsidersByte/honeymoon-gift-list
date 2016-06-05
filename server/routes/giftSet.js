@@ -70,7 +70,7 @@ module.exports = (app, express) => {
         .route('/:giftSetId/paid')
 
         .put(wrap(function* markGiftSetAsPaid(req, res) {
-            req.checkParams('id').equals(req.params.id);
+            req.checkParams('giftSetId').equals(req.body._id); // eslint-disable-line no-underscore-dangle
 
             const errors = req.validationErrors();
 
@@ -105,7 +105,7 @@ module.exports = (app, express) => {
         .route('/:giftSetId/detailsSent')
 
         .put(wrap(function* markGiftSetAsDetailsSent(req, res) {
-            req.checkParams('id').equals(req.params.id);
+            req.checkParams('giftSetId').equals(req.body._id); // eslint-disable-line no-underscore-dangle
 
             const errors = req.validationErrors();
 
