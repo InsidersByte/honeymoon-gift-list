@@ -1,12 +1,12 @@
-doctype html
-html
-    body
-        h1 Hello!
+extends ../../layout.pug
 
-        p A request has been made to reset your password.
+block content
+    h1 Hello!
 
-        p Please follow the link below to reset your password:
+    p A request has been made to reset your password.
 
-        a(href='#{resetUrl}') Click here to reset your password
+    p Please follow the link below to reset your password:
 
-        p Our Wedding Heroes
+    a(href='#{resetUrl}') Click here to reset your password
+
+    p Our Wedding Heroes
