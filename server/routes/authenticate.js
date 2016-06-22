@@ -20,9 +20,10 @@ module.exports = (app, express, config) => {
                 .send(errors);
         }
 
+        // mongoose constrains user.name toLowerCase()
         const user = yield User
             .findOne({
-                username: req.body.username,
+                username: req.body.username.toLowerCase(),
             })
             .select('name username password salt')
             .exec();

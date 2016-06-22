@@ -100,6 +100,7 @@
     "why-did-you-update": "0.0.8"
   },
   "engines": {
-    "node": "6.2.0"
+    "node": "6.2.0",
+    "npm": "3.9.3"
   }
 }
