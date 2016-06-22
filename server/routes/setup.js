@@ -28,6 +28,7 @@ module.exports = (app, express) => {
 
             const user = new User();
 
+            // mongoose UserSchema calls .toLowerCase() on user.name
             user.name = req.body.name;
             user.username = req.body.username;
             user.password = req.body.password;
