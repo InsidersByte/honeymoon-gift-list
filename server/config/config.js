@@ -1,7 +1,7 @@
 module.exports = {
     url: process.env.URL || 'http://localhost:8080',
     port: process.env.PORT || 8080,
-    database: process.env.DATABASE_URL || 'mongodb://localhost:27017/macnlisa',
+    database: process.env.DATABASE_URL || 'mongodb://localhost:27017/our-wedding-heroes',
     secret: process.env.SECRET || 'ilovetheideaofmywedding',
     siteTitle: process.env.SITE_TITLE || 'Our Wedding',
     paypalMeUsername: process.env.PAYPAL_ME_USERNAME,

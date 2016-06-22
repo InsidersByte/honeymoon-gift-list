@@ -24,8 +24,6 @@ module.exports = co.wrap(function* initialise() {
         aboutOurHoneymoon: comingSoonText,
         honeymoonGiftList: {
             content: comingSoonText,
-            showPaymentMessage: comingSoonText,
-            paymentMessage: false,
             showOfflinePaymentMessage: false,
             offlinePaymentMessage: comingSoonText,
             showDisclaimerMessage: false,
