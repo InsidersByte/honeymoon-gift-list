@@ -1,6 +1,6 @@
-const GiftSet = require('../models/giftSet');
-const User = require('../models/user');
-const wrap = require('../utilities/wrap');
+const GiftSet = require('../../models/giftSet');
+const User = require('../../models/user');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();

@@ -1,5 +1,5 @@
-const WeddingProfile = require('../models/weddingProfile');
-const wrap = require('../utilities/wrap');
+const WeddingProfile = require('../../models/weddingProfile');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -7,13 +7,13 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(wrap(function* getLocalFlavour(req, res) {
+        .get(wrap(function* getAboutOurDay(req, res) {
             const weddingProfile = yield WeddingProfile.findOne({});
-            return res.json(weddingProfile.localFlavour);
+            return res.json(weddingProfile.aboutOurDay);
         }))
 
-        .put(wrap(function* updateLocalFlavour(req, res) {
-            req.checkBody('localFlavour').notEmpty();
+        .put(wrap(function* updateAboutOurDay(req, res) {
+            req.checkBody('aboutOurDay').notEmpty();
 
             const errors = req.validationErrors();
 
@@ -25,11 +25,11 @@ module.exports = (app, express) => {
 
             const weddingProfile = yield WeddingProfile.findOne({});
 
-            weddingProfile.localFlavour = req.body.localFlavour;
+            weddingProfile.aboutOurDay = req.body.aboutOurDay;
 
             yield weddingProfile.save();
 
-            return res.json(weddingProfile.localFlavour);
+            return res.json(weddingProfile.aboutOurDay);
         }));
 
     return router;

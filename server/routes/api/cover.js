@@ -1,5 +1,5 @@
-const WeddingProfile = require('../models/weddingProfile');
-const wrap = require('../utilities/wrap');
+const WeddingProfile = require('../../models/weddingProfile');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();

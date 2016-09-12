@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const wrap = require('../utilities/wrap');
+const User = require('../../models/user');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -101,7 +101,19 @@ module.exports = (app, express) => {
         .route('/:userId')
 
         .delete(wrap(function* deleteUser(req, res) {
-            yield User.remove({ _id: req.params.userId });
+            const user = yield User.findById(req.params.userId);
+
+            if (!user) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            if (user.username === req.user.username) {
+                return res
+                    .status(400)
+                    .json({ message: 'You cannot delete yourself!' });
+            }
 
             return res
                 .status(204)

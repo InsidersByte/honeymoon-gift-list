@@ -1,5 +1,5 @@
-const WeddingProfile = require('../models/weddingProfile');
-const wrap = require('../utilities/wrap');
+const WeddingProfile = require('../../models/weddingProfile');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -7,13 +7,13 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(wrap(function* getWeddingProfile(req, res) {
+        .get(wrap(function* getOnTheDay(req, res) {
             const weddingProfile = yield WeddingProfile.findOne({});
-            return res.json(weddingProfile.aboutUs);
+            return res.json(weddingProfile.onTheDay);
         }))
 
-        .put(wrap(function* getWeddingProfile(req, res) {
-            req.checkBody('aboutUs').notEmpty();
+        .put(wrap(function* updateOnTheDay(req, res) {
+            req.checkBody('onTheDay').notEmpty();
 
             const errors = req.validationErrors();
 
@@ -25,11 +25,11 @@ module.exports = (app, express) => {
 
             const weddingProfile = yield WeddingProfile.findOne({});
 
-            weddingProfile.aboutUs = req.body.aboutUs;
+            weddingProfile.onTheDay = req.body.onTheDay;
 
             yield weddingProfile.save();
 
-            return res.json(weddingProfile.aboutUs);
+            return res.json(weddingProfile.onTheDay);
         }));
 
     return router;

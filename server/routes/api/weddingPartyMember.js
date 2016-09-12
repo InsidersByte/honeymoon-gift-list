@@ -1,7 +1,7 @@
-const WeddingProfile = require('../models/weddingProfile');
-const wrap = require('../utilities/wrap');
-const { integer } = require('../../lib/random');
-const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
+const WeddingProfile = require('../../models/weddingProfile');
+const wrap = require('../../utilities/wrap');
+const { integer } = require('../../../lib/random/index');
+const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants/index');
 
 module.exports = (app, express) => {
     const router = new express.Router();
