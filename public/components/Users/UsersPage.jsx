@@ -3,20 +3,28 @@ import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import NotificationActions from '../../actions/NotificationActions';
 import UserActions from '../../actions/UserActions';
 import UserStore from '../../stores/UserStore';
+import LoginStore from '../../stores/LoginStore';
 import UserTable from './UserTable';
 import User from './User';
 
 export default class Users extends React.Component {
-    state = { ...UserStore.getState(), showModal: false };
+    state = { ...UserStore.getState(), showModal: false, loggedInUser: LoginStore.getState().user };
 
     componentDidMount() {
         UserStore.listen(this.onStoreChange);
+        LoginStore.listen(this.onLoginStoreChange);
         UserActions.query.defer();
     }
 
     componentWillUnmount() {
         UserStore.unlisten(this.onStoreChange);
+        LoginStore.unlisten(this.onLoginStoreChange);
     }
+
+    onLoginStoreChange = (state) => {
+        const { user } = state;
+        this.setState({ loggedInUser: user });
+    };
 
     onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
@@ -66,6 +74,8 @@ export default class Users extends React.Component {
     };
 
     render() {
+        const { users, user, showModal, saving, loggedInUser } = this.state;
+
         return (
             <div>
                 <Jumbotron>
@@ -73,16 +83,16 @@ export default class Users extends React.Component {
                         <Button bsStyle="success" bsSize="small" onClick={this.add}><Glyphicon glyph="plus" /></Button>
                     </h1>
 
-                    <UserTable users={this.state.users} onEdit={this.open} onDelete={this.delete} />
+                    <UserTable users={users} loggedInUser={loggedInUser} onDelete={this.delete} />
                 </Jumbotron>
 
                 <User
-                    user={this.state.user}
-                    show={this.state.showModal}
+                    user={user}
+                    show={showModal}
                     onHide={this.close}
                     onSubmit={this.save}
                     onChange={this.setUserState}
-                    saving={this.state.saving}
+                    saving={saving}
                 />
             </div>
         );
