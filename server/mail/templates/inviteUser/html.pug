@@ -1,0 +1,16 @@
+extends ../../layout.pug
+
+block content
+    h1 Hello!
+
+    p We are using Our Wedding Heroes. #{inviter.name} has invited you to join, Please click on the link below to activate your account.
+
+    p
+        a(href=signUpUrl) Click here to activate your account
+
+    p
+        | If you have trouble activating your account, you can reach out to #{inviter.name} on&nbsp;
+        a(href='mailto:' + inviter.username) #{inviter.username}
+        |  for assistance.
+
+    p Have fun, and good luck!

@@ -1,7 +1,7 @@
+const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
-const uuid = require('uuid');
 const Mailer = require('../../mail/index');
 
 const mailer = new Mailer();

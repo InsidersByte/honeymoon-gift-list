@@ -1,5 +1,10 @@
 const express = require('express');
+const values = require('object.values');
 const environmentConstants = require('./constants/environment');
+
+if (!Object.values) {
+    values.shim();
+}
 
 const environment = process.env.NODE_ENV || environmentConstants.DEVELOPMENT;
 

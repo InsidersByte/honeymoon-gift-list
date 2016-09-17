@@ -46,6 +46,7 @@
     "moment": "2.15.0",
     "mongoose": "4.6.0",
     "nodemailer": "2.6.0",
+    "object.values": "1.0.3",
     "pug": "2.0.0-beta6",
     "react": "15.3.1",
     "react-addons-update": "15.3.1",

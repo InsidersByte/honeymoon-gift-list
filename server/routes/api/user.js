@@ -1,5 +1,10 @@
+const uuid = require('uuid');
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
+const { STATUS } = require('../../constants/user');
+const Mailer = require('../../mail/index');
+
+const mailer = new Mailer();
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -15,7 +20,6 @@ module.exports = (app, express) => {
         .post(wrap(function* createUser(req, res) {
             req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
-            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
@@ -25,21 +29,66 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const user = new User();
+            let user;
+            const existingUser = yield User.findOne({ username: req.body.username.toLowerCase() });
 
-            // mongoose UserSchema calls .toLowerCase() on user.name
-            user.name = req.body.name;
-            user.username = req.body.username;
-            user.password = req.body.password;
-
-            try {
-                yield user.save();
-            } catch (error) {
-                if (error.code === 11000) {
+            if (existingUser) {
+                if (existingUser.status !== STATUS.INVITED && existingUser.status !== STATUS.INVITE_PENDING) {
                     return res
                         .status(400)
-                        .json({ success: false, message: 'A user with that username already exists.' });
+                        .json({ message: 'This user has already registered.' });
                 }
+
+                user = existingUser;
+            } else {
+                user = new User();
+
+                // mongoose UserSchema calls .toLowerCase() on user.name
+                user.name = req.body.name;
+                user.username = req.body.username;
+                user.password = uuid.v4;
+                user.status = STATUS.INVITED;
+
+                try {
+                    yield user.save();
+                } catch (error) {
+                    if (error.code === 11000) {
+                        return res
+                            .status(400)
+                            .json({ message: 'A user with that username already exists.' });
+                    }
+
+                    throw error;
+                }
+            }
+
+            try {
+                user.resetPasswordToken = uuid.v4();
+                user.resetPasswordExpires = Date.now() + 86400000; // expires in 24 hours
+
+                yield user.save();
+
+                const { user: { name } } = req;
+
+                yield mailer.send(
+                    {
+                        to: user.username,
+                        subject: `${name} has invited you to join Our Wedding Heroes`,
+                        signUpUrl: `http://${req.headers.host}/admin/signup/${user.resetPasswordToken}`,
+                        inviter: req.user,
+                        invitee: user,
+                    },
+                    'inviteUser'
+                );
+            } catch (error) {
+                user.status = STATUS.INVITE_PENDING;
+                yield user.save();
+                throw error;
+            }
+
+            if (user.status === STATUS.INVITE_PENDING) {
+                user.status = STATUS.INVITED;
+                yield user.save();
             }
 
             return res
@@ -92,9 +141,7 @@ module.exports = (app, express) => {
 
             yield user.save();
 
-            return res.json({
-                message: 'Password Changed Successfully!',
-            });
+            return res.json({ message: 'Password Changed Successfully!' });
         }));
 
     router

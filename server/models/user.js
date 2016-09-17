@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const encryption = require('../utilities/encryption');
+const { STATUS } = require('../constants/user');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +12,7 @@ const UserSchema = new Schema({
     lastLogin: Date,
     resetPasswordToken: { type: String, select: false },
     resetPasswordExpires: { type: Date, select: false },
+    status: { type: String, enum: Object.values(STATUS), required: true },
 });
 
 UserSchema.pre('save', function preSave(next) {

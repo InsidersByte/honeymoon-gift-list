@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
+const { STATUS } = require('../../constants/user');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -32,6 +33,7 @@ module.exports = (app, express) => {
             user.name = req.body.name;
             user.username = req.body.username;
             user.password = req.body.password;
+            user.status = STATUS.ACTIVE;
 
             try {
                 yield user.save();

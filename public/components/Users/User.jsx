@@ -7,8 +7,6 @@ export default class User extends React.Component {
         user: React.PropTypes.shape({
             name: React.PropTypes.string.isRequired,
             username: React.PropTypes.string.isRequired,
-            password: React.PropTypes.string.isRequired,
-            confirmPassword: React.PropTypes.string.isRequired,
         }).isRequired,
         show: React.PropTypes.bool.isRequired,
         onHide: React.PropTypes.func.isRequired,
@@ -50,30 +48,6 @@ export default class User extends React.Component {
                                 type="email"
                                 placeholder="Enter username"
                                 value={this.props.user.username}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
-                            <ControlLabel>Password</ControlLabel>
-                            <FormControl
-                                name="password"
-                                type="password"
-                                placeholder="Enter password"
-                                value={this.props.user.password}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
-                            <ControlLabel>Confirm Password</ControlLabel>
-                            <FormControl
-                                name="confirmPassword"
-                                type="password"
-                                placeholder="Enter confirm password"
-                                value={this.props.user.confirmPassword}
                                 onChange={this.props.onChange}
                                 required
                             />
