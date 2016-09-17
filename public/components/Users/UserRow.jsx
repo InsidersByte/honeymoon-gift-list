@@ -7,6 +7,7 @@ export default class UserRow extends React.Component {
         user: React.PropTypes.shape({
             name: React.PropTypes.string.isRequired,
             username: React.PropTypes.string.isRequired,
+            status: React.PropTypes.string.isRequired,
         }).isRequired,
         loggedInUser: React.PropTypes.shape({
             username: React.PropTypes.string.isRequired,
@@ -25,6 +26,7 @@ export default class UserRow extends React.Component {
             <tr>
                 <th>{this.props.user.name}</th>
                 <th>{this.props.user.username}</th>
+                <th style={{ textTransform: 'capitalize' }}>{this.props.user.status}</th>
                 <th>
                     { deletable &&
                         <Button

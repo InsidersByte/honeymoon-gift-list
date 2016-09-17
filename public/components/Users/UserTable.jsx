@@ -9,6 +9,7 @@ export default function UserTable({ users, loggedInUser, onDelete }) {
                 <tr>
                     <th>Name</th>
                     <th>Username</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>

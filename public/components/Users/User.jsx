@@ -55,7 +55,7 @@ export default class User extends React.Component {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button bsStyle="primary" type="submit">Create</Button>
+                        <Button bsStyle="primary" type="submit">Invite</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Form>
