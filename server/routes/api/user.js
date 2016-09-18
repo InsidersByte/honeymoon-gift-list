@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
 const { STATUS } = require('../../constants/user');
 const Mailer = require('../../mail/index');
+const { ONE_DAY_MS } = require('../../constants');
 
 const mailer = new Mailer();
 
@@ -18,7 +19,6 @@ module.exports = (app, express) => {
         }))
 
         .post(wrap(function* createUser(req, res) {
-            req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
 
             const errors = req.validationErrors();
@@ -44,7 +44,6 @@ module.exports = (app, express) => {
                 user = new User();
 
                 // mongoose UserSchema calls .toLowerCase() on user.name
-                user.name = req.body.name;
                 user.username = req.body.username;
                 user.password = uuid.v4;
                 user.status = STATUS.INVITED;
@@ -64,7 +63,7 @@ module.exports = (app, express) => {
 
             try {
                 user.resetPasswordToken = uuid.v4();
-                user.resetPasswordExpires = Date.now() + 86400000; // expires in 24 hours
+                user.resetPasswordExpires = Date.now() + (ONE_DAY_MS * 14);
 
                 yield user.save();
 
@@ -161,6 +160,8 @@ module.exports = (app, express) => {
                     .status(400)
                     .json({ message: 'You cannot delete yourself!' });
             }
+
+            yield user.remove();
 
             return res
                 .status(204)

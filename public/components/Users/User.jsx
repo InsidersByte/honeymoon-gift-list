@@ -5,7 +5,6 @@ import Form from '../common/Form';
 export default class User extends React.Component {
     static propTypes = {
         user: React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired,
             username: React.PropTypes.string.isRequired,
         }).isRequired,
         show: React.PropTypes.bool.isRequired,
@@ -30,18 +29,6 @@ export default class User extends React.Component {
 
                     <Modal.Body>
                         <FormGroup>
-                            <ControlLabel>Name</ControlLabel>
-                            <FormControl
-                                name="name"
-                                type="text"
-                                placeholder="Enter name"
-                                value={this.props.user.name}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
                             <ControlLabel>Username</ControlLabel>
                             <FormControl
                                 name="username"
@@ -55,7 +42,7 @@ export default class User extends React.Component {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button bsStyle="primary" type="submit">Invite</Button>
+                        <Button bsStyle="primary" type="submit">Send Invitation Now</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Form>
