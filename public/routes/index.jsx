@@ -17,6 +17,7 @@ import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 import LoginPage from '../components/Login/LoginPage';
 import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
+import SignupPage from '../containers/SignUpPage';
 import Admin from '../components/Admin';
 import AuthenticatedLanding from '../components/AuthenticatedLanding';
 import CoverPage from '../components/Cover/CoverPage';
@@ -66,6 +67,7 @@ export default (
                 <Route path="login" component={LoginPage} />
                 <Route path="setup" component={SetupPage} />
                 <Route path="reset/:token" component={ResetPage} />
+                <Route path="signUp/:token" component={SignupPage} />
             </Route>
 
             <Route onEnter={requireAuth}>

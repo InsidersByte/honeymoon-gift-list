@@ -1,5 +1,6 @@
 const expressJwt = require('express-jwt');
 const setup = require('./setup');
+const signUp = require('./signUp');
 const authenticate = require('./authenticate');
 const weddingProfile = require('./weddingProfile');
 const gift = require('./gift');
@@ -22,6 +23,7 @@ module.exports = (app, express, config) => {
     const router = new express.Router();
 
     router.use('/setup', setup(app, express, config));
+    router.use('/signUp', signUp(app, express, config));
     router.use('/authenticate', authenticate(app, express, config));
     router.use('/weddingProfile', weddingProfile(app, express));
     router.use('/gift', gift(app, express, config));
