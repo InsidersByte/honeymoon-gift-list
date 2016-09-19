@@ -122,8 +122,7 @@ module.exports = (app, express, config) => {
 
         .put(wrap(function* resetPassword(req, res) {
             req.checkBody('token').equals(req.params.token);
-            req.checkBody('password').notEmpty();
-            req.checkBody('confirmPassword').equals(req.body.password);
+            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
