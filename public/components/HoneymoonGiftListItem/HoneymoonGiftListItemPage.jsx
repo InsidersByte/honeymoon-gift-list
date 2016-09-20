@@ -52,7 +52,6 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     };
 
     onDelete = (item) => {
-        // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift item?')) {
             return;
         }

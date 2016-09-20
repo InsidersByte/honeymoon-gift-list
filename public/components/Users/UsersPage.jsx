@@ -56,7 +56,6 @@ export default class Users extends React.Component {
     };
 
     delete = (user) => {
-        // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this user?')) {
             return;
         }

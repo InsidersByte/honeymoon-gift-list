@@ -15,7 +15,6 @@ import './index.styl';
 const jwt = localStorage.getItem('jwt');
 
 if (jwt !== null) {
-    // TODO: maybe use final store here? http://survivejs.com/webpack_react/react_and_flux/
     const user = jwtDecode(jwt);
     const expiryDate = new Date(0);
     expiryDate.setUTCSeconds(user.exp);

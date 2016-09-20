@@ -45,7 +45,6 @@ export default class GiftSetPage extends React.Component {
     };
 
     markAsDetailsSent = () => {
-        // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
             return;
         }
@@ -55,7 +54,6 @@ export default class GiftSetPage extends React.Component {
     };
 
     markAsPaid = () => {
-        // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift as paid?')) {
             return;
         }
@@ -65,7 +63,6 @@ export default class GiftSetPage extends React.Component {
     };
 
     delete = () => {
-        // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift set?')) {
             return;
         }
