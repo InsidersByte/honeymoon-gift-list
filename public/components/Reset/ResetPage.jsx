@@ -4,6 +4,7 @@ import NotificationActions from '../../actions/NotificationActions';
 import passwordResetActions from '../../actions/PasswordResetActions';
 import passwordResetStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
+import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../../constants';
 
 export default class ResetPage extends React.Component {
     static propTypes = {
@@ -44,11 +45,16 @@ export default class ResetPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        if (this.state.user.password !== this.state.user.confirmPassword) {
-            NotificationActions.error({ message: 'Your new passwords must match' });
-        }
+        const { user } = this.state;
+        const { password, confirmPassword } = user;
 
-        passwordResetActions.update({ token: this.props.params.token, ...this.state.user });
+        if (password.length < MINIMUM_PASSWORD_LENGTH) {
+            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+        } else if (password !== confirmPassword) {
+            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+        } else {
+            passwordResetActions.update({ token: this.props.params.token, ...user });
+        }
     };
 
     render() {

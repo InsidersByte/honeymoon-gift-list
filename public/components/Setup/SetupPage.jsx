@@ -4,6 +4,7 @@ import setupActions from '../../actions/SetupActions';
 import setupStore from '../../stores/SetupStore';
 import NotificationActions from '../../actions/NotificationActions';
 import SetupForm from './SetupForm';
+import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../../constants';
 
 export default class SetupPage extends React.Component {
     state = {
@@ -38,12 +39,15 @@ export default class SetupPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        if (this.state.user.password !== this.state.user.confirmPassword) {
-            NotificationActions.error({ message: 'Your new passwords must match' });
-            return;
-        }
+        const { user: { password, confirmPassword } } = this.state;
 
-        setupActions.create(this.state);
+        if (password.length < MINIMUM_PASSWORD_LENGTH) {
+            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+        } else if (password !== confirmPassword) {
+            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+        } else {
+            setupActions.create(this.state);
+        }
     };
 
     render() {
