@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const encryption = require('../utilities/encryption');
-const { STATUS } = require('../constants/user');
+const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../constants/user');
 
 const Schema = mongoose.Schema;
 
@@ -21,6 +21,11 @@ UserSchema.pre('save', function preSave(next) {
     // hash the password only if the password has been changed or user is new
     if (!self.isModified('password')) {
         return next();
+    }
+
+    if (self.password.length < MINIMUM_PASSWORD_LENGTH) {
+        const error = Error(MINIMUM_PASSWORD_MESSAGE);
+        return next(error);
     }
 
     self.salt = encryption.createSalt();
