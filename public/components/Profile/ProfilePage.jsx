@@ -5,6 +5,7 @@ import passwordStore from '../../stores/PasswordStore';
 import loginStore from '../../stores/LoginStore';
 import NotificationActions from '../../actions/NotificationActions';
 import ProfileForm from './ProfileForm';
+import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../../constants';
 
 export default class ProfilePage extends React.Component {
     state = {
@@ -37,12 +38,15 @@ export default class ProfilePage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        if (this.state.user.newPassword !== this.state.user.confirmPassword) {
-            NotificationActions.error({ message: 'Your new passwords must match!' });
-            return;
-        }
+        const { user: { newPassword, confirmPassword } } = this.state;
 
-        passwordActions.update(this.state.user);
+        if (newPassword.length < MINIMUM_PASSWORD_LENGTH) {
+            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+        } else if (newPassword !== confirmPassword) {
+            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+        } else {
+            passwordActions.update(this.state.user);
+        }
     };
 
     render() {

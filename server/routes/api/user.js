@@ -1,7 +1,7 @@
 const uuid = require('uuid');
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
-const { STATUS } = require('../../constants/user');
+const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 const Mailer = require('../../mail/index');
 const { ONE_DAY_MS } = require('../../constants');
 
@@ -101,7 +101,8 @@ module.exports = (app, express) => {
         .put(wrap(function* resetPassword(req, res) {
             req.checkBody('username').notEmpty();
             req.checkBody('currentPassword').notEmpty();
-            req.checkBody('newPassword').notEmpty().equals(req.body.confirmPassword);
+            req.checkBody('newPassword', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
+            req.checkBody('confirmPassword').equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
