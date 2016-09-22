@@ -1,6 +1,6 @@
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
-const { STATUS } = require('../../constants/user');
+const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -30,7 +30,8 @@ module.exports = (app, express) => {
 
         .put(wrap(function* updateUser(req, res) {
             req.checkBody('name').notEmpty();
-            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
+            req.checkBody('password', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
+            req.checkBody('confirmPassword').equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 

@@ -4,6 +4,7 @@ const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
 const Mailer = require('../../mail/index');
 const { ONE_DAY_MS } = require('../../constants');
+const { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 
 const mailer = new Mailer();
 
@@ -122,7 +123,8 @@ module.exports = (app, express, config) => {
 
         .put(wrap(function* resetPassword(req, res) {
             req.checkBody('token').equals(req.params.token);
-            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
+            req.checkBody('password', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
+            req.checkBody('confirmPassword').equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
