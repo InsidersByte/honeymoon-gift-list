@@ -12,6 +12,7 @@ class LoginStore {
         this.saving = false;
         this.user = null;
         this.jwt = null;
+        this.isLoggedIn = false;
     }
 
     login() {

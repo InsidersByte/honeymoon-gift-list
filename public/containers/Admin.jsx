@@ -1,30 +1,55 @@
-import React from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from 'react-router';
-import LoginActions from '../actions/LoginActions';
-import loginStore from '../stores/LoginStore';
-import * as routes from '../constants/routeConstants';
+/* @flow */
 
-export default class Admin extends React.Component {
+import React, { Component, PropTypes } from 'react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link, withRouter } from 'react-router';
+import connect from 'alt-utils/lib/connectToStores';
+import LoginActions from '../actions/LoginActions';
+import SetupActions from '../actions/SetupActions';
+import LoginStore from '../stores/LoginStore';
+import SetupStore from '../stores/SetupStore';
+import * as routes from '../constants/routeConstants';
+import Loader from '../components/common/Loader';
+
+@withRouter
+@connect
+export default class Admin extends Component {
     static propTypes = {
-        children: React.PropTypes.element.isRequired,
+        auth: PropTypes.shape({
+            isLoggedIn: PropTypes.bool.isRequired,
+            user: PropTypes.shape({
+                name: PropTypes.string,
+            }),
+        }).isRequired,
+        setup: PropTypes.shape({
+            loading: PropTypes.bool.isRequired,
+        }),
+        children: PropTypes.element.isRequired,
+        router: PropTypes.shape({}).isRequired,
     };
 
-    state = loginStore.getState();
+    static getStores = () => [LoginStore, SetupStore];
+    static getPropsFromStores = () => ({ auth: LoginStore.getState(), setup: SetupStore.getState() });
+
+    state = { ...LoginStore.getState(), ...SetupStore.getState() };
 
     componentDidMount() {
-        loginStore.listen(this.onStoreChange);
+        SetupActions.fetch();
     }
 
-    componentWillUnmount() {
-        loginStore.unlisten(this.onStoreChange);
+    componentWillReceiveProps({ setup: { setup: nextSetup } }: { setup: { setup: boolean } }) {
+        const { setup: { setup }, router } = this.props;
+
+        if (!nextSetup || setup === nextSetup) {
+            return;
+        }
+
+        if (!status) {
+            router.push(routes.SETUP_ROUTE);
+        }
     }
 
-    onStoreChange = (state) => {
-        this.setState(state);
-    };
-
-    logout(event) {
+    logout(event: SyntheticEvent) {
         event.preventDefault();
         LoginActions.logoutUser();
     }
@@ -32,9 +57,11 @@ export default class Admin extends React.Component {
     render() {
         let headerItems;
 
+        const { auth: { isLoggedIn, user }, setup: { loading } } = this.props;
+
         const viewSiteLink = <li><Link to={routes.HOME_ROUTE} target="_blank" rel="noopener noreferrer">View Site</Link></li>;
 
-        if (!this.state.isLoggedIn) {
+        if (!isLoggedIn) {
             headerItems = (
                 <Nav pullRight>
                     {viewSiteLink}
@@ -93,7 +120,7 @@ export default class Admin extends React.Component {
 
                     {viewSiteLink}
 
-                    <NavDropdown id="userProfile" title={this.state.user.name}>
+                    <NavDropdown id="userProfile" title={user.name}>
                         <li>
                             <Link to={routes.PROFILE_ROUTE}>Your Profile</Link>
                         </li>
@@ -106,7 +133,7 @@ export default class Admin extends React.Component {
         }
 
         return (
-            <div>
+            <Loader loading={loading}>
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -123,7 +150,7 @@ export default class Admin extends React.Component {
                 <div className="container">
                     {this.props.children}
                 </div>
-            </div>
+            </Loader>
         );
     }
 }

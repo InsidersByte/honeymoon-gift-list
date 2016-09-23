@@ -3,7 +3,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE } from '../constants/routeConstants';
-
 import loginStore from '../stores/LoginStore';
 
 import NoMatch from '../components/NoMatch';
@@ -19,8 +18,8 @@ import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 import LoginPage from '../components/Login/LoginPage';
 import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
-import SignupPage from '../containers/SignUpPage';
-import Admin from '../components/Admin';
+import SignUpPage from '../containers/SignUpPage';
+import Admin from '../containers/Admin';
 import AuthenticatedLanding from '../components/AuthenticatedLanding';
 import CoverPage from '../components/Cover/CoverPage';
 import AboutUsPage from '../components/AboutUs/AboutUsPage';
@@ -69,7 +68,7 @@ export default (
                 <Route path="login" component={LoginPage} />
                 <Route path="setup" component={SetupPage} />
                 <Route path="reset/:token" component={ResetPage} />
-                <Route path="signUp/:token" component={SignupPage} />
+                <Route path="signUp/:token" component={SignUpPage} />
             </Route>
 
             <Route onEnter={requireAuth}>
