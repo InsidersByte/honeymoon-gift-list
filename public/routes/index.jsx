@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import { LOGIN_ROUTE, ADMIN_ROUTE } from '../constants/routeConstants';
+import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
 import loginStore from '../stores/LoginStore';
+import SetupApi from '../api/SetupApi';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
@@ -39,6 +40,21 @@ import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPa
 import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
 
+function requireSetup(nextState, replace, callback) {
+    SetupApi
+        .get()
+        .then(({ status }) => {
+            if (!status) {
+                replace(SETUP_ROUTE);
+            }
+
+            callback();
+        })
+        .catch((error) => {
+            callback(error);
+        });
+}
+
 function requireAuth(nextState, replace) {
     const { isLoggedIn } = loginStore.getState();
 
@@ -62,35 +78,38 @@ export default (
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
-            <Route onEnter={ifLoggedInRedirectToAdmin}>
-                <Route path="login" component={LoginPage} />
-                <Route path="setup" component={SetupPage} />
-                <Route path="reset/:token" component={ResetPage} />
-                <Route path="signUp/:token" component={SignUpPage} />
-            </Route>
+            <Route path="setup" component={SetupPage} />
 
-            <Route onEnter={requireAuth}>
-                <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
-                <Route path="profile" component={ProfilePage} />
-                <Route path="cover" component={CoverPage} />
-                <Route path="aboutUs" component={AboutUsPage} />
-                <Route path="rsvp" component={RsvpPage} />
-                <Route path="aboutOurDay" component={AboutOurDayPage} />
-                <Route path="localFlavour" component={LocalFlavourPage} />
-                <Route path="onTheDay" component={OnTheDayPage} />
-                <Route path="weddingPlaylist" component={WeddingPlaylistPage} />
-                <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} />
-                <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />
-                <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
-                <Route path="users" component={UsersPage} />
-                <Route path="giftSet" component={GiftSetsPage} />
-                <Route path="giftSet/:giftSetId" component={GiftSetPage} />
-                <Route path="weddingPartyMember" component={WeddingPartyMembersPage} />
-                <Route path="weddingPartyMember/create" component={CreateWeddingPartyMemberPage} />
-                <Route path="weddingPartyMember/:id" component={UpdateWeddingPartyMemberPage} />
-            </Route>
+            <Route onEnter={requireSetup}>
+                <Route onEnter={ifLoggedInRedirectToAdmin}>
+                    <Route path="login" component={LoginPage} />
+                    <Route path="reset/:token" component={ResetPage} />
+                    <Route path="signUp/:token" component={SignUpPage} />
+                </Route>
 
-            <Route path="*" component={NoMatchAdmin} />
+                <Route onEnter={requireAuth}>
+                    <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
+                    <Route path="profile" component={ProfilePage} />
+                    <Route path="cover" component={CoverPage} />
+                    <Route path="aboutUs" component={AboutUsPage} />
+                    <Route path="rsvp" component={RsvpPage} />
+                    <Route path="aboutOurDay" component={AboutOurDayPage} />
+                    <Route path="localFlavour" component={LocalFlavourPage} />
+                    <Route path="onTheDay" component={OnTheDayPage} />
+                    <Route path="weddingPlaylist" component={WeddingPlaylistPage} />
+                    <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} />
+                    <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />
+                    <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
+                    <Route path="users" component={UsersPage} />
+                    <Route path="giftSet" component={GiftSetsPage} />
+                    <Route path="giftSet/:giftSetId" component={GiftSetPage} />
+                    <Route path="weddingPartyMember" component={WeddingPartyMembersPage} />
+                    <Route path="weddingPartyMember/create" component={CreateWeddingPartyMemberPage} />
+                    <Route path="weddingPartyMember/:id" component={UpdateWeddingPartyMemberPage} />
+
+                    <Route path="*" component={NoMatchAdmin} />
+                </Route>
+            </Route>
         </Route>
         <Route path="*" component={NoMatch} />
     </Route>

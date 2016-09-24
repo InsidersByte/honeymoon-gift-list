@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link, withRouter } from 'react-router';
+import { Link } from 'react-router';
 import connect from 'alt-utils/lib/connectToStores';
 import LoginActions from '../actions/LoginActions';
 import SetupActions from '../actions/SetupActions';
@@ -11,7 +11,6 @@ import SetupStore from '../stores/SetupStore';
 import * as routes from '../constants/routeConstants';
 import Loader from '../components/common/Loader';
 
-@withRouter
 @connect
 export default class Admin extends Component {
     static propTypes = {
@@ -25,7 +24,6 @@ export default class Admin extends Component {
             loading: PropTypes.bool.isRequired,
         }),
         children: PropTypes.element.isRequired,
-        router: PropTypes.shape({}).isRequired,
     };
 
     static getStores = () => [LoginStore, SetupStore];
@@ -35,20 +33,6 @@ export default class Admin extends Component {
 
     componentDidMount() {
         SetupActions.fetch();
-    }
-
-    componentWillReceiveProps({ setup: { setup: nextSetup } }: { setup: { setup?: { status: boolean } } }) {
-        const { setup: { setup }, router } = this.props;
-
-        if (!nextSetup || setup === nextSetup) {
-            return;
-        }
-
-        const { status } = nextSetup;
-
-        if (!status) {
-            router.push(routes.SETUP_ROUTE);
-        }
     }
 
     logout(event: SyntheticEvent) {
