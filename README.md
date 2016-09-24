@@ -10,7 +10,7 @@ A wedding website with a honeymoon gift list.
 
 ## Requirements
 
-* [NodeJS v6](https://nodejs.org/en/)
+* [Node.js v6](https://nodejs.org/en/)
 * [MongoDB v3](https://www.mongodb.org/downloads)
 
 ## Install
@@ -28,7 +28,7 @@ A wedding website with a honeymoon gift list.
     $ npm install
     ```
     
-3. **Make sure MongoDB is running**
+3. **Ensure MongoDB is running**
 
     ```bash
     $ lsof -iTCP:27017 -sTCP:LISTEN
@@ -37,11 +37,9 @@ A wedding website with a honeymoon gift list.
 4. **Start the server**
 
     ```bash
-    $ npm start
+    $ npm start-dev
     ```
-    
-    > run `npm run start:dev` to use nodemon
     
 5.  **Run the setup**
     
-    visit [http://localhost:8080/admin/setup](http://localhost:8080/admin/setup)
+    visit [http://localhost:8080/admin](http://localhost:8080/admin)
