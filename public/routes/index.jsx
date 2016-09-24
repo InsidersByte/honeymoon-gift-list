@@ -40,19 +40,32 @@ import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPa
 import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
 
-function requireSetup(nextState, replace, callback) {
+function checkSetup(callback, onSuccess) {
     SetupApi
         .get()
         .then(({ status }) => {
-            if (!status) {
-                replace(SETUP_ROUTE);
-            }
-
+            onSuccess({ status });
             callback();
         })
         .catch((error) => {
             callback(error);
         });
+}
+
+function requireNoSetup(nextState, replace, callback) {
+    checkSetup(callback, ({ status }) => {
+        if (status) {
+            replace(ADMIN_ROUTE);
+        }
+    });
+}
+
+function requireSetup(nextState, replace, callback) {
+    checkSetup(callback, ({ status }) => {
+        if (!status) {
+            replace(SETUP_ROUTE);
+        }
+    });
 }
 
 function requireAuth(nextState, replace) {
@@ -78,7 +91,7 @@ export default (
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
-            <Route path="setup" component={SetupPage} />
+            <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
             <Route onEnter={requireSetup}>
                 <Route onEnter={ifLoggedInRedirectToAdmin}>
