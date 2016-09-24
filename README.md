@@ -10,11 +10,10 @@ A wedding website with a honeymoon gift list.
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en/)
-    * Version 6.x
-* [MongoDB](https://www.mongodb.org/downloads)
+* [NodeJS v6](https://nodejs.org/en/)
+* [MongoDB v3](https://www.mongodb.org/downloads)
 
-## Setup
+## Install
 
 1.  **Clone the repo**
 
@@ -46,5 +45,3 @@ A wedding website with a honeymoon gift list.
 5.  **Run the setup**
     
     visit [http://localhost:8080/admin/setup](http://localhost:8080/admin/setup)
-    
-    > I am planning to redirect from [http://localhost:8080/admin](http://localhost:8080/admin) to [http://localhost:8080/admin/setup](http://localhost:8080/admin/setup) automatically if the setup has not been run yet, but this feature does not exist at the moment [#111](https://github.com/InsidersByte/our-wedding-heroes/issues/111).
