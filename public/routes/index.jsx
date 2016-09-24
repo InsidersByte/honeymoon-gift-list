@@ -62,7 +62,9 @@ export default (
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
-            <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
+            <Route>
+                <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
+            </Route>
 
             <Route onEnter={ifLoggedInRedirectToAdmin}>
                 <Route path="login" component={LoginPage} />

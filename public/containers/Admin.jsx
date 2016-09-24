@@ -37,12 +37,14 @@ export default class Admin extends Component {
         SetupActions.fetch();
     }
 
-    componentWillReceiveProps({ setup: { setup: nextSetup } }: { setup: { setup: boolean } }) {
+    componentWillReceiveProps({ setup: { setup: nextSetup } }: { setup: { setup?: { status: boolean } } }) {
         const { setup: { setup }, router } = this.props;
 
         if (!nextSetup || setup === nextSetup) {
             return;
         }
+
+        const { status } = nextSetup;
 
         if (!status) {
             router.push(routes.SETUP_ROUTE);
