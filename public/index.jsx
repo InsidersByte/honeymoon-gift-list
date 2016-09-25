@@ -5,10 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import jwtDecode from 'jwt-decode';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'animate.css/animate.css';
 import 'font-awesome/css/font-awesome.css';
-import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
 import history from './helpers/history';
 import routes from './routes';
 import alt from './helpers/alt';
@@ -34,9 +34,13 @@ if (jwt !== null) {
     }
 }
 
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 ReactDOM.render(
     <Router history={history}>
         {routes}
     </Router>,
-    document.getElementById('content')
+    document.getElementById('app')
 );

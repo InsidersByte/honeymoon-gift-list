@@ -9,7 +9,7 @@ import SetupApi from '../api/SetupApi';
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
 
-import App from '../components/App';
+import App from '../containers/App';
 
 import LandingPage from '../components/Landing/LandingPage';
 import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';

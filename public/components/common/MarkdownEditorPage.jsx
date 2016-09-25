@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
+import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
 import Form from '../common/Form';
 
 export default class MarkdownEditorPage extends React.Component {

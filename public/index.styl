@@ -1,16 +1,15 @@
-html
-:global(#content)
-    height 100%
-    width 100%
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
 
 body
-    font-family Quicksand, Helvetica Neue, Helvetica, Arial, sans-serif
+html
+:global(#app)
+    font 14px 'Roboto', sans-serif
     height 100%
+    margin 0
     width 100%
 
-@font-face
-    font-family Quicksand
-    src url('./fonts/Quicksand-Regular.ttf')
+*, :after, :before
+    box-sizing border-box
 
 :global(.markdown-editor p)
     font-size 14px
