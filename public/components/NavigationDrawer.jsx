@@ -63,7 +63,7 @@ export default function NavigationDrawer({ isAuthenticated, user, location, onCh
                     primaryTogglesNestedList
                     nestedItems={[
                         <ListItem primaryText="Your Profile" value={ROUTES.PROFILE_ROUTE} />,
-                        <ListItem value="#" primaryText="Logout" onClick={logout} />,
+                        <ListItem primaryText="Logout" onClick={logout} />,
                     ]}
                 />
             </SelectableList>

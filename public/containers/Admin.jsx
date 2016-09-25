@@ -13,15 +13,14 @@ const muiTheme = getMuiTheme();
 
 const styles = {
     root: {
-        height: '100%',
-        width: '100%',
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
     },
     container: {
         flex: 1,
         display: 'flex',
-        margin: 0,
+        margin: '0px',
     },
 };
 
@@ -45,18 +44,14 @@ export default class Admin extends Component {
     };
 
     handleTouchTapLeftIconButton = () => {
-        this.setState({
-            navDrawerOpen: !this.state.navDrawerOpen,
-        });
+        this.setState({ navDrawerOpen: !this.state.navDrawerOpen });
     };
 
     handleRequestChange = (open: boolean) => {
-        this.setState({
-            navDrawerOpen: open,
-        });
+        this.setState({ navDrawerOpen: open });
     };
 
-    handleChangeList = (event: SyntheticEvent, value: boolean) => {
+    handleChangeList = (event: SyntheticEvent, value: string) => {
         const { router } = this.props;
 
         router.push(value);
@@ -97,7 +92,9 @@ export default class Admin extends Component {
                     <div
                         style={Object.assign(styles.container, { margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px` })}
                     >
-                        {children}
+                        <div className="container">
+                            {children}
+                        </div>
                     </div>
                 </div>
             </MuiThemeProvider>
