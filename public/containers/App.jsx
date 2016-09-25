@@ -21,6 +21,7 @@ const styles = {
 export default class App extends React.Component {
     static propTypes = {
         children: React.PropTypes.element.isRequired,
+        notification: React.PropTypes.shape({}).isRequired,
     };
 
     static getStores = () => [NotificationStore];
