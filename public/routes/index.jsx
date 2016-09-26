@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
 import loginStore from '../stores/LoginStore';
 import SetupApi from '../api/SetupApi';
@@ -21,7 +21,6 @@ import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
-import AuthenticatedLanding from '../components/AuthenticatedLanding';
 import CoverPage from '../containers/CoverPage';
 import AboutUsPage from '../components/AboutUs/AboutUsPage';
 import RsvpPage from '../components/Rsvp/RsvpPage';
@@ -91,6 +90,7 @@ export default (
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
+            <IndexRedirect to="giftSet" />
             <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
             <Route onEnter={requireSetup}>
@@ -101,7 +101,6 @@ export default (
                 </Route>
 
                 <Route onEnter={requireAuth}>
-                    <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
                     <Route path="profile" component={ProfilePage} />
                     <Route path="cover" component={CoverPage} />
                     <Route path="aboutUs" component={AboutUsPage} />
