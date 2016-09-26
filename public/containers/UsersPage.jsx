@@ -2,12 +2,11 @@
 
 import React from 'react';
 import connect from 'alt-utils/lib/connectToStores';
-import NotificationActions from '../actions/NotificationActions';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
 import LoginStore from '../stores/LoginStore';
 import UserList from '../components/UserList';
-import User from '../components/Users/User';
+import User from '../components/UserDialog';
 
 type PropsType = {
     removing: boolean,
@@ -50,7 +49,7 @@ export default class Users extends React.Component {
     };
 
     props: PropsType;
-    state = { showModal: false, user: { ...initialUser } };
+    state = { open: false, user: { ...initialUser } };
 
     componentDidMount() {
         UserActions.query.defer();
@@ -74,12 +73,9 @@ export default class Users extends React.Component {
         return this.setState({ user });
     };
 
-    save = (user: Object) => {
-        if (user.password !== user.confirmPassword) {
-            NotificationActions.error({ message: 'Passwords must match!' });
-            return;
-        }
-
+    save = (event: SyntheticEvent) => {
+        event.preventDefault();
+        const { user } = this.state;
         UserActions.create({ user });
     };
 
@@ -92,16 +88,16 @@ export default class Users extends React.Component {
     };
 
     add = () => {
-        this.setState({ showModal: true, user: { ...initialUser } });
+        this.setState({ open: true, user: { ...initialUser } });
     };
 
     close = () => {
-        this.setState({ showModal: false });
+        this.setState({ open: false });
     };
 
     render() {
         const { activeUsers, invitedUsers, saving, loggedInUser } = this.props;
-        const { user, showModal } = this.state;
+        const { user, open } = this.state;
 
         return (
             <div>
@@ -115,7 +111,7 @@ export default class Users extends React.Component {
 
                 <User
                     user={user}
-                    show={showModal}
+                    open={open}
                     onHide={this.close}
                     onSubmit={this.save}
                     onChange={this.setUserState}
