@@ -52,7 +52,7 @@ export default class CoverPage extends React.Component {
     };
 
     onDateChange = (event: SyntheticEvent, date: Date) => {
-        const cover = Object.assign(this.state.cover, { weddingDate: date });
+        const cover = Object.assign({}, this.state.cover, { weddingDate: date });
         this.setState({ cover });
     };
 

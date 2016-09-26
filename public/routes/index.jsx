@@ -16,7 +16,7 @@ import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
 import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
-import LoginPage from '../components/Login/LoginPage';
+import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
