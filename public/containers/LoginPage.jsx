@@ -22,7 +22,7 @@ export default class Login extends React.Component {
         const loginStoreState = LoginStore.getState();
 
         return {
-            saving: passwordResetStoreState.saving || loginStoreState.saving
+            saving: passwordResetStoreState.saving || loginStoreState.saving,
         };
     };
 
