@@ -37,7 +37,7 @@ export default class ActiveUserListItem extends Component {
                     primaryText={name}
                     secondaryText={username}
                 />
-            )
+            );
         }
 
         return (
