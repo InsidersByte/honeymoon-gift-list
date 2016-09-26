@@ -36,6 +36,8 @@ const styles = {
     },
 };
 
+const DateTimeFormat = global.Intl.DateTimeFormat;
+
 export default function CoverForm({ loading, saving, onSubmit, onChange, onDateChange, cover }: PropsType) {
     const { title, imageUrl, weddingDate } = cover;
 
@@ -75,6 +77,8 @@ export default function CoverForm({ loading, saving, onSubmit, onChange, onDateC
                     <DatePicker
                         name="weddingDate"
                         hintText="Wedding Date"
+                        DateTimeFormat={DateTimeFormat}
+                        locale="en-GB"
                         value={weddingDate}
                         onChange={onDateChange}
                         fullWidth
