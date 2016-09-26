@@ -50,14 +50,13 @@ export default class Admin extends Component {
 
         router.push(value);
 
-        this.setState({
-            navDrawerOpen: false,
-        });
+        this.setState({ navDrawerOpen: false });
     };
 
-    logout(event: SyntheticEvent) {
+    logout = (event: SyntheticEvent) => {
         event.preventDefault();
         LoginActions.logoutUser();
+        this.setState({ navDrawerOpen: false });
     }
 
     render() {
