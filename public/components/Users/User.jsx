@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import Form from '../common/Form';
+import Form from '../Form';
 
 export default class User extends React.Component {
     static propTypes = {

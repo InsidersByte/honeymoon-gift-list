@@ -92,9 +92,7 @@ export default class Admin extends Component {
                     <div
                         style={Object.assign(styles.container, { margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px` })}
                     >
-                        <div className="container">
-                            {children}
-                        </div>
+                        {children}
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -1,9 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
-import { RaisedButton, DatePicker, TextField } from 'material-ui';
-import Form from './common/Form';
+import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, DatePicker, TextField } from 'material-ui';
+import ProgressButton from './ProgressButton';
+import Form from './Form';
 
 type PropsType = {
     loading: boolean,
@@ -18,44 +18,74 @@ type PropsType = {
     onSubmit: Function,
 };
 
+const styles = {
+    root: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    form: {
+        padding: '30px 50px',
+        marginBottom: 10,
+    },
+    input: {
+        margin: '6px 0',
+    },
+    button: {
+        marginTop: 12,
+    },
+};
+
 export default function CoverForm({ loading, saving, onSubmit, onChange, onDateChange, cover }: PropsType) {
     const { title, imageUrl, weddingDate } = cover;
 
     return (
-        <Jumbotron>
-            <h1>Cover</h1>
+        <div style={styles.root}>
+            <Paper>
+                <Toolbar>
+                    <ToolbarGroup>
+                        <ToolbarTitle text="Cover" />
+                    </ToolbarGroup>
+                </Toolbar>
 
-            <Form onSubmit={onSubmit} loading={loading} saving={saving}>
-                <TextField
-                    name="title"
-                    floatingLabelText="Title"
-                    value={title}
-                    onChange={onChange}
-                    required
-                    fullWidth
-                />
+                <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
+                    <TextField
+                        name="title"
+                        floatingLabelText="Title"
+                        value={title}
+                        onChange={onChange}
+                        fullWidth
+                        style={styles.input}
+                        disabled={saving}
+                        required
+                    />
 
-                <TextField
-                    name="imageUrl"
-                    type="url"
-                    floatingLabelText="Cover Image Url"
-                    value={imageUrl}
-                    onChange={onChange}
-                    required
-                    fullWidth
-                />
+                    <TextField
+                        name="imageUrl"
+                        type="url"
+                        floatingLabelText="Cover Image Url"
+                        value={imageUrl}
+                        onChange={onChange}
+                        fullWidth
+                        style={styles.input}
+                        disabled={saving}
+                        required
+                    />
 
-                <DatePicker
-                    name="weddingDate"
-                    hintText="Wedding Date"
-                    value={weddingDate}
-                    onChange={onDateChange}
-                    required
-                    fullWidth
-                />
+                    <DatePicker
+                        name="weddingDate"
+                        hintText="Wedding Date"
+                        value={weddingDate}
+                        onChange={onDateChange}
+                        fullWidth
+                        style={styles.input}
+                        disabled={saving}
+                        required
+                    />
 
-                <RaisedButton type="submit" label="Update" primary disabled={saving} />
-            </Form>
-        </Jumbotron>
+                    <ProgressButton saving={saving} label="Update" style={styles.button} />
+                </Form>
+            </Paper>
+        </div>
     );
 }

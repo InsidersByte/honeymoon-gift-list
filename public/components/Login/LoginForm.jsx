@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
 import css from './LoginForm.styl';
-import Form from '../common/Form';
+import Form from '../Form';
 
 export default function LoginForm(props) {
     return (

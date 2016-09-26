@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import Form from '../common/Form';
+import Form from '../Form';
 
 export default function ResetForm(props) {
     return (

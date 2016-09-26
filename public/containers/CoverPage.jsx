@@ -29,7 +29,6 @@ function cleanCover(cover) {
 export default class CoverPage extends React.Component {
     static getStores = () => [CoverStore];
     static getPropsFromStores = () => {
-        console.log('foo')
         const storeState = CoverStore.getState();
         const cover = cleanCover(storeState.cover);
         return Object.assign({}, storeState, { cover });

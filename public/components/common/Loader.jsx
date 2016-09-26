@@ -1,23 +1,20 @@
+/* @flow */
+
 import React from 'react';
 import ReactLoader from 'react-loader';
 
-export default function Loader(props) {
+type PropsType = {
+    loading: boolean,
+    className?: string,
+    children?: React$Element<any>,
+};
+
+export default function Loader(props: PropsType) {
+    const { loading = true, className, children } = props;
+
     return (
-        <ReactLoader {...props} loadedClassName={props.className} loaded={!props.loading}>
-            {props.children}
+        <ReactLoader {...props} loadedClassName={className} loaded={!loading}>
+            {children}
         </ReactLoader>
     );
 }
-
-Loader.propTypes = {
-    loading: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.oneOfType([
-        React.PropTypes.element,
-        React.PropTypes.arrayOf(React.PropTypes.element),
-    ]).isRequired,
-    className: React.PropTypes.string,
-};
-
-Loader.defaultProps = {
-    loading: true,
-};

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import Form from './common/Form';
+import Form from './Form';
 
 export default function SignUpForm({ user, saving, loading, onChange, onSubmit }) {
     const { username, name, password, confirmPassword } = user;
