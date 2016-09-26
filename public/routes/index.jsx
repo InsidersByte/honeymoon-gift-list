@@ -22,7 +22,7 @@ import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
 import AuthenticatedLanding from '../components/AuthenticatedLanding';
-import CoverPage from '../components/Cover/CoverPage';
+import CoverPage from '../containers/CoverPage';
 import AboutUsPage from '../components/AboutUs/AboutUsPage';
 import RsvpPage from '../components/Rsvp/RsvpPage';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage';

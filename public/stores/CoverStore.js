@@ -6,7 +6,7 @@ import { COVER as key } from '../constants/KeyConstants';
 const initialValue = {
     title: '',
     imageUrl: '',
-    weddingDate: '',
+    weddingDate: null,
 };
 
 class CoverStore extends BaseStore {
