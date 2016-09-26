@@ -19,11 +19,6 @@ type PropsType = {
 };
 
 const styles = {
-    root: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-    },
     form: {
         padding: '30px 50px',
         marginBottom: 10,
@@ -42,54 +37,52 @@ export default function CoverForm({ loading, saving, onSubmit, onChange, onDateC
     const { title, imageUrl, weddingDate } = cover;
 
     return (
-        <div style={styles.root}>
-            <Paper>
-                <Toolbar>
-                    <ToolbarGroup>
-                        <ToolbarTitle text="Cover" />
-                    </ToolbarGroup>
-                </Toolbar>
+        <Paper>
+            <Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text="Cover" />
+                </ToolbarGroup>
+            </Toolbar>
 
-                <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
-                    <TextField
-                        name="title"
-                        floatingLabelText="Title"
-                        value={title}
-                        onChange={onChange}
-                        fullWidth
-                        style={styles.input}
-                        disabled={saving}
-                        required
-                    />
+            <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
+                <TextField
+                    name="title"
+                    floatingLabelText="Title"
+                    value={title}
+                    onChange={onChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                    <TextField
-                        name="imageUrl"
-                        type="url"
-                        floatingLabelText="Cover Image Url"
-                        value={imageUrl}
-                        onChange={onChange}
-                        fullWidth
-                        style={styles.input}
-                        disabled={saving}
-                        required
-                    />
+                <TextField
+                    name="imageUrl"
+                    type="url"
+                    floatingLabelText="Cover Image Url"
+                    value={imageUrl}
+                    onChange={onChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                    <DatePicker
-                        name="weddingDate"
-                        hintText="Wedding Date"
-                        DateTimeFormat={DateTimeFormat}
-                        locale="en-GB"
-                        value={weddingDate}
-                        onChange={onDateChange}
-                        fullWidth
-                        style={styles.input}
-                        disabled={saving}
-                        required
-                    />
+                <DatePicker
+                    name="weddingDate"
+                    hintText="Wedding Date"
+                    DateTimeFormat={DateTimeFormat}
+                    locale="en-GB"
+                    value={weddingDate}
+                    onChange={onDateChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                    <ProgressButton saving={saving} label="Update" style={styles.button} />
-                </Form>
-            </Paper>
-        </div>
+                <ProgressButton saving={saving} label="Update" style={styles.button} />
+            </Form>
+        </Paper>
     );
 }

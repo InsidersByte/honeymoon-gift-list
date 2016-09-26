@@ -14,13 +14,10 @@ const styles = {
     root: {
         height: '100%',
         width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
     },
     container: {
-        flex: 1,
-        display: 'flex',
-        margin: '0',
+        height: '100%',
+        width: '100%',
     },
 };
 

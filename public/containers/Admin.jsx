@@ -12,15 +12,9 @@ import NavigationDrawer from '../components/NavigationDrawer';
 const muiTheme = getMuiTheme();
 
 const styles = {
-    root: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-    },
+    root: {},
     container: {
-        flex: 1,
-        display: 'flex',
-        margin: '0px',
+        margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`
     },
 };
 
@@ -89,9 +83,7 @@ export default class Admin extends Component {
                         isAuthenticated={isLoggedIn}
                     />
 
-                    <div
-                        style={Object.assign(styles.container, { margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px` })}
-                    >
+                    <div style={styles.container}>
                         {children}
                     </div>
                 </div>
