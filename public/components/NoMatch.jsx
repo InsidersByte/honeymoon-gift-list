@@ -1,15 +1,31 @@
+/* @flow */
+
 import React from 'react';
 import { Link } from 'react-router';
 import { HOME_ROUTE } from '../constants/routeConstants';
 
-import css from './NoMatch.styl';
+const styles = {
+    root: {
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        minHeight: '75%',
+    },
+    title: {
+        marginBottom: 15,
+    },
+    content: {
+        marginBottom: 20,
+    },
+};
 
 export default function NoMatch() {
     return (
-        <div className={css.root}>
-            <h1 className={css.title}>Page not found</h1>
+        <div style={styles.root}>
+            <h1 style={styles.title}>Page not found</h1>
 
-            <div className={css.content}>
+            <div style={styles.content}>
                 Woops! Sorry, there is nothing to see here.
             </div>
 
