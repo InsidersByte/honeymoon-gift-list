@@ -17,7 +17,7 @@ import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
 import LoginPage from '../containers/LoginPage';
-import ProfilePage from '../components/Profile/ProfilePage';
+import ProfilePage from '../containers/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';

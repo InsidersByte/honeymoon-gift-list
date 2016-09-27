@@ -5,7 +5,6 @@ const authenticate = require('./authenticate');
 const weddingProfile = require('./weddingProfile');
 const gift = require('./gift');
 const user = require('./user');
-const landing = require('./landing');
 const cover = require('./cover');
 const aboutUs = require('./aboutUs');
 const aboutOurDay = require('./aboutOurDay');
@@ -33,7 +32,6 @@ module.exports = (app, express, config) => {
     }));
 
     router.use('/user', user(app, express));
-    router.use('/landing', landing(app, express));
     router.use('/cover', cover(app, express));
     router.use('/aboutUs', aboutUs(app, express));
     router.use('/aboutOurDay', aboutOurDay(app, express));

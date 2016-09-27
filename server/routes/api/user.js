@@ -98,8 +98,7 @@ module.exports = (app, express) => {
     router
         .route('/password')
 
-        .put(wrap(function* resetPassword(req, res) {
-            req.checkBody('username').notEmpty();
+        .put(wrap(function* changePassword(req, res) {
             req.checkBody('currentPassword').notEmpty();
             req.checkBody('newPassword', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
             req.checkBody('confirmPassword').equals(req.body.confirmPassword);
@@ -112,14 +111,10 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            if (req.user.username !== req.body.username) {
-                return res.status(401).send();
-            }
+            const { user: { username } } = req;
 
             const user = yield User
-                .findOne({
-                    username: req.body.username,
-                })
+                .findOne({ username })
                 .select('name username password salt')
                 .exec();
 
