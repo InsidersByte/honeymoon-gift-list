@@ -144,9 +144,7 @@ export default class LandingPage extends React.Component {
 
                 <LandingSection title="Gift List" postContent={giftItemsElement}>
                     <div>
-                        <span className={css.content}>
-                            {this.state.weddingProfile.honeymoonGiftList.content}
-                        </span>
+                        <MarkdownRenderer markdown={this.state.weddingProfile.honeymoonGiftList.content} />
 
                         {this.renderPaymentMessage()}
 
