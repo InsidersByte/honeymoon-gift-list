@@ -4,8 +4,8 @@ import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
-import Form from '../components/Form';
-import ProgressButton from '../components/ProgressButton';
+import Form from './Form';
+import ProgressButton from './ProgressButton';
 
 type PropsType = {
     propKey: string,

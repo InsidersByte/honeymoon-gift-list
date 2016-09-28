@@ -47,7 +47,7 @@ export default class CoverPage extends React.Component {
     }
 
     onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
-        const cover = Object.assign(this.state.cover, { [name]: value });
+        const cover = Object.assign({}, this.state.cover, { [name]: value });
         this.setState({ cover });
     };
 

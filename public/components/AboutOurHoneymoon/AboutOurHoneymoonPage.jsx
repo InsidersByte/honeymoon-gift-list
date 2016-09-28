@@ -1,7 +1,7 @@
 import React from 'react';
 import AboutOurHoneymoonStore from '../../stores/AboutOurHoneymoonStore';
 import AboutOurHoneymoonActions from '../../actions/AboutOurHoneymoonActions';
-import MarkdownEditorPage from '../../containers/MarkdownEditorPage';
+import MarkdownEditorPage from '../MarkdownEditorPage';
 import { ABOUT_OUR_HONEYMOON as key } from '../../constants/KeyConstants';
 
 export default function AboutOurDayPage() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import LocalFlavourStore from '../../stores/LocalFlavourStore';
 import LocalFlavourActions from '../../actions/LocalFlavourActions';
-import MarkdownEditorPage from '../../containers/MarkdownEditorPage';
+import MarkdownEditorPage from '../MarkdownEditorPage';
 import { LOCAL_FLAVOUR as key } from '../../constants/KeyConstants';
 
 export default function AboutOurDayPage() {

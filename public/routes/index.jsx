@@ -30,7 +30,7 @@ import OnTheDayPage from '../components/OnTheDay/OnTheDayPage';
 import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
-import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage';
+import HoneymoonGiftListPage from '../containers/HoneymoonGiftListPage';
 import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';

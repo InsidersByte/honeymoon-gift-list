@@ -1,7 +1,7 @@
 import React from 'react';
 import AboutUsStore from '../../stores/AboutUsStore';
 import AboutUsActions from '../../actions/AboutUsActions';
-import MarkdownEditorPage from '../../containers/MarkdownEditorPage';
+import MarkdownEditorPage from '../MarkdownEditorPage';
 import { ABOUT_US as key } from '../../constants/KeyConstants';
 
 export default function AboutOurDayPage() {
