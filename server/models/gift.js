@@ -17,14 +17,14 @@ const GiftSchema = new Schema(
 
 GiftSchema.pre('remove', function preRemove(next) {
     const giftSetPromise = this.model('GiftSet').update(
-        { gifts: this._id }, // eslint-disable-line no-underscore-dangle
-        { $pull: { gifts: this._id } }, // eslint-disable-line no-underscore-dangle
+        { gifts: this.id },
+        { $pull: { gifts: this.id } },
         { multi: true }
     );
 
     const honeymoonGiftListItemPromise = this.model('HoneymoonGiftListItem').update(
-        { gifts: this._id }, // eslint-disable-line no-underscore-dangle
-        { $pull: { gifts: this._id } }, // eslint-disable-line no-underscore-dangle
+        { gifts: this.id },
+        { $pull: { gifts: this.id } },
         { multi: true }
     );
 

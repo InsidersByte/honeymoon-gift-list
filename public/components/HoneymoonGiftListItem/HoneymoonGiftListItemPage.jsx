@@ -39,15 +39,15 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     };
 
     onDrop = ({ id }) => {
-        const item = this.state.items.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        const item = this.state.items.find(o => o.id === id);
         HoneymoonGiftListItemActions.update({ item, id });
     };
 
     onSubmit = (item) => {
-        if (!item._id) { // eslint-disable-line no-underscore-dangle
+        if (!item.id) {
             HoneymoonGiftListItemActions.create({ item });
         } else {
-            HoneymoonGiftListItemActions.update({ item, id: item._id }); // eslint-disable-line no-underscore-dangle
+            HoneymoonGiftListItemActions.update({ item, id: item.id });
         }
     };
 
@@ -76,8 +76,8 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     render() {
         const itemList = this.state.items.map(item =>
             <SortableItem
-                key={item._id} // eslint-disable-line no-underscore-dangle
-                id={item._id} // eslint-disable-line no-underscore-dangle
+                key={item.id}
+                id={item.id}
                 onMove={HoneymoonGiftListItemActions.move}
                 onDrop={this.onDrop}
             >

@@ -7,7 +7,7 @@ import css from './GiftItem.styl';
 export default class GiftItem extends React.Component {
     static propTypes = {
         item: React.PropTypes.shape({
-            _id: React.PropTypes.string.isRequired,
+            id: React.PropTypes.string.isRequired,
             remaining: React.PropTypes.number.isRequired,
             price: React.PropTypes.number.isRequired,
             imageUrl: React.PropTypes.string.isRequired,
@@ -24,9 +24,9 @@ export default class GiftItem extends React.Component {
     };
 
     render() {
-        const { _id, remaining, price, imageUrl, name } = this.props.item; // eslint-disable-line no-underscore-dangle
+        const { id, remaining, price, imageUrl, name } = this.props.item;
 
-        const { quantity } = this.props.basketItems.get(_id) || { quantity: 0 };
+        const { quantity } = this.props.basketItems.get(id) || { quantity: 0 };
         const outOfStock = remaining - quantity <= 0;
 
         let button;

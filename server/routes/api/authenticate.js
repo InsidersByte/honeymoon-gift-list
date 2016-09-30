@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
-const User = require('../../models/user');
+const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const Mailer = require('../../mail/index');
 const { ONE_DAY_MS } = require('../../constants');
@@ -23,38 +23,30 @@ module.exports = (app, express, config) => {
                 .send(errors);
         }
 
-        // mongoose constrains user.email toLowerCase()
+        const { email, password } = req.body;
+
         const user = yield User
-            .findOne({
-                email: req.body.email.toLowerCase(),
-            })
-            .select('name email password salt')
-            .exec();
+            .forge({ email })
+            .fetch();
 
         if (!user) {
             return res
                 .status(400)
-                .json({
-                    success: false,
-                    message: 'Authentication failed.',
-                });
+                .json({ message: 'Authentication failed.' });
         }
 
-        const validPassword = user.comparePassword(req.body.password);
+        const validPassword = user.comparePassword(password);
 
         if (!validPassword) {
             return res
                 .status(400)
-                .json({
-                    success: false,
-                    message: 'Authentication failed.',
-                });
+                .json({ message: 'Authentication failed.' });
         }
 
         const token = jwt.sign(
             {
-                name: user.name,
-                email: user.email,
+                name: user.get('name'),
+                email: user.get('email'),
             },
             config.secret,
             {
@@ -62,14 +54,7 @@ module.exports = (app, express, config) => {
             }
         );
 
-        user.lastLogin = Date.now();
-        yield user.save();
-
-        return res.json({
-            success: true,
-            message: 'Enjoy your token!',
-            token,
-        });
+        return res.json({ token });
     }));
 
     router
@@ -86,36 +71,36 @@ module.exports = (app, express, config) => {
                     .send(errors);
             }
 
-            const user = yield User.findOne({
-                email: req.body.email,
-            });
+            const { email } = req.body;
+
+            const user = yield User
+                .forge({ email })
+                .fetch();
 
             if (!user) {
-                return res
-                    .status(404)
-                    .json({
-                        success: false,
-                        message: 'There is no user with that email address.',
-                    });
+                // Send 200 with reset password so that people can't guess the email address
+                return res.json({ message: `A email has been sent to ${email} with further instructions.` });
             }
 
-            user.resetPasswordToken = uuid.v4();
-            user.resetPasswordExpires = Date.now() + 86400000; // expires in 24 hours
+            const resetPasswordToken = uuid.v4();
+
+            user.set({
+                resetPasswordToken,
+                resetPasswordExpires: Date.now() + ONE_DAY_MS,
+            });
 
             yield user.save();
 
             yield mailer.send(
                 {
-                    to: user.email,
+                    to: email,
                     subject: 'Reset Password',
-                    resetUrl: `http://${req.headers.host}/admin/reset/${user.resetPasswordToken}`,
+                    resetUrl: `http://${req.headers.host}/admin/reset/${resetPasswordToken}`,
                 },
                 'resetPassword'
             );
 
-            return res.json({
-                message: `A email has been sent to ${user.email} with further instructions.`,
-            });
+            return res.json({ message: `A email has been sent to ${email} with further instructions.` });
         }));
 
     router
@@ -134,37 +119,36 @@ module.exports = (app, express, config) => {
                     .send(errors);
             }
 
-            const user = yield User.findOne({
-                resetPasswordToken: req.body.token,
-                resetPasswordExpires: { $gt: Date.now() },
-            });
+            const { token, password } = req.body;
+
+            const user = yield User
+                .forge({ resetPasswordToken: token })
+                .where('reset_password_expires', '>', Date.now())
+                .fetch();
 
             if (!user) {
                 return res
                     .status(400)
-                    .json({
-                        success: false,
-                        message: 'Password reset token is invalid or has expired.',
-                    });
+                    .json({ message: 'Password reset token is invalid or has expired.' });
             }
 
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
-            user.password = req.body.password;
+            user.set({
+                resetPasswordToken: null,
+                resetPasswordExpires: null,
+                password,
+            });
 
             yield user.save();
 
             yield mailer.send(
                 {
-                    to: user.email,
+                    to: user.get('email'),
                     subject: 'Your password has been changed',
                 },
                 'resetPasswordConfirmation'
             );
 
-            return res.json({
-                message: 'Password Reset Successfully!',
-            });
+            return res.json({ message: 'Password Reset Successfully!' });
         }));
 
     return router;

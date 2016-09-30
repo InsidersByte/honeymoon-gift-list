@@ -12,12 +12,12 @@ type PropsType = {
     removing: boolean,
     saving: boolean,
     activeUsers: Array<{
-        _id: string,
+        id: string,
         name: string,
         email: string,
     }>,
     invitedUsers: Array<{
-        _id: string,
+        id: string,
         email: string,
     }>,
     loggedInUser: {

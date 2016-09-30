@@ -10,7 +10,7 @@ export default function WeddingPartyMembers({ weddingPartyMembers }) {
                 weddingPartyMembers
                     .map(weddingPartyMember =>
                         <WeddingPartyMember
-                            key={weddingPartyMember._id} // eslint-disable-line no-underscore-dangle
+                            key={weddingPartyMember.id}
                             weddingPartyMember={weddingPartyMember}
                         />
                     )

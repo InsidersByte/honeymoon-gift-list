@@ -7,7 +7,7 @@ import Delete from 'material-ui/svg-icons/action/delete';
 
 type PropsType = {
     user: {
-        _id: string,
+        id: string,
         name: string,
         email: string,
     },
@@ -25,13 +25,13 @@ export default class ActiveUserListItem extends Component {
     };
 
     render() {
-        const { user: { _id, name, email }, loggedInUser } = this.props;
+        const { user: { id, name, email }, loggedInUser } = this.props;
         const deletable = email !== loggedInUser.email;
 
         if (deletable) {
             return (
                 <ListItem
-                    key={_id}
+                    key={id}
                     leftAvatar={<Avatar icon={<Person />} />}
                     rightIconButton={<IconButton onClick={this.onDelete}><Delete /></IconButton>}
                     primaryText={name}
@@ -42,7 +42,7 @@ export default class ActiveUserListItem extends Component {
 
         return (
             <ListItem
-                key={_id}
+                key={id}
                 leftAvatar={<Avatar icon={<Person />} />}
                 primaryText={name}
                 secondaryText={email}

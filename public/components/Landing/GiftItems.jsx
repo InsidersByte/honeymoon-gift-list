@@ -10,7 +10,7 @@ export default function GiftItems({ giftItems, addToBasket, basketItems }) {
                 giftItems
                     .map(item =>
                         <GiftItem
-                            key={item._id} // eslint-disable-line no-underscore-dangle
+                            key={item.id}
                             item={item}
                             addToBasket={addToBasket}
                             basketItems={basketItems}

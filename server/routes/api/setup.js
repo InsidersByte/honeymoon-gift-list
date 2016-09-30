@@ -1,9 +1,16 @@
-const User = require('../../models/user');
+const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 
 function* isSetup() {
-    const count = yield User.count({ status: { $in: [STATUS.ACTIVE] } });
+    const validStatuses = [STATUS.ACTIVE];
+
+    let count = yield User
+        .where('status', 'in', validStatuses)
+        .count('id');
+
+    // FIXME: Hack as count returns a string for some reason
+    count = parseInt(count, 10);
 
     return {
         status: !!count,
@@ -16,7 +23,6 @@ module.exports = (app, express) => {
     router.route('/')
         .get(wrap(function* getSetup(req, res) {
             const setup = yield isSetup();
-
             return res.json(setup);
         }))
 
@@ -42,29 +48,15 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const user = new User();
+            const { name, email, password } = req.body;
 
-            // mongoose UserSchema calls .toLowerCase() on user.email
-            user.name = req.body.name;
-            user.email = req.body.email;
-            user.password = req.body.password;
-            user.status = STATUS.ACTIVE;
+            const user = new User({ name, email, password, status: STATUS.ACTIVE });
 
-            try {
-                yield user.save();
-            } catch (err) {
-                if (err.code === 11000) {
-                    return res
-                        .status(400)
-                        .json({ success: false, message: 'A user with that email already exists.' });
-                }
+            yield user.save();
 
-                return res
-                    .status(400)
-                    .send(err);
-            }
-
-            return res.json({ message: 'User created!' });
+            return res
+                .status(201)
+                .json(user);
         }));
 
     return router;

@@ -67,8 +67,8 @@ export default class GiftSetPage extends React.Component {
             return;
         }
 
-        const { giftSetId: _id } = this.props.params;
-        GiftSetActions.remove({ _id });
+        const { giftSetId: id } = this.props.params;
+        GiftSetActions.remove({ id });
     };
 
     render() {

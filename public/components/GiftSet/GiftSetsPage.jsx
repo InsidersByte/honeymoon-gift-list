@@ -39,7 +39,7 @@ export default class GiftSetsPage extends React.Component {
             return;
         }
 
-        const { _id: id } = giftSet;
+        const { id } = giftSet;
         GiftSetActions.detailsSent({ giftSet, id });
     };
 
@@ -48,7 +48,7 @@ export default class GiftSetsPage extends React.Component {
             return;
         }
 
-        const { _id: id } = giftSet;
+        const { id } = giftSet;
         GiftSetActions.paid({ giftSet, id });
     };
 
@@ -61,7 +61,7 @@ export default class GiftSetsPage extends React.Component {
     };
 
     view = (giftSet) => {
-        this.context.router.push(giftSetRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
+        this.context.router.push(giftSetRoute(giftSet.id));
     };
 
     render() {

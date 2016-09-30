@@ -18,7 +18,8 @@
     "flow-check": "flow check",
     "test": "npm run lint && npm run flow-check",
     "start": "node ./server/index.js",
-    "start:dev": "nodemon --ignore public ./server/index.js"
+    "start:dev": "nodemon --ignore public ./server/index.js",
+    "knex": "knex"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,8 @@
     "animate.css": "3.5.2",
     "babel-polyfill": "6.13.0",
     "body-parser": "1.15.2",
+    "bookshelf": "0.10.2",
+    "bookshelf-camelcase": "1.1.4",
     "bootstrap": "3.3.7",
     "co": "4.6.0",
     "cors": "2.8.1",
@@ -47,11 +50,13 @@
     "font-awesome": "4.6.3",
     "jsonwebtoken": "7.1.9",
     "jwt-decode": "2.1.0",
+    "knex": "0.12.2",
     "material-ui": "0.15.4",
     "moment": "2.15.1",
     "mongoose": "4.6.1",
     "nodemailer": "2.6.4",
     "object.values": "1.0.3",
+    "pg": "6.1.0",
     "pug": "2.0.0-beta6",
     "react": "15.3.2",
     "react-bootstrap": "0.30.3",

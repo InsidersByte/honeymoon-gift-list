@@ -1,7 +1,7 @@
 const Giver = require('../../models/giver');
 const GiftSet = require('../../models/giftSet');
 const Gift = require('../../models/gift');
-const User = require('../../models/user');
+const User = require('../../models/User');
 const HoneymoonGiftListItem = require('../../models/honeymoonGiftListItem');
 const wrap = require('../../utilities/wrap');
 const Mailer = require('../../mail/index');
@@ -45,26 +45,26 @@ module.exports = (app, express, config) => {
             }
 
             const giftSet = yield GiftSet.create({
-                giver: giver._id, // eslint-disable-line no-underscore-dangle
+                giver: giver.id,
                 paymentMethod,
             });
 
-            giver.giftSets.push(giftSet._id); // eslint-disable-line no-underscore-dangle
+            giver.giftSets.push(giftSet.id);
             yield giver.save();
 
             for (const item of itemsData) {
-                const honeymoonGiftListItem = yield HoneymoonGiftListItem.findById(item._id); // eslint-disable-line no-underscore-dangle
+                const honeymoonGiftListItem = yield HoneymoonGiftListItem.findById(item.id);
 
                 const gift = new Gift({
                     quantity: item.quantity,
                     price: honeymoonGiftListItem.price,
-                    honeymoonGiftListItem: item._id, // eslint-disable-line no-underscore-dangle
-                    giftSet: giftSet._id, // eslint-disable-line no-underscore-dangle
+                    honeymoonGiftListItem: item.id,
+                    giftSet: giftSet.id,
                 });
 
                 yield gift.save();
 
-                honeymoonGiftListItem.gifts.push(gift._id); // eslint-disable-line no-underscore-dangle
+                honeymoonGiftListItem.gifts.push(gift.id);
                 yield honeymoonGiftListItem.save();
 
                 giftSet.gifts.push(gift);

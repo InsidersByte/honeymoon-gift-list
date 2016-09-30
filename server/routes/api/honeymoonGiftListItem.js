@@ -80,7 +80,7 @@ module.exports = (app, express) => {
         .route('/:id')
 
         .put(wrap(function* updateHoneymoonGiftItem(req, res) {
-            req.checkParams('id').equals(req.body._id); // eslint-disable-line no-underscore-dangle
+            req.checkParams('id').equals(req.body.id);
             req.checkBody('imageUrl').isURL();
             req.checkBody('name').notEmpty();
             req.checkBody('description').notEmpty();
@@ -129,7 +129,7 @@ module.exports = (app, express) => {
             }
 
             const honeymoonGiftListItem = yield HoneymoonGiftListItem
-                .findOne({ _id: req.params.id })
+                .findOne({ id: req.params.id })
                 .populate('gifts');
 
             if (!honeymoonGiftListItem) {

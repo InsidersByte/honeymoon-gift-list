@@ -90,12 +90,12 @@ export default class BaseActions {
         return error;
     }
 
-    remove({ _id }) {
+    remove({ id }) {
         return (dispatch) => {
             dispatch();
 
             this.api
-                .delete(_id)
+                .delete(id)
                 .then(this.removeSuccess)
                 .catch(this.removeError);
         };

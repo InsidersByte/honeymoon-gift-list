@@ -73,7 +73,7 @@ module.exports = (app, express) => {
         }))
 
         .put(wrap(function* updateWeddingPartyMember(req, res) {
-            req.checkBody('_id').equals(req.params.weddingPartyMemberId);
+            req.checkBody('id').equals(req.params.weddingPartyMemberId);
             req.checkBody('name').notEmpty();
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();

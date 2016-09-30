@@ -22,7 +22,7 @@ export default function GiftSetTable({ giftSets, onMarkAsPaid, onMarkAsDetailsSe
                 {giftSets
                     .map(giftSet =>
                         <GiftSetRow
-                            key={giftSet._id} // eslint-disable-line no-underscore-dangle
+                            key={giftSet.id}
                             giftSet={giftSet}
                             onMarkAsPaid={onMarkAsPaid}
                             onMarkAsDetailsSent={onMarkAsDetailsSent}

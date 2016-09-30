@@ -12,7 +12,7 @@ class GiftStore extends BaseStore {
 
     createSuccess(giftSet) {
         super.createSuccess(giftSet);
-        history.push(confirmationPageRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
+        history.push(confirmationPageRoute(giftSet.id));
     }
 }
 

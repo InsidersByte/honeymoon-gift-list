@@ -18,7 +18,7 @@ export default function GiftTable({ gifts }) {
                 {gifts
                     .map(gift =>
                         <GiftRow
-                            key={gift._id} // eslint-disable-line no-underscore-dangle
+                            key={gift.id}
                             gift={gift}
                         />
                     )

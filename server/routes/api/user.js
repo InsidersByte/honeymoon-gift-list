@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const User = require('../../models/user');
+const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 const Mailer = require('../../mail/index');
@@ -14,7 +14,7 @@ module.exports = (app, express) => {
         .route('/')
 
         .get(wrap(function* getUsers(req, res) {
-            const users = yield User.find({});
+            const users = yield User.fetchAll();
             return res.json(users);
         }))
 
@@ -29,11 +29,17 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
+            const { email } = req.body;
+
             let user;
-            const existingUser = yield User.findOne({ email: req.body.email.toLowerCase() });
+            const existingUser = yield User
+                .forge({ email })
+                .fetch();
 
             if (existingUser) {
-                if (existingUser.status !== STATUS.INVITED && existingUser.status !== STATUS.INVITE_PENDING) {
+                const status = existingUser.get('status');
+
+                if (status !== STATUS.INVITED && status !== STATUS.INVITE_PENDING) {
                     return res
                         .status(400)
                         .json({ message: 'This user has already registered.' });
@@ -41,42 +47,45 @@ module.exports = (app, express) => {
 
                 user = existingUser;
             } else {
-                user = new User();
-
-                // mongoose UserSchema calls .toLowerCase() on user.email
-                user.email = req.body.email;
-                user.password = uuid.v4;
-                user.status = STATUS.INVITED;
+                user = new User({
+                    email,
+                    password: uuid.v4(),
+                    status: STATUS.INVITED,
+                });
 
                 yield user.save();
             }
 
             try {
-                user.resetPasswordToken = uuid.v4();
-                user.resetPasswordExpires = Date.now() + (ONE_DAY_MS * 14);
+                const resetPasswordToken = uuid.v4();
+
+                user.set({
+                    resetPasswordToken,
+                    resetPasswordExpires: Date.now() + (ONE_DAY_MS * 14),
+                });
 
                 yield user.save();
 
-                const { user: { name } } = req;
+                const { name } = req.user;
 
                 yield mailer.send(
                     {
-                        to: user.email,
+                        to: email,
                         subject: `${name} has invited you to join Our Wedding Heroes`,
-                        signUpUrl: `http://${req.headers.host}/admin/signup/${user.resetPasswordToken}`,
+                        signUpUrl: `http://${req.headers.host}/admin/signup/${resetPasswordToken}`,
                         inviter: req.user,
-                        invitee: user,
+                        invitee: user.toJSON(),
                     },
                     'inviteUser'
                 );
             } catch (error) {
-                user.status = STATUS.INVITE_PENDING;
+                user.set({ status: STATUS.INVITE_PENDING });
                 yield user.save();
                 throw error;
             }
 
-            if (user.status === STATUS.INVITE_PENDING) {
-                user.status = STATUS.INVITED;
+            if (user.get('status') === STATUS.INVITE_PENDING) {
+                user.set({ status: STATUS.INVITED });
                 yield user.save();
             }
 
@@ -130,10 +139,14 @@ module.exports = (app, express) => {
         }));
 
     router
-        .route('/:userId')
+        .route('/:id')
 
         .delete(wrap(function* deleteUser(req, res) {
-            const user = yield User.findById(req.params.userId);
+            const { id } = req.params;
+
+            const user = yield User
+                .forge({ id })
+                .fetch();
 
             if (!user) {
                 return res
@@ -141,13 +154,13 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            if (user.email === req.user.email) {
+            if (user.get('email') === req.user.email) {
                 return res
                     .status(400)
                     .json({ message: 'You cannot delete yourself!' });
             }
 
-            yield user.remove();
+            yield user.destroy();
 
             return res
                 .status(204)

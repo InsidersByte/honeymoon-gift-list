@@ -28,9 +28,9 @@ class BasketStore {
     }
 
     addToBasket(item) {
-        const { _id } = item; // eslint-disable-line no-underscore-dangle
+        const { id } = item;
 
-        const existingItem = this.items.get(_id) || { quantity: 0 };
+        const existingItem = this.items.get(id) || { quantity: 0 };
         const updatedItem = Object.assign(existingItem, item);
         updatedItem.quantity += 1;
 
@@ -38,11 +38,11 @@ class BasketStore {
             updatedItem.quantity = updatedItem.remaining;
         }
 
-        this.items.set(_id, updatedItem);
+        this.items.set(id, updatedItem);
     }
 
-    removeFromBasket({ _id }) {
-        const item = this.items.get(_id);
+    removeFromBasket({ id }) {
+        const item = this.items.get(id);
 
         if (item.quantity <= 1) {
             return;
@@ -51,8 +51,8 @@ class BasketStore {
         item.quantity -= 1;
     }
 
-    deleteFromBasket({ _id }) {
-        this.items.delete(_id);
+    deleteFromBasket({ id }) {
+        this.items.delete(id);
     }
 
     emptyBasket() {

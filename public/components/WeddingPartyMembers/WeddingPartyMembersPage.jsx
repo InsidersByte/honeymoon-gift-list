@@ -34,7 +34,7 @@ export default class WeddingPartyMembersPage extends React.Component {
     };
 
     onSelect = (member) => {
-        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+        this.context.router.push(updateWeddingPartyMemberRoute(member.id));
     };
 
     onDelete(member) {
@@ -46,7 +46,7 @@ export default class WeddingPartyMembersPage extends React.Component {
     }
 
     onDrop = ({ id }) => {
-        const member = this.state.members.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        const member = this.state.members.find(o => o.id === id);
         WeddingPartyMemberActions.update({ member, id });
     };
 
@@ -57,8 +57,8 @@ export default class WeddingPartyMembersPage extends React.Component {
     render() {
         const membersList = this.state.members.map(member =>
             <SortableItem
-                key={member._id} // eslint-disable-line no-underscore-dangle
-                id={member._id} // eslint-disable-line no-underscore-dangle
+                key={member.id}
+                id={member.id}
                 onMove={WeddingPartyMemberActions.move}
                 onDrop={this.onDrop}
             >
