@@ -5,7 +5,6 @@ const authenticate = require('./authenticate');
 const weddingProfile = require('./weddingProfile');
 const gift = require('./gift');
 const user = require('./user');
-const honeymoonGiftList = require('./honeymoonGiftList');
 const honeymoonGiftListItem = require('./honeymoonGiftListItem');
 const giftSet = require('./giftSet');
 const weddingPartyMember = require('./weddingPartyMember');
@@ -24,7 +23,6 @@ module.exports = (app, express, config) => {
     }));
 
     router.use('/user', user(app, express));
-    router.use('/honeymoonGiftList', honeymoonGiftList(app, express));
     router.use('/honeymoonGiftListItem', honeymoonGiftListItem(app, express));
     router.use('/giftSet', giftSet(app, express));
     router.use('/weddingPartyMember', weddingPartyMember(app, express));
