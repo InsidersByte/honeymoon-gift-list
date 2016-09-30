@@ -1,9 +1,11 @@
 /* @flow */
 
 import React from 'react';
-import { Paper, Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
+import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, IconButton } from 'material-ui';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
+import InfoOutline from 'material-ui/svg-icons/action/info-outline';
+import MarkdownHelp from './MarkdownHelp';
 import Form from './Form';
 import ProgressButton from './ProgressButton';
 
@@ -27,7 +29,10 @@ const styles = {
 export default class MarkdownEditorPage extends React.Component {
     props: PropsType;
 
-    state = this.props.store.getState();
+    state = {
+        ...this.props.store.getState(),
+        open: false,
+    };
 
     componentDidMount() {
         this.props.store.listen(this.onStoreChange);
@@ -46,6 +51,14 @@ export default class MarkdownEditorPage extends React.Component {
         this.setState({ [this.props.propKey]: value });
     };
 
+    open = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     submit = (event: SyntheticEvent) => {
         event.preventDefault();
         this.props.actions.update(this.state);
@@ -53,22 +66,31 @@ export default class MarkdownEditorPage extends React.Component {
 
     render() {
         const { title, propKey } = this.props;
-        const { loading, saving, [propKey]: value } = this.state;
+        const { loading, saving, [propKey]: value, open } = this.state;
 
         return (
-            <Paper>
-                <Toolbar>
-                    <ToolbarGroup>
-                        <ToolbarTitle text={title} />
-                    </ToolbarGroup>
-                </Toolbar>
+            <div>
+                <Paper>
+                    <Toolbar>
+                        <ToolbarGroup>
+                            <ToolbarTitle text={title} />
+                        </ToolbarGroup>
+                        <ToolbarGroup>
+                            <IconButton touch tooltip="Help" onClick={this.open}>
+                                <InfoOutline />
+                            </IconButton>
+                        </ToolbarGroup>
+                    </Toolbar>
 
-                <Form onSubmit={this.submit} loading={loading} saving={saving} style={styles.form}>
-                    <MarkdownEditor value={value} onChange={this.onChange} />
+                    <Form onSubmit={this.submit} loading={loading} saving={saving} style={styles.form}>
+                        <MarkdownEditor value={value} onChange={this.onChange} />
 
-                    <ProgressButton saving={saving} label="Update" style={styles.button} />
-                </Form>
-            </Paper>
+                        <ProgressButton saving={saving} label="Update" style={styles.button} />
+                    </Form>
+                </Paper>
+
+                <MarkdownHelp open={open} handleClose={this.handleClose} />
+            </div>
         );
     }
 }
