@@ -1,9 +1,11 @@
 /* @flow */
 
 import React from 'react';
-import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, Checkbox } from 'material-ui';
+import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, Checkbox, IconButton } from 'material-ui';
+import InfoOutline from 'material-ui/svg-icons/action/info-outline';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
+import MarkdownHelp from './MarkdownHelp';
 import ProgressButton from './ProgressButton';
 import Form from './Form';
 
@@ -17,10 +19,13 @@ type PropsType = {
     },
     loading: boolean,
     saving: boolean,
+    open: boolean,
     onChange: Function,
     onContentChange: Function,
     onCheck: Function,
     onSubmit: Function,
+    handleOpen: Function,
+    handleClose: Function,
 };
 
 const styles = {
@@ -40,7 +45,7 @@ const styles = {
     },
 };
 
-export default function HoneymoonGiftListForm({ honeymoonGiftList, loading, saving, onChange, onContentChange, onCheck, onSubmit }: PropsType) {
+export default function HoneymoonGiftListForm({ honeymoonGiftList, loading, saving, onChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType) {
     const { content, showPaymentMessage, showDisclaimerMessage, paymentMessage, disclaimerMessage } = honeymoonGiftList;
 
     let paymentMessageInput = null;
@@ -79,42 +84,51 @@ export default function HoneymoonGiftListForm({ honeymoonGiftList, loading, savi
     }
 
     return (
-        <Paper>
-            <Toolbar>
-                <ToolbarGroup>
-                    <ToolbarTitle text="Honeymoon Gift List" />
-                </ToolbarGroup>
-            </Toolbar>
+        <div>
+            <Paper>
+                <Toolbar>
+                    <ToolbarGroup>
+                        <ToolbarTitle text="Honeymoon Gift List" />
+                    </ToolbarGroup>
+                    <ToolbarGroup>
+                        <IconButton touch tooltip="Help" onClick={handleOpen}>
+                            <InfoOutline />
+                        </IconButton>
+                    </ToolbarGroup>
+                </Toolbar>
 
-            <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
-                <MarkdownEditor
-                    name="content"
-                    value={content}
-                    onChange={onContentChange}
-                />
+                <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
+                    <MarkdownEditor
+                        name="content"
+                        value={content}
+                        onChange={onContentChange}
+                    />
 
-                <Checkbox
-                    name="showPaymentMessage"
-                    label="Show Payment Message"
-                    checked={showPaymentMessage}
-                    onCheck={onCheck}
-                    style={styles.checkbox}
-                />
+                    <Checkbox
+                        name="showPaymentMessage"
+                        label="Show Payment Message"
+                        checked={showPaymentMessage}
+                        onCheck={onCheck}
+                        style={styles.checkbox}
+                    />
 
-                {paymentMessageInput}
+                    {paymentMessageInput}
 
-                <Checkbox
-                    name="showDisclaimerMessage"
-                    label="Show Disclaimer Message"
-                    checked={showDisclaimerMessage}
-                    onCheck={onCheck}
-                    style={styles.checkbox}
-                />
+                    <Checkbox
+                        name="showDisclaimerMessage"
+                        label="Show Disclaimer Message"
+                        checked={showDisclaimerMessage}
+                        onCheck={onCheck}
+                        style={styles.checkbox}
+                    />
 
-                {disclaimerMessageInput}
+                    {disclaimerMessageInput}
 
-                <ProgressButton saving={saving} label="Update" style={styles.button} />
-            </Form>
-        </Paper>
+                    <ProgressButton saving={saving} label="Update" style={styles.button} />
+                </Form>
+            </Paper>
+
+            <MarkdownHelp open={open} handleClose={handleClose} />
+        </div>
     );
 }

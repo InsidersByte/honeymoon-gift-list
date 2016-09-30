@@ -25,7 +25,10 @@ export default class HoneymoonGiftListPage extends React.Component {
 
     props: PropsType;
 
-    state = { honeymoonGiftList: this.props.honeymoonGiftList };
+    state = {
+        honeymoonGiftList: this.props.honeymoonGiftList,
+        open: false,
+    };
 
     componentDidMount() {
         HoneymoonGiftListActions.fetch();
@@ -55,9 +58,17 @@ export default class HoneymoonGiftListPage extends React.Component {
         HoneymoonGiftListActions.update(this.state);
     };
 
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     render() {
         const { loading, saving } = this.props;
-        const { honeymoonGiftList } = this.state;
+        const { honeymoonGiftList, open } = this.state;
 
         return (
             <HoneymoonGiftListForm
@@ -68,6 +79,9 @@ export default class HoneymoonGiftListPage extends React.Component {
                 onSubmit={this.onSubmit}
                 loading={loading}
                 saving={saving}
+                open={open}
+                handleOpen={this.handleOpen}
+                handleClose={this.handleClose}
             />
         );
     }
