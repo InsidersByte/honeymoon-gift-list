@@ -45,7 +45,9 @@ const styles = {
     },
 };
 
-export default function HoneymoonGiftListForm({ honeymoonGiftList, loading, saving, onChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType) {
+export default function HoneymoonGiftListForm(
+    { honeymoonGiftList, loading, saving, onChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType
+) {
     const { content, showPaymentMessage, showDisclaimerMessage, paymentMessage, disclaimerMessage } = honeymoonGiftList;
 
     let paymentMessageInput = null;
