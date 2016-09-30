@@ -11,10 +11,10 @@ module.exports = (app, express) => {
         .get(wrap(function* getUser(req, res) {
             const { token } = req.params;
 
-            const user = yield User.findOne({
-                resetPasswordToken: token,
-                resetPasswordExpires: { $gt: Date.now() },
-            });
+            const user = yield User
+                .forge({ resetPasswordToken: token, status: STATUS.INVITED })
+                .where('reset_password_expires', '>', Date.now())
+                .fetch();
 
             if (!user) {
                 return res
@@ -43,10 +43,10 @@ module.exports = (app, express) => {
 
             const { params: { token }, body: { name, password } } = req;
 
-            const user = yield User.findOne({
-                resetPasswordToken: token,
-                resetPasswordExpires: { $gt: Date.now() },
-            });
+            const user = yield User
+                .forge({ resetPasswordToken: token, status: STATUS.INVITED })
+                .where('reset_password_expires', '>', Date.now())
+                .fetch();
 
             if (!user) {
                 return res
@@ -57,11 +57,13 @@ module.exports = (app, express) => {
                     });
             }
 
-            user.name = name;
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
-            user.password = password;
-            user.status = STATUS.ACTIVE;
+            user.set({
+                name,
+                password,
+                resetPasswordToken: null,
+                resetPasswordExpires: null,
+                status: STATUS.ACTIVE,
+            });
 
             yield user.save();
 
