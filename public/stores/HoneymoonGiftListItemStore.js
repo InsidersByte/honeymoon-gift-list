@@ -2,7 +2,7 @@ import alt from '../helpers/alt';
 import actions from '../actions/HoneymoonGiftListItemActions';
 import BaseStore from './BaseStore';
 import { HONEYMOON_GIFT_LIST_ITEM as key } from '../constants/KeyConstants';
-import { move } from '../helpers/sortingHelper';
+import { move } from '../utils/sortingHelper';
 
 const initialValue = {
     imageUrl: '',

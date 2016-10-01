@@ -4,7 +4,7 @@ import BaseStore from './BaseStore';
 import { WEDDING_PARTY_MEMBER as key } from '../constants/KeyConstants';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routeConstants';
 import history from '../helpers/history';
-import { move } from '../helpers/sortingHelper';
+import { move } from '../utils/sortingHelper';
 
 const initialValue = {
     name: '',
