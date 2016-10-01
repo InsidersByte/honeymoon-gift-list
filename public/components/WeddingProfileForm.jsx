@@ -52,11 +52,11 @@ const styles = {
 const DateTimeFormat = global.Intl.DateTimeFormat;
 
 export default function HoneymoonGiftListForm(
-    { weddingProfile, loading, saving, onChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType
+    { weddingProfile, loading, saving, onChange, onDateChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType
 ) {
     const {
         coverTitle, coverImageUrl, weddingDate, giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage,
-        disclaimerMessage, onDateChange,
+        disclaimerMessage,
     } = weddingProfile;
 
     let paymentMessageInput = null;
