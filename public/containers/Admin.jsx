@@ -1,15 +1,25 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import connect from 'alt-utils/lib/connectToStores';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { AppBar } from 'material-ui';
 import { getMuiTheme, MuiThemeProvider, spacing } from 'material-ui/styles';
-import LoginActions from '../actions/LoginActions';
-import LoginStore from '../stores/LoginStore';
+import * as actions from '../actions/auth';
 import NavigationDrawer from '../components/NavigationDrawer';
 
-const muiTheme = getMuiTheme();
+type PropsType = {
+    isAuthenticated: boolean,
+    user: {
+        name: string,
+    },
+    actions: {
+        logout: Function,
+    },
+    router: Object,
+    children: React$Element<any>,
+};
 
 const styles = {
     root: {},
@@ -18,20 +28,22 @@ const styles = {
     },
 };
 
-@withRouter
-@connect
-export default class Admin extends Component {
-    static propTypes = {
-        isLoggedIn: PropTypes.bool.isRequired,
-        user: PropTypes.shape({
-            name: PropTypes.string,
-        }),
-        router: PropTypes.shape({}).isRequired,
-        children: PropTypes.element.isRequired,
-    };
+const muiTheme = getMuiTheme();
 
-    static getStores = () => [LoginStore];
-    static getPropsFromStores = () => LoginStore.getState();
+@withRouter
+@connect(
+    (state) => {
+        const { auth: { user, isAuthenticated } } = state;
+
+        return {
+            user,
+            isAuthenticated,
+        };
+    },
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+)
+export default class Admin extends Component {
+    props: PropsType;
 
     state = {
         navDrawerOpen: false,
@@ -55,12 +67,12 @@ export default class Admin extends Component {
 
     logout = (event: SyntheticEvent) => {
         event.preventDefault();
-        LoginActions.logoutUser();
+        this.props.actions.logout();
         this.setState({ navDrawerOpen: false });
-    }
+    };
 
     render() {
-        const { isLoggedIn, user, children } = this.props;
+        const { isAuthenticated, user, children } = this.props;
         const { navDrawerOpen } = this.state;
 
         return (
@@ -79,7 +91,7 @@ export default class Admin extends Component {
                         location={location}
                         logout={this.logout}
                         user={user}
-                        isAuthenticated={isLoggedIn}
+                        isAuthenticated={isAuthenticated}
                     />
 
                     <div style={styles.container}>

@@ -27,11 +27,10 @@ const styles = {
 
 @connect(
     (state) => {
-        const { auth: { isAuthenticated }, notifications } = state;
+        const { notifications } = state;
         const notificationsToShow = notifications.filter(({ show }) => show);
 
         return {
-            isAuthenticated,
             notifications: notificationsToShow,
         };
     },
