@@ -1,22 +1,26 @@
 /* @flow */
 
 import React from 'react';
-import connect from 'alt-utils/lib/connectToStores';
-import PasswordActions from '../actions/PasswordActions';
-import PasswordStore from '../stores/PasswordStore';
-import NotificationActions from '../actions/NotificationActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../actions/users';
+import * as notificationActions from '../actions/notifications';
 import ProfileForm from '../components/ProfileForm';
 import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
 
 type PropsType = {
     saving: boolean,
+    actions: {
+        changePassword: Function,
+        error: Function,
+    },
 };
 
-@connect
+@connect(
+    ({ users }) => users,
+    dispatch => ({ actions: { ...bindActionCreators(userActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+)
 export default class ProfilePage extends React.Component {
-    static getStores = () => [PasswordStore];
-    static getPropsFromStores = () => PasswordStore.getState();
-
     props: PropsType;
 
     state = {
@@ -35,15 +39,16 @@ export default class ProfilePage extends React.Component {
     submit = (event: SyntheticEvent) => {
         event.preventDefault();
 
+        const { actions: { changePassword, error } } = this.props;
         const { user } = this.state;
         const { newPassword, confirmPassword } = user;
 
         if (newPassword.length < MINIMUM_PASSWORD_LENGTH) {
-            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+            error({ message: MINIMUM_PASSWORD_MESSAGE });
         } else if (newPassword !== confirmPassword) {
-            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+            error({ message: MATCHING_PASSWORD_MESSAGE });
         } else {
-            PasswordActions.update(user);
+            changePassword(user);
         }
     };
 
