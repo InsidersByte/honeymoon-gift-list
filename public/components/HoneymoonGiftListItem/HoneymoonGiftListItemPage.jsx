@@ -7,7 +7,9 @@ import Loader from '../Loader';
 import SortableContainer from '../SortableContainer';
 import SortableItem from '../SortableItem';
 import HoneymoonGiftListItemListItem from './HoneymoonGiftListItemListItem';
+import ComingSoon from '../ComingSoon';
 
+@ComingSoon
 export default class HoneymoonGiftListItemPage extends React.Component {
     state = { ...HoneymoonGiftListItemStore.getState(), showModal: false };
 
