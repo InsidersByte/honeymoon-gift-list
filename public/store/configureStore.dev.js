@@ -7,10 +7,11 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import createLogger from 'redux-logger';
 import DevTools from '../containers/DevTools';
 import rootReducer from '../reducers';
+import api from '../middleware/api';
 
 module.exports = (initialState: Object, history: any) => {
     const enhancer = compose(
-        applyMiddleware(thunk, routerMiddleware(history), reduxImmutableStateInvariant(), createLogger()),
+        applyMiddleware(thunk, api, routerMiddleware(history), reduxImmutableStateInvariant(), createLogger()),
         DevTools.instrument()
     );
 

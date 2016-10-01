@@ -1,9 +1,7 @@
-/* @flow */
 
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
-import loginStore from '../stores/LoginStore';
 import SetupApi from '../api/SetupApi';
 
 import NoMatch from '../components/NoMatch';
@@ -60,23 +58,27 @@ function requireSetup(nextState, replace, callback) {
     });
 }
 
-function requireAuth(nextState, replace) {
-    const { isLoggedIn } = loginStore.getState();
+function requireAuth(store) {
+    return (nextState, replace) => {
+        const { auth: { isAuthenticated } } = store.getState();
 
-    if (!isLoggedIn) {
-        replace(LOGIN_ROUTE);
-    }
+        if (!isAuthenticated) {
+            replace(LOGIN_ROUTE);
+        }
+    };
 }
 
-function ifLoggedInRedirectToAdmin(nextState, replace) {
-    const { isLoggedIn } = loginStore.getState();
+function ifLoggedInRedirectToAdmin(store) {
+    return (nextState, replace) => {
+        const { auth: { isAuthenticated } } = store.getState();
 
-    if (isLoggedIn) {
-        replace(ADMIN_ROUTE);
-    }
+        if (isAuthenticated) {
+            replace(ADMIN_ROUTE);
+        }
+    };
 }
 
-export default (
+export default store => (
     <Route path="/" component={Root}>
         <IndexRoute component={LandingPage} />
         <Route path="basket" component={BasketSummaryPage} />
@@ -87,13 +89,13 @@ export default (
             <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
             <Route onEnter={requireSetup}>
-                <Route onEnter={ifLoggedInRedirectToAdmin}>
+                <Route onEnter={ifLoggedInRedirectToAdmin(store)}>
                     <Route path="login" component={LoginPage} />
                     <Route path="reset/:token" component={ResetPage} />
                     <Route path="signUp/:token" component={SignUpPage} />
                 </Route>
 
-                <Route onEnter={requireAuth}>
+                <Route onEnter={requireAuth(store)}>
                     <Route path="profile" component={ProfilePage} />
                     <Route path="cover" component={CoverPage} />
                     <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />

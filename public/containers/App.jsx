@@ -2,12 +2,16 @@
 
 import React from 'react';
 import NotificationSystem from 'react-notification-system';
-import connect from 'alt-utils/lib/connectToStores';
-import NotificationStore from '../stores/NotificationStore';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../actions/notifications';
 
 type PropsType = {
     children: React$Element<any>,
-    notification: Object,
+    notifications: Array<Object>,
+    actions: {
+        hideNotification: Function,
+    },
 };
 
 const styles = {
@@ -21,19 +25,32 @@ const styles = {
     },
 };
 
-@connect
-export default class App extends React.Component {
-    static getStores = () => [NotificationStore];
-    static getPropsFromStores = () => NotificationStore.getState();
+@connect(
+    (state) => {
+        const { auth: { isAuthenticated }, notifications } = state;
+        const notificationsToShow = notifications.filter(({ show }) => show);
 
+        return {
+            isAuthenticated,
+            notifications: notificationsToShow,
+        };
+    },
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+)
+export default class App extends React.Component {
     props: PropsType;
 
-    componentWillReceiveProps({ notification }: PropsType) {
-        if (!notification || notification === this.props.notification) {
+    componentWillReceiveProps({ notifications, actions: { hideNotification } }: PropsType) {
+        if (notifications.length === 0) {
             return;
         }
 
-        this.notificationSystem.addNotification(notification);
+        const { notificationSystem } = this;
+
+        for (const notification of notifications) {
+            notificationSystem.addNotification(notification);
+            hideNotification(notification);
+        }
     }
 
     notificationSystem: { addNotification: Function };
