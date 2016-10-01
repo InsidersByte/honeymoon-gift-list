@@ -1,16 +1,17 @@
 /* @flow */
 
 import React from 'react';
-import connect from 'alt-utils/lib/connectToStores';
-import UserActions from '../actions/UserActions';
-import UserStore from '../stores/UserStore';
-import LoginStore from '../stores/LoginStore';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/users';
 import UserList from '../components/UserList';
 import User from '../components/UserDialog';
 
 type PropsType = {
-    removing: boolean,
+    loading: boolean,
     saving: boolean,
+    deleting: boolean,
+    userModalOpen: boolean,
     activeUsers: Array<{
         id: string,
         name: string,
@@ -23,48 +24,59 @@ type PropsType = {
     loggedInUser: {
         email: string,
     },
+    actions: {
+        loadUsers: Function,
+        createUser: Function,
+        deleteUser: Function,
+        openUserModal: Function,
+        closeUserModal: Function,
+    },
 };
 
 const initialUser = {
     email: '',
 };
 
-@connect
-export default class Users extends React.Component {
-    static getStores = () => [LoginStore, UserStore];
-    static getPropsFromStores = () => {
-        const loggedInUser = LoginStore.getState().user;
-        const { users, saving, removing } = UserStore.getState();
+@connect(
+    (state) => {
+        const { auth: { user: loggedInUser }, users: { users, loading, saving, deleting, userModalOpen } } = state;
 
         const activeUsers = users.filter(({ status }) => status === 'active');
         const invitedUsers = users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
 
         return {
+            loggedInUser,
             activeUsers,
             invitedUsers,
+            loading,
             saving,
-            removing,
-            loggedInUser,
+            deleting,
+            userModalOpen,
         };
-    };
-
+    },
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+)
+export default class Users extends React.Component {
     props: PropsType;
-    state = { open: false, user: { ...initialUser } };
+
+    state = { user: { ...initialUser } };
 
     componentDidMount() {
-        UserActions.query.defer();
+        this.props.actions.loadUsers();
     }
 
-    componentWillReceiveProps({ removing: nextRemoving, saving: nextSaving }: PropsType) {
-        const { removing, saving } = this.props;
+    // TODO: This seems like a bit of a hack
+    componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
+        const { saving, deleting, actions: { loadUsers } } = this.props;
 
-        if (removing && !nextRemoving) {
-            UserActions.query.defer();
+        if (deleting && !nextDeleting) {
+            console.log('deleting');
+            loadUsers();
         }
 
         if (saving && !nextSaving) {
-            UserActions.query.defer();
-            this.close();
+            console.log('saving');
+            loadUsers();
         }
     }
 
@@ -75,8 +87,11 @@ export default class Users extends React.Component {
 
     save = (event: SyntheticEvent) => {
         event.preventDefault();
+
+        const { actions: { createUser } } = this.props;
         const { user } = this.state;
-        UserActions.create({ user });
+
+        createUser(user);
     };
 
     delete = (user: Object) => {
@@ -84,35 +99,35 @@ export default class Users extends React.Component {
             return;
         }
 
-        UserActions.remove(user);
+        const { actions: { deleteUser } } = this.props;
+
+        deleteUser(user);
     };
 
-    add = () => {
-        this.setState({ open: true, user: { ...initialUser } });
-    };
-
-    close = () => {
-        this.setState({ open: false });
+    onAdd = () => {
+        this.props.actions.openUserModal();
+        this.setState({ user: { ...initialUser } });
     };
 
     render() {
-        const { activeUsers, invitedUsers, saving, loggedInUser } = this.props;
-        const { user, open } = this.state;
+        const { activeUsers, invitedUsers, saving, loggedInUser, loading, userModalOpen: open, actions: { closeUserModal } } = this.props;
+        const { user } = this.state;
 
         return (
             <div>
                 <UserList
+                    loading={loading}
                     activeUsers={activeUsers}
                     invitedUsers={invitedUsers}
                     loggedInUser={loggedInUser}
-                    onAdd={this.add}
+                    onAdd={this.onAdd}
                     onDelete={this.delete}
                 />
 
                 <User
                     user={user}
                     open={open}
-                    onHide={this.close}
+                    onHide={closeUserModal}
                     onSubmit={this.save}
                     onChange={this.setUserState}
                     saving={saving}

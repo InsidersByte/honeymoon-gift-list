@@ -1,17 +1,19 @@
-import { push } from 'react-router-redux';
+import { createAction } from 'redux-actions';
 import { success } from './notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
-import { USERS_ROUTE } from '../constants/routes';
 
-function onSaveUserSuccess(dispatch, notification) {
-    dispatch(push(USERS_ROUTE));
-    dispatch(success(notification));
-}
+export const openUserModal = createAction(TYPES.OPEN_USER_MODAL);
+export const closeUserModal = createAction(TYPES.CLOSE_USER_MODAL);
 
 function onCreateUserSuccess(dispatch) {
-    onSaveUserSuccess(dispatch, { message: 'User created successfully' });
+    dispatch(success({ message: 'User created successfully' }));
+    dispatch(closeUserModal());
+}
+
+function onDeleteUserSuccess(dispatch) {
+    dispatch(success({ message: 'User deleted successfully' }));
 }
 
 export function loadUsers() {
@@ -34,6 +36,19 @@ export function createUser(user) {
             authenticated: true,
             onSuccess: onCreateUserSuccess,
             types: [TYPES.CREATE_USER_REQUEST, TYPES.CREATE_USER_SUCCESS, TYPES.CREATE_USER_ERROR],
+        },
+    };
+}
+
+export function deleteUser(user) {
+    return {
+        [CALL_API]: {
+            data: user,
+            endpoint: `user/${user.id}`,
+            method: HTTP_METHODS.DELETE,
+            authenticated: true,
+            onSuccess: onDeleteUserSuccess,
+            types: [TYPES.DELETE_USER_REQUEST, TYPES.DELETE_USER_SUCCESS, TYPES.DELETE_USER_ERROR],
         },
     };
 }
