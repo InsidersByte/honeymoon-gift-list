@@ -1,7 +1,7 @@
 const bookshelf = require('../bookshelf');
 const encryption = require('../utilities/encryption');
 
-const Users = bookshelf.Model.extend({
+const User = bookshelf.Model.extend({
     tableName: 'users',
     hasTimestamps: true,
 
@@ -25,4 +25,4 @@ const Users = bookshelf.Model.extend({
     hidden: ['password', 'salt', 'resetPasswordToken', 'resetPasswordExpires'],
 });
 
-module.exports = Users;
+module.exports = User;

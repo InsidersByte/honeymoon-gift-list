@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
@@ -19,9 +18,8 @@ import ProfilePage from '../containers/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
-import CoverPage from '../containers/CoverPage';
+import WeddingProfilePage from '../containers/WeddingProfilePage';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
-import HoneymoonGiftListPage from '../containers/HoneymoonGiftListPage';
 import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
@@ -97,8 +95,7 @@ export default store => (
 
                 <Route onEnter={requireAuth(store)}>
                     <Route path="profile" component={ProfilePage} />
-                    <Route path="cover" component={CoverPage} />
-                    <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />
+                    <Route path="weddingProfile" component={WeddingProfilePage} />
                     <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
                     <Route path="users" component={UsersPage} />
                     <Route path="giftSet" component={GiftSetsPage} />
