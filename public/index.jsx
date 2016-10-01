@@ -3,15 +3,17 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { syncHistoryWithStore } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'animate.css/animate.css';
 import 'font-awesome/css/font-awesome.css';
-import history from './helpers/history';
 import routes from './routes';
 import alt from './helpers/alt';
+import configureStore from './store/configureStore';
 // FIXME:FLOW need to fix import .styl
 import './index.styl';
 
@@ -38,9 +40,14 @@ if (jwt !== null) {
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+const store = configureStore({}, browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
-    <Router history={history}>
-        {routes}
-    </Router>,
+    <Provider store={store}>
+        <Router history={history}>
+            {routes}
+        </Router>
+    </Provider>,
     document.getElementById('app')
 );

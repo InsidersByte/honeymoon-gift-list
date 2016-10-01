@@ -9,7 +9,7 @@ import SetupApi from '../api/SetupApi';
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
 
-import App from '../containers/App';
+import Root from '../containers/Root';
 
 import LandingPage from '../components/Landing/LandingPage';
 import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
@@ -77,7 +77,7 @@ function ifLoggedInRedirectToAdmin(nextState, replace) {
 }
 
 export default (
-    <Route path="/" component={App}>
+    <Route path="/" component={Root}>
         <IndexRoute component={LandingPage} />
         <Route path="basket" component={BasketSummaryPage} />
         <Route path="giver" component={GiverDetailsPage} />
