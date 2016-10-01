@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { SUCCESS_NOTIFICATION, HIDE_NOTIFICATION } from '../constants/actionTypes';
+import { SUCCESS_NOTIFICATION, ERROR_NOTIFICATION, HIDE_NOTIFICATION } from '../constants/actionTypes';
 
 function createNotification(notification) {
     return { ...notification, id: uuid.v4(), position: 'br', show: true };
@@ -46,6 +46,10 @@ export default function notificationReducer(state = [], action) {
 
     if (action.type === SUCCESS_NOTIFICATION) {
         return [...state, createSuccessNotification(action)];
+    }
+
+    if (action.type === ERROR_NOTIFICATION) {
+        return [...state, createErrorNotification(action.payload.message)];
     }
 
     return state;

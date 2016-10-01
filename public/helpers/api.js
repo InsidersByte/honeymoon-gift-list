@@ -69,9 +69,6 @@ export default class {
         return new Promise((resolve, reject) => {
             req.end((error, response) => {
                 if (error) {
-                    if (error.status === 401) {
-                    }
-
                     return reject(error);
                 }
 

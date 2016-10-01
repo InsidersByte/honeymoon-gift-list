@@ -1,22 +1,25 @@
 /* @flow */
 
 import React from 'react';
-// import { isEmail } from 'validator';
+import { isEmail } from 'validator';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/auth';
+import * as authActions from '../actions/auth';
+import * as notificationActions from '../actions/notifications';
 import LoginForm from '../components/LoginForm';
 
 type PropsType = {
     saving: boolean,
     actions: {
         login: Function,
+        requestPasswordReset: Function,
+        error: Function,
     },
 };
 
 @connect(
     ({ auth: { saving } }) => ({ saving }),
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: { ...bindActionCreators(authActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
 )
 export default class Login extends React.Component {
     props: PropsType;
@@ -45,14 +48,15 @@ export default class Login extends React.Component {
     forgot = (event: SyntheticEvent) => {
         event.preventDefault();
 
-        // const email = this.state.user.email;
-        //
-        // if (!email || !isEmail(email)) {
-        //     NotificationActions.error({ message: 'We need your email address to reset your password!' });
-        //     return;
-        // }
-        //
-        // PasswordResetActions.create({ email });
+        const { actions: { requestPasswordReset, error } } = this.props;
+        const email = this.state.user.email;
+
+        if (!email || !isEmail(email)) {
+            error({ message: 'We need your email address to reset your password!' });
+            return;
+        }
+
+        requestPasswordReset({ email });
     };
 
     render() {
