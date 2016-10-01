@@ -1,4 +1,4 @@
-const WeddingProfile = require('../../models/weddingProfile');
+const WeddingProfile = require('../../models/WeddingProfile');
 const wrap = require('../../utilities/wrap');
 const { integer } = require('../../../lib/random/index');
 const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants/index');
