@@ -37,24 +37,10 @@ export default function NavigationDrawer({ isAuthenticated, user, location, onCh
                 onChange={onChange}
                 style={{ padding: 0 }}
             >
-                <ListItem
-                    primaryText="Wedding Profile"
-                    primaryTogglesNestedList
-                    nestedItems={[
-                        <ListItem primaryText="Cover" value={ROUTES.COVER_ROUTE} />,
-                        <ListItem primaryText="About Us" value={ROUTES.ABOUT_US_ROUTE} />,
-                        <ListItem primaryText="RSVP" value={ROUTES.RSVP_ROUTE} />,
-                        <ListItem primaryText="About Our Day" value={ROUTES.ABOUT_OUR_DAY_ROUTE} />,
-                        <ListItem primaryText="Wedding Party Members" value={ROUTES.WEDDING_PARTY_MEMBERS_ROUTE} />,
-                        <ListItem primaryText="Local Flavour" value={ROUTES.LOCAL_FLAVOUR_ROUTE} />,
-                        <ListItem primaryText="On the Day" value={ROUTES.ON_THE_DAY_ROUTE} />,
-                        <ListItem primaryText="Wedding Playlist" value={ROUTES.WEDDING_PLAYLIST_ROUTE} />,
-                        <ListItem primaryText="About Our Honeymoon" value={ROUTES.ABOUT_OUR_HONEYMOON_ROUTE} />,
-                        <ListItem primaryText="Honeymoon Gift List" value={ROUTES.HONEYMOON_GIFT_LIST_ROUTE} />,
-                        <ListItem primaryText="Honeymoon Gift List Items" value={ROUTES.HONEYMOON_GIFT_LIST_ITEM_ROUTE} />,
-                    ]}
-                />
-
+                <ListItem primaryText="Wedding Profile" value={ROUTES.COVER_ROUTE} />
+                <ListItem primaryText="Sections" value={ROUTES.COVER_ROUTE} />
+                <ListItem primaryText="Wedding Party Members" value={ROUTES.WEDDING_PARTY_MEMBERS_ROUTE} />
+                <ListItem primaryText="Gift List" value={ROUTES.HONEYMOON_GIFT_LIST_ITEM_ROUTE} />
                 <ListItem primaryText="Gift Sets" value={ROUTES.GIFT_SETS_ROUTE} />
                 <ListItem primaryText="Users" value={ROUTES.USERS_ROUTE} />
 

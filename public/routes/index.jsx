@@ -22,13 +22,6 @@ import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
 import CoverPage from '../containers/CoverPage';
-import AboutUsPage from '../components/AboutUs/AboutUsPage';
-import RsvpPage from '../components/Rsvp/RsvpPage';
-import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage';
-import LocalFlavourPage from '../components/LocalFlavour/LocalFlavourPage';
-import OnTheDayPage from '../components/OnTheDay/OnTheDayPage';
-import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage';
-import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
 import HoneymoonGiftListPage from '../containers/HoneymoonGiftListPage';
 import UsersPage from '../containers/UsersPage';
@@ -103,13 +96,6 @@ export default (
                 <Route onEnter={requireAuth}>
                     <Route path="profile" component={ProfilePage} />
                     <Route path="cover" component={CoverPage} />
-                    <Route path="aboutUs" component={AboutUsPage} />
-                    <Route path="rsvp" component={RsvpPage} />
-                    <Route path="aboutOurDay" component={AboutOurDayPage} />
-                    <Route path="localFlavour" component={LocalFlavourPage} />
-                    <Route path="onTheDay" component={OnTheDayPage} />
-                    <Route path="weddingPlaylist" component={WeddingPlaylistPage} />
-                    <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} />
                     <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />
                     <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
                     <Route path="users" component={UsersPage} />

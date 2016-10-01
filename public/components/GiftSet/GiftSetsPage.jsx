@@ -5,7 +5,9 @@ import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
 import { giftSetRoute } from '../../constants/routeConstants';
 import Loader from '../Loader';
+import ComingSoon from '../ComingSoon';
 
+@ComingSoon
 export default class GiftSetsPage extends React.Component {
     static contextTypes = {
         router: React.PropTypes.object.isRequired,

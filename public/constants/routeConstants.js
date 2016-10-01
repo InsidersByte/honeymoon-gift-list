@@ -9,14 +9,6 @@ export const SETUP_ROUTE = `${ADMIN_ROUTE}/setup`;
 export const PROFILE_ROUTE = `${ADMIN_ROUTE}/profile`;
 
 export const COVER_ROUTE = `${ADMIN_ROUTE}/cover`;
-export const ABOUT_US_ROUTE = `${ADMIN_ROUTE}/aboutUs`;
-export const RSVP_ROUTE = `${ADMIN_ROUTE}/rsvp`;
-export const ABOUT_OUR_DAY_ROUTE = `${ADMIN_ROUTE}/aboutOurDay`;
-export const LOCAL_FLAVOUR_ROUTE = `${ADMIN_ROUTE}/localFlavour`;
-export const ON_THE_DAY_ROUTE = `${ADMIN_ROUTE}/onTheDay`;
-export const WEDDING_PLAYLIST_ROUTE = `${ADMIN_ROUTE}/weddingPlaylist`;
-export const ABOUT_OUR_HONEYMOON_ROUTE = `${ADMIN_ROUTE}/aboutOurHoneymoon`;
-export const HONEYMOON_GIFT_LIST_ROUTE = `${ADMIN_ROUTE}/honeymoonGiftList`;
 export const HONEYMOON_GIFT_LIST_ITEM_ROUTE = `${ADMIN_ROUTE}/honeymoonGiftListItem`;
 export const USERS_ROUTE = `${ADMIN_ROUTE}/users`;
 

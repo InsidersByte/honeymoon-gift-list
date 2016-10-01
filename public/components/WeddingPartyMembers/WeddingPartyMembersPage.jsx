@@ -8,7 +8,9 @@ import WeddingPartyMember from './WeddingPartyMember';
 import FontAwesome from '../FontAwesome';
 import SortableContainer from '../SortableContainer';
 import SortableItem from '../SortableItem';
+import ComingSoon from '../ComingSoon';
 
+@ComingSoon
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
