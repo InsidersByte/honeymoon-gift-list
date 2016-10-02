@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import { SUCCESS_NOTIFICATION, ERROR_NOTIFICATION, HIDE_NOTIFICATION } from '../constants/actionTypes';
 
 function createNotification(notification) {
-    return { ...notification, id: uuid.v4(), position: 'br', show: true };
+    return { ...notification, id: uuid.v4(), position: 'bl', show: true };
 }
 
 function createSuccessNotification({ payload: { message } }) {
