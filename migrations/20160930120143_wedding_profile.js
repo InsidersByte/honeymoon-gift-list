@@ -7,9 +7,9 @@ exports.up = knex =>
         table.timestamp('wedding_date').notNullable();
         table.string('gift_list_content').notNullable();
         table.boolean('show_payment_message').notNullable().defaultTo(false);
-        table.string('payment_message').notNullable();
+        table.string('payment_message');
         table.boolean('show_disclaimer_message').notNullable().defaultTo(false);
-        table.string('disclaimer_message').notNullable();
+        table.string('disclaimer_message');
     });
 
 exports.down = knex => knex.schema.dropTable('wedding_profiles');

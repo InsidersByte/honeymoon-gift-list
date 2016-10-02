@@ -51,7 +51,7 @@ const styles = {
 
 const DateTimeFormat = global.Intl.DateTimeFormat;
 
-export default function HoneymoonGiftListForm(
+export default function WeddingProfileForm(
     { weddingProfile, loading, saving, onChange, onDateChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType
 ) {
     const {
@@ -99,7 +99,7 @@ export default function HoneymoonGiftListForm(
             <Paper>
                 <Toolbar>
                     <ToolbarGroup>
-                        <ToolbarTitle text="Honeymoon Gift List" />
+                        <ToolbarTitle text="Wedding Profile" />
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <IconButton touch tooltip="Help" onClick={handleOpen}>
