@@ -23,7 +23,7 @@ import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/Honey
 import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
-import ResetPage from '../components/Reset/ResetPage';
+import ResetPasswordPage from '../containers/ResetPasswordPage';
 import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPartyMembersPage';
 import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
@@ -90,7 +90,7 @@ export default store => (
             <Route onEnter={requireSetup}>
                 <Route onEnter={ifLoggedInRedirectToAdmin(store)}>
                     <Route path="login" component={LoginPage} />
-                    <Route path="reset/:token" component={ResetPage} />
+                    <Route path="reset/:token" component={ResetPasswordPage} />
                     <Route path="signUp/:token" component={SignUpPage} />
                 </Route>
 

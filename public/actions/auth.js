@@ -44,3 +44,18 @@ export function requestPasswordReset(data) {
         },
     };
 }
+
+export function resetPassword(data) {
+    return {
+        [CALL_API]: {
+            data,
+            endpoint: `authenticate/resetPassword/${data.token}`,
+            method: HTTP_METHODS.PUT,
+            onSuccess: (dispatch) => {
+                dispatch(success({ message: 'Password reset successfully' }));
+                dispatch(push(LOGIN_ROUTE));
+            },
+            types: [TYPES.PASSWORD_RESET_REQUEST, TYPES.PASSWORD_RESET_SUCCESS, TYPES.PASSWORD_RESET_ERROR],
+        },
+    };
+}
