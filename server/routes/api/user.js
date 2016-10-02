@@ -110,12 +110,11 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const { user: { email } } = req;
+            const { email } = req.user;
 
             const user = yield User
-                .findOne({ email })
-                .select('name email password salt')
-                .exec();
+                .forge({ email })
+                .fetch();
 
             if (!user) {
                 return res
@@ -131,7 +130,7 @@ module.exports = (app, express) => {
                     .json({ message: 'Your password is incorrect.' });
             }
 
-            user.password = req.body.newPassword;
+            user.set({ password: req.body.newPassword });
 
             yield user.save();
 
