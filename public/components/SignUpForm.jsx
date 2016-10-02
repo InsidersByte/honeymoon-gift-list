@@ -1,75 +1,97 @@
-// TODO: Move to flow
+/* @flow */
 
-import React, { PropTypes } from 'react';
-import { Jumbotron, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import React from 'react';
+import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField } from 'material-ui';
+import ProgressButton from './ProgressButton';
 import Form from './Form';
 
-export default function SignUpForm({ user, saving, loading, onChange, onSubmit }) {
+type PropsType = {
+    user: {
+        email: string,
+        name: string,
+        password: string,
+        confirmPassword: string,
+    },
+    saving: boolean,
+    loading: boolean,
+    onChange: Function,
+    onSubmit: Function,
+};
+
+const styles = {
+    form: {
+        padding: '30px 50px',
+        marginBottom: 10,
+    },
+    input: {
+        margin: '6px 0',
+    },
+    checkbox: {
+        marginTop: 12,
+        marginBottom: -6,
+    },
+    button: {
+        marginTop: 12,
+    },
+};
+
+export default function SignUpForm({ user, saving, loading, onChange, onSubmit }: PropsType) {
     const { email, name, password, confirmPassword } = user;
 
     return (
-        <Jumbotron>
-            <h1>Create your account</h1>
+        <Paper>
+            <Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text="Sign Up" />
+                </ToolbarGroup>
+            </Toolbar>
 
-            <Form onSubmit={onSubmit} loading={loading} saving={saving}>
-                <FormGroup>
-                    <ControlLabel>Email</ControlLabel>
-                    <FormControl.Static>
-                        {email}
-                    </FormControl.Static>
-                </FormGroup>
+            <Form onSubmit={onSubmit} loading={loading} saving={saving} style={styles.form}>
+                <TextField
+                    id="email"
+                    value={email}
+                    fullWidth
+                    style={styles.input}
+                    disabled
+                />
 
-                <FormGroup>
-                    <ControlLabel>Name</ControlLabel>
-                    <FormControl
-                        name="name"
-                        type="text"
-                        placeholder="Enter name"
-                        value={name}
-                        onChange={onChange}
-                        required
-                    />
-                </FormGroup>
+                <TextField
+                    name="name"
+                    floatingLabelText="Name"
+                    value={name}
+                    onChange={onChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                <FormGroup>
-                    <ControlLabel>Password</ControlLabel>
-                    <FormControl
-                        name="password"
-                        type="password"
-                        placeholder="Enter password"
-                        value={password}
-                        onChange={onChange}
-                        required
-                    />
-                </FormGroup>
+                <TextField
+                    name="password"
+                    type="password"
+                    floatingLabelText="Password"
+                    value={password}
+                    onChange={onChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                <FormGroup>
-                    <ControlLabel>Confirm Password</ControlLabel>
-                    <FormControl
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Enter confirm password"
-                        value={confirmPassword}
-                        onChange={onChange}
-                        required
-                    />
-                </FormGroup>
+                <TextField
+                    name="confirmPassword"
+                    type="password"
+                    floatingLabelText="Confirm Password"
+                    value={confirmPassword}
+                    onChange={onChange}
+                    fullWidth
+                    style={styles.input}
+                    disabled={saving}
+                    required
+                />
 
-                <Button type="submit" bsStyle="primary" block>Create Account</Button>
+                <ProgressButton saving={saving} label="Create Account" style={styles.button} />
             </Form>
-        </Jumbotron>
+        </Paper>
     );
 }
-
-SignUpForm.propTypes = {
-    user: PropTypes.shape({
-        email: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-        name: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-        password: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-        confirmPassword: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-    }).isRequired,
-    saving: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-};

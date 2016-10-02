@@ -1,30 +1,37 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
-import connect from 'alt-utils/lib/connectToStores';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import SignUpStore from '../stores/SignUpStore';
-import SignUpActions from '../actions/SignUpActions';
-import NotificationActions from '../actions/NotificationActions';
-import SignUpForm from '../components/SignUpForm';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as signUpActions from '../actions/signUp';
+import * as notificationActions from '../actions/notifications';
 import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
+import SignUpForm from '../components/SignUpForm';
+
+type PropsType = {
+    user: {
+        email: string,
+    },
+    loading: boolean,
+    saving: boolean,
+    params: {
+        token: string,
+    },
+    actions: {
+        loadSignUp: Function,
+        signUp: Function,
+        error: Function,
+    },
+};
 
 @withRouter
-@connect
+@connect(
+    ({ signUp }) => signUp,
+    dispatch => ({ actions: { ...bindActionCreators(signUpActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+)
 export default class SignUpPage extends Component {
-    static propTypes = {
-        user: PropTypes.shape({
-            email: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-        }).isRequired,
-        loading: PropTypes.bool.isRequired,
-        saving: PropTypes.bool.isRequired,
-        params: PropTypes.shape({
-            token: PropTypes.string.isRequired,
-        }),
-    };
-
-    static getStores = () => [SignUpStore];
-    static getPropsFromStores = () => SignUpStore.getState();
+    props: PropsType;
 
     state = {
         user: {
@@ -35,7 +42,8 @@ export default class SignUpPage extends Component {
     };
 
     componentDidMount() {
-        SignUpActions.fetch(this.props.params.token);
+        const { params: { token }, actions: { loadSignUp } } = this.props;
+        loadSignUp({ token });
     }
 
     onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
@@ -46,16 +54,16 @@ export default class SignUpPage extends Component {
     onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
 
-        const token = this.props.params.token;
+        const { params: { token }, actions: { signUp, error } } = this.props;
         const { user } = this.state;
         const { password, confirmPassword } = user;
 
         if (password.length < MINIMUM_PASSWORD_LENGTH) {
-            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+            error({ message: MINIMUM_PASSWORD_MESSAGE });
         } else if (password !== confirmPassword) {
-            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+            error({ message: MATCHING_PASSWORD_MESSAGE });
         } else {
-            SignUpActions.update({ id: token, user });
+            signUp({ ...user, token });
         }
     };
 
