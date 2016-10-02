@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
-import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
+import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
 import SetupApi from '../api/SetupApi';
 
 import NoMatch from '../components/NoMatch';
@@ -27,6 +27,7 @@ import ResetPage from '../components/Reset/ResetPage';
 import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPartyMembersPage';
 import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
+import SectionsPage from '../containers/SectionsPage';
 
 function checkSetup(callback, onSuccess) {
     SetupApi
@@ -97,7 +98,8 @@ export default store => (
                     <Route path="profile" component={ProfilePage} />
                     <Route path="weddingProfile" component={WeddingProfilePage} />
                     <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
-                    <Route path="users" component={UsersPage} />
+                    <Route path="section" component={SectionsPage} />
+                    <Route path="user" component={UsersPage} />
                     <Route path="giftSet" component={GiftSetsPage} />
                     <Route path="giftSet/:giftSetId" component={GiftSetPage} />
                     <Route path="weddingPartyMember" component={WeddingPartyMembersPage} />

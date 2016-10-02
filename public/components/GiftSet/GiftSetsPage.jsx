@@ -3,7 +3,7 @@ import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable';
 import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
-import { giftSetRoute } from '../../constants/routeConstants';
+import { giftSetRoute } from '../../constants/routes';
 import Loader from '../Loader';
 import ComingSoon from '../ComingSoon';
 

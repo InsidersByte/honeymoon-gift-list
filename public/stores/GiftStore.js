@@ -2,7 +2,7 @@ import alt from '../helpers/alt';
 import actions from '../actions/GiftActions';
 import BaseStore from './BaseStore';
 import { GIFT as key } from '../constants/KeyConstants';
-import { confirmationPageRoute } from '../constants/routeConstants';
+import { confirmationPageRoute } from '../constants/routes';
 import history from '../helpers/history';
 
 class GiftStore extends BaseStore {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import GiftActions from '../../actions/GiftActions';
 import GiftStore from '../../stores/GiftStore';
-import { HOME_ROUTE } from '../../constants/routeConstants';
+import { HOME_ROUTE } from '../../constants/routes';
 import Loader from '../Loader';
 import { PAYMENT_METHODS } from '../../../lib/constants';
 import css from './ConfirmationPage.styl';

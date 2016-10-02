@@ -3,7 +3,7 @@ import GiverDetailsForm from './GiverDetailsForm';
 import GiftActions from '../../actions/GiftActions';
 import GiftStore from '../../stores/GiftStore';
 import basketStore from '../../stores/BasketStore';
-import { HOME_ROUTE } from '../../constants/routeConstants';
+import { HOME_ROUTE } from '../../constants/routes';
 
 import css from './GiverDetailsPage.styl';
 

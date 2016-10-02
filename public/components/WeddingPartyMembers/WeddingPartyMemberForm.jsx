@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { WEDDING_PARTY_MEMBERS_ROUTE } from '../../constants/routeConstants';
+import { WEDDING_PARTY_MEMBERS_ROUTE } from '../../constants/routes';
 import Form from '../Form';
 
 export default function WeddingPartyMemberForm(props) {

@@ -5,7 +5,7 @@ import moment from 'moment';
 import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
 import GiftTable from './GiftTable';
-import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
+import { GIFT_SETS_ROUTE } from '../../constants/routes';
 import Loader from '../Loader';
 
 export default class GiftSetPage extends React.Component {

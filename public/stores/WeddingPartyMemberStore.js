@@ -2,7 +2,7 @@ import alt from '../helpers/alt';
 import actions from '../actions/WeddingPartyMemberActions';
 import BaseStore from './BaseStore';
 import { WEDDING_PARTY_MEMBER as key } from '../constants/KeyConstants';
-import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routeConstants';
+import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
 import history from '../helpers/history';
 import { move } from '../utils/sortingHelper';
 

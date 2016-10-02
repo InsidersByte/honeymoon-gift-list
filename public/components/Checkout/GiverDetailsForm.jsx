@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Radio } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { BASKET_ROUTE } from '../../constants/routeConstants';
+import { BASKET_ROUTE } from '../../constants/routes';
 import Form from '../Form';
 import css from './GiverDetailsForm.styl';
 import { PAYMENT_METHODS } from '../../../lib/constants';

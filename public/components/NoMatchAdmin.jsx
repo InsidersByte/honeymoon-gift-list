@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ADMIN_ROUTE } from '../constants/routeConstants';
+import { ADMIN_ROUTE } from '../constants/routes';
 
 export default function NoMatchAdmin() {
     return (

@@ -3,7 +3,7 @@ import { success } from './notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
-import { ADMIN_ROUTE } from '../constants/routeConstants';
+import { ADMIN_ROUTE } from '../constants/routes';
 
 export function loadSignUp({ token }) {
     return {

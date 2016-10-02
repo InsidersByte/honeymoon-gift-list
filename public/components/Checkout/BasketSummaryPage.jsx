@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import BasketSummaryTable from './BasketSummaryTable';
-import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routeConstants';
+import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routes';
 
 import css from './BasketSummaryPage.styl';
 

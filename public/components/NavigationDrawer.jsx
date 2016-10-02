@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Drawer, List, ListItem, MakeSelectable as makeSelectable } from 'material-ui';
-import * as ROUTES from '../constants/routeConstants';
+import * as ROUTES from '../constants/routes';
 
 type PropsType = {
     isAuthenticated: boolean,
@@ -38,7 +38,7 @@ export default function NavigationDrawer({ isAuthenticated, user, location, onCh
                 style={{ padding: 0 }}
             >
                 <ListItem primaryText="Wedding Profile" value={ROUTES.WEDDING_PROFILE_ROUTE} />
-                <ListItem primaryText="Sections" value={ROUTES.WEDDING_PROFILE_ROUTE} />
+                <ListItem primaryText="Sections" value={ROUTES.SECTIONS_ROUTE} />
                 <ListItem primaryText="Wedding Party Members" value={ROUTES.WEDDING_PARTY_MEMBERS_ROUTE} />
                 <ListItem primaryText="Gift List" value={ROUTES.HONEYMOON_GIFT_LIST_ITEM_ROUTE} />
                 <ListItem primaryText="Gift Sets" value={ROUTES.GIFT_SETS_ROUTE} />

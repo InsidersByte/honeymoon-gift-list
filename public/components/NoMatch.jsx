@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { HOME_ROUTE } from '../constants/routeConstants';
+import { HOME_ROUTE } from '../constants/routes';
 
 const styles = {
     root: {
