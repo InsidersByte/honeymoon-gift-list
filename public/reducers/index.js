@@ -7,6 +7,7 @@ import users from './users';
 import notifications from './notifications';
 import weddingProfile from './weddingProfile';
 import signUp from './signUp';
+import setup from './setup';
 
 export default combineReducers({
     auth,
@@ -14,5 +15,6 @@ export default combineReducers({
     notifications,
     weddingProfile,
     signUp,
+    setup,
     routing,
 });

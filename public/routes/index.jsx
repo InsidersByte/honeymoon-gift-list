@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
-import SetupApi from '../api/SetupApi';
+import api from '../api';
+import { HTTP_METHODS } from '../constants/api';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
@@ -15,7 +16,7 @@ import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
 import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
-import SetupPage from '../components/Setup/SetupPage';
+import SetupPage from '../containers/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
 import WeddingProfilePage from '../containers/WeddingProfilePage';
@@ -30,8 +31,7 @@ import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/Upda
 import SectionsPage from '../containers/SectionsPage';
 
 function checkSetup(callback, onSuccess) {
-    SetupApi
-        .get()
+    api({ method: HTTP_METHODS.GET, endpoint: 'setup' })
         .then(({ status }) => {
             onSuccess({ status });
             callback();
