@@ -1,13 +1,18 @@
 import * as TYPES from '../constants/actionTypes';
+import { move } from '../utils/sortingHelper';
 
-const weddingPartyMembers = {
+const initialWeddingPartyMembers = {
     loading: false,
     saving: false,
     deleting: false,
     weddingPartyMembers: [],
 };
 
-export default function weddingPartyMembersReducer(state = weddingPartyMembers, action) {
+function moveMembers({ weddingPartyMembers }, { payload: { sourceId, targetId } }) {
+    return move({ sourceId, targetId, data: weddingPartyMembers });
+}
+
+export default function weddingPartyMembersReducer(state = initialWeddingPartyMembers, action) {
     switch (action.type) {
         case TYPES.LOAD_WEDDING_PARTY_MEMBERS_REQUEST:
             return Object.assign({}, state, { loading: true });
@@ -17,6 +22,9 @@ export default function weddingPartyMembersReducer(state = weddingPartyMembers, 
 
         case TYPES.LOAD_WEDDING_PARTY_MEMBERS_ERROR:
             return Object.assign({}, state, { loading: false });
+
+        case TYPES.MOVE_WEDDING_PARTY_MEMBER:
+            return Object.assign({}, state, { weddingPartyMembers: moveMembers(state, action) });
 
         default:
             return state;

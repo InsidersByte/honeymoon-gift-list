@@ -4,10 +4,9 @@ import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
 import ProgressButton from './ProgressButton';
 import Form from './Form';
-import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
 
 type PropsType = {
-    member: {
+    weddingPartyMember: {
         name: string,
         title: string,
         imageUrl: string,
@@ -35,7 +34,7 @@ const styles = {
     },
 };
 
-export default function WeddingPartyMemberForm({ member, title, loading, saving, onChange, onSubmit, onBack }: PropsType) {
+export default function WeddingPartyMemberForm({ weddingPartyMember, title, loading, saving, onChange, onSubmit, onBack }: PropsType) {
     return (
         <Paper>
             <Toolbar>
@@ -48,7 +47,7 @@ export default function WeddingPartyMemberForm({ member, title, loading, saving,
                 <TextField
                     name="name"
                     floatingLabelText="Name"
-                    value={member.name}
+                    value={weddingPartyMember.name}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}
@@ -59,7 +58,7 @@ export default function WeddingPartyMemberForm({ member, title, loading, saving,
                 <TextField
                     name="title"
                     floatingLabelText="Title"
-                    value={member.title}
+                    value={weddingPartyMember.title}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}
@@ -71,7 +70,7 @@ export default function WeddingPartyMemberForm({ member, title, loading, saving,
                     name="imageUrl"
                     type="url"
                     floatingLabelText="Image Url"
-                    value={member.imageUrl}
+                    value={weddingPartyMember.imageUrl}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}
@@ -84,7 +83,7 @@ export default function WeddingPartyMemberForm({ member, title, loading, saving,
                     rows={10}
                     multiLine
                     floatingLabelText="Description"
-                    value={member.description}
+                    value={weddingPartyMember.description}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}

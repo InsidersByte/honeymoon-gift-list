@@ -10,6 +10,7 @@ type PropsType = {
     loading: boolean,
     saving: boolean,
     weddingProfile: {
+        id: number,
         coverTitle: string,
         coverImageUrl: string,
         weddingDate: Date,
@@ -59,7 +60,9 @@ export default class WeddingProfilePage extends React.Component {
     }
 
     componentWillReceiveProps({ weddingProfile }: PropsType) {
-        this.setState({ weddingProfile });
+        if (weddingProfile.id !== this.state.weddingProfile.id) {
+            this.setState({ weddingProfile: { ...weddingProfile } });
+        }
     }
 
     onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {

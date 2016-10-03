@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 import { SORTABLE_ITEM } from '../constants/itemTypes';

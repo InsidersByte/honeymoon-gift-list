@@ -9,13 +9,20 @@ import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from
 import WeddingPartyMembersList from '../components/WeddingPartyMemberList';
 
 type PropsType = {
-    weddingPartyMembers: Array<Object>,
+    weddingPartyMembers: Array<{
+        id: number,
+        name: string,
+        title: string,
+        imageUrl: string,
+        description: string,
+    }>,
     loading: boolean,
     deleting: boolean,
     actions: {
         loadWeddingPartyMembers: Function,
         updateWeddingPartyMember: Function,
         deleteWeddingPartyMember: Function,
+        moveWeddingPartyMember: Function,
     },
     router: {
         push: Function,
@@ -56,22 +63,26 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.props.actions.updateWeddingPartyMember(member);
     };
 
-    onDelete(member: Object) {
+    onDelete = (member: Object) => {
         if (!confirm('Are you sure you want to delete this member?')) {
             return;
         }
 
         this.props.actions.deleteWeddingPartyMember(member);
-    }
+    };
 
     render() {
-        const { weddingPartyMembers, loading } = this.props;
+        const { weddingPartyMembers, loading, actions: { moveWeddingPartyMember } } = this.props;
 
         return (
             <WeddingPartyMembersList
                 weddingPartyMembers={weddingPartyMembers}
                 loading={loading}
                 onAdd={this.onAdd}
+                onSelect={this.onSelect}
+                onMove={moveWeddingPartyMember}
+                onDrop={this.onDrop}
+                onDelete={this.onDelete}
             />
         );
     }

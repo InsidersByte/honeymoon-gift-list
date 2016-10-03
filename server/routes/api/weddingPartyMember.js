@@ -58,79 +58,81 @@ module.exports = (app, express) => {
                 .json(weddingPartyMember);
         }));
 
-    // router
-    //     .route('/:weddingPartyMemberId')
-    //
-    //     .get(wrap(function* getWeddingPartyMember(req, res) {
-    //         const weddingProfile = yield WeddingProfile.findOne({});
-    //
-    //         const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
-    //
-    //         if (!weddingPartyMember) {
-    //             return res
-    //                 .status(404)
-    //                 .send();
-    //         }
-    //
-    //         return res.json(weddingPartyMember);
-    //     }))
-    //
-    //     .put(wrap(function* updateWeddingPartyMember(req, res) {
-    //         req.checkBody('id').equals(req.params.weddingPartyMemberId);
-    //         req.checkBody('name').notEmpty();
-    //         req.checkBody('title').notEmpty();
-    //         req.checkBody('imageUrl').isURL();
-    //         req.checkBody('description').notEmpty();
-    //         req.checkBody('position').isFloat();
-    //
-    //         const errors = req.validationErrors();
-    //
-    //         if (errors) {
-    //             return res
-    //                 .status(400)
-    //                 .send(errors);
-    //         }
-    //
-    //         const weddingProfile = yield WeddingProfile.findOne({});
-    //
-    //         const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
-    //
-    //         if (!weddingPartyMember) {
-    //             return res
-    //                 .status(404)
-    //                 .send();
-    //         }
-    //
-    //         weddingPartyMember.name = req.body.name;
-    //         weddingPartyMember.title = req.body.title;
-    //         weddingPartyMember.imageUrl = req.body.imageUrl;
-    //         weddingPartyMember.description = req.body.description;
-    //         weddingPartyMember.position = req.body.position;
-    //
-    //         yield weddingProfile.save();
-    //
-    //         return res.json(weddingPartyMember);
-    //     }))
-    //
-    //     .delete(wrap(function* deleteWeddingPartyMember(req, res) {
-    //         const weddingProfile = yield WeddingProfile.findOne({});
-    //
-    //         const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
-    //
-    //         if (!weddingPartyMember) {
-    //             return res
-    //                 .status(404)
-    //                 .send();
-    //         }
-    //
-    //         weddingPartyMember.remove();
-    //
-    //         yield weddingProfile.save();
-    //
-    //         return res
-    //             .status(204)
-    //             .send();
-    //     }));
+    router
+        .route('/:id')
+
+        .get(wrap(function* getWeddingPartyMember(req, res) {
+            const { id } = req.params;
+
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
+
+            return res.json(weddingPartyMember);
+        }))
+
+        .put(wrap(function* updateWeddingPartyMember(req, res) {
+            req.checkBody('id').equals(req.params.id);
+            req.checkBody('name').notEmpty();
+            req.checkBody('title').notEmpty();
+            req.checkBody('imageUrl').isURL();
+            req.checkBody('description').notEmpty();
+            req.checkBody('position').isFloat();
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
+            }
+
+            const { id } = req.params;
+
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
+
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            const { name, title, imageUrl, description, position } = req.body;
+
+            weddingPartyMember.set({
+                name,
+                title,
+                imageUrl,
+                description,
+                position,
+            });
+
+            yield weddingPartyMember.save();
+
+            return res.json(weddingPartyMember);
+        }))
+
+        .delete(wrap(function* deleteWeddingPartyMember(req, res) {
+            const { id } = req.params;
+
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
+
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            yield weddingPartyMember.destroy();
+
+            return res
+                .status(204)
+                .send();
+        }));
 
     return router;
 };

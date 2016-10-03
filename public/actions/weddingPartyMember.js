@@ -1,9 +1,12 @@
+import { createAction } from 'redux-actions';
 import { push } from 'react-router-redux';
 import { success } from './notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
+
+export const moveWeddingPartyMember = createAction(TYPES.MOVE_WEDDING_PARTY_MEMBER);
 
 export function loadWeddingPartyMembers() {
     return {
@@ -12,6 +15,17 @@ export function loadWeddingPartyMembers() {
             method: HTTP_METHODS.GET,
             authenticated: true,
             types: [TYPES.LOAD_WEDDING_PARTY_MEMBERS_REQUEST, TYPES.LOAD_WEDDING_PARTY_MEMBERS_SUCCESS, TYPES.LOAD_WEDDING_PARTY_MEMBERS_ERROR],
+        },
+    };
+}
+
+export function loadWeddingPartyMember(id) {
+    return {
+        [CALL_API]: {
+            endpoint: `weddingPartyMember/${id}`,
+            method: HTTP_METHODS.GET,
+            authenticated: true,
+            types: [TYPES.LOAD_WEDDING_PARTY_MEMBER_REQUEST, TYPES.LOAD_WEDDING_PARTY_MEMBER_SUCCESS, TYPES.LOAD_WEDDING_PARTY_MEMBER_ERROR],
         },
     };
 }
@@ -27,7 +41,7 @@ export function createWeddingPartyMember(data) {
                 dispatch(success({ message: 'Wedding party member created successfully' }));
                 dispatch(push(WEDDING_PARTY_MEMBERS_ROUTE));
             },
-            types: [TYPES.CREATE_WEDDING_PARTY_MEMBERS_REQUEST, TYPES.CREATE_WEDDING_PARTY_MEMBERS_SUCCESS, TYPES.CREATE_WEDDING_PARTY_MEMBERS_ERROR],
+            types: [TYPES.CREATE_WEDDING_PARTY_MEMBER_REQUEST, TYPES.CREATE_WEDDING_PARTY_MEMBER_SUCCESS, TYPES.CREATE_WEDDING_PARTY_MEMBER_ERROR],
         },
     };
 }
@@ -42,7 +56,7 @@ export function updateWeddingPartyMember(data) {
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'Wedding party member updated successfully' }));
             },
-            types: [TYPES.UPDATE_WEDDING_PARTY_MEMBERS_REQUEST, TYPES.UPDATE_WEDDING_PARTY_MEMBERS_SUCCESS, TYPES.UPDATE_WEDDING_PARTY_MEMBERS_ERROR],
+            types: [TYPES.UPDATE_WEDDING_PARTY_MEMBER_REQUEST, TYPES.UPDATE_WEDDING_PARTY_MEMBER_SUCCESS, TYPES.UPDATE_WEDDING_PARTY_MEMBER_ERROR],
         },
     };
 }
@@ -56,7 +70,7 @@ export function deleteWeddingPartyMember({ id }) {
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'Wedding party member deleted successfully' }));
             },
-            types: [TYPES.DELETE_WEDDING_PARTY_MEMBERS_REQUEST, TYPES.DELETE_WEDDING_PARTY_MEMBERS_SUCCESS, TYPES.DELETE_WEDDING_PARTY_MEMBERS_ERROR],
+            types: [TYPES.DELETE_WEDDING_PARTY_MEMBER_REQUEST, TYPES.DELETE_WEDDING_PARTY_MEMBER_SUCCESS, TYPES.DELETE_WEDDING_PARTY_MEMBER_ERROR],
         },
     };
 }

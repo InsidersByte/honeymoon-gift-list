@@ -27,7 +27,7 @@ import GiftSetPage from '../components/GiftSet/GiftSetPage';
 import ResetPasswordPage from '../containers/ResetPasswordPage';
 import WeddingPartyMembersPage from '../containers/WeddingPartyMembersPage';
 import CreateWeddingPartyMemberPage from '../containers/CreateWeddingPartyMemberPage';
-import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
+import UpdateWeddingPartyMemberPage from '../containers/UpdateWeddingPartyMemberPage';
 import SectionsPage from '../containers/SectionsPage';
 
 function checkSetup(callback, onSuccess) {
