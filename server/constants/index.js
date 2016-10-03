@@ -1,4 +1,6 @@
 module.exports = {
+    WEDDING_PROFILE_ID: 1,
+
     /**
      * Timespans in seconds and milliseconds for better readability
      */

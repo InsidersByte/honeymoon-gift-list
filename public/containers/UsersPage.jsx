@@ -70,12 +70,10 @@ export default class Users extends React.Component {
         const { saving, deleting, actions: { loadUsers } } = this.props;
 
         if (deleting && !nextDeleting) {
-            console.log('deleting');
             loadUsers();
         }
 
         if (saving && !nextSaving) {
-            console.log('saving');
             loadUsers();
         }
     }

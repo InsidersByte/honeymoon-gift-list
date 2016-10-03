@@ -25,8 +25,8 @@ import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 import ResetPasswordPage from '../containers/ResetPasswordPage';
-import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPartyMembersPage';
-import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
+import WeddingPartyMembersPage from '../containers/WeddingPartyMembersPage';
+import CreateWeddingPartyMemberPage from '../containers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
 import SectionsPage from '../containers/SectionsPage';
 

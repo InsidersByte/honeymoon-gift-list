@@ -8,6 +8,8 @@ import notifications from './notifications';
 import weddingProfile from './weddingProfile';
 import signUp from './signUp';
 import setup from './setup';
+import weddingPartyMembers from './weddingPartyMembers';
+import weddingPartyMember from './weddingPartyMember';
 
 export default combineReducers({
     auth,
@@ -16,5 +18,7 @@ export default combineReducers({
     weddingProfile,
     signUp,
     setup,
+    weddingPartyMembers,
+    weddingPartyMember,
     routing,
 });

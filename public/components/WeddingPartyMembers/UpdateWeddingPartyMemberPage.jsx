@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import WeddingPartyMemberForm from './WeddingPartyMemberForm';
+import WeddingPartyMemberForm from '../WeddingPartyMemberForm';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 

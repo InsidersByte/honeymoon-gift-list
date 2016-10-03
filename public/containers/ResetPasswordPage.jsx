@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -36,7 +38,7 @@ export default class ResetPasswordPage extends React.Component {
         return this.setState({ user });
     };
 
-    submit = (event) => {
+    submit = (event: SyntheticEvent) => {
         event.preventDefault();
 
         const { params: { token }, actions: { resetPassword, error } } = this.props;
