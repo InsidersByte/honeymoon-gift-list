@@ -31,7 +31,13 @@ type PropsType = {
 
 @withRouter
 @connect(
-    ({ weddingPartyMembers }) => weddingPartyMembers,
+    ({ weddingPartyMembers: state }) => {
+        const { weddingPartyMembers } = state;
+
+        const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+
+        return Object.assign({}, state, { weddingPartyMembers: sortedWeddingPartyMembers });
+    },
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class WeddingPartyMembersPage extends React.Component {
