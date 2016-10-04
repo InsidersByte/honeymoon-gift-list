@@ -17,6 +17,10 @@ type PropsType = {
 };
 
 export default function LandingWeddingPartyMembers({ weddingPartyMembers }: PropsType) {
+    if (weddingPartyMembers.length === 0) {
+        return null;
+    }
+
     return (
         <LandingItem title="Wedding Party Members">
             <div className={css.root}>
