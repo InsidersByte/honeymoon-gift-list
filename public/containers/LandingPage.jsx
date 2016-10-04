@@ -107,9 +107,9 @@ export default class LandingPage extends React.Component {
         this.landing.scrollToFirstSection();
     };
 
-    addToBasket(gift: Object) {
+    addToBasket = (gift: Object) => {
         this.props.actions.addToBasket(gift);
-    }
+    };
 
     render() {
         const { loading, weddingProfile, sections, weddingPartyMembers, gifts } = this.props;

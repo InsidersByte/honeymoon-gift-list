@@ -1,6 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import FontAwesome from './FontAwesome';
 // FIXME:FLOW need to fix import .styl
 import css from './LandingGift.styl';
 
@@ -23,7 +25,7 @@ export default class LandingGift extends Component {
     };
 
     render() {
-        const { gift: { name, imageUrl, remaining } } = this.props;
+        const { gift: { name, imageUrl, price, remaining } } = this.props;
 
         const backgroundImageStyle = { backgroundImage: `url(${imageUrl})` };
 
@@ -33,7 +35,11 @@ export default class LandingGift extends Component {
 
                 <div className={css.content}>
                     <h4>{name}</h4>
-                    <p>Remaining: {remaining} </p>
+                    <p>Remaining: {remaining} Coming Soon!</p>
+
+                    <Button bsStyle="success" onClick={this.onClick}>
+                        <FontAwesome icon="shopping-basket" /> Add to Basket £ {price}
+                    </Button>
                 </div>
             </div>
         );
