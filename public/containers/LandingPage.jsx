@@ -44,6 +44,9 @@ type PropsType = {
         price: number,
         remaining: number,
     }>,
+    basket: Map,
+    basketCount: number,
+    basketTotal: number,
     actions: {
         loadWeddingProfile: Function,
         loadSections: Function,
@@ -55,7 +58,7 @@ type PropsType = {
 
 @connect(
     (state) => {
-        const { weddingProfile: weddingProfileState, sections, weddingPartyMembers, gifts } = state;
+        const { weddingProfile: weddingProfileState, sections, weddingPartyMembers, gifts, basket } = state;
 
         const loading = weddingProfileState.loading || sections.loading || weddingPartyMembers.loading || gifts.loading;
 
@@ -70,12 +73,24 @@ type PropsType = {
             weddingProfile = Object.assign({}, weddingProfile, { daysToGo });
         }
 
+        let basketCount = 0;
+        let basketTotal = 0;
+
+        for (const item of basket.values()) {
+            const { quantity, price } = item;
+            basketCount += quantity;
+            basketTotal += price * quantity;
+        }
+
         return {
             weddingProfile,
+            loading,
+            basket,
+            basketCount,
+            basketTotal,
             sections: sections.sections,
             weddingPartyMembers: weddingPartyMembers.weddingPartyMembers,
             gifts: gifts.gifts,
-            loading,
         };
     },
     dispatch => ({
@@ -112,7 +127,7 @@ export default class LandingPage extends React.Component {
     };
 
     render() {
-        const { loading, weddingProfile, sections, weddingPartyMembers, gifts } = this.props;
+        const { loading, weddingProfile, sections, weddingPartyMembers, gifts, basket, basketCount, basketTotal } = this.props;
 
         return (
             <Landing
@@ -122,6 +137,9 @@ export default class LandingPage extends React.Component {
                 sections={sections}
                 weddingPartyMembers={weddingPartyMembers}
                 gifts={gifts}
+                basket={basket}
+                basketCount={basketCount}
+                basketTotal={basketTotal}
                 addToBasket={this.addToBasket}
                 onScrollDown={this.onScrollDown}
             />

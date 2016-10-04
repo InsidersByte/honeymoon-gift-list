@@ -14,6 +14,7 @@ export default function basketReducer(state = new Map(), action) {
         }
 
         state.set(id, updatedItem);
+        return new Map(state);
     }
 
     return state;

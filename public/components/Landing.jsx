@@ -6,6 +6,7 @@ import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
 import LandingWeddingPartyMembers from './LandingWeddingPartyMembers';
 import LandingGifts from './LandingGifts';
+import LandingBasket from './LandingBasket';
 // FIXME:FLOW need to fix import .styl
 import css from './Landing.styl';
 
@@ -13,6 +14,9 @@ type PropsType = {
     loading: boolean,
     onScrollDown: Function,
     addToBasket: Function,
+    basket: Map,
+    basketCount: number,
+    basketTotal: number,
     weddingProfile: {
         id: number,
         coverTitle: string,
@@ -56,7 +60,7 @@ export default class Landing extends Component {
     };
 
     render() {
-        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts } = this.props;
+        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts, basketCount, basketTotal } = this.props;
 
         return (
             <Loader loading={loading} className={css.root}>
@@ -87,6 +91,7 @@ export default class Landing extends Component {
 
                 <LandingWeddingPartyMembers weddingPartyMembers={weddingPartyMembers} />
                 <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} />
+                <LandingBasket count={basketCount} total={basketTotal} />
             </Loader>
         );
     }
