@@ -1,5 +1,5 @@
 import random from '../../lib/random';
-import { MAXIMUM_NUMBER } from '../constants/sorting';
+import { MAXIMUM_NUMBER } from '../constants';
 
 export function move({ sourceId, targetId, data }) { // eslint-disable-line import/prefer-default-export
     const items = [...data];

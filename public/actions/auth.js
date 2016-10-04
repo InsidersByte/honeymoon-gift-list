@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 import { CALL_API } from '../middleware/api';
 import { success } from './notifications';
 import * as TYPES from '../constants/actionTypes';
-import { TOKEN } from '../constants/storageKeys';
+import { TOKEN } from '../constants';
 import { ADMIN_ROUTE, LOGIN_ROUTE } from '../constants/routes';
 import { HTTP_METHODS } from '../constants/api';
 

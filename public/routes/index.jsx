@@ -20,7 +20,7 @@ import SetupPage from '../containers/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
 import WeddingProfilePage from '../containers/WeddingProfilePage';
-import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
+import GiftsPage from '../containers/GiftsPage';
 import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
@@ -97,7 +97,7 @@ export default store => (
                 <Route onEnter={requireAuth(store)}>
                     <Route path="profile" component={ProfilePage} />
                     <Route path="weddingProfile" component={WeddingProfilePage} />
-                    <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
+                    <Route path="gift" component={GiftsPage} />
                     <Route path="section" component={SectionsPage} />
                     <Route path="user" component={UsersPage} />
                     <Route path="giftSet" component={GiftSetsPage} />

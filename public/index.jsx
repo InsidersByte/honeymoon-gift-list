@@ -12,7 +12,7 @@ import 'animate.css/animate.css';
 import 'font-awesome/css/font-awesome.css';
 import routes from './routes';
 import configureStore from './store/configureStore';
-import { TOKEN } from './constants/storageKeys';
+import { TOKEN } from './constants';
 import jwtDecoder from './utils/jwtDecoder';
 // FIXME:FLOW need to fix import .styl
 import './index.styl';

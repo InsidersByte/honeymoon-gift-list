@@ -10,6 +10,7 @@ import signUp from './signUp';
 import setup from './setup';
 import weddingPartyMembers from './weddingPartyMembers';
 import weddingPartyMember from './weddingPartyMember';
+import gifts from './gifts';
 
 export default combineReducers({
     auth,
@@ -20,5 +21,6 @@ export default combineReducers({
     setup,
     weddingPartyMembers,
     weddingPartyMember,
+    gifts,
     routing,
 });

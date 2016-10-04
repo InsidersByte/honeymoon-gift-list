@@ -8,7 +8,7 @@ export const LOGIN_ROUTE = `${ADMIN_ROUTE}/login`;
 export const SETUP_ROUTE = `${ADMIN_ROUTE}/setup`;
 export const PROFILE_ROUTE = `${ADMIN_ROUTE}/profile`;
 export const WEDDING_PROFILE_ROUTE = `${ADMIN_ROUTE}/weddingProfile`;
-export const HONEYMOON_GIFT_LIST_ITEM_ROUTE = `${ADMIN_ROUTE}/honeymoonGiftListItem`;
+export const GIFT_ROUTE = `${ADMIN_ROUTE}/gift`;
 export const SECTIONS_ROUTE = `${ADMIN_ROUTE}/section`;
 export const USERS_ROUTE = `${ADMIN_ROUTE}/user`;
 

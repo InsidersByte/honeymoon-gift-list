@@ -3,7 +3,7 @@
 import request from 'superagent';
 
 import { BASE_API_URL } from '../constants/api';
-import { TOKEN } from '../constants/storageKeys';
+import { TOKEN } from '../constants';
 
 function createRequest({ endpoint, method, authenticated }: { endpoint: string, method: string, authenticated: boolean }): any {
     const url = `${BASE_API_URL}${endpoint}`;

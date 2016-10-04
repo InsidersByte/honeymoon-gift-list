@@ -1,12 +1,7 @@
+// TODO: Delete me
+
 export const ABOUT_OUR_DAY = 'aboutOurDay';
 export const RSVP = 'rsvp';
-export const WEDDING_PARTY_MEMBER = 'member';
-export const COVER = 'cover';
-export const SETUP = 'user';
-export const SIGN_UP = 'user';
-export const USER = 'user';
-export const HONEYMOON_GIFT_LIST = 'honeymoonGiftList';
 export const WEDDING_PROFILE = 'weddingProfile';
-export const HONEYMOON_GIFT_LIST_ITEM = 'item';
 export const GIFT = 'giftSet';
 export const GIFT_SET = 'giftSet';
