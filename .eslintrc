@@ -13,12 +13,10 @@
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 160, 2],
-        "no-continue": 0,
+        "no-continue": 1,
         "class-methods-use-this": 1,
 
-        "jsx-a11y/href-no-hash": 1,
-
-        "react/no-unused-prop-types": 0,
+        "react/no-unused-prop-types": 1,
         "react/jsx-indent-props": [2, 4],
         "react/jsx-indent": [2, 4],
         "react/sort-comp": [2, {

@@ -3,10 +3,6 @@ import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
 
-function onUpdateWeddingProfile(dispatch) {
-    dispatch(success({ message: 'Wedding Profile updated successfully' }));
-}
-
 export function loadWeddingProfile() {
     return {
         [CALL_API]: {
@@ -25,7 +21,9 @@ export function updateWeddingProfile(data) {
             endpoint: 'weddingProfile',
             method: HTTP_METHODS.PUT,
             authenticated: true,
-            onSuccess: onUpdateWeddingProfile,
+            onSuccess: (dispatch) => {
+                dispatch(success({ message: 'Wedding Profile updated successfully' }));
+            },
             types: [TYPES.UPDATE_WEDDING_PROFILE_REQUEST, TYPES.UPDATE_WEDDING_PROFILE_SUCCESS, TYPES.UPDATE_WEDDING_PROFILE_ERROR],
         },
     };

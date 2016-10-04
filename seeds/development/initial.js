@@ -23,6 +23,5 @@ exports.seed = knex =>
                 knex('sections').insert({ id: 4, title: 'Local Flavour', content: comingSoonText, position: 400000, wedding_profile_id: 1 }),
                 knex('sections').insert({ id: 5, title: 'On The Day', content: comingSoonText, position: 500000, wedding_profile_id: 1 }),
                 knex('sections').insert({ id: 6, title: 'The Wedding Playlist', content: comingSoonText, position: 600000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 7, title: 'About Our Honeymoon', content: comingSoonText, position: 700000, wedding_profile_id: 1 }),
             ])
         );

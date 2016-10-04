@@ -9,7 +9,7 @@ import NoMatchAdmin from '../components/NoMatchAdmin';
 
 import Root from '../containers/Root';
 
-import LandingPage from '../components/Landing/LandingPage';
+import LandingPage from '../containers/LandingPage';
 import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
 import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';

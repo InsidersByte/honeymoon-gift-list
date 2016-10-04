@@ -59,7 +59,7 @@ export default function MarkdownHelp({ open, handleClose }: PropsType) {
 
                     <TableRow>
                         <TableRowColumn>[title](http://)</TableRowColumn>
-                        <TableRowColumn><a href="#">Link</a></TableRowColumn>
+                        <TableRowColumn><a href="#link">Link</a></TableRowColumn>
                     </TableRow>
 
                     <TableRow>
