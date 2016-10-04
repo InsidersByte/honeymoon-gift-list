@@ -8,6 +8,7 @@ import css from './LandingItem.styl';
 type PropsType = {
     title: string,
     children?: React$Element<any>,
+    postContent?: React$Element<any>,
 };
 
 export default class LandingItem extends Component {
@@ -21,7 +22,7 @@ export default class LandingItem extends Component {
     };
 
     render() {
-        const { title, children } = this.props;
+        const { title, children, postContent } = this.props;
 
         return (
             <section ref={(c) => { this.container = c; }} className={css.root}>
@@ -30,6 +31,8 @@ export default class LandingItem extends Component {
                 <div className={css.content}>
                     {children}
                 </div>
+
+                {postContent}
             </section>
         );
     }

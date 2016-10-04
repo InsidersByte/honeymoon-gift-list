@@ -37,6 +37,13 @@ type PropsType = {
         imageUrl: string,
         description: string,
     }>,
+    gifts: Array<{
+        id: number,
+        name: string,
+        imageUrl: string,
+        price: number,
+        remaining: number,
+    }>,
     actions: {
         loadWeddingProfile: Function,
         loadSections: Function,
@@ -105,7 +112,7 @@ export default class LandingPage extends React.Component {
     }
 
     render() {
-        const { loading, weddingProfile, sections, weddingPartyMembers } = this.props;
+        const { loading, weddingProfile, sections, weddingPartyMembers, gifts } = this.props;
 
         return (
             <Landing
@@ -114,6 +121,8 @@ export default class LandingPage extends React.Component {
                 weddingProfile={weddingProfile}
                 sections={sections}
                 weddingPartyMembers={weddingPartyMembers}
+                gifts={gifts}
+                addToBasket={this.addToBasket}
                 onScrollDown={this.onScrollDown}
             />
         );

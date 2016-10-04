@@ -5,12 +5,14 @@ import Loader from '../components/Loader';
 import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
 import LandingWeddingPartyMembers from './LandingWeddingPartyMembers';
+import LandingGifts from './LandingGifts';
 // FIXME:FLOW need to fix import .styl
 import css from './Landing.styl';
 
 type PropsType = {
     loading: boolean,
     onScrollDown: Function,
+    addToBasket: Function,
     weddingProfile: {
         id: number,
         coverTitle: string,
@@ -35,6 +37,13 @@ type PropsType = {
         imageUrl: string,
         description: string,
     }>,
+    gifts: Array<{
+        id: number,
+        name: string,
+        imageUrl: string,
+        price: number,
+        remaining: number,
+    }>,
 };
 
 export default class Landing extends Component {
@@ -47,14 +56,11 @@ export default class Landing extends Component {
     };
 
     render() {
-        const { loading, onScrollDown, weddingProfile, sections, weddingPartyMembers } = this.props;
+        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts } = this.props;
 
         return (
             <Loader loading={loading} className={css.root}>
-                <LandingHeader
-                    weddingProfile={weddingProfile}
-                    onScrollDown={onScrollDown}
-                />
+                <LandingHeader weddingProfile={weddingProfile} onScrollDown={onScrollDown} />
 
                 {
                     sections.map(({ id, title, content }, i) => {
@@ -79,9 +85,8 @@ export default class Landing extends Component {
                     })
                 }
 
-                <LandingWeddingPartyMembers
-                    weddingPartyMembers={weddingPartyMembers}
-                />
+                <LandingWeddingPartyMembers weddingPartyMembers={weddingPartyMembers} />
+                <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} />
             </Loader>
         );
     }
