@@ -104,6 +104,84 @@ module.exports = (app, express, config) => {
             const giftSetWithPaypalLink = Object.assign({}, giftSet.toJSON(), { paypalLink });
 
             return res.json(giftSetWithPaypalLink);
+        }))
+
+        .delete(wrap(function* deleteGiftSet(req, res) {
+            const { id } = req.params;
+
+            const giftSet = yield GiftSet
+                .forge({ id })
+                .fetch({ withRelated: ['gifts', 'giver'] });
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            const paid = giftSet.get('paid');
+
+            if (paid) {
+                return res
+                    .status(400)
+                    .send({ message: 'A Gift Set marked as paid cannot be deleted' });
+            }
+
+            yield giftSet.destroy();
+
+            return res
+                .status(204)
+                .send();
+        }));
+
+    router
+        .route('/:id/paid')
+
+        .put(wrap(function* markAsPaid(req, res) {
+            const { id } = req.params;
+
+            const giftSet = yield GiftSet
+                .forge({ id })
+                .fetch({ withRelated: ['gifts', 'giver'] });
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            giftSet.set({ paid: true });
+
+            yield giftSet.save();
+
+            return res
+                .status(204)
+                .send();
+        }));
+
+    router
+        .route('/:id/detailsSent')
+
+        .put(wrap(function* markAsDetailsSent(req, res) {
+            const { id } = req.params;
+
+            const giftSet = yield GiftSet
+                .forge({ id })
+                .fetch({ withRelated: ['gifts', 'giver'] });
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            giftSet.set({ detailsSent: true });
+
+            yield giftSet.save();
+
+            return res
+                .status(204)
+                .send();
         }));
 
     return router;

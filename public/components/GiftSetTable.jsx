@@ -8,7 +8,20 @@ import GiftSetRow from './GiftSetRow';
 type PropsType = {
     loading: boolean,
     total: number,
-    giftSets: Array<{}>,
+    giftSets: Array<{
+        id: number,
+        giver: {
+            forename: string,
+            surname: string,
+            email: string,
+            phoneNumber: string,
+        },
+        createdAt: string,
+        total: number,
+        paid: boolean,
+        detailsSent: boolean,
+        paymentMethod: string,
+    }>,
     onMarkAsPaid: Function,
     onMarkAsDetailsSent: Function,
     onDelete: Function,

@@ -13,7 +13,20 @@ type PropsType = {
     saving: boolean,
     deleting: boolean,
     total: number,
-    giftSets: Array<{}>,
+    giftSets: Array<{
+        id: number,
+        giver: {
+            forename: string,
+            surname: string,
+            email: string,
+            phoneNumber: string,
+        },
+        createdAt: string,
+        total: number,
+        paid: boolean,
+        detailsSent: boolean,
+        paymentMethod: string,
+    }>,
     actions: {
         loadGiftSets: Function,
         deleteGiftSet: Function,
@@ -47,14 +60,14 @@ export default class GiftSetsPage extends React.Component {
 
     // TODO: This seems like a bit of a hack
     componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
-        const { saving, deleting, actions: { loadUsers } } = this.props;
+        const { saving, deleting, actions: { loadGiftSets } } = this.props;
 
         if (deleting && !nextDeleting) {
-            loadUsers();
+            loadGiftSets();
         }
 
         if (saving && !nextSaving) {
-            loadUsers();
+            loadGiftSets();
         }
     }
 

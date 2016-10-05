@@ -7,6 +7,7 @@ import FontAwesome from './FontAwesome';
 
 type PropsType = {
     giftSet: {
+        id: number,
         giver: {
             forename: string,
             surname: string,

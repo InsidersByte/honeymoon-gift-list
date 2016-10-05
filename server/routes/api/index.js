@@ -12,6 +12,8 @@ const section = require('./section');
 module.exports = (app, express, config) => {
     const router = new express.Router();
 
+    // TODO: Secure the routes that need securing
+
     router.use('/setup', setup(app, express, config));
     router.use('/signUp', signUp(app, express, config));
     router.use('/authenticate', authenticate(app, express, config));
