@@ -23,10 +23,11 @@ type PropsType = {
         price: number,
         remaining: number,
     }>,
+    basket: Map<number, Object>,
     addToBasket: Function,
 };
 
-export default function LandingGifts({ weddingProfile, gifts, addToBasket }: PropsType) {
+export default function LandingGifts({ weddingProfile, gifts, basket, addToBasket }: PropsType) {
     const { giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage, disclaimerMessage } = weddingProfile;
 
     const giftsElement = (
@@ -36,6 +37,7 @@ export default function LandingGifts({ weddingProfile, gifts, addToBasket }: Pro
                     <LandingGift
                         key={gift.id}
                         gift={gift}
+                        basket={basket}
                         addToBasket={addToBasket}
                     />
                 )

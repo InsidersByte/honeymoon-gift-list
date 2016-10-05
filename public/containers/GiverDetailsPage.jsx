@@ -22,7 +22,7 @@ type PropsType = {
 
 @withRouter
 @connect(
-    ({ basket }) => {
+    ({ basket, giftSet: { saving } }) => {
         let basketCount = 0;
 
         for (const item of basket.values()) {
@@ -31,6 +31,7 @@ type PropsType = {
         }
 
         return {
+            saving,
             basket,
             basketCount,
         };

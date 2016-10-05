@@ -1,7 +1,10 @@
+import { push } from 'react-router-redux';
 import { success } from './notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
+import { confirmationPageRoute } from '../constants/routes';
+import { emptyBasket } from './basket';
 
 export function loadGiftSet(id) {
     return {
@@ -21,8 +24,10 @@ export function createGiftSet(data) {
             endpoint: 'giftSet',
             method: HTTP_METHODS.POST,
             authenticated: true,
-            onSuccess: (dispatch) => {
+            afterSuccess: (dispatch, { id }) => {
                 dispatch(success({ message: 'Gift set created successfully' }));
+                dispatch(push(confirmationPageRoute(id)));
+                dispatch(emptyBasket());
             },
             types: [TYPES.CREATE_GIFT_SET_REQUEST, TYPES.CREATE_GIFT_SET_SUCCESS, TYPES.CREATE_GIFT_SET_ERROR],
         },

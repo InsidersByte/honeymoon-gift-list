@@ -1,8 +1,6 @@
 const bookshelf = require('../bookshelf');
 
-const Section = bookshelf.Model.extend({
+module.exports = bookshelf.model('Section', {
     tableName: 'sections',
     hasTimestamps: true,
 });
-
-module.exports = Section;

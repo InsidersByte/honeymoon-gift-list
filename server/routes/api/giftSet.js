@@ -1,92 +1,89 @@
-const GiftSet = require('../../models/giftSet');
+const GiftSet = require('../../models/GiftSet');
+const Giver = require('../../models/Giver');
+const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
+const Mailer = require('../../mail/index');
+const { PAYMENT_METHODS } = require('../../../lib/constants/index');
+const { generatePaypalMeLink } = require('../../../lib/paypal/index');
 
-module.exports = (app, express) => {
+const mailer = new Mailer();
+
+module.exports = (app, express, config) => {
     const router = new express.Router();
 
     router
         .route('/')
 
-        .get(wrap(function* getGiftSets(req, res) {
-            const giftSets = yield GiftSet
-                .find({})
-                .populate('gifts')
-                .populate('giver')
-                .sort('-createdAt');
+        .post(wrap(function* createGiftSet(req, res) {
+            req.checkBody('giver').notEmpty();
+            req.checkBody('giver.forename').notEmpty();
+            req.checkBody('giver.surname').notEmpty();
+            req.checkBody('giver.email').isEmail();
+            req.checkBody('giver.phoneNumber').notEmpty();
+            req.checkBody('giver.paymentMethod').isIn([PAYMENT_METHODS.PAYPAL, PAYMENT_METHODS.BANK_TRANSFER]);
+            req.checkBody('basket').notEmpty();
 
-            return res.json(giftSets);
-        }));
+            const errors = req.validationErrors();
 
-    router
-        .route('/:giftSetId')
-
-        .get(wrap(function* getGiftSet(req, res) {
-            const giftSet = yield GiftSet
-                .findById(req.params.giftSetId)
-                .populate({
-                    path: 'gifts',
-                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
-                })
-                .populate('giver');
-
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            return res.json(giftSet);
-        }))
-
-        .delete(wrap(function* deleteGiftSet(req, res) {
-            const giftSet = yield GiftSet
-                .findById(req.params.giftSetId)
-                .populate('gifts');
-
-            if (giftSet.paid) {
+            if (errors) {
                 return res
                     .status(400)
-                    .json({ message: 'a gift set marked as paid cannot be deleted' });
+                    .send(errors);
             }
 
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
+            const { giver: { forename, surname, email, phoneNumber, paymentMethod }, basket } = req.body;
+
+            let giver = yield Giver
+                .forge({ email })
+                .fetch();
+
+            if (!giver) {
+                giver = yield Giver
+                    .forge({ forename, surname, email, phoneNumber })
+                    .save();
             }
 
-            for (const gift of giftSet.gifts) {
-                yield gift.remove();
-            }
+            const giverId = giver.get('id');
+            const giftIds = basket.map(({ id, quantity, price }) => ({ gift_id: id, quantity, price }));
 
-            yield giftSet.remove();
+            const giftSet = yield GiftSet
+                .forge({ giverId, paymentMethod })
+                .save();
+
+            yield giftSet
+                .gifts()
+                .attach(giftIds);
+
+            yield giftSet.refresh({ withRelated: ['gifts'] });
+
+            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
+
+            yield mailer.send({ to: giver.get('email'), subject: 'Gift Confirmation', giftSet: giftSet.toJSON(), PAYMENT_METHODS, paypalLink }, 'confirmation');
+
+            const users = yield User.fetchAll();
+
+            const userEmails = users.map(user => user.get('email'));
+
+            yield mailer.send({ to: userEmails, subject: 'Woop we just got a gift!', giver: giver.toJSON(), giftSet: giftSet.toJSON() }, 'adminConfirmation');
+
+            giftSet.set({ emailSent: true });
+
+            yield giftSet.save();
 
             return res
-                .status(204)
-                .send();
+                .status(201)
+                .json(giftSet);
         }));
 
     router
-        .route('/:giftSetId/paid')
+        .route('/:id')
 
-        .put(wrap(function* markGiftSetAsPaid(req, res) {
-            req.checkParams('giftSetId').equals(req.body.id);
-
-            const errors = req.validationErrors();
-
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        .get(wrap(function* getGiftSet(req, res) {
+            const { id } = req.params;
 
             const giftSet = yield GiftSet
-                .findById(req.params.giftSetId)
-                .populate({
-                    path: 'gifts',
-                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
-                })
-                .populate('giver');
+                .forge({ id })
+                .fetch({ withRelated: ['gifts'] });
 
             if (!giftSet) {
                 return res
@@ -94,46 +91,10 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            giftSet.paid = true;
+            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
+            const giftSetWithPaypalLink = Object.assign({}, giftSet.toJSON(), { paypalLink });
 
-            yield giftSet.save();
-
-            return res.json(giftSet);
-        }));
-
-    router
-        .route('/:giftSetId/detailsSent')
-
-        .put(wrap(function* markGiftSetAsDetailsSent(req, res) {
-            req.checkParams('giftSetId').equals(req.body.id);
-
-            const errors = req.validationErrors();
-
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
-
-            const giftSet = yield GiftSet
-                .findById(req.params.giftSetId)
-                .populate({
-                    path: 'gifts',
-                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
-                })
-                .populate('giver');
-
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            giftSet.detailsSent = true;
-
-            yield giftSet.save();
-
-            return res.json(giftSet);
+            return res.json(giftSetWithPaypalLink);
         }));
 
     return router;

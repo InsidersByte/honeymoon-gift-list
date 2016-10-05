@@ -1,8 +1,10 @@
 const comingSoonText = 'Coming Soon!';
 
 exports.seed = knex =>
-    knex('wedding_profiles')
+    knex('sections')
         .del()
+        .then(() => knex('gifts').del())
+        .then(() => knex('wedding_profiles').del())
         .then(() =>
             knex('wedding_profiles').insert({
                 id: 1,
@@ -14,7 +16,6 @@ exports.seed = knex =>
                 disclaimer_message: comingSoonText,
             })
         )
-        .then(() => knex('sections').del())
         .then(() =>
             Promise.all([
                 knex('sections').insert({ id: 1, title: 'About Us', content: comingSoonText, position: 100000, wedding_profile_id: 1 }),
@@ -24,4 +25,15 @@ exports.seed = knex =>
                 knex('sections').insert({ id: 5, title: 'On The Day', content: comingSoonText, position: 500000, wedding_profile_id: 1 }),
                 knex('sections').insert({ id: 6, title: 'The Wedding Playlist', content: comingSoonText, position: 600000, wedding_profile_id: 1 }),
             ])
+        )
+        .then(() =>
+            knex('gifts').insert({
+                id: 1,
+                name: 'Flight',
+                image_url: 'https://i.ytimg.com/vi/4AlGn9K242I/maxresdefault.jpg',
+                requested: 10,
+                price: 10,
+                position: 100000,
+                wedding_profile_id: 1,
+            })
         );

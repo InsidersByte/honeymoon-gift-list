@@ -12,7 +12,7 @@ module.exports = (app, express) => {
         .get(wrap(function* getGifts(req, res) {
             const gifts = yield Gift
                 .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .fetchAll();
+                .fetchAll({ withRelated: ['giftSets'] });
 
             return res.json(gifts);
         }))

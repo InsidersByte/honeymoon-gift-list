@@ -1,8 +1,6 @@
 const bookshelf = require('../bookshelf');
 
-const WeddingProfile = bookshelf.Model.extend({
+module.exports = bookshelf.model('WeddingProfile', {
     tableName: 'wedding_profiles',
     hasTimestamps: true,
 });
-
-module.exports = WeddingProfile;

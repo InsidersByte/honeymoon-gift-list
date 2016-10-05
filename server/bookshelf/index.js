@@ -8,5 +8,7 @@ const orm = bookshelf(knex);
 
 orm.plugin('bookshelf-camelcase');
 orm.plugin('visibility');
+orm.plugin('registry');
+orm.plugin('virtuals');
 
 module.exports = orm;

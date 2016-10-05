@@ -9,10 +9,12 @@ exports.up = knex => knex.schema
         table.integer('giver_id').references('givers.id').notNullable();
     })
     .createTable('gift_sets_gifts', (table) => {
-        table.integer('gift_set_id').references('gift_sets.id');
-        table.integer('gift_id').references('gifts.id');
+        table.primary(['gift_set_id', 'gift_id']);
+        table.integer('gift_set_id').references('gift_sets.id').notNullable();
+        table.integer('gift_id').references('gifts.id').notNullable();
+        table.integer('quantity').notNullable();
+        table.integer('price').notNullable();
     });
-
 
 exports.down = knex => knex.schema
     .dropTable('gift_sets_gifts')

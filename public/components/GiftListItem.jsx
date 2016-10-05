@@ -42,7 +42,7 @@ export default class GiftListItem extends React.Component {
                     <h3 className={css.name}>{name}</h3>
                     <h4 className={css.title}>Price: £{price}</h4>
                     <h4 className={css.title}>Requested: {requested}</h4>
-                    <h4 className={css.title}>Remaining: {remaining} <em>Coming Soon!</em></h4>
+                    <h4 className={css.title}>Remaining: {remaining}</h4>
                 </div>
 
                 <div className={css.actionContainer}>

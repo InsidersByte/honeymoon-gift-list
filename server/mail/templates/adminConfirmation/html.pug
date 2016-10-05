@@ -19,10 +19,10 @@ block content
         tbody
             each gift in giftSet.gifts
                 tr
-                    td.text-column #{gift.honeymoonGiftListItem.name}
-                    td.numeric-column #{gift.price}
-                    td.numeric-column #{gift.quantity}
-                    td.numeric-column #{gift.total}
+                    td.text-column #{gift.name}
+                    td.numeric-column #{gift._pivot_price}
+                    td.numeric-column #{gift._pivot_quantity}
+                    td.numeric-column #{gift._pivot_price * gift._pivot_quantity}
 
     p
         strong Total £#{giftSet.total}
