@@ -9,6 +9,7 @@ import NoMatchAdmin from '../components/NoMatchAdmin';
 
 import Root from '../containers/Root';
 
+import Main from '../containers/Main';
 import LandingPage from '../containers/LandingPage';
 import BasketSummaryPage from '../containers/BasketSummaryPage';
 import GiverDetailsPage from '../containers/GiverDetailsPage';
@@ -79,10 +80,13 @@ function ifLoggedInRedirectToAdmin(store) {
 
 export default store => (
     <Route path="/" component={Root}>
-        <IndexRoute component={LandingPage} />
-        <Route path="basket" component={BasketSummaryPage} />
-        <Route path="giver" component={GiverDetailsPage} />
-        <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
+        <Route component={Main}>
+            <IndexRoute component={LandingPage} />
+            <Route path="basket" component={BasketSummaryPage} />
+            <Route path="giver" component={GiverDetailsPage} />
+            <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
+        </Route>
+
         <Route path="admin" component={Admin}>
             <IndexRedirect to="giftSet" />
             <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
