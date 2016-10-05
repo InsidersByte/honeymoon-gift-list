@@ -17,5 +17,33 @@ export default function basketReducer(state = new Map(), action) {
         return new Map(state);
     }
 
+    if (action.type === TYPES.REMOVE_FROM_BASKET) {
+        const { payload: item } = action;
+        const { id } = item;
+
+        const existingItem = state.get(id);
+
+        if (existingItem.quantity <= 1) {
+            return state;
+        }
+
+        const updatedItem = Object.assign({}, existingItem, { quantity: item.quantity -= 1 });
+
+        state.set(id, updatedItem);
+        return new Map(state);
+    }
+
+    if (action.type === TYPES.DELETE_FROM_BASKET) {
+        const { payload: item } = action;
+        const { id } = item;
+
+        state.delete(id);
+        return new Map(state);
+    }
+
+    if (action.type === TYPES.EMPTY_BASKET) {
+        return new Map();
+    }
+
     return state;
 }
