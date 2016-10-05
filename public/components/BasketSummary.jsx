@@ -4,10 +4,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import BasketSummaryTable from './BasketSummaryTable';
 import { GIVER_ROUTE, HOME_ROUTE } from '../constants/routes';
+// FIXME:FLOW need to fix import .styl
 import css from './BasketSummary.styl';
 
 type PropsType = {
-    basket: Map,
+    basket: Map<number, Object>,
     basketCount: number,
     basketTotal: number,
     addToBasket: Function,

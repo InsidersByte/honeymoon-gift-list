@@ -7,7 +7,7 @@ import * as actions from '../actions/basket';
 import BasketSummary from '../components/BasketSummary';
 
 type PropsType = {
-    basket: Map,
+    basket: Map<number, Object>,
     basketCount: number,
     basketTotal: number,
     actions: {

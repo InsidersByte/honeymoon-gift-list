@@ -11,7 +11,7 @@ import Root from '../containers/Root';
 
 import LandingPage from '../containers/LandingPage';
 import BasketSummaryPage from '../containers/BasketSummaryPage';
-import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
+import GiverDetailsPage from '../containers/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
 import LoginPage from '../containers/LoginPage';

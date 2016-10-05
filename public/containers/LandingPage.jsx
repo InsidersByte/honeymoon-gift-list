@@ -44,7 +44,7 @@ type PropsType = {
         price: number,
         remaining: number,
     }>,
-    basket: Map,
+    basket: Map<number, Object>,
     basketCount: number,
     basketTotal: number,
     actions: {

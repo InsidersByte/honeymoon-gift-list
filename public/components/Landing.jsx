@@ -14,7 +14,7 @@ type PropsType = {
     loading: boolean,
     onScrollDown: Function,
     addToBasket: Function,
-    basket: Map,
+    basket: Map<number, Object>,
     basketCount: number,
     basketTotal: number,
     weddingProfile: {
