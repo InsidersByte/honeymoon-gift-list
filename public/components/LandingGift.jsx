@@ -1,8 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import FontAwesome from './FontAwesome';
+import { RaisedButton } from 'material-ui';
+import AddCircleOutline from 'material-ui/svg-icons/action/add-shopping-cart';
 // FIXME:FLOW need to fix import .styl
 import css from './LandingGift.styl';
 
@@ -37,9 +37,12 @@ export default class LandingGift extends Component {
                     <h4>{name}</h4>
                     <p>Remaining: {remaining} Coming Soon!</p>
 
-                    <Button bsStyle="success" onClick={this.onClick}>
-                        <FontAwesome icon="shopping-basket" /> Add to Basket £ {price}
-                    </Button>
+                    <RaisedButton
+                        primary
+                        label={`Add to Basket £${price}`}
+                        onClick={this.onClick}
+                        icon={<AddCircleOutline />}
+                    />
                 </div>
             </div>
         );
