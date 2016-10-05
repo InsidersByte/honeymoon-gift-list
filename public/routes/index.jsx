@@ -12,7 +12,7 @@ import Root from '../containers/Root';
 import LandingPage from '../containers/LandingPage';
 import BasketSummaryPage from '../containers/BasketSummaryPage';
 import GiverDetailsPage from '../containers/GiverDetailsPage';
-import ConfirmationPage from '../components/Checkout/ConfirmationPage';
+import ConfirmationPage from '../containers/ConfirmationPage';
 
 import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
