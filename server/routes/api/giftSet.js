@@ -14,6 +14,15 @@ module.exports = (app, express, config) => {
     router
         .route('/')
 
+        .get(wrap(function* getGiftSets(req, res) {
+            const giftSets = yield GiftSet
+                .forge()
+                .orderBy('created_at', 'DESC')
+                .fetchAll({ withRelated: ['gifts', 'giver'] });
+
+            return res.json(giftSets);
+        }))
+
         .post(wrap(function* createGiftSet(req, res) {
             req.checkBody('giver').notEmpty();
             req.checkBody('giver.forename').notEmpty();
@@ -83,7 +92,7 @@ module.exports = (app, express, config) => {
 
             const giftSet = yield GiftSet
                 .forge({ id })
-                .fetch({ withRelated: ['gifts'] });
+                .fetch({ withRelated: ['gifts', 'giver'] });
 
             if (!giftSet) {
                 return res

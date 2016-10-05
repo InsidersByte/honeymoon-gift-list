@@ -14,6 +14,7 @@ import gifts from './gifts';
 import sections from './sections';
 import basket from './basket';
 import giftSet from './giftSet';
+import giftSets from './giftSets';
 
 export default combineReducers({
     auth,
@@ -28,5 +29,6 @@ export default combineReducers({
     sections,
     basket,
     giftSet,
+    giftSets,
     routing,
 });

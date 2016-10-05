@@ -6,6 +6,17 @@ import { HTTP_METHODS } from '../constants/api';
 import { confirmationPageRoute } from '../constants/routes';
 import { emptyBasket } from './basket';
 
+export function loadGiftSets() {
+    return {
+        [CALL_API]: {
+            endpoint: 'giftSet',
+            method: HTTP_METHODS.GET,
+            authenticated: true,
+            types: [TYPES.LOAD_GIFT_SETS_REQUEST, TYPES.LOAD_GIFT_SETS_SUCCESS, TYPES.LOAD_GIFT_SETS_ERROR],
+        },
+    };
+}
+
 export function loadGiftSet(id) {
     return {
         [CALL_API]: {

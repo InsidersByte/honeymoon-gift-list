@@ -23,7 +23,7 @@ import Admin from '../containers/Admin';
 import WeddingProfilePage from '../containers/WeddingProfilePage';
 import GiftsPage from '../containers/GiftsPage';
 import UsersPage from '../containers/UsersPage';
-import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
+import GiftSetsPage from '../containers/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 import ResetPasswordPage from '../containers/ResetPasswordPage';
 import WeddingPartyMembersPage from '../containers/WeddingPartyMembersPage';

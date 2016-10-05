@@ -1,32 +1,32 @@
+/* @flow */
+
 import React from 'react';
 import moment from 'moment';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import FontAwesome from '../FontAwesome';
+import FontAwesome from './FontAwesome';
+
+type PropsType = {
+    giftSet: {
+        giver: {
+            forename: string,
+            surname: string,
+            email: string,
+            phoneNumber: string,
+        },
+        createdAt: string,
+        total: number,
+        paid: boolean,
+        detailsSent: boolean,
+        paymentMethod: string,
+    },
+    onDelete: Function,
+    onMarkAsPaid: Function,
+    onMarkAsDetailsSent: Function,
+    onSelect: Function,
+};
 
 export default class GiftSetRow extends React.Component {
-    static propTypes = {
-        giftSet: React.PropTypes.shape({
-            giver: React.PropTypes.shape({
-                forename: React.PropTypes.string.isRequired,
-                surname: React.PropTypes.string.isRequired,
-                email: React.PropTypes.string.isRequired,
-                phoneNumber: React.PropTypes.string.isRequired,
-            }).isRequired,
-            createdAt: React.PropTypes.string.isRequired,
-            total: React.PropTypes.number.isRequired,
-            paid: React.PropTypes.bool.isRequired,
-            detailsSent: React.PropTypes.bool.isRequired,
-            paymentMethod: React.PropTypes.string.isRequired,
-        }).isRequired,
-        onDelete: React.PropTypes.func.isRequired,
-        onMarkAsPaid: React.PropTypes.func.isRequired,
-        onMarkAsDetailsSent: React.PropTypes.func.isRequired,
-        onSelect: React.PropTypes.func.isRequired,
-    };
-
-    static defaultProps = {
-        giftSet: {},
-    };
+    props: PropsType;
 
     onDelete = () => {
         this.props.onDelete(this.props.giftSet);
@@ -45,18 +45,21 @@ export default class GiftSetRow extends React.Component {
     };
 
     render() {
-        const createdAt = moment(this.props.giftSet.createdAt);
-        const createdAtFormatted = createdAt.format('DD/MM/YY HH:MM');
+        const { giftSet: { giver, createdAt, total, paid, detailsSent, paymentMethod } } = this.props;
+        const { forename, surname, email, phoneNumber } = giver;
+
+        const createdAtMoment = moment(createdAt);
+        const createdAtFormatted = createdAtMoment.format('DD/MM/YY HH:MM');
 
         return (
             <tr>
-                <th>{this.props.giftSet.giver.forename} {this.props.giftSet.giver.surname}</th>
-                <th>{this.props.giftSet.giver.email}</th>
-                <th>{this.props.giftSet.giver.phoneNumber}</th>
-                <th>{this.props.giftSet.total}</th>
-                <th>{this.props.giftSet.paymentMethod}</th>
+                <th>{forename} {surname}</th>
+                <th>{email}</th>
+                <th>{phoneNumber}</th>
+                <th>{total}</th>
+                <th>{paymentMethod}</th>
                 <th>{createdAtFormatted}</th>
-                <th>{this.props.giftSet.paid ? 'Yes' : 'No'}</th>
+                <th>{paid ? 'Yes' : 'No'}</th>
                 <th>
                     <ButtonToolbar>
                         <Button
@@ -71,7 +74,7 @@ export default class GiftSetRow extends React.Component {
                             bsSize="xsmall"
                             bsStyle="success"
                             onClick={this.onMarkAsDetailsSent}
-                            disabled={this.props.giftSet.detailsSent || this.props.giftSet.paid}
+                            disabled={detailsSent || paid}
                         >
                             <FontAwesome icon="send" />
                         </Button>
@@ -80,7 +83,7 @@ export default class GiftSetRow extends React.Component {
                             bsSize="xsmall"
                             bsStyle="success"
                             onClick={this.onMarkAsPaid}
-                            disabled={this.props.giftSet.paid}
+                            disabled={paid}
                         >
                             <FontAwesome icon="gbp" />
                         </Button>
@@ -89,7 +92,7 @@ export default class GiftSetRow extends React.Component {
                             bsSize="xsmall"
                             bsStyle="danger"
                             onClick={this.onDelete}
-                            disabled={this.props.giftSet.paid}
+                            disabled={paid}
                         >
                             <FontAwesome icon="trash" />
                         </Button>
