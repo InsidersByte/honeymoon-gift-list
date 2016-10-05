@@ -2,8 +2,8 @@ const environmentConstants = require('../constants/environment');
 const path = require('path');
 const api = require('./api');
 
-module.exports = (app, express, config, environment) => {
-    const apiRoutes = api(app, express, config);
+module.exports = ({ app, express, config, environment }) => {
+    const apiRoutes = api({ express, config });
 
     app.use('/api', apiRoutes);
 

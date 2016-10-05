@@ -2,7 +2,7 @@ const Section = require('../../models/Section');
 const wrap = require('../../utilities/wrap');
 const { WEDDING_PROFILE_ID } = require('../../constants');
 
-module.exports = (app, express) => {
+module.exports = ({ express }) => {
     const router = new express.Router();
 
     router

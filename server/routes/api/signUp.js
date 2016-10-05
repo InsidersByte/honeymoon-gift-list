@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 
-module.exports = (app, express) => {
+module.exports = ({ express }) => {
     const router = new express.Router();
 
     router

@@ -3,7 +3,7 @@ const wrap = require('../../utilities/wrap');
 const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
-module.exports = (app, express) => {
+module.exports = ({ express }) => {
     const router = new express.Router();
 
     router

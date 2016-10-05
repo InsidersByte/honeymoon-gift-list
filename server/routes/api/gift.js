@@ -3,7 +3,7 @@ const wrap = require('../../utilities/wrap');
 const { integer } = require('../../../lib/random/index');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
-module.exports = (app, express) => {
+module.exports = ({ express, secure }) => {
     const router = new express.Router();
 
     router
@@ -17,7 +17,7 @@ module.exports = (app, express) => {
             return res.json(gifts);
         }))
 
-        .post(wrap(function* createGift(req, res) {
+        .post(secure, wrap(function* createGift(req, res) {
             req.checkBody('imageUrl').isURL();
             req.checkBody('name').notEmpty();
             req.checkBody('requested').isInt();
@@ -61,7 +61,7 @@ module.exports = (app, express) => {
     router
         .route('/:id')
 
-        .put(wrap(function* updateGift(req, res) {
+        .put(secure, wrap(function* updateGift(req, res) {
             req.checkParams('id').equals(`${req.body.id}`);
             req.checkBody('imageUrl').isURL();
             req.checkBody('name').notEmpty();
@@ -104,7 +104,7 @@ module.exports = (app, express) => {
             return res.json(gift);
         }))
 
-        .delete(wrap(function* deleteGift(req, res) {
+        .delete(secure, wrap(function* deleteGift(req, res) {
             const { id } = req.params;
 
             const gift = yield Gift

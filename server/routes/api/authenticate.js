@@ -8,7 +8,7 @@ const { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../con
 
 const mailer = new Mailer();
 
-module.exports = (app, express, config) => {
+module.exports = ({ express, config }) => {
     const router = new express.Router();
 
     router.post('/', wrap(function* authenticate(req, res) {

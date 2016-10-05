@@ -7,7 +7,7 @@ const { ONE_DAY_MS } = require('../../constants');
 
 const mailer = new Mailer();
 
-module.exports = (app, express) => {
+module.exports = ({ express }) => {
     const router = new express.Router();
 
     router

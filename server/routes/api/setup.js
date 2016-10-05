@@ -17,7 +17,7 @@ function* isSetup() {
     };
 }
 
-module.exports = (app, express) => {
+module.exports = ({ express }) => {
     const router = new express.Router();
 
     router.route('/')

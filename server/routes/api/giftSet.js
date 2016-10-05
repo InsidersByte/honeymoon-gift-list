@@ -8,13 +8,13 @@ const { generatePaypalMeLink } = require('../../../lib/paypal/index');
 
 const mailer = new Mailer();
 
-module.exports = (app, express, config) => {
+module.exports = ({ express, config, secure }) => {
     const router = new express.Router();
 
     router
         .route('/')
 
-        .get(wrap(function* getGiftSets(req, res) {
+        .get(secure, wrap(function* getGiftSets(req, res) {
             const giftSets = yield GiftSet
                 .forge()
                 .orderBy('created_at', 'DESC')
@@ -106,7 +106,7 @@ module.exports = (app, express, config) => {
             return res.json(giftSetWithPaypalLink);
         }))
 
-        .delete(wrap(function* deleteGiftSet(req, res) {
+        .delete(secure, wrap(function* deleteGiftSet(req, res) {
             const { id } = req.params;
 
             const giftSet = yield GiftSet
@@ -137,7 +137,7 @@ module.exports = (app, express, config) => {
     router
         .route('/:id/paid')
 
-        .put(wrap(function* markAsPaid(req, res) {
+        .put(secure, wrap(function* markAsPaid(req, res) {
             const { id } = req.params;
 
             const giftSet = yield GiftSet
@@ -162,7 +162,7 @@ module.exports = (app, express, config) => {
     router
         .route('/:id/detailsSent')
 
-        .put(wrap(function* markAsDetailsSent(req, res) {
+        .put(secure, wrap(function* markAsDetailsSent(req, res) {
             const { id } = req.params;
 
             const giftSet = yield GiftSet

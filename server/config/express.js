@@ -4,7 +4,7 @@ const expressValidator = require('express-validator');
 const cors = require('cors');
 const environmentConstants = require('../constants/environment');
 
-module.exports = (app, environment) => {
+module.exports = ({ app, environment }) => {
     if (environment !== environmentConstants.PRODUCTION) {
         app.use(require('morgan')('dev')); // eslint-disable-line global-require, import/no-extraneous-dependencies
         app.use(require('errorhandler')()); // eslint-disable-line global-require, import/no-extraneous-dependencies
