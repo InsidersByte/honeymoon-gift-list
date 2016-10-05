@@ -13,6 +13,7 @@ import weddingPartyMember from './weddingPartyMember';
 import gifts from './gifts';
 import sections from './sections';
 import basket from './basket';
+import giftSet from './giftSet';
 
 export default combineReducers({
     auth,
@@ -26,5 +27,6 @@ export default combineReducers({
     gifts,
     sections,
     basket,
+    giftSet,
     routing,
 });
