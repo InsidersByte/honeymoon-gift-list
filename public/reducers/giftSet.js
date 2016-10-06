@@ -5,6 +5,7 @@ const giftSet = {
     saving: false,
     giftSet: {
         giver: {},
+        gifts: [],
     },
 };
 

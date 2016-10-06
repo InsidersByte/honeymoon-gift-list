@@ -19,6 +19,12 @@ type PropsType = {
             email: string,
             phoneNumber: string,
         },
+        gifts: Array<{
+            name: string,
+            price: number,
+            quantity: number,
+            total: number,
+        }>,
         createdAt: string,
         createdAtFormatted: string,
         total: number,
@@ -49,15 +55,24 @@ type PropsType = {
 @withRouter
 @connect(
     ({ giftSet: { giftSet, ...state } }) => {
-        const { createdAt, paid, paymentDetailsSent } = giftSet;
+        const { createdAt, paid, paymentDetailsSent, gifts } = giftSet;
         const createdAtMoment = moment(createdAt);
         const createdAtFormatted = createdAtMoment.format('DD/MM/YY HH:MM');
+
+        console.log(giftSet)
+
+        const mappedGifts = gifts.map(({ name, _pivot_price: price, _pivot_quantity: quantity }) => ({
+            name,
+            price,
+            quantity,
+            total: price * quantity,
+        }));
 
         const canDelete = !paid;
         const canMarkAsDetailsSent = !paid && !paymentDetailsSent;
         const canMarkAsPaid = !paid;
 
-        const updatedGiftSet = Object.assign({}, giftSet, { createdAtFormatted });
+        const updatedGiftSet = Object.assign({}, giftSet, { gifts: mappedGifts, createdAtFormatted });
 
         return {
             ...state,

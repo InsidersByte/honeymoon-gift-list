@@ -3,6 +3,7 @@
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
 import Loader from './Loader';
+import GiftTable from './GiftTable';
 
 type PropsType = {
     giftSet: {
@@ -14,6 +15,12 @@ type PropsType = {
             email: string,
             phoneNumber: string,
         },
+        gifts: Array<{
+            name: string,
+            price: number,
+            quantity: number,
+            total: number,
+        }>,
         createdAt: string,
         createdAtFormatted: string,
         total: number,
@@ -47,7 +54,7 @@ const styles = {
 };
 
 export default function GiftSet({
-    giftSet: { total, paid, createdAtFormatted, giver: { fullName, email, phoneNumber } }, loading, saving, onBack,
+    giftSet: { total, paid, createdAtFormatted, gifts, giver: { fullName, email, phoneNumber } }, loading, saving, onBack,
     canDelete, canMarkAsDetailsSent, canMarkAsPaid, onMarkAsDetailsSent, onMarkAsPaid, onDelete,
 }: PropsType) {
     return (
@@ -113,6 +120,8 @@ export default function GiftSet({
                         style={styles.input}
                         disabled
                     />
+
+                    <GiftTable gifts={gifts} />
 
                     <RaisedButton
                         label="Back to Gift Sets"
