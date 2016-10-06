@@ -158,8 +158,8 @@ module.exports = ({ express, config, secure }) => {
             yield giftSet.save();
 
             return res
-                .status(204)
-                .send();
+                .status(200)
+                .json(giftSet);
         }));
 
     router
@@ -183,8 +183,8 @@ module.exports = ({ express, config, secure }) => {
             yield giftSet.save();
 
             return res
-                .status(204)
-                .send();
+                .status(200)
+                .send(giftSet);
         }));
 
     return router;

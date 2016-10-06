@@ -7,4 +7,9 @@ module.exports = bookshelf.model('Giver', {
     giftSets() {
         return this.hasMany('GiftSet');
     },
+    virtuals: {
+        fullName() {
+            return `${this.get('forename')}  ${this.get('surname')}`;
+        },
+    },
 });

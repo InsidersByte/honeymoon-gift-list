@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import GiftRow from './GiftRow';
 
 export default function GiftTable({ gifts }) {
     return (
@@ -17,10 +16,12 @@ export default function GiftTable({ gifts }) {
             <tbody>
                 {gifts
                     .map(gift =>
-                        <GiftRow
-                            key={gift.id}
-                            gift={gift}
-                        />
+                        <tr>
+                            <th>{gift.honeymoonGiftListItem.name}</th>
+                            <th>{gift.price}</th>
+                            <th>{gift.quantity}</th>
+                            <th>{gift.total}</th>
+                        </tr>
                     )
                 }
             </tbody>
