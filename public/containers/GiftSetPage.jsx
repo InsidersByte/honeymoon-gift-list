@@ -59,8 +59,6 @@ type PropsType = {
         const createdAtMoment = moment(createdAt);
         const createdAtFormatted = createdAtMoment.format('DD/MM/YY HH:MM');
 
-        console.log(giftSet)
-
         const mappedGifts = gifts.map(({ name, _pivot_price: price, _pivot_quantity: quantity }) => ({
             name,
             price,
