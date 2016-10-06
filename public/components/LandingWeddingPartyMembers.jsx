@@ -3,7 +3,6 @@
 import React from 'react';
 import LandingWeddingPartyMember from './LandingWeddingPartyMember';
 import LandingItem from './LandingItem';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingWeddingPartyMembers.styl';
 
 type PropsType = {

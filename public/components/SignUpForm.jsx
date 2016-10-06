@@ -50,6 +50,7 @@ export default function SignUpForm({ user, saving, loading, onChange, onSubmit }
                 <TextField
                     id="email"
                     value={email}
+                    floatingLabelText="Email"
                     fullWidth
                     style={styles.input}
                     disabled

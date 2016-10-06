@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingWeddingPartyMember.styl';
 
 type PropsType = {

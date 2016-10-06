@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import smoothscroll from 'smoothscroll';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingItem.styl';
 
 type PropsType = {

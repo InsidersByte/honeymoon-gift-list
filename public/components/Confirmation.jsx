@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import { HOME_ROUTE } from '../constants/routes';
 import Loader from '../components/Loader';
 import { PAYMENT_METHODS } from '../../lib/constants';
-// FIXME:FLOW need to fix import .styl
 import css from '../components/Confirmation.styl';
 
 type PropsType = {

@@ -65,7 +65,7 @@ export default class Users extends React.Component {
         this.props.actions.loadUsers();
     }
 
-    // TODO: This seems like a bit of a hack
+    // FIXME: This seems like a bit of a hack
     componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
         const { saving, deleting, actions: { loadUsers } } = this.props;
 

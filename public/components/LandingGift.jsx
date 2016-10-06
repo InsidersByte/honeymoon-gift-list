@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { RaisedButton } from 'material-ui';
 import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingGift.styl';
 
 type PropsType = {

@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { IconButton } from 'material-ui';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
-// FIXME:FLOW need to fix import .styl
 import css from './WeddingPartyMemberItem.styl';
 
 type PropsType = {

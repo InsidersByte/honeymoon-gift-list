@@ -14,7 +14,6 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import { TOKEN } from './constants';
 import jwtDecoder from './utils/jwtDecoder';
-// FIXME:FLOW need to fix import .styl
 import './index.styl';
 
 let initialState = {};

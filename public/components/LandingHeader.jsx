@@ -2,7 +2,6 @@
 
 import React from 'react';
 import FontAwesome from './FontAwesome';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingHeader.styl';
 
 type PropsType = {

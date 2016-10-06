@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 import { BASKET_ROUTE } from '../constants/routes';
 import Form from './Form';
 import { PAYMENT_METHODS } from '../../lib/constants';
-// FIXME:FLOW need to fix import .styl
 import css from './GiverDetailsForm.styl';
 
 type PropsType = {

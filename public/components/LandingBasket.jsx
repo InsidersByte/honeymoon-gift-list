@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import FontAwesome from './FontAwesome';
 import { BASKET_ROUTE } from '../constants/routes';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingBasket.styl';
 
 type PropsType = {

@@ -5,7 +5,6 @@ import MarkdownRenderer from 'react-markdown-renderer';
 import LandingGift from './LandingGift';
 import LandingItem from './LandingItem';
 import FontAwesome from './FontAwesome';
-// FIXME:FLOW need to fix import .styl
 import css from './LandingGifts.styl';
 
 type PropsType = {

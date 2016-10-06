@@ -7,7 +7,6 @@ import LandingSection from './LandingSection';
 import LandingWeddingPartyMembers from './LandingWeddingPartyMembers';
 import LandingGifts from './LandingGifts';
 import LandingBasket from './LandingBasket';
-// FIXME:FLOW need to fix import .styl
 import css from './Landing.styl';
 
 type PropsType = {
