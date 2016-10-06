@@ -54,15 +54,25 @@ type PropsType = {
 export default class GiftSetsPage extends React.Component {
     props: PropsType;
 
+    state = {
+        canView: false,
+        canDelete: false,
+        canMarkAsDetailsSent: false,
+        canMarkAsPaid: false,
+        selectedGiftSets: [],
+        selectedGiftSet: undefined,
+    };
+
     componentDidMount() {
         this.props.actions.loadGiftSets();
     }
 
-    // TODO: This seems like a bit of a hack
+    // FIXME: This seems like a bit of a hack
     componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
         const { saving, deleting, actions: { loadGiftSets } } = this.props;
 
         if (deleting && !nextDeleting) {
+            this.setState({ selectedGiftSet: undefined, selectedGiftSets: [] });
             loadGiftSets();
         }
 
@@ -71,46 +81,100 @@ export default class GiftSetsPage extends React.Component {
         }
     }
 
-    markAsDetailsSent = (giftSet: Object) => {
+    onView = () => {
+        const { selectedGiftSet } = this.state;
+
+        if (!selectedGiftSet) {
+            // TODO: error?
+            return;
+        }
+
+        this.props.router.push(giftSetRoute(selectedGiftSet.id));
+    };
+
+    onMarkAsDetailsSent = () => {
+        const { selectedGiftSet } = this.state;
+
+        if (!selectedGiftSet) {
+            // TODO: error?
+            return;
+        }
+
         if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
             return;
         }
 
-        this.props.actions.markGiftSetAsDetailsSent(giftSet);
+        this.props.actions.markGiftSetAsDetailsSent(selectedGiftSet);
     };
 
-    markAsPaid = (giftSet: Object) => {
+    onMarkAsPaid = () => {
+        const { selectedGiftSet } = this.state;
+
+        if (!selectedGiftSet) {
+            // TODO: error?
+            return;
+        }
+
         if (!confirm('Are you sure you want to mark this gift set as paid?')) {
             return;
         }
 
-        this.props.actions.markGiftSetAsPaid(giftSet);
+        this.props.actions.markGiftSetAsPaid(selectedGiftSet);
     };
 
-    delete = (giftSet: Object) => {
+    onDelete = () => {
+        const { selectedGiftSet } = this.state;
+
+        if (!selectedGiftSet) {
+            // TODO: error?
+            return;
+        }
+
         if (!confirm('Are you sure you want to delete this gift set?')) {
             return;
         }
 
-        this.props.actions.deleteGiftSet(giftSet);
+        this.props.actions.deleteGiftSet(selectedGiftSet);
     };
 
-    view = ({ id }: Object) => {
-        this.props.router.push(giftSetRoute(id));
+    onSelect = (selectedGiftSets: Array<number>) => {
+        if (selectedGiftSets.length !== 1) {
+            this.setState({
+                selectedGiftSets, selectedGiftSet: undefined, canView: false, canDelete: false, canMarkAsDetailsSent: false, canMarkAsPaid: false,
+            });
+        }
+
+        const [index] = selectedGiftSets;
+        const { giftSets } = this.props;
+        const selectedGiftSet = giftSets[index];
+        const { paid, paymentDetailsSent } = selectedGiftSet;
+
+        const canDelete = !paid;
+        const canMarkAsDetailsSent = !paid && !paymentDetailsSent;
+        const canMarkAsPaid = !paid;
+
+        this.setState({ selectedGiftSets, selectedGiftSet, canView: true, canDelete, canMarkAsDetailsSent, canMarkAsPaid });
     };
 
     render() {
         const { loading, giftSets, total } = this.props;
+        const { selectedGiftSets, canView, canDelete, canMarkAsDetailsSent, canMarkAsPaid } = this.state;
 
         return (
             <GiftSetTable
                 loading={loading}
                 giftSets={giftSets}
+                selectedGiftSets={selectedGiftSets}
                 total={total}
-                onMarkAsPaid={this.markAsPaid}
-                onMarkAsDetailsSent={this.markAsDetailsSent}
-                onDelete={this.delete}
-                onSelect={this.view}
+                canView={canView}
+                canDelete={canDelete}
+                canMarkAsDetailsSent={canMarkAsDetailsSent}
+                canMarkAsPaid={canMarkAsPaid}
+                onSelect={this.onSelect}
+                onView={this.onView}
+                onMarkAsPaid={this.onMarkAsPaid}
+                onMarkAsDetailsSent={this.onMarkAsDetailsSent}
+                onDelete={this.onDelete}
             />
         );
     }

@@ -57,7 +57,7 @@ export default class HoneymoonGiftListItemPage extends React.Component {
         this.props.actions.loadGifts();
     }
 
-    // TODO: This seems like a bit of a hack
+    // FIXME: This seems like a bit of a hack
     componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
         const { saving, deleting, actions: { loadGifts } } = this.props;
 

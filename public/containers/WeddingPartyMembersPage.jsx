@@ -47,7 +47,7 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.props.actions.loadWeddingPartyMembers();
     }
 
-    // TODO: This seems like a bit of a hack
+    // FIXME: This seems like a bit of a hack
     componentWillReceiveProps({ deleting: nextDeleting }: PropsType) {
         const { deleting, actions: { loadWeddingPartyMembers } } = this.props;
 

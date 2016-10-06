@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Drawer, List, ListItem, MakeSelectable as makeSelectable } from 'material-ui';
+import { Drawer, List, ListItem, makeSelectable } from 'material-ui';
 import * as ROUTES from '../constants/routes';
 
 type PropsType = {
