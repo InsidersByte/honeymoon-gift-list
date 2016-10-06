@@ -44,3 +44,45 @@ export function createGiftSet(data) {
         },
     };
 }
+
+export function deleteGiftSet({ id }) {
+    return {
+        [CALL_API]: {
+            endpoint: `giftSet/${id}`,
+            method: HTTP_METHODS.DELETE,
+            authenticated: true,
+            afterSuccess: (dispatch) => {
+                dispatch(success({ message: 'Gift set deleted successfully' }));
+            },
+            types: [TYPES.DELETE_GIFT_SET_REQUEST, TYPES.DELETE_GIFT_SET_SUCCESS, TYPES.DELETE_GIFT_SET_ERROR],
+        },
+    };
+}
+
+export function markGiftSetAsDetailsSent({ id }) {
+    return {
+        [CALL_API]: {
+            endpoint: `giftSet/${id}/detailsSent`,
+            method: HTTP_METHODS.PUT,
+            authenticated: true,
+            afterSuccess: (dispatch) => {
+                dispatch(success({ message: 'Gift set marked as details sent successfully' }));
+            },
+            types: [TYPES.GIFT_SET_DETAILS_SENT_REQUEST, TYPES.GIFT_SET_DETAILS_SENT_SUCCESS, TYPES.GIFT_SET_DETAILS_SENT_ERROR],
+        },
+    };
+}
+
+export function markGiftSetAsPaid({ id }) {
+    return {
+        [CALL_API]: {
+            endpoint: `giftSet/${id}/paid`,
+            method: HTTP_METHODS.PUT,
+            authenticated: true,
+            afterSuccess: (dispatch) => {
+                dispatch(success({ message: 'Gift set marked as paid successfully' }));
+            },
+            types: [TYPES.GIFT_SET_PAID_REQUEST, TYPES.GIFT_SET_PAID_SUCCESS, TYPES.GIFT_SET_PAID_ERROR],
+        },
+    };
+}

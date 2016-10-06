@@ -17,7 +17,7 @@ type PropsType = {
         createdAt: string,
         total: number,
         paid: boolean,
-        detailsSent: boolean,
+        paymentDetailsSent: boolean,
         paymentMethod: string,
     },
     onDelete: Function,
@@ -46,7 +46,7 @@ export default class GiftSetRow extends React.Component {
     };
 
     render() {
-        const { giftSet: { giver, createdAt, total, paid, detailsSent, paymentMethod } } = this.props;
+        const { giftSet: { giver, createdAt, total, paid, paymentDetailsSent, paymentMethod } } = this.props;
         const { forename, surname, email, phoneNumber } = giver;
 
         const createdAtMoment = moment(createdAt);
@@ -75,7 +75,7 @@ export default class GiftSetRow extends React.Component {
                             bsSize="xsmall"
                             bsStyle="success"
                             onClick={this.onMarkAsDetailsSent}
-                            disabled={detailsSent || paid}
+                            disabled={paymentDetailsSent || paid}
                         >
                             <FontAwesome icon="send" />
                         </Button>

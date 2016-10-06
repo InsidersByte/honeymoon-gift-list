@@ -24,7 +24,7 @@ type PropsType = {
         createdAt: string,
         total: number,
         paid: boolean,
-        detailsSent: boolean,
+        paymentDetailsSent: boolean,
         paymentMethod: string,
     }>,
     actions: {

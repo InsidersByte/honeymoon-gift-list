@@ -111,7 +111,7 @@ module.exports = ({ express, config, secure }) => {
 
             const giftSet = yield GiftSet
                 .forge({ id })
-                .fetch({ withRelated: ['gifts', 'giver'] });
+                .fetch({ withRelated: ['gifts'] });
 
             if (!giftSet) {
                 return res
@@ -127,6 +127,9 @@ module.exports = ({ express, config, secure }) => {
                     .send({ message: 'A Gift Set marked as paid cannot be deleted' });
             }
 
+            const gifts = giftSet.related('gifts');
+            const giftIds = gifts.map(o => o.get('id'));
+            yield giftSet.gifts().detach(giftIds);
             yield giftSet.destroy();
 
             return res
@@ -175,7 +178,7 @@ module.exports = ({ express, config, secure }) => {
                     .send();
             }
 
-            giftSet.set({ detailsSent: true });
+            giftSet.set({ paymentDetailsSent: true });
 
             yield giftSet.save();
 
