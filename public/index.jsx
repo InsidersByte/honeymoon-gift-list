@@ -9,7 +9,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'animate.css/animate.css';
-import 'font-awesome/css/font-awesome.css';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import { TOKEN } from './constants';

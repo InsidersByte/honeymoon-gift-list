@@ -1,7 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import FontAwesome from './FontAwesome';
+import { IconButton } from 'material-ui';
+import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import { white } from 'material-ui/styles/colors';
 import css from './LandingHeader.styl';
 
 type PropsType = {
@@ -11,6 +13,18 @@ type PropsType = {
         daysToGo?: number,
     },
     onScrollDown: Function,
+};
+
+const styles = {
+    button: {
+        margin: 0,
+        width: 96,
+        height: 96,
+    },
+    icon: {
+        width: 48,
+        height: 48,
+    },
 };
 
 export default function LandingHeader({ weddingProfile: { coverTitle, coverImageUrl, daysToGo }, onScrollDown }: PropsType) {
@@ -31,9 +45,11 @@ export default function LandingHeader({ weddingProfile: { coverTitle, coverImage
 
                 <div className={css.spacer} />
 
-                <a className={css.scrollDown} href="#firstSection" onClick={onScrollDown}>
-                    <FontAwesome icon="chevron-down" size="lg" />
-                </a>
+                <div className={css.scrollDown}>
+                    <IconButton onClick={onScrollDown} iconStyle={styles.icon} style={styles.button}>
+                        <ArrowDown color={white} />
+                    </IconButton>
+                </div>
             </div>
         </header>
     );
