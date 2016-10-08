@@ -1,8 +1,10 @@
 const Knex = require('knex');
 const bookshelf = require('bookshelf');
-const knexFile = require('../../knexfile');
+const config = require('../../knexfile');
 
-const knex = new Knex(knexFile[process.env.NODE_ENV]);
+const knex = new Knex(config[process.env.NODE_ENV]);
+
+knex.migrate.latest([config]);
 
 const orm = bookshelf(knex);
 
