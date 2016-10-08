@@ -4,7 +4,9 @@ const config = require('../../knexfile');
 
 const knex = new Knex(config[process.env.NODE_ENV]);
 
-knex.migrate.latest([config]);
+knex.migrate
+    .latest([config])
+    .then(() => knex.seed.run([config]));
 
 const orm = bookshelf(knex);
 
