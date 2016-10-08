@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 import BasketSummaryTable from './BasketSummaryTable';
 import { GIVER_ROUTE, HOME_ROUTE } from '../constants/routes';
@@ -13,6 +14,12 @@ type PropsType = {
     addToBasket: Function,
     removeFromBasket: Function,
     deleteFromBasket: Function,
+};
+
+const styles = {
+    button: {
+        marginRight: 12,
+    },
 };
 
 export default function BasketSummary({ basket, basketCount, basketTotal, addToBasket, removeFromBasket, deleteFromBasket }: PropsType) {
@@ -56,15 +63,20 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
                 </div>
 
                 <div className={css.actions}>
-                    <Link to={GIVER_ROUTE} className="btn btn-success" role="button">Proceed to Checkout</Link>
+                    <RaisedButton
+                        primary
+                        label="Proceed to Checkout"
+                        containerElement={<Link to={GIVER_ROUTE}>Proceed to Checkout</Link>}
+                        linkButton
+                        style={styles.button}
+                    />
 
-                    <Link
-                        to={HOME_ROUTE}
-                        className="btn btn-default"
-                        role="button"
-                    >
-                        Back to Home
-                    </Link>
+                    <RaisedButton
+                        label="Back to Home"
+                        containerElement={<Link to={HOME_ROUTE}>Back to Home</Link>}
+                        linkButton
+                        style={styles.button}
+                    />
                 </div>
             </div>
         </div>

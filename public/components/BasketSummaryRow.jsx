@@ -22,6 +22,10 @@ const styles = {
         minWidth: 24,
         height: 24,
     },
+    icon: {
+        width: 18,
+        height: 18,
+    },
 };
 
 export default class BasketSummaryRow extends React.Component {
@@ -49,7 +53,7 @@ export default class BasketSummaryRow extends React.Component {
                 <th>
                     <RaisedButton
                         primary
-                        icon={<Remove />}
+                        icon={<Remove style={styles.icon} />}
                         onClick={this.onRemove}
                         disabled={quantity === 1}
                         style={styles.button}
@@ -61,7 +65,7 @@ export default class BasketSummaryRow extends React.Component {
 
                     <RaisedButton
                         primary
-                        icon={<Add />}
+                        icon={<Add style={styles.icon} />}
                         onClick={this.onAdd}
                         disabled={quantity === remaining}
                         style={styles.button}
@@ -71,7 +75,7 @@ export default class BasketSummaryRow extends React.Component {
                 <th>
                     <RaisedButton
                         secondary
-                        icon={<Delete />}
+                        icon={<Delete style={styles.icon} />}
                         onClick={this.onDelete}
                         style={styles.button}
                     />

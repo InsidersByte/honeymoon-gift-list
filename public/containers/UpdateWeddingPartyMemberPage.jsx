@@ -1,11 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/weddingPartyMember';
-import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
 import WeddingPartyMemberForm from '../components/WeddingPartyMemberForm';
 
 type PropsType = {
@@ -25,12 +23,8 @@ type PropsType = {
         loadWeddingPartyMember: Function,
         updateWeddingPartyMember: Function,
     },
-    router: {
-        push: Function,
-    },
 };
 
-@withRouter
 @connect(
     ({ weddingPartyMember }) => weddingPartyMember,
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
@@ -67,11 +61,6 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
         updateWeddingPartyMember(weddingPartyMember);
     };
 
-    onBack = (event: SyntheticEvent) => {
-        event.preventDefault();
-        this.props.router.push(WEDDING_PARTY_MEMBERS_ROUTE);
-    };
-
     render() {
         const { loading, saving } = this.props;
         const { weddingPartyMember } = this.state;
@@ -84,7 +73,6 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
                 saving={saving}
                 onChange={this.onChange}
                 onSubmit={this.onSubmit}
-                onBack={this.onBack}
             />
         );
     }

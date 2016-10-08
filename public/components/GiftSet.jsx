@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
+import { Link } from 'react-router';
+import { GIFT_SETS_ROUTE } from '../constants/routes';
 import Loader from './Loader';
 import GiftTable from './GiftTable';
 
@@ -36,7 +38,6 @@ type PropsType = {
     onMarkAsDetailsSent: Function,
     onMarkAsPaid: Function,
     onDelete: Function,
-    onBack: Function,
 };
 
 const styles = {
@@ -54,7 +55,7 @@ const styles = {
 };
 
 export default function GiftSet({
-    giftSet: { total, paid, createdAtFormatted, gifts, giver: { fullName, email, phoneNumber } }, loading, saving, onBack,
+    giftSet: { total, paid, createdAtFormatted, gifts, giver: { fullName, email, phoneNumber } }, loading, saving,
     canDelete, canMarkAsDetailsSent, canMarkAsPaid, onMarkAsDetailsSent, onMarkAsPaid, onDelete,
 }: PropsType) {
     return (
@@ -124,9 +125,10 @@ export default function GiftSet({
                     <GiftTable gifts={gifts} />
 
                     <RaisedButton
-                        label="Back to Gift Sets"
+                        label="Back"
                         primary
-                        onClick={onBack}
+                        containerElement={<Link to={GIFT_SETS_ROUTE}>Back</Link>}
+                        linkButton
                         disabled={saving}
                         style={styles.button}
                     />

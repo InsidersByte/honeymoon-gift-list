@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
+import { Link } from 'react-router';
+import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
 import ProgressButton from './ProgressButton';
 import Form from './Form';
 
@@ -17,7 +19,6 @@ type PropsType = {
     saving: boolean,
     onChange: Function,
     onSubmit: Function,
-    onBack: Function,
 };
 
 const styles = {
@@ -34,7 +35,7 @@ const styles = {
     },
 };
 
-export default function WeddingPartyMemberForm({ weddingPartyMember, title, loading, saving, onChange, onSubmit, onBack }: PropsType) {
+export default function WeddingPartyMemberForm({ weddingPartyMember, title, loading, saving, onChange, onSubmit }: PropsType) {
     return (
         <Paper>
             <Toolbar>
@@ -92,7 +93,13 @@ export default function WeddingPartyMemberForm({ weddingPartyMember, title, load
                 />
 
                 <ProgressButton saving={saving} label={title} style={styles.button} />
-                <RaisedButton label="Back" onClick={onBack} disabled={saving} style={styles.button} />
+
+                <RaisedButton
+                    label="Back"
+                    containerElement={<Link to={WEDDING_PARTY_MEMBERS_ROUTE}>Back</Link>}
+                    linkButton
+                    style={styles.button}
+                />
             </Form>
         </Paper>
     );
