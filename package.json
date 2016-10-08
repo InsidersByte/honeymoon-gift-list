@@ -34,9 +34,6 @@
   "homepage": "https://github.com/InsidersByte/our-wedding-heroes#readme",
   "dependencies": {
     "@insidersbyte/react-markdown-editor": "0.3.0",
-    "alt": "0.18.6",
-    "alt-utils": "1.0.0",
-    "animate.css": "3.5.2",
     "babel-polyfill": "6.16.0",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.2",
