@@ -2,9 +2,10 @@
 
 import React from 'react';
 import MarkdownRenderer from 'react-markdown-renderer';
+import Info from 'material-ui/svg-icons/action/info';
+import { white } from 'material-ui/styles/colors';
 import LandingGift from './LandingGift';
 import LandingItem from './LandingItem';
-import FontAwesome from './FontAwesome';
 import css from './LandingGifts.styl';
 
 type PropsType = {
@@ -24,6 +25,13 @@ type PropsType = {
     }>,
     basket: Map<number, Object>,
     addToBasket: Function,
+};
+
+const styles = {
+    icon: {
+        height: 18,
+        width: 18,
+    },
 };
 
 export default function LandingGifts({ weddingProfile, gifts, basket, addToBasket }: PropsType) {
@@ -54,7 +62,7 @@ export default function LandingGifts({ weddingProfile, gifts, basket, addToBaske
                         <br />
                         <br />
 
-                        <FontAwesome icon="info-circle" /> {paymentMessage}
+                        <Info color={white} style={styles.icon} /> {paymentMessage}
                     </span>
                 )}
 
@@ -63,7 +71,7 @@ export default function LandingGifts({ weddingProfile, gifts, basket, addToBaske
                         <br />
                         <br />
 
-                        <FontAwesome icon="info-circle" /> {disclaimerMessage}
+                        <Info color={white} style={styles.icon} /> {disclaimerMessage}
                     </span>
                 )}
             </div>

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import FontAwesome from './FontAwesome';
+import { RaisedButton } from 'material-ui';
+import Add from 'material-ui/svg-icons/content/add';
+import Remove from 'material-ui/svg-icons/content/remove';
+import Delete from 'material-ui/svg-icons/content/clear';
 import css from './BasketSummaryRow.styl';
 
 type PropsType = {
@@ -13,6 +15,13 @@ type PropsType = {
     addToBasket: Function,
     removeFromBasket: Function,
     deleteFromBasket: Function,
+};
+
+const styles = {
+    button: {
+        minWidth: 24,
+        height: 24,
+    },
 };
 
 export default class BasketSummaryRow extends React.Component {
@@ -38,37 +47,34 @@ export default class BasketSummaryRow extends React.Component {
                 <th>{name}</th>
                 <th>{price}</th>
                 <th>
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="success"
+                    <RaisedButton
+                        primary
+                        icon={<Remove />}
                         onClick={this.onRemove}
                         disabled={quantity === 1}
-                    >
-                        <FontAwesome icon="minus" />
-                    </Button>
+                        style={styles.button}
+                    />
 
                     <span className={css.quantity}>
                         {quantity}
                     </span>
 
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="success"
+                    <RaisedButton
+                        primary
+                        icon={<Add />}
                         onClick={this.onAdd}
                         disabled={quantity === remaining}
-                    >
-                        <FontAwesome icon="plus" />
-                    </Button>
+                        style={styles.button}
+                    />
                 </th>
                 <th>{remaining}</th>
                 <th>
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="danger"
+                    <RaisedButton
+                        secondary
+                        icon={<Delete />}
                         onClick={this.onDelete}
-                    >
-                        <FontAwesome icon="remove" />
-                    </Button>
+                        style={styles.button}
+                    />
                 </th>
             </tr>
         );

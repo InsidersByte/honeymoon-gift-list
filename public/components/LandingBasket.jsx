@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import FontAwesome from './FontAwesome';
+import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
+import { white } from 'material-ui/styles/colors';
 import { BASKET_ROUTE } from '../constants/routes';
 import css from './LandingBasket.styl';
 
@@ -19,7 +20,7 @@ export default function LandingBasket({ count, total }: PropsType) {
     return (
         <section className={css.root}>
             <div>
-                <FontAwesome icon="shopping-basket" />
+                <ShoppingCart color={white} />
             </div>
 
             <div>
