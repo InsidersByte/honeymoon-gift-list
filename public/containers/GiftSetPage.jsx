@@ -6,6 +6,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/giftSet';
+import { GIFT_SETS_ROUTE } from '../constants/routes';
 import GiftSet from '../components/GiftSet';
 
 type PropsType = {
