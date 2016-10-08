@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import { RaisedButton } from 'material-ui';
 import { HOME_ROUTE } from '../constants/routes';
 import Loader from '../components/Loader';
 import { PAYMENT_METHODS } from '../../lib/constants';
@@ -48,18 +49,24 @@ export default function Confirmation({ loading, giftSet: { paymentMethod, paypal
 
             <div className={css.actions}>
                 {showPaypalLink &&
-                    <a
+                    <RaisedButton
+                        primary
+                        linkButton
+                        label="Pay with PayPal"
                         href={paypalLink}
                         target="_blank"
-                        className="btn btn-success"
                         rel="noopener noreferrer"
                         onClick={onLinkClicked}
-                    >
-                        Pay with PayPal
-                    </a>
+                    />
                 }
 
-                {showHomeLink && <Link to={HOME_ROUTE} className="btn btn-default">Back to Home</Link>}
+                {showHomeLink &&
+                    <RaisedButton
+                        label="Back to Home"
+                        containerElement={<Link to={HOME_ROUTE}>Back to Home</Link>}
+                        linkButton
+                    />
+                }
             </div>
         </Loader>
     );

@@ -32,13 +32,11 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
                     </h1>
 
                     <div className={css.actions}>
-                        <Link
-                            to={HOME_ROUTE}
-                            className="btn btn-success"
-                            role="button"
-                        >
-                            Back to Home
-                        </Link>
+                        <RaisedButton
+                            label="Back to Home"
+                            containerElement={<Link to={HOME_ROUTE}>Back to Home</Link>}
+                            linkButton
+                        />
                     </div>
                 </div>
             </div>

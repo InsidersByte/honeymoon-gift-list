@@ -3,6 +3,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Radio } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { RaisedButton } from 'material-ui';
 import { BASKET_ROUTE } from '../constants/routes';
 import Form from './Form';
 import { PAYMENT_METHODS } from '../../lib/constants';
@@ -106,13 +107,11 @@ export default function GiverDetailsForm({ giver: { forename, surname, email, ph
                             {saving ? 'Completing Gift...' : 'Complete Gift'}
                         </Button>
 
-                        <Link
-                            to={BASKET_ROUTE}
-                            className="btn btn-default"
-                            role="button"
-                        >
-                            Back to Basket
-                        </Link>
+                        <RaisedButton
+                            label="Back to Basket"
+                            containerElement={<Link to={BASKET_ROUTE}>Back to Basket</Link>}
+                            linkButton
+                        />
                     </div>
                 </Form>
             </div>
