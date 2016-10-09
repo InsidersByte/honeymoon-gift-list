@@ -1,6 +1,6 @@
 const Gift = require('../../models/Gift');
 const wrap = require('../../utilities/wrap');
-const { integer } = require('../../../lib/random/index');
+const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
 module.exports = ({ express, secure }) => {

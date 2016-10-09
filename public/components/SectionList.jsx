@@ -2,56 +2,56 @@
 
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, IconButton, Divider } from 'material-ui';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
+import Add from 'material-ui/svg-icons/content/add';
 import Loader from './Loader';
-import WeddingPartyMemberItem from './WeddingPartyMemberItem';
 import SortableContainer from './SortableContainer';
 import SortableItem from './SortableItem';
+import SectionListItem from './SectionListItem';
 
 type PropsType = {
-    weddingPartyMembers: Array<{
-        id: number,
-        name: string,
-        title: string,
-        imageUrl: string,
-        description: string,
-    }>,
     loading: boolean,
+    sections: Array<{
+        id: number,
+        title: string,
+        hidden: boolean,
+    }>,
     onAdd: Function,
     onSelect: Function,
     onMove: Function,
     onDrop: Function,
+    onToggleVisibility: Function,
     onDelete: Function,
 };
 
-export default function WeddingPartyMembersList({ weddingPartyMembers, loading, onAdd, onSelect, onMove, onDrop, onDelete }: PropsType) {
+export default function SectionList({ loading, sections, onAdd, onSelect, onMove, onDrop, onToggleVisibility, onDelete }: PropsType) {
     return (
         <Loader loading={loading}>
             <Paper>
                 <Toolbar>
                     <ToolbarGroup>
-                        <ToolbarTitle text="Wedding Party Members" />
+                        <ToolbarTitle text="Sections" />
                     </ToolbarGroup>
 
                     <ToolbarGroup>
                         <IconButton touch onClick={onAdd}>
-                            <PersonAdd />
+                            <Add />
                         </IconButton>
                     </ToolbarGroup>
                 </Toolbar>
 
                 <SortableContainer>
                     {
-                        weddingPartyMembers.map(weddingPartyMember =>
+                        sections.map(section =>
                             <SortableItem
-                                key={weddingPartyMember.id}
-                                id={weddingPartyMember.id}
+                                key={section.id}
+                                id={section.id}
                                 onMove={onMove}
                                 onDrop={onDrop}
                             >
-                                <WeddingPartyMemberItem
-                                    weddingPartyMember={weddingPartyMember}
+                                <SectionListItem
+                                    section={section}
                                     onSelect={onSelect}
+                                    onToggleVisibility={onToggleVisibility}
                                     onDelete={onDelete}
                                 />
 

@@ -2,7 +2,7 @@ const uuid = require('uuid');
 const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const { STATUS, MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
-const Mailer = require('../../mail/index');
+const Mailer = require('../../mail');
 const { ONE_DAY_MS } = require('../../constants');
 
 const mailer = new Mailer();

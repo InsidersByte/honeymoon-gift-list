@@ -23,6 +23,15 @@ export default function weddingPartyMembersReducer(state = initialWeddingPartyMe
         case TYPES.LOAD_WEDDING_PARTY_MEMBERS_ERROR:
             return Object.assign({}, state, { loading: false });
 
+        case TYPES.DELETE_WEDDING_PARTY_MEMBER_REQUEST:
+            return Object.assign({}, state, { deleting: true });
+
+        case TYPES.DELETE_WEDDING_PARTY_MEMBER_SUCCESS:
+            return Object.assign({}, state, { deleting: false });
+
+        case TYPES.DELETE_WEDDING_PARTY_MEMBER_ERROR:
+            return Object.assign({}, state, { deleting: false });
+
         case TYPES.MOVE_WEDDING_PARTY_MEMBER:
             return Object.assign({}, state, { weddingPartyMembers: moveMembers(state, action) });
 

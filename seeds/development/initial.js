@@ -5,6 +5,7 @@ exports.seed = knex =>
         .del()
         .then(() => knex('gift_sets_gifts').del())
         .then(() => knex('gifts').del())
+        .then(() => knex('wedding_party_members').del())
         .then(() => knex('wedding_profiles').del())
         .then(() =>
             knex('wedding_profiles').insert({

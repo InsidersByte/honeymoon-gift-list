@@ -2,9 +2,9 @@ const GiftSet = require('../../models/GiftSet');
 const Giver = require('../../models/Giver');
 const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
-const Mailer = require('../../mail/index');
-const { PAYMENT_METHODS } = require('../../../lib/constants/index');
-const { generatePaypalMeLink } = require('../../../lib/paypal/index');
+const Mailer = require('../../mail');
+const { PAYMENT_METHODS } = require('../../../lib/constants');
+const { generatePaypalMeLink } = require('../../../lib/paypal');
 
 const mailer = new Mailer();
 
