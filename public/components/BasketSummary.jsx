@@ -34,6 +34,7 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
 
                     <div className={css.actions}>
                         <RaisedButton
+                            primary
                             label="Back to Home"
                             containerElement={<Link to={HOME_ROUTE}>Back to Home</Link>}
                             linkButton
