@@ -58,9 +58,9 @@ type PropsType = {
 
 @connect(
     (state) => {
-        const { weddingProfile: weddingProfileState, sections, weddingPartyMembers, gifts, basket } = state;
+        const { weddingProfile: weddingProfileState, sections: sectionsState, weddingPartyMembers, gifts, basket } = state;
 
-        const loading = weddingProfileState.loading || sections.loading || weddingPartyMembers.loading || gifts.loading;
+        const loading = weddingProfileState.loading || sectionsState.loading || weddingPartyMembers.loading || gifts.loading;
 
         let { weddingProfile } = weddingProfileState;
 
@@ -82,13 +82,17 @@ type PropsType = {
             basketTotal += price * quantity;
         }
 
+        const { sections } = sectionsState;
+        const visibleSections = sections.filter(o => !o.hidden);
+        const sortedSections = visibleSections.sort((a, b) => a.position - b.position);
+
         return {
             weddingProfile,
             loading,
             basket,
             basketCount,
             basketTotal,
-            sections: sections.sections,
+            sections: sortedSections,
             weddingPartyMembers: weddingPartyMembers.weddingPartyMembers,
             gifts: gifts.gifts,
         };
