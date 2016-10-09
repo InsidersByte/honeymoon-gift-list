@@ -38,7 +38,7 @@ export function createSection(data) {
             method: HTTP_METHODS.POST,
             authenticated: true,
             onSuccess: (dispatch) => {
-                dispatch(success({ message: 'Wedding party member created successfully' }));
+                dispatch(success({ message: 'Section created successfully' }));
                 dispatch(push(SECTIONS_ROUTE));
             },
             types: [TYPES.CREATE_SECTION_REQUEST, TYPES.CREATE_SECTION_SUCCESS, TYPES.CREATE_SECTION_ERROR],
@@ -54,7 +54,7 @@ export function updateSection(data) {
             method: HTTP_METHODS.PUT,
             authenticated: true,
             onSuccess: (dispatch) => {
-                dispatch(success({ message: 'Wedding party member updated successfully' }));
+                dispatch(success({ message: 'Section updated successfully' }));
             },
             types: [TYPES.UPDATE_SECTION_REQUEST, TYPES.UPDATE_SECTION_SUCCESS, TYPES.UPDATE_SECTION_ERROR],
         },
@@ -68,7 +68,7 @@ export function deleteSection({ id }) {
             method: HTTP_METHODS.DELETE,
             authenticated: true,
             onSuccess: (dispatch) => {
-                dispatch(success({ message: 'Wedding party member deleted successfully' }));
+                dispatch(success({ message: 'Section deleted successfully' }));
             },
             types: [TYPES.DELETE_SECTION_REQUEST, TYPES.DELETE_SECTION_SUCCESS, TYPES.DELETE_SECTION_ERROR],
         },
