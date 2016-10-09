@@ -1,9 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, Radio } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { RaisedButton } from 'material-ui';
+import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton, RadioButton, RadioButtonGroup } from 'material-ui';
 import { BASKET_ROUTE } from '../constants/routes';
 import Form from './Form';
 import { PAYMENT_METHODS } from '../../lib/constants';
@@ -19,101 +18,117 @@ type PropsType = {
     },
     saving: boolean,
     onChange: Function,
+    onRadioChange: Function,
     onSubmit: Function,
 };
 
-export default function GiverDetailsForm({ giver: { forename, surname, email, phoneNumber, paymentMethod }, saving, onChange, onSubmit }: PropsType) {
+const styles = {
+    form: {
+        padding: '30px 50px',
+        marginBottom: 10,
+    },
+    input: {
+        margin: '6px 0',
+    },
+    button: {
+        marginTop: 12,
+        marginRight: 12,
+    },
+};
+
+export default function GiverDetailsForm({
+    giver: { forename, surname, email, phoneNumber, paymentMethod }, saving, onChange, onRadioChange, onSubmit,
+}: PropsType) {
     return (
         <section className={css.root}>
             <div className={css.container}>
-                <h1 className={css.title}>Your Details</h1>
+                <Paper>
+                    <Toolbar>
+                        <ToolbarGroup>
+                            <ToolbarTitle text="Your Details" />
+                        </ToolbarGroup>
+                    </Toolbar>
 
-                <Form onSubmit={onSubmit} loading={false} saving={saving}>
-                    <FormGroup>
-                        <ControlLabel>Forename</ControlLabel>
-                        <FormControl
+                    <Form onSubmit={onSubmit} loading={false} saving={saving} style={styles.form}>
+                        <TextField
                             name="forename"
-                            type="text"
-                            placeholder="Enter your forename"
+                            floatingLabelText="Forename"
                             value={forename}
                             onChange={onChange}
+                            fullWidth
+                            style={styles.input}
+                            disabled={saving}
                             required
                         />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <ControlLabel>Surname</ControlLabel>
-                        <FormControl
+                        <TextField
                             name="surname"
-                            type="text"
-                            placeholder="Enter your surname"
+                            floatingLabelText="Surname"
                             value={surname}
                             onChange={onChange}
+                            fullWidth
+                            style={styles.input}
+                            disabled={saving}
                             required
                         />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <ControlLabel>Email</ControlLabel>
-                        <FormControl
+                        <TextField
                             name="email"
                             type="email"
-                            placeholder="Enter your email address"
+                            floatingLabelText="Email"
                             value={email}
                             onChange={onChange}
+                            fullWidth
+                            style={styles.input}
+                            disabled={saving}
                             required
                         />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <ControlLabel>Telephone Number</ControlLabel>
-                        <FormControl
+                        <TextField
                             name="phoneNumber"
-                            type="text"
-                            placeholder="Enter your telephone number"
+                            floatingLabelText="Telephone Number"
                             value={phoneNumber}
                             onChange={onChange}
+                            fullWidth
+                            style={styles.input}
+                            disabled={saving}
                             required
                         />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <ControlLabel>Payment Method</ControlLabel>
+                        <RadioButtonGroup name="paymentMethod" valueSelected={paymentMethod} onChange={onRadioChange}>
+                            <RadioButton
+                                label="PayPal"
+                                value={PAYMENT_METHODS.PAYPAL}
+                                disabled={saving}
+                                style={styles.input}
+                            />
+                            <RadioButton
+                                label="Bank Transfer"
+                                value={PAYMENT_METHODS.BANK_TRANSFER}
+                                disabled={saving}
+                                style={styles.input}
+                            />
+                        </RadioButtonGroup>
 
-                        <Radio
-                            name="paymentMethod"
-                            value={PAYMENT_METHODS.PAYPAL}
-                            checked={paymentMethod === PAYMENT_METHODS.PAYPAL}
-                            onChange={onChange}
-                        >
-                            PayPal
-                        </Radio>
+                        <div className={css.actions}>
+                            <RaisedButton
+                                primary
+                                type="submit"
+                                label={saving ? 'Completing Gift...' : 'Complete Gift'}
+                                disabled={saving}
+                                style={styles.button}
+                            />
 
-                        <Radio
-                            name="paymentMethod"
-                            value={PAYMENT_METHODS.BANK_TRANSFER}
-                            checked={paymentMethod === PAYMENT_METHODS.BANK_TRANSFER}
-                            onChange={onChange}
-                        >
-                            Bank Transfer
-                        </Radio>
-                    </FormGroup>
-
-                    <div className={css.actions}>
-                        <Button
-                            type="submit"
-                            bsStyle="success"
-                        >
-                            {saving ? 'Completing Gift...' : 'Complete Gift'}
-                        </Button>
-
-                        <RaisedButton
-                            label="Back to Basket"
-                            containerElement={<Link to={BASKET_ROUTE}>Back to Basket</Link>}
-                            linkButton
-                        />
-                    </div>
-                </Form>
+                            <RaisedButton
+                                label="Back to Basket"
+                                linkButton
+                                containerElement={<Link to={BASKET_ROUTE}>Back to Basket</Link>}
+                                disabled={saving}
+                                style={styles.button}
+                            />
+                        </div>
+                    </Form>
+                </Paper>
             </div>
         </section>
     );

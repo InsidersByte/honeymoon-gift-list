@@ -61,7 +61,12 @@ export default class GiverDetailsPage extends React.Component {
 
     onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
         const giver = Object.assign({}, this.state.giver, { [name]: value });
-        return this.setState({ giver });
+        this.setState({ giver });
+    };
+
+    onRadioChange = ({ target: { name } }: { target: { name: string } }, value: string) => {
+        const giver = Object.assign({}, this.state.giver, { [name]: value });
+        this.setState({ giver });
     };
 
     onSubmit = (event: SyntheticEvent) => {
@@ -85,6 +90,7 @@ export default class GiverDetailsPage extends React.Component {
                 giver={giver}
                 saving={saving}
                 onChange={this.onChange}
+                onRadioChange={this.onRadioChange}
                 onSubmit={this.onSubmit}
             />
         );

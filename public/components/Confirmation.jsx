@@ -18,6 +18,13 @@ type PropsType = {
     onLinkClicked: Function,
 };
 
+const styles = {
+    button: {
+        marginTop: 12,
+        marginRight: 12,
+    },
+};
+
 function renderPaymentMessage({ paymentMethod }: { paymentMethod: string }) {
     if (paymentMethod !== PAYMENT_METHODS.PAYPAL) {
         return (
@@ -57,6 +64,7 @@ export default function Confirmation({ loading, giftSet: { paymentMethod, paypal
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={onLinkClicked}
+                        style={styles.button}
                     />
                 }
 
@@ -65,6 +73,7 @@ export default function Confirmation({ loading, giftSet: { paymentMethod, paypal
                         label="Back to Home"
                         containerElement={<Link to={HOME_ROUTE}>Back to Home</Link>}
                         linkButton
+                        style={styles.button}
                     />
                 }
             </div>
