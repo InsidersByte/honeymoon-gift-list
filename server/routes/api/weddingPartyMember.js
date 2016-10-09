@@ -68,6 +68,12 @@ module.exports = ({ express }) => {
                 .forge({ id })
                 .fetch();
 
+            if (!weddingPartyMember) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
             return res.json(weddingPartyMember);
         }))
 

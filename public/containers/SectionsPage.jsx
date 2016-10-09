@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/section';
+import { CREATE_SECTION_ROUTE, updateSectionRoute } from '../constants/routes';
 import SectionList from '../components/SectionList';
 
 type PropsType = {
@@ -55,11 +56,11 @@ export default class SectionsPage extends Component {
     }
 
     onAdd = () => {
-        alert('coming soon!');
+        this.props.router.push(CREATE_SECTION_ROUTE);
     };
 
-    onSelect = (/* member: Object */) => {
-        alert('coming soon!');
+    onSelect = ({ id }: Object) => {
+        this.props.router.push(updateSectionRoute(id));
     };
 
     onToggleVisibility = (/* section: Object */) => {

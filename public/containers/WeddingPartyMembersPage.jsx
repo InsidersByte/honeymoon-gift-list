@@ -60,8 +60,8 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.props.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
     };
 
-    onSelect = (member: Object) => {
-        this.props.router.push(updateWeddingPartyMemberRoute(member.id));
+    onSelect = ({ id }: Object) => {
+        this.props.router.push(updateWeddingPartyMemberRoute(id));
     };
 
     onDrop = ({ id }: Object) => {

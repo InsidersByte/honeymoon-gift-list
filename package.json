@@ -47,7 +47,7 @@
     "express-validator": "2.20.10",
     "jsonwebtoken": "7.1.9",
     "jwt-decode": "2.1.0",
-    "knex": "0.12.2",
+    "knex": "0.12.3",
     "material-ui": "0.16.0",
     "moment": "2.15.1",
     "nodemailer": "2.6.4",

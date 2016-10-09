@@ -101,6 +101,7 @@ export default function WeddingProfileForm(
                     <ToolbarGroup>
                         <ToolbarTitle text="Wedding Profile" />
                     </ToolbarGroup>
+
                     <ToolbarGroup>
                         <IconButton touch tooltip="Help" onClick={handleOpen}>
                             <InfoOutline />

@@ -30,6 +30,8 @@ import WeddingPartyMembersPage from '../containers/WeddingPartyMembersPage';
 import CreateWeddingPartyMemberPage from '../containers/CreateWeddingPartyMemberPage';
 import UpdateWeddingPartyMemberPage from '../containers/UpdateWeddingPartyMemberPage';
 import SectionsPage from '../containers/SectionsPage';
+import CreateSectionPage from '../containers/CreateSectionPage';
+import UpdateSectionPage from '../containers/UpdateSectionPage';
 
 function checkSetup(callback, onSuccess) {
     api({ method: HTTP_METHODS.GET, endpoint: 'setup' })
@@ -103,6 +105,8 @@ export default store => (
                     <Route path="weddingProfile" component={WeddingProfilePage} />
                     <Route path="gift" component={GiftsPage} />
                     <Route path="section" component={SectionsPage} />
+                    <Route path="section/create" component={CreateSectionPage} />
+                    <Route path="section/:id" component={UpdateSectionPage} />
                     <Route path="user" component={UsersPage} />
                     <Route path="giftSet" component={GiftSetsPage} />
                     <Route path="giftSet/:giftSetId" component={GiftSetPage} />

@@ -49,7 +49,7 @@ export default class SectionListItem extends Component {
                         <Edit />
                     </IconButton>
 
-                    <IconButton touch onClick={this.onToggleVisibility}>
+                    <IconButton touch onClick={this.onToggleVisibility} disabled>
                         {hidden ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
 

@@ -57,6 +57,22 @@ module.exports = ({ express, secure }) => {
     router
         .route('/:id')
 
+        .get(wrap(function* getSection(req, res) {
+            const { id } = req.params;
+
+            const section = yield Section
+                .forge({ id })
+                .fetch();
+
+            if (!section) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            return res.json(section);
+        }))
+
         .put(secure, wrap(function* updateSection(req, res) {
             req.checkParams('id').equals(`${req.body.id}`);
             req.checkBody('title').notEmpty();

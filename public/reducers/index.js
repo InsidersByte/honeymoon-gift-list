@@ -12,6 +12,7 @@ import weddingPartyMembers from './weddingPartyMembers';
 import weddingPartyMember from './weddingPartyMember';
 import gifts from './gifts';
 import sections from './sections';
+import section from './section';
 import basket from './basket';
 import giftSet from './giftSet';
 import giftSets from './giftSets';
@@ -27,6 +28,7 @@ export default combineReducers({
     weddingPartyMember,
     gifts,
     sections,
+    section,
     basket,
     giftSet,
     giftSets,

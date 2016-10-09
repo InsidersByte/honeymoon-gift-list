@@ -20,17 +20,16 @@ exports.seed = knex =>
         )
         .then(() =>
             Promise.all([
-                knex('sections').insert({ id: 1, title: 'About Us', content: comingSoonText, position: 100000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 2, title: 'RSVP', content: comingSoonText, position: 200000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 3, title: 'About Our Day', content: comingSoonText, position: 300000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 4, title: 'Local Flavour', content: comingSoonText, position: 400000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 5, title: 'On The Day', content: comingSoonText, position: 500000, wedding_profile_id: 1 }),
-                knex('sections').insert({ id: 6, title: 'The Wedding Playlist', content: comingSoonText, position: 600000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'About Us', content: comingSoonText, position: 100000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'RSVP', content: comingSoonText, position: 200000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'About Our Day', content: comingSoonText, position: 300000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'Local Flavour', content: comingSoonText, position: 400000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'On The Day', content: comingSoonText, position: 500000, wedding_profile_id: 1 }),
+                knex('sections').insert({ title: 'The Wedding Playlist', content: comingSoonText, position: 600000, wedding_profile_id: 1 }),
             ])
         )
         .then(() =>
             knex('gifts').insert({
-                id: 1,
                 name: 'Flight',
                 image_url: 'https://i.ytimg.com/vi/4AlGn9K242I/maxresdefault.jpg',
                 requested: 10,
