@@ -3,6 +3,7 @@ const comingSoonText = 'Coming Soon!';
 exports.seed = knex =>
     knex('sections')
         .del()
+        .then(() => knex('gift_sets_gifts').del())
         .then(() => knex('gifts').del())
         .then(() => knex('wedding_profiles').del())
         .then(() =>
