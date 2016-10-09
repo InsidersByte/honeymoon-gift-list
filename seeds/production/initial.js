@@ -14,7 +14,6 @@ exports.seed = knex =>
                 disclaimer_message: comingSoonText,
             })
         )
-        .then(() => knex('sections').del())
         .then(() =>
             Promise.all([
                 knex('sections').insert({ id: 1, title: 'About Us', content: comingSoonText, position: 100000, wedding_profile_id: 1 }),
