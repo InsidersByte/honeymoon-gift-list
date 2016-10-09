@@ -8,7 +8,10 @@ import Sections from '../components/Sections';
 
 type PropsType = {
     loading: boolean,
-    sections: Array<{}>,
+    sections: Array<{
+        id: number,
+        title: string,
+    }>,
     actions: {
         loadSections: Function,
     },
