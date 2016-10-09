@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
 import BasketSummaryRow from './BasketSummaryRow';
 
 type PropsType = {
@@ -11,18 +11,18 @@ type PropsType = {
 
 export default function BasketSummaryTable({ basket, addToBasket, removeFromBasket, deleteFromBasket }: PropsType) {
     return (
-        <Table responsive>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price (£)</th>
-                    <th>Quantity</th>
-                    <th>Remaining</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
+        <Table>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                    <TableHeaderColumn>Name</TableHeaderColumn>
+                    <TableHeaderColumn>Price (£)</TableHeaderColumn>
+                    <TableHeaderColumn>Quantity</TableHeaderColumn>
+                    <TableHeaderColumn>Remaining</TableHeaderColumn>
+                    <TableHeaderColumn>Remove</TableHeaderColumn>
+                </TableRow>
+            </TableHeader>
 
-            <tbody>
+            <TableBody displayRowCheckbox={false}>
                 {
                     [...basket.entries()].map(([key, item]) =>
                         <BasketSummaryRow
@@ -34,7 +34,7 @@ export default function BasketSummaryTable({ basket, addToBasket, removeFromBask
                         />
                     )
                 }
-            </tbody>
+            </TableBody>
         </Table>
     );
 }

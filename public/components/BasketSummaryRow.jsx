@@ -1,5 +1,6 @@
 import React from 'react';
 import { RaisedButton } from 'material-ui';
+import { TableRow, TableRowColumn } from 'material-ui/Table';
 import Add from 'material-ui/svg-icons/content/add';
 import Remove from 'material-ui/svg-icons/content/remove';
 import Delete from 'material-ui/svg-icons/content/clear';
@@ -47,10 +48,10 @@ export default class BasketSummaryRow extends React.Component {
         const { item: { name, price, quantity, remaining } } = this.props;
 
         return (
-            <tr>
-                <th>{name}</th>
-                <th>{price}</th>
-                <th>
+            <TableRow>
+                <TableRowColumn>{name}</TableRowColumn>
+                <TableRowColumn>{price}</TableRowColumn>
+                <TableRowColumn>
                     <RaisedButton
                         primary
                         icon={<Remove style={styles.icon} />}
@@ -70,17 +71,17 @@ export default class BasketSummaryRow extends React.Component {
                         disabled={quantity === remaining}
                         style={styles.button}
                     />
-                </th>
-                <th>{remaining}</th>
-                <th>
+                </TableRowColumn>
+                <TableRowColumn>{remaining}</TableRowColumn>
+                <TableRowColumn>
                     <RaisedButton
                         secondary
                         icon={<Delete style={styles.icon} />}
                         onClick={this.onDelete}
                         style={styles.button}
                     />
-                </th>
-            </tr>
+                </TableRowColumn>
+            </TableRow>
         );
     }
 }

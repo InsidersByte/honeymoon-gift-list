@@ -18,6 +18,7 @@ type PropsType = {
 
 const styles = {
     button: {
+        marginTop: 12,
         marginRight: 12,
     },
 };
