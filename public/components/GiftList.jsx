@@ -27,21 +27,21 @@ type PropsType = {
 
 export default function GiftList({ gifts, loading, onAdd, onSelect, onMove, onDrop, onDelete }: PropsType) {
     return (
-        <Paper>
-            <Toolbar>
-                <ToolbarGroup>
-                    <ToolbarTitle text="Gifts" />
-                </ToolbarGroup>
+        <Loader loading={loading}>
+            <Paper>
+                <Toolbar>
+                    <ToolbarGroup>
+                        <ToolbarTitle text="Gifts" />
+                    </ToolbarGroup>
 
-                <ToolbarGroup>
-                    <IconButton touch onClick={onAdd}>
-                        <AddCircleOutline />
-                    </IconButton>
-                </ToolbarGroup>
-            </Toolbar>
+                    <ToolbarGroup>
+                        <IconButton touch onClick={onAdd}>
+                            <AddCircleOutline />
+                        </IconButton>
+                    </ToolbarGroup>
+                </Toolbar>
 
-            <SortableContainer>
-                <Loader loading={loading}>
+                <SortableContainer>
                     {
                         gifts.map(gift =>
                             <SortableItem
@@ -60,8 +60,8 @@ export default function GiftList({ gifts, loading, onAdd, onSelect, onMove, onDr
                             </SortableItem>
                         )
                     }
-                </Loader>
-            </SortableContainer>
-        </Paper>
+                </SortableContainer>
+            </Paper>
+        </Loader>
     );
 }

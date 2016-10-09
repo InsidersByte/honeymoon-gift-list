@@ -5,7 +5,7 @@ import {
     Paper, Toolbar, ToolbarGroup, ToolbarTitle, Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, IconButton,
 } from 'material-ui';
 import Mail from 'material-ui/svg-icons/content/mail';
-import View from 'material-ui/svg-icons/image/remove-red-eye';
+import View from 'material-ui/svg-icons/action/pageview';
 import Sent from 'material-ui/svg-icons/content/send';
 import Paid from 'material-ui/svg-icons/editor/attach-money';
 import Delete from 'material-ui/svg-icons/action/delete';

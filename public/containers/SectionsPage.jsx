@@ -1,11 +1,45 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import ComingSoon from '../components/ComingSoon';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/section';
+import Sections from '../components/Sections';
 
-@ComingSoon
-export default class SectionsPage extends Component { // eslint-disable-line react/prefer-stateless-function
+type PropsType = {
+    loading: boolean,
+    sections: Array<{}>,
+    actions: {
+        loadSections: Function,
+    },
+};
+
+@connect(
+    ({ sections: { sections, ...state } }) => {
+        const sortedSections = sections.sort((a, b) => a.position - b.position);
+
+        return {
+            ...state,
+            sections: sortedSections,
+        };
+    },
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+)
+export default class SectionsPage extends Component {
+    props: PropsType;
+
+    componentDidMount() {
+        this.props.actions.loadSections();
+    }
+
     render() {
-        return <div />;
+        const { loading, sections } = this.props;
+
+        return (
+            <Sections
+                loading={loading}
+                sections={sections}
+            />
+        );
     }
 }

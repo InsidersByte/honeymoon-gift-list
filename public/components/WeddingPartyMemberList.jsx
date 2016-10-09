@@ -26,21 +26,21 @@ type PropsType = {
 
 export default function WeddingPartyMembersList({ weddingPartyMembers, loading, onAdd, onSelect, onMove, onDrop, onDelete }: PropsType) {
     return (
-        <Paper>
-            <Toolbar>
-                <ToolbarGroup>
-                    <ToolbarTitle text="Wedding Party Members" />
-                </ToolbarGroup>
+        <Loader loading={loading}>
+            <Paper>
+                <Toolbar>
+                    <ToolbarGroup>
+                        <ToolbarTitle text="Wedding Party Members" />
+                    </ToolbarGroup>
 
-                <ToolbarGroup>
-                    <IconButton touch onClick={onAdd}>
-                        <AddCircleOutline />
-                    </IconButton>
-                </ToolbarGroup>
-            </Toolbar>
+                    <ToolbarGroup>
+                        <IconButton touch onClick={onAdd}>
+                            <AddCircleOutline />
+                        </IconButton>
+                    </ToolbarGroup>
+                </Toolbar>
 
-            <SortableContainer>
-                <Loader loading={loading}>
+                <SortableContainer>
                     {
                         weddingPartyMembers.map(weddingPartyMember =>
                             <SortableItem
@@ -59,8 +59,8 @@ export default function WeddingPartyMembersList({ weddingPartyMembers, loading, 
                             </SortableItem>
                         )
                     }
-                </Loader>
-            </SortableContainer>
-        </Paper>
+                </SortableContainer>
+            </Paper>
+        </Loader>
     );
 }
