@@ -3,7 +3,7 @@ const wrap = require('../../utilities/wrap');
 const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
-module.exports = ({ express }) => {
+module.exports = ({ express, secure }) => {
     const router = new express.Router();
 
     router
@@ -17,7 +17,7 @@ module.exports = ({ express }) => {
             return res.json(weddingPartyMembers);
         }))
 
-        .post(wrap(function* createWeddingPartyMember(req, res) {
+        .post(secure, wrap(function* createWeddingPartyMember(req, res) {
             req.checkBody('name').notEmpty();
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
@@ -61,7 +61,7 @@ module.exports = ({ express }) => {
     router
         .route('/:id')
 
-        .get(wrap(function* getWeddingPartyMember(req, res) {
+        .get(secure, wrap(function* getWeddingPartyMember(req, res) {
             const { id } = req.params;
 
             const weddingPartyMember = yield WeddingPartyMember
@@ -77,7 +77,7 @@ module.exports = ({ express }) => {
             return res.json(weddingPartyMember);
         }))
 
-        .put(wrap(function* updateWeddingPartyMember(req, res) {
+        .put(secure, wrap(function* updateWeddingPartyMember(req, res) {
             req.checkBody('id').equals(req.params.id);
             req.checkBody('name').notEmpty();
             req.checkBody('title').notEmpty();
@@ -120,7 +120,7 @@ module.exports = ({ express }) => {
             return res.json(weddingPartyMember);
         }))
 
-        .delete(wrap(function* deleteWeddingPartyMember(req, res) {
+        .delete(secure, wrap(function* deleteWeddingPartyMember(req, res) {
             const { id } = req.params;
 
             const weddingPartyMember = yield WeddingPartyMember

@@ -13,7 +13,6 @@ export function loadGifts() {
         [CALL_API]: {
             endpoint: 'gift',
             method: HTTP_METHODS.GET,
-            authenticated: true,
             types: [TYPES.LOAD_GIFTS_REQUEST, TYPES.LOAD_GIFTS_SUCCESS, TYPES.LOAD_GIFTS_ERROR],
         },
     };

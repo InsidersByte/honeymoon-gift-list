@@ -21,11 +21,11 @@ module.exports = ({ express, config }) => {
     router.use('/section', section({ express, config, secure }));
     router.use('/gift', gift({ express, config, secure }));
     router.use('/giftSet', giftSet({ express, config, secure }));
+    router.use('/weddingPartyMember', weddingPartyMember({ express, config, secure }));
 
     router.use(secure);
 
     router.use('/user', user({ express, config }));
-    router.use('/weddingPartyMember', weddingPartyMember({ express, config }));
 
     router.all('/*', (req, res) =>
         res.sendStatus(404)

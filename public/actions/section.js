@@ -13,7 +13,6 @@ export function loadSections() {
         [CALL_API]: {
             endpoint: 'section',
             method: HTTP_METHODS.GET,
-            authenticated: true,
             types: [TYPES.LOAD_SECTIONS_REQUEST, TYPES.LOAD_SECTIONS_SUCCESS, TYPES.LOAD_SECTIONS_ERROR],
         },
     };

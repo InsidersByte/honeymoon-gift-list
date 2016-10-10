@@ -13,7 +13,6 @@ export function loadWeddingPartyMembers() {
         [CALL_API]: {
             endpoint: 'weddingPartyMember',
             method: HTTP_METHODS.GET,
-            authenticated: true,
             types: [TYPES.LOAD_WEDDING_PARTY_MEMBERS_REQUEST, TYPES.LOAD_WEDDING_PARTY_MEMBERS_SUCCESS, TYPES.LOAD_WEDDING_PARTY_MEMBERS_ERROR],
         },
     };

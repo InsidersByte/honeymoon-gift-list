@@ -8,7 +8,6 @@ export function loadWeddingProfile() {
         [CALL_API]: {
             endpoint: 'weddingProfile',
             method: HTTP_METHODS.GET,
-            authenticated: true,
             types: [TYPES.LOAD_WEDDING_PROFILE_REQUEST, TYPES.LOAD_WEDDING_PROFILE_SUCCESS, TYPES.LOAD_WEDDING_PROFILE_ERROR],
         },
     };

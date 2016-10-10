@@ -22,7 +22,6 @@ export function loadGiftSet(id) {
         [CALL_API]: {
             endpoint: `giftSet/${id}`,
             method: HTTP_METHODS.GET,
-            authenticated: true,
             types: [TYPES.LOAD_GIFT_SET_REQUEST, TYPES.LOAD_GIFT_SET_SUCCESS, TYPES.LOAD_GIFT_SET_ERROR],
         },
     };
@@ -34,7 +33,6 @@ export function createGiftSet(data) {
             data,
             endpoint: 'giftSet',
             method: HTTP_METHODS.POST,
-            authenticated: true,
             afterSuccess: (dispatch, { id }) => {
                 dispatch(success({ message: 'Gift set created successfully' }));
                 dispatch(push(confirmationPageRoute(id)));
