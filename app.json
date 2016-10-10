@@ -5,7 +5,7 @@
     "website": "https://www.ourweddingheroes.com/",
     "success_url": "/admin",
     "addons": [
-        "postgres"
+        "heroku-postgresql"
     ],
     "env": {
         "URL": {
