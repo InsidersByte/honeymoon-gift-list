@@ -1,0 +1,46 @@
+{
+    "name": "Our Wedding Heroes",
+    "description": "Wedding website with a honeymoon gift list",
+    "repository": "https://github.com/InsidersByte/our-wedding-heroes",
+    "website": "https://www.ourweddingheroes.com/",
+    "success_url": "/admin",
+    "addons": [
+        "postgres"
+    ],
+    "env": {
+        "URL": {
+            "description": "The URL of this Heroku app.",
+            "value": "https://YOURAPPNAME.herokuapp.com"
+        },
+        "SECRET": {
+            "description": "A secret key for verifying the integrity of JWT.",
+            "generator": "secret"
+        },
+        "PAYPAL_ME_USERNAME": {
+            "description": "Your paypal.me username.",
+            "required": false
+        },
+        "EMAIL_FROM": {
+            "description": "The from address that emails come from.",
+            "value": "no-reply@ourweddingheroes.com"
+        },
+        "EMAIL_SIGNATURE": {
+            "description": "The email signature you want to use.",
+            "value": "Our Wedding Heroes"
+        },
+        "EMAIL_SERVICE": {
+            "description": "The email service to use.",
+            "value": "Mailgun"
+        },
+        "EMAIL_USERNAME": {
+            "description": "The username for the email service"
+        },
+        "EMAIL_PASSWORD": {
+            "description": "The password for the email service"
+        },
+        "NPM_CONFIG_PRODUCTION": {
+            "description": "Don't change, it's required at the moment to deploy.",
+            "value": "false"
+        }
+    }
+}
