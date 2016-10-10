@@ -80,8 +80,7 @@ First, you'll need **Docker**.
 
     Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
 
-## Deployment
+## Deploying on Heroku
 
-This will documented as part of this [issue](https://github.com/InsidersByte/our-wedding-heroes/issues/243).
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-> For now see this [discussion](https://github.com/InsidersByte/our-wedding-heroes/issues/216).
