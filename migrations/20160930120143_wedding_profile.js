@@ -5,7 +5,7 @@ exports.up = knex =>
         table.string('cover_title').notNullable();
         table.string('cover_image_url').notNullable();
         table.timestamp('wedding_date').notNullable();
-        table.string('gift_list_content').notNullable();
+        table.text('gift_list_content', 'medium').notNullable();
         table.boolean('show_payment_message').notNullable().defaultTo(false);
         table.string('payment_message');
         table.boolean('show_disclaimer_message').notNullable().defaultTo(false);

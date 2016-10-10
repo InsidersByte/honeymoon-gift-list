@@ -3,7 +3,7 @@ exports.up = knex =>
         table.increments();
         table.timestamps();
         table.string('title').notNullable();
-        table.string('content').notNullable();
+        table.text('content', 'medium').notNullable();
         table.boolean('hidden').notNullable().defaultTo(false);
         table.integer('position').notNullable();
         table.integer('wedding_profile_id').references('wedding_profiles.id').notNullable();
