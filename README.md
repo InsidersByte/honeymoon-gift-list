@@ -10,7 +10,7 @@ A wedding website with a honeymoon gift list.
 
 ## Install
 
-First, you'll need **Node.js v6** and **MongoDB v3**.
+First, you'll need **Node.js v6** and **PostgreSQL v9**.
 
 1.  **Clone the repo**
 
@@ -25,11 +25,7 @@ First, you'll need **Node.js v6** and **MongoDB v3**.
     $ npm install
     ```
     
-3. **Ensure MongoDB is running**
-
-    ```bash
-    $ lsof -iTCP:27017 -sTCP:LISTEN
-    ```
+3. **Ensure PostgresSQL is running**
     
 4. **Start the server**
 

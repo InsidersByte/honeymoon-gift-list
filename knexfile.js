@@ -1,7 +1,7 @@
 module.exports = {
     development: {
         client: 'pg',
-        connection: 'postgres://postgres@localhost:5432/our_wedding_heroes',
+        connection: process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/our_wedding_heroes',
         migrations: {
             tableName: 'knex_migrations',
         },
