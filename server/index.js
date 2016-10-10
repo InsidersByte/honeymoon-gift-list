@@ -14,7 +14,7 @@ if (environment === environmentConstants.DEVELOPMENT) {
 
 const app = express();
 
-const config = require('./config/config');
+const config = require('./config');
 
 require('./config/express')({ app, environment });
 require('./routes')({ app, express, config, environment });

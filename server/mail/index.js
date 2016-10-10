@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const EmailTemplate = require('email-templates').EmailTemplate;
 const path = require('path');
-const config = require('../config/config');
+const config = require('../config');
 
 const templatesDirectory = path.join(__dirname, 'templates');
 
