@@ -34,10 +34,11 @@ const styles = {
 
 export default function GiftDialog({ gift: { id, name, imageUrl, requested, price }, open, onHide, onChange, onSubmit, saving }: PropsType) {
     const updating = !!id;
+    const action = `${updating ? 'Update' : 'Create'}`;
 
     return (
         <Dialog
-            title="Create a Gift"
+            title={`${action} a Gift`}
             open={open}
             onRequestClose={onHide}
             contentStyle={styles.dialog}
@@ -86,7 +87,7 @@ export default function GiftDialog({ gift: { id, name, imageUrl, requested, pric
                     required
                 />
 
-                <ProgressButton saving={saving} label={`${updating ? 'Update' : 'Create'}`} style={styles.button} fullWidth />
+                <ProgressButton saving={saving} label={action} style={styles.button} fullWidth />
             </Form>
         </Dialog>
     );
