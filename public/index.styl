@@ -1,3 +1,8 @@
+$link-colour = #337AB6
+$link-hover-colour = #23527c
+$code-color = #c7254e
+$code-background-color = #f9f2f4
+
 // @stylint off
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
 // @stylint on
@@ -18,8 +23,8 @@ body
     width 100%
 
 h1, h2, h3, h4, h5, h6
-    margin-bottom 10px
     font-weight 500
+    margin-bottom 10px
 
 h1, h2, h3
     margin-top 20px
@@ -31,7 +36,7 @@ p
     margin 0 0 10px
 
 a
-    color #337AB6
+    color $link-colour
     text-decoration none
 
     &:active
@@ -40,7 +45,7 @@ a
 
     &:hover
     &:focus
-        color #23527c
+        color $link-hover-colour
         text-decoration underline
 
     &:focus
@@ -48,11 +53,11 @@ a
         outline-offset -2px
 
 code
-    padding 2px 4px
-    font-size 90%
-    color #c7254e
-    background-color #f9f2f4
+    background-color $code-background-color
     border-radius 4px
+    color $code-color
+    font-size 90%
+    padding 2px 4px
 
 // copied from https://github.com/daneden/animate.css/blob/master/source/attention_seekers/bounce.css
 @keyframes bounce
