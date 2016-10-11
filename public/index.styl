@@ -7,6 +7,8 @@ $code-background-color = #f9f2f4
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
 // @stylint on
 
+/* Global Styles */
+
 html
     height 100%
     margin 0
@@ -58,6 +60,13 @@ code
     color $code-color
     font-size 90%
     padding 2px 4px
+
+/* Overrides */
+
+:global(.markdown-editor__textarea)
+    font-size 1em
+
+/* Keyframes */
 
 // copied from https://github.com/daneden/animate.css/blob/master/source/attention_seekers/bounce.css
 @keyframes bounce

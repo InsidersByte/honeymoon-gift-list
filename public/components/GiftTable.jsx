@@ -13,7 +13,7 @@ type PropsType = {
 export default function GiftTable({ gifts }: PropsType) {
     return (
         <div>
-            <h3>Gifts</h3>
+            <h2>Gifts</h2>
 
             <Table selectable={false}>
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
