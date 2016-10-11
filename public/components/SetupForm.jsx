@@ -27,7 +27,6 @@ const styles = {
     },
     checkbox: {
         marginTop: 12,
-        marginBottom: -6,
     },
     button: {
         marginTop: 12,
