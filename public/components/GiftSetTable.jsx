@@ -46,18 +46,18 @@ export default function GiftSetTable({
     onMarkAsDetailsSent, onDelete,
 }: PropsType) {
     return (
-        <Loader loading={loading}>
-            <Paper>
-                <Toolbar>
-                    <ToolbarGroup>
-                        <ToolbarTitle text="Gift Sets" />
-                    </ToolbarGroup>
+        <Paper>
+            <Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text="Gift Sets" />
+                </ToolbarGroup>
 
-                    <ToolbarGroup>
-                        <ToolbarTitle text={`${giftSets.length} Gift Sets totalling £${total}`} />
-                    </ToolbarGroup>
-                </Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text={`${giftSets.length} Gift Sets totalling £${total}`} />
+                </ToolbarGroup>
+            </Toolbar>
 
+            <Loader loading={loading}>
                 <Table onRowSelection={onSelect}>
                     <TableHeader displaySelectAll={false}>
                         <TableRow>
@@ -116,7 +116,7 @@ export default function GiftSetTable({
                         }
                     </TableBody>
                 </Table>
-            </Paper>
-        </Loader>
+            </Loader>
+        </Paper>
     );
 }

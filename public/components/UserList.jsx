@@ -27,20 +27,20 @@ type PropsType = {
 
 export default function UserList({ loading, activeUsers, invitedUsers, loggedInUser, onAdd, onDelete }: PropsType) {
     return (
-        <Loader loading={loading}>
-            <Paper>
-                <Toolbar>
-                    <ToolbarGroup>
-                        <ToolbarTitle text="Users" />
-                    </ToolbarGroup>
+        <Paper>
+            <Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text="Users" />
+                </ToolbarGroup>
 
-                    <ToolbarGroup>
-                        <IconButton touch onClick={onAdd}>
-                            <PersonAdd />
-                        </IconButton>
-                    </ToolbarGroup>
-                </Toolbar>
+                <ToolbarGroup>
+                    <IconButton touch onClick={onAdd}>
+                        <PersonAdd />
+                    </IconButton>
+                </ToolbarGroup>
+            </Toolbar>
 
+            <Loader loading={loading}>
                 <InvitedUserList
                     users={invitedUsers}
                     onDelete={onDelete}
@@ -51,7 +51,7 @@ export default function UserList({ loading, activeUsers, invitedUsers, loggedInU
                     loggedInUser={loggedInUser}
                     onDelete={onDelete}
                 />
-            </Paper>
-        </Loader>
+            </Loader>
+        </Paper>
     );
 }

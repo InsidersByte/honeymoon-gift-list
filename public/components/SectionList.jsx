@@ -25,20 +25,20 @@ type PropsType = {
 
 export default function SectionList({ loading, sections, onAdd, onSelect, onMove, onDrop, onToggleVisibility, onDelete }: PropsType) {
     return (
-        <Loader loading={loading}>
-            <Paper>
-                <Toolbar>
-                    <ToolbarGroup>
-                        <ToolbarTitle text="Sections" />
-                    </ToolbarGroup>
+        <Paper>
+            <Toolbar>
+                <ToolbarGroup>
+                    <ToolbarTitle text="Sections" />
+                </ToolbarGroup>
 
-                    <ToolbarGroup>
-                        <IconButton touch onClick={onAdd}>
-                            <Add />
-                        </IconButton>
-                    </ToolbarGroup>
-                </Toolbar>
+                <ToolbarGroup>
+                    <IconButton touch onClick={onAdd}>
+                        <Add />
+                    </IconButton>
+                </ToolbarGroup>
+            </Toolbar>
 
+            <Loader loading={loading}>
                 <SortableContainer>
                     {
                         sections.map(section =>
@@ -60,7 +60,7 @@ export default function SectionList({ loading, sections, onAdd, onSelect, onMove
                         )
                     }
                 </SortableContainer>
-            </Paper>
-        </Loader>
+            </Loader>
+        </Paper>
     );
 }
