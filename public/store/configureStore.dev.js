@@ -3,8 +3,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import createLogger from 'redux-logger';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'; // eslint-disable-line import/no-extraneous-dependencies
+import createLogger from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import DevTools from '../containers/DevTools';
 import rootReducer from '../reducers';
 import api from '../middleware/api';

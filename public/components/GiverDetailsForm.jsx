@@ -31,7 +31,6 @@ const styles = {
         margin: '6px 0',
     },
     button: {
-        marginTop: 12,
         marginRight: 12,
     },
 };
@@ -102,6 +101,7 @@ export default function GiverDetailsForm({
                                 disabled={saving}
                                 style={styles.input}
                             />
+
                             <RadioButton
                                 label="Bank Transfer"
                                 value={PAYMENT_METHODS.BANK_TRANSFER}

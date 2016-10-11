@@ -2,13 +2,57 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
 // @stylint on
 
-body
 html
-:global(#app)
+    height 100%
+    margin 0
+    width 100%
+
+body
     font 14px 'Roboto', sans-serif
     height 100%
     margin 0
     width 100%
+
+:global(#app)
+    height 100%
+    width 100%
+
+h1, h2, h3, h4, h5, h6
+    margin-bottom 10px
+    font-weight 500
+
+h1, h2, h3
+    margin-top 20px
+
+h4, h5, h6
+    margin-top 10px
+
+p
+    margin 0 0 10px
+
+a
+    color #337AB6
+    text-decoration none
+
+    &:active
+    &:hover
+        outline 0
+
+    &:hover
+    &:focus
+        color #23527c
+        text-decoration underline
+
+    &:focus
+        outline 5px auto -webkit-focus-ring-color
+        outline-offset -2px
+
+code
+    padding 2px 4px
+    font-size 90%
+    color #c7254e
+    background-color #f9f2f4
+    border-radius 4px
 
 // copied from https://github.com/daneden/animate.css/blob/master/source/attention_seekers/bounce.css
 @keyframes bounce
