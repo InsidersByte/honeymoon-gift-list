@@ -16,7 +16,7 @@ export default function weddingPartyMemberReducer(state = section, action) {
             return Object.assign({}, state, { saving: true });
 
         case TYPES.CREATE_SECTION_SUCCESS:
-            return Object.assign({}, state, { section: action.payload, saving: false });
+            return Object.assign({}, state, { saving: false });
 
         case TYPES.CREATE_SECTION_ERROR:
             return Object.assign({}, state, { saving: false });
