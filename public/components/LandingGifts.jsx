@@ -3,7 +3,6 @@
 import React from 'react';
 import MarkdownRenderer from 'react-markdown-renderer';
 import Info from 'material-ui/svg-icons/action/info';
-import { white } from 'material-ui/styles/colors';
 import LandingGift from './LandingGift';
 import LandingItem from './LandingItem';
 import css from './LandingGifts.styl';
@@ -62,7 +61,7 @@ export default function LandingGifts({ weddingProfile, gifts, basket, addToBaske
                         <br />
                         <br />
 
-                        <Info color={white} style={styles.icon} /> {paymentMessage}
+                        <Info color={'#9a9ca7'} style={styles.icon} /> {paymentMessage}
                     </span>
                 )}
 
@@ -71,7 +70,7 @@ export default function LandingGifts({ weddingProfile, gifts, basket, addToBaske
                         <br />
                         <br />
 
-                        <Info color={white} style={styles.icon} /> {disclaimerMessage}
+                        <Info color={'#9a9ca7'} style={styles.icon} /> {disclaimerMessage}
                     </span>
                 )}
             </div>
