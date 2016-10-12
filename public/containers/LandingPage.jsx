@@ -58,9 +58,9 @@ type PropsType = {
 
 @connect(
     (state) => {
-        const { weddingProfile: weddingProfileState, sections: sectionsState, weddingPartyMembers, gifts, basket } = state;
+        const { weddingProfile: weddingProfileState, sections: sectionsState, weddingPartyMembers, gifts: giftsState, basket } = state;
 
-        const loading = weddingProfileState.loading || sectionsState.loading || weddingPartyMembers.loading || gifts.loading;
+        const loading = weddingProfileState.loading || sectionsState.loading || weddingPartyMembers.loading || giftsState.loading;
 
         let { weddingProfile } = weddingProfileState;
 
@@ -86,6 +86,9 @@ type PropsType = {
         const visibleSections = sections.filter(o => !o.hidden);
         const sortedSections = visibleSections.sort((a, b) => a.position - b.position);
 
+        const { gifts } = giftsState;
+        const sortedGifts = gifts.sort((a, b) => a.position - b.position);
+
         return {
             weddingProfile,
             loading,
@@ -94,7 +97,7 @@ type PropsType = {
             basketTotal,
             sections: sortedSections,
             weddingPartyMembers: weddingPartyMembers.weddingPartyMembers,
-            gifts: gifts.gifts,
+            gifts: sortedGifts,
         };
     },
     dispatch => ({
