@@ -1,10 +1,10 @@
 /* @flow */
 
 import React from 'react';
-import { RaisedButton } from 'material-ui';
+import { RaisedButton, Divider } from 'material-ui';
 import { Link } from 'react-router';
-import BasketSummaryTable from './BasketSummaryTable';
 import { GIVER_ROUTE, HOME_ROUTE } from '../constants/routes';
+import BasketSummaryListItem from './BasketSummaryListItem';
 import css from './BasketSummary.styl';
 
 type PropsType = {
@@ -49,17 +49,26 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
         <div className={css.root}>
             <div className={css.container}>
                 <h1 className={css.title}>
-                    Subtotal ({basketCount} items): £{basketTotal}
+                    Subtotal ({basketCount} item{basketCount > 1 ? 's' : null}): £{basketTotal}
                 </h1>
 
+                <Divider />
+
                 <div className={css.content}>
-                    <BasketSummaryTable
-                        basket={basket}
-                        basketTotal={basketTotal}
-                        addToBasket={addToBasket}
-                        removeFromBasket={removeFromBasket}
-                        deleteFromBasket={deleteFromBasket}
-                    />
+                    {
+                        [...basket.entries()].map(([key, item]) =>
+                            <div key={key}>
+                                <BasketSummaryListItem
+                                    item={item}
+                                    addToBasket={addToBasket}
+                                    removeFromBasket={removeFromBasket}
+                                    deleteFromBasket={deleteFromBasket}
+                                />
+
+                                <Divider />
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div className={css.actions}>
