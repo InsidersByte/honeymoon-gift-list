@@ -56,6 +56,7 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
 
                 <div className={css.content}>
                     {
+                        // FIXME:FLOW this does work?
                         [...basket.entries()].map(([key, item]) =>
                             <div key={key}>
                                 <BasketSummaryListItem
