@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { RaisedButton } from 'material-ui';
+import { Badge } from 'material-ui';
 import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
 import { white } from 'material-ui/styles/colors';
 import { BASKET_ROUTE } from '../constants/routes';
@@ -13,31 +13,21 @@ type PropsType = {
     total: number,
 };
 
-export default function LandingBasket({ count, total }: PropsType) {
+export default function LandingBasket({ count }: PropsType) {
     if (count <= 0) {
         return null;
     }
 
     return (
         <section className={css.root}>
-            <div>
-                <ShoppingCart color={white} />
-            </div>
-
-            <div>
-                {count} item(s)
-            </div>
-
-            <div>
-                £{total}
-            </div>
-
-            <RaisedButton
-                primary
-                label="Basket"
-                containerElement={<Link to={BASKET_ROUTE}>Basket</Link>}
-                linkButton
-            />
+            <Link to={BASKET_ROUTE}>
+                <Badge
+                    primary
+                    badgeContent={count}
+                >
+                    <ShoppingCart color={white} />
+                </Badge>
+            </Link>
         </section>
     );
 }
