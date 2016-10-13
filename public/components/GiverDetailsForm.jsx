@@ -30,6 +30,10 @@ const styles = {
     input: {
         margin: '6px 0',
     },
+    radioButton: {
+        marginTop: 16,
+        marginBottom: 16,
+    },
     button: {
         marginTop: 12,
         marginRight: 12,
@@ -100,14 +104,14 @@ export default function GiverDetailsForm({
                                 label="PayPal"
                                 value={PAYMENT_METHODS.PAYPAL}
                                 disabled={saving}
-                                style={styles.input}
+                                style={styles.radioButton}
                             />
 
                             <RadioButton
                                 label="Bank Transfer"
                                 value={PAYMENT_METHODS.BANK_TRANSFER}
                                 disabled={saving}
-                                style={styles.input}
+                                style={styles.radioButton}
                             />
                         </RadioButtonGroup>
 
