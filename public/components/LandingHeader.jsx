@@ -18,12 +18,12 @@ type PropsType = {
 const styles = {
     button: {
         margin: 0,
-        width: 96,
-        height: 96,
+        width: 72,
+        height: 72,
     },
     icon: {
-        width: 48,
-        height: 48,
+        width: 36,
+        height: 36,
     },
 };
 
@@ -32,7 +32,7 @@ export default function LandingHeader({ weddingProfile: { coverTitle, coverImage
     let daysTillIDoCountdown = null;
 
     if (daysToGo) {
-        daysTillIDoCountdown = <h2>{daysToGo} Days until I Do</h2>;
+        daysTillIDoCountdown = <h2 className={css.daysToGo}>{daysToGo} Days until I Do</h2>;
     }
 
     return (
