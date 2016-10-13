@@ -44,15 +44,13 @@ export default class GiftListItem extends React.Component {
                     <h4 className={css.title}>Remaining: {remaining}</h4>
                 </div>
 
-                <div className={css.actionContainer}>
-                    <IconButton touch onClick={this.onSelect}>
-                        <Edit />
-                    </IconButton>
+                <IconButton touch onClick={this.onSelect}>
+                    <Edit />
+                </IconButton>
 
-                    <IconButton touch onClick={this.onDelete}>
-                        <Delete />
-                    </IconButton>
-                </div>
+                <IconButton touch onClick={this.onDelete}>
+                    <Delete />
+                </IconButton>
             </div>
         );
     }

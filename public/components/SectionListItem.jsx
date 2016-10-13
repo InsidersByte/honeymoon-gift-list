@@ -41,22 +41,20 @@ export default class SectionListItem extends Component {
         return (
             <div className={css.root} style={style}>
                 <div className={css.textContainer}>
-                    <h3 className={css.name}>{title}</h3>
+                    <h3 className={css.title}>{title}</h3>
                 </div>
 
-                <div className={css.actionContainer}>
-                    <IconButton touch onClick={this.onSelect}>
-                        <Edit />
-                    </IconButton>
+                <IconButton touch onClick={this.onSelect}>
+                    <Edit />
+                </IconButton>
 
-                    <IconButton touch onClick={this.onToggleVisibility} disabled>
-                        {hidden ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
+                <IconButton touch onClick={this.onToggleVisibility} disabled>
+                    {hidden ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
 
-                    <IconButton touch onClick={this.onDelete}>
-                        <Delete />
-                    </IconButton>
-                </div>
+                <IconButton touch onClick={this.onDelete}>
+                    <Delete />
+                </IconButton>
             </div>
         );
     }

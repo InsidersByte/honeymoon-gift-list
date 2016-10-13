@@ -42,15 +42,13 @@ export default class WeddingPartyMemberItem extends Component {
                     <p className={css.description}>{description}</p>
                 </div>
 
-                <div className={css.actionContainer}>
-                    <IconButton touch onClick={this.onSelect}>
-                        <Edit />
-                    </IconButton>
+                <IconButton touch onClick={this.onSelect}>
+                    <Edit />
+                </IconButton>
 
-                    <IconButton touch onClick={this.onDelete}>
-                        <Delete />
-                    </IconButton>
-                </div>
+                <IconButton touch onClick={this.onDelete}>
+                    <Delete />
+                </IconButton>
             </div>
      );
     }
