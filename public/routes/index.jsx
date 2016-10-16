@@ -15,11 +15,12 @@ import BasketSummaryPage from '../containers/BasketSummaryPage';
 import GiverDetailsPage from '../containers/GiverDetailsPage';
 import ConfirmationPage from '../containers/ConfirmationPage';
 
+import Admin from '../containers/Admin';
 import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import SetupPage from '../containers/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
-import Admin from '../containers/Admin';
+import LoggedIn from '../containers/LoggedIn';
 import WeddingProfilePage from '../containers/WeddingProfilePage';
 import GiftsPage from '../containers/GiftsPage';
 import UsersPage from '../containers/UsersPage';
@@ -100,7 +101,7 @@ export default store => (
                     <Route path="signUp/:token" component={SignUpPage} />
                 </Route>
 
-                <Route onEnter={requireAuth(store)}>
+                <Route onEnter={requireAuth(store)} component={LoggedIn}>
                     <Route path="profile" component={ProfilePage} />
                     <Route path="weddingProfile" component={WeddingProfilePage} />
                     <Route path="gift" component={GiftsPage} />
@@ -118,6 +119,7 @@ export default store => (
                 </Route>
             </Route>
         </Route>
+
         <Route path="*" component={NoMatch} />
     </Route>
 );
