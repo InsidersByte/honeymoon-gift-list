@@ -31,12 +31,13 @@ type PropsType = {
 
 @withRouter
 @connect(
-    ({ weddingPartyMembers: state }) => {
-        const { weddingPartyMembers } = state;
-
+    ({ weddingPartyMembers: { weddingPartyMembers, ...state } }) => {
         const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
 
-        return Object.assign({}, state, { weddingPartyMembers: sortedWeddingPartyMembers });
+        return {
+            ...state,
+            weddingPartyMembers: sortedWeddingPartyMembers,
+        };
     },
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )

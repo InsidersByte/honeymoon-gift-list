@@ -39,12 +39,13 @@ const initialGift = {
 };
 
 @connect(
-    ({ gifts: state }) => {
-        const { gifts } = state;
-
+    ({ gifts: { gifts, ...state } }) => {
         const sortedGifts = gifts.sort((a, b) => a.position - b.position);
 
-        return Object.assign({}, state, { gifts: sortedGifts });
+        return {
+            ...state,
+            gifts: sortedGifts,
+        };
     },
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )

@@ -26,14 +26,7 @@ type PropsType = {
 @withWidth({ largeWidth: 1200 })
 @withRouter
 @connect(
-    (state) => {
-        const { auth: { user, isAuthenticated } } = state;
-
-        return {
-            user,
-            isAuthenticated,
-        };
-    },
+    ({ auth }) => auth,
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class Admin extends Component {
