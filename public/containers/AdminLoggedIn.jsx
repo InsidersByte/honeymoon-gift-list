@@ -29,7 +29,7 @@ type PropsType = {
     ({ auth }) => auth,
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-export default class Admin extends Component {
+export default class AdminLoggedIn extends Component {
     props: PropsType;
 
     state = {
