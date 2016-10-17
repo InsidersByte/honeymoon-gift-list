@@ -7,13 +7,13 @@ const setup = {
 export default function usersReducer(state = setup, action) {
     switch (action.type) {
         case TYPES.SETUP_REQUEST:
-            return Object.assign({}, state, { loading: true });
+            return Object.assign({}, state, { saving: true });
 
         case TYPES.SETUP_SUCCESS:
-            return Object.assign({}, state, { loading: false });
+            return Object.assign({}, state, { saving: false });
 
         case TYPES.SETUP_ERROR:
-            return Object.assign({}, state, { loading: false });
+            return Object.assign({}, state, { saving: false });
 
         default:
             return state;
