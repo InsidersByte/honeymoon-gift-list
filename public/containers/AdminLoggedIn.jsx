@@ -72,6 +72,11 @@ export default class AdminLoggedIn extends Component {
         const { navDrawerOpen } = this.state;
         let docked = false;
 
+        if (!isAuthenticated) {
+            console.error('This component can only be rendered if logged in');
+            return null;
+        }
+
         const styles = this.getStyles();
         let open = navDrawerOpen;
 
@@ -97,7 +102,6 @@ export default class AdminLoggedIn extends Component {
                     location={location}
                     logout={this.logout}
                     user={user}
-                    isAuthenticated={isAuthenticated}
                 />
 
                 <div style={styles.container}>

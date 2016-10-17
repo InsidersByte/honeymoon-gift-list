@@ -5,7 +5,6 @@ import { Drawer, List, ListItem, makeSelectable } from 'material-ui';
 import * as ROUTES from '../constants/routes';
 
 type PropsType = {
-    isAuthenticated: boolean,
     location: { pathname: string },
     docked: boolean,
     open: boolean,
@@ -17,21 +16,9 @@ type PropsType = {
 
 const SelectableList = makeSelectable(List);
 
-export default function NavigationDrawer({ isAuthenticated, user, location, onChange, onRequestChange, docked, open, logout }: PropsType) {
-    let menuItems;
-
-    if (!isAuthenticated) {
-        menuItems = (
-            <SelectableList
-                value={location.pathname}
-                onChange={onChange}
-                style={{ padding: 0 }}
-            >
-                <ListItem primaryText="Login" value={ROUTES.LOGIN_ROUTE} />
-            </SelectableList>
-        );
-    } else {
-        menuItems = (
+export default function NavigationDrawer({ user, location, onChange, onRequestChange, docked, open, logout }: PropsType) {
+    return (
+        <Drawer onRequestChange={onRequestChange} docked={docked} open={open}>
             <SelectableList
                 value={location.pathname}
                 onChange={onChange}
@@ -53,12 +40,6 @@ export default function NavigationDrawer({ isAuthenticated, user, location, onCh
                     ]}
                 />
             </SelectableList>
-        );
-    }
-
-    return (
-        <Drawer onRequestChange={onRequestChange} docked={docked} open={open}>
-            {menuItems}
         </Drawer>
     );
 }
