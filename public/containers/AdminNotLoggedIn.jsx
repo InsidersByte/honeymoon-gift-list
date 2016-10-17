@@ -8,17 +8,23 @@ type PropsType = {
 
 const styles = {
     root: {
-        height: '75%',
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: '8vh',
+    },
+    container: {
+        margin: '0 5%',
     },
 };
 
 export default function AdminLoggedIn({ children }: PropsType) {
     return (
         <div style={styles.root}>
-            {children}
+            <div style={styles.container}>
+                {children}
+            </div>
         </div>
     );
 }
