@@ -1,3 +1,5 @@
+// TODO: flow this file
+
 import React from 'react';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 

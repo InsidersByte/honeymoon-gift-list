@@ -1,3 +1,5 @@
+/* @flow */
+
 export const BASE_API_URL = '/api/';
 
 export const HTTP_METHODS = {

@@ -1,7 +1,6 @@
 /* @flow */
 
 import request from 'superagent';
-
 import { BASE_API_URL } from '../constants/api';
 import { TOKEN } from '../constants';
 

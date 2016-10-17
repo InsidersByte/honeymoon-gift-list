@@ -1,3 +1,5 @@
+/* @flow */
+
 export const TOKEN = 'TOKEN';
 
 export const MAXIMUM_NUMBER = 1000000;
