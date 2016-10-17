@@ -57,21 +57,15 @@ export default function LandingGifts({ weddingProfile, gifts, addToBasket }: Pro
                 <MarkdownRenderer markdown={giftListContent} />
 
                 {showPaymentMessage && (
-                    <span>
-                        <br />
-                        <br />
-
+                    <p>
                         <Info style={styles.icon} /> {paymentMessage}
-                    </span>
+                    </p>
                 )}
 
                 {showDisclaimerMessage && (
-                    <span className={css.disclaimerMessage}>
-                        <br />
-                        <br />
-
+                    <p>
                         <Info style={styles.icon} /> {disclaimerMessage}
-                    </span>
+                    </p>
                 )}
             </div>
         </LandingItem>

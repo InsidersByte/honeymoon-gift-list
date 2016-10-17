@@ -21,7 +21,7 @@ export default function LandingWeddingPartyMember({ weddingPartyMember: { name, 
 
             <h1 className={css.name}>{name}</h1>
 
-            <h2 className={css.title}>{title}</h2>
+            <h3 className={css.title}>&#34;{title}&#34;</h3>
 
             <p className={css.description}>{description}</p>
         </div>

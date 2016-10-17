@@ -1,7 +1,7 @@
 const wedding_profile_id = 1; // eslint-disable-line camelcase
 const comingSoonText = 'Coming Soon!';
 
-function createSection({ title, position }, knex) {
+function createSection(knex, { title, position }) {
     return {
         title,
         position: position * 1000000,
@@ -40,14 +40,14 @@ exports.seed = knex =>
                     updated_at: knex.fn.now(),
                 })
                 .then(() => Promise.all([
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'A Little Bit About Us', position: 1 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'RSVP', position: 2 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'About Our Day', position: 3 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'Local Flavour', position: 4 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'Staying At The Venue', position: 5 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'On The Day', position: 6 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'The Wedding Playlist', position: 7 }, knex)),
-                    knex('sections').transacting(transaction).insert(createSection({ title: 'About our Honeymoon', position: 8 }, knex)),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'A Little Bit About Us', position: 1 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'RSVP', position: 2 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'About Our Day', position: 3 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'Local Flavour', position: 4 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'Staying At The Venue', position: 5 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'On The Day', position: 6 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'The Wedding Playlist', position: 7 })),
+                    knex('sections').transacting(transaction).insert(createSection(knex, { title: 'About our Honeymoon', position: 8 })),
                 ]))
                 .then(() => knex('gifts').transacting(transaction).insert({
                     wedding_profile_id,
