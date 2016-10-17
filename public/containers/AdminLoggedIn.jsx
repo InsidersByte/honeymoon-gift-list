@@ -40,7 +40,7 @@ export default class AdminLoggedIn extends Component {
         return {
             root: {},
             container: {
-                margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`,
+                margin: spacing.desktopGutter,
             },
         };
     }
