@@ -17,7 +17,7 @@ type PropsType = {
 };
 
 @connect(
-    ({ setup }) => saving,
+    ({ setup }) => setup,
     dispatch => ({ actions: { ...bindActionCreators(setupActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
 )
 export default class SetupPage extends React.Component {
