@@ -58,9 +58,7 @@ type PropsType = {
 };
 
 @connect(
-    (state) => {
-        const { weddingProfile: weddingProfileState, sections: sectionsState, weddingPartyMembers, gifts: giftsState, basket } = state;
-
+    ({ weddingProfile: weddingProfileState, sections: sectionsState, weddingPartyMembers, gifts: giftsState, basket }) => {
         const loading = weddingProfileState.loading || sectionsState.loading || weddingPartyMembers.loading || giftsState.loading;
 
         let { weddingProfile } = weddingProfileState;

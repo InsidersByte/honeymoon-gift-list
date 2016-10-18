@@ -26,8 +26,7 @@ const styles = {
 };
 
 @connect(
-    (state) => {
-        const { notifications } = state;
+    ({ notifications }) => {
         const notificationsToShow = notifications.filter(({ show }) => show);
 
         return {

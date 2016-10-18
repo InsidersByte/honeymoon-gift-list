@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 const wrap = require('../../utilities/wrap');
 const Mailer = require('../../mail');
-const { ONE_DAY_MS } = require('../../constants');
+const { ONE_DAY_S, ONE_DAY_MS } = require('../../constants');
 const { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE } = require('../../constants/user');
 
 const mailer = new Mailer();
@@ -50,7 +50,7 @@ module.exports = ({ express, config }) => {
             },
             config.secret,
             {
-                expiresIn: ONE_DAY_MS,
+                expiresIn: ONE_DAY_S,
             }
         );
 

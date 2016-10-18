@@ -27,11 +27,10 @@ type PropsType = {
 };
 
 @connect(
-    ({ weddingProfile: { loading, saving, weddingProfile } }) => {
+    ({ weddingProfile: { weddingProfile, ...state } }) => {
         if (!weddingProfile || !weddingProfile.weddingDate) {
             return {
-                loading,
-                saving,
+                ...state,
                 weddingProfile,
             };
         }
@@ -40,8 +39,7 @@ type PropsType = {
         const updatedWeddingProfile = Object.assign({}, weddingProfile, { weddingDate });
 
         return {
-            loading,
-            saving,
+            ...state,
             weddingProfile: updatedWeddingProfile,
         };
     },

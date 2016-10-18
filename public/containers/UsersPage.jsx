@@ -38,20 +38,15 @@ const initialUser = {
 };
 
 @connect(
-    (state) => {
-        const { auth: { user: loggedInUser }, users: { users, loading, saving, deleting, userModalOpen } } = state;
-
+    ({ auth: { user: loggedInUser }, users: { users, ...state } }) => {
         const activeUsers = users.filter(({ status }) => status === 'active');
         const invitedUsers = users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
 
         return {
             loggedInUser,
+            ...state,
             activeUsers,
             invitedUsers,
-            loading,
-            saving,
-            deleting,
-            userModalOpen,
         };
     },
     dispatch => ({ actions: bindActionCreators(actions, dispatch) })
