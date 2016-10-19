@@ -23,10 +23,10 @@
     "knex": "knex"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://insidersbyte@github.com/InsidersByte/our-wedding-heroes.git"
+    "url": "git+https://insidersbyte@github.com/InsidersByte/our-wedding-heroes.git",
+    "type": "git"
   },
-  "author": "Jonathon Kelly <jonathon.kelly@insidersbyte.com>",
+  "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/InsidersByte/our-wedding-heroes/issues"
