@@ -6,10 +6,10 @@
   "main": "./server",
   "scripts": {
     "clean": "rimraf dist",
-    "postinstall": "npm run build",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack --config webpack.production.config.js --profile --colors",
     "build:progress": "npm run build -- --progress",
+    "heroku-postbuild": "npm run build",
     "lint-stylus": "stylint ./public",
     "lint-js": "eslint --ignore-path .gitignore --ext .js,.jsx .",
     "lint-js:fix": "npm run lint-js -- --fix",
