@@ -31,13 +31,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 include: [paths.appSrc, paths.appLib],
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015', 'stage-1', 'react'],
-                        plugins: ['transform-decorators-legacy'],
-                    },
-                },
+                use: 'babel-loader',
             },
             {
                 test: /\.css$/,

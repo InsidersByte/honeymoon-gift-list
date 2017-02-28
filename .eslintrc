@@ -2,6 +2,10 @@
     "parser": "babel-eslint",
     "extends": "airbnb-base",
 
+    "env": {
+        "jest": true
+    },
+
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 160, 2],
@@ -12,6 +16,14 @@
             "ForInStatement",
             "LabeledStatement",
             "WithStatement"
-        ]
+        ],
+
+        "import/no-extraneous-dependencies": ["error", {
+            "devDependencies": [
+                "**/*.test.{js,jsx}",
+                "**/webpack.config.*.js"
+            ],
+            "optionalDependencies": false
+        }]
     }
 }

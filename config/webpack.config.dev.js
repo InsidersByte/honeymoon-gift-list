@@ -6,6 +6,8 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const paths = require('./paths');
 
+process.env.BABEL_ENV = 'development';
+
 module.exports = {
     devtool: 'eval',
     entry: [
@@ -31,8 +33,6 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'stage-1', 'react', 'react-hmre'],
-                        plugins: ['transform-decorators-legacy', 'flow-react-proptypes'],
                         cacheDirectory: true,
                     },
                 },

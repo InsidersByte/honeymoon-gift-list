@@ -12,8 +12,15 @@
             "LabeledStatement",
             "WithStatement"
         ],
-
         "no-alert": "off",
+
+        "import/no-extraneous-dependencies": ["error", {
+            "devDependencies": [
+                "**/*.test.{js,jsx}",
+                "**/webpack.config.*.js"
+            ],
+            "optionalDependencies": false
+        }],
 
         "react/no-unused-prop-types": "off",
         "react/require-default-props": "off",
