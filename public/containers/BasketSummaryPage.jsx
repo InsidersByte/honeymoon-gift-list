@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/basket';
+import * as actions from '../redux/basket';
 import BasketSummary from '../components/BasketSummary';
 
 type PropsType = {

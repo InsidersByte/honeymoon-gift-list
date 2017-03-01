@@ -8,7 +8,7 @@ import * as weddingProfileActions from '../actions/weddingProfile';
 import * as sectionActions from '../actions/section';
 import * as weddingPartyMembersActions from '../actions/weddingPartyMember';
 import * as giftActions from '../actions/gift';
-import * as basketActions from '../actions/basket';
+import * as basketActions from '../redux/basket';
 import Landing from '../components/Landing';
 
 type PropsType = {
