@@ -9,7 +9,6 @@ function* isSetup() {
         .where('status', 'in', validStatuses)
         .count('id');
 
-    // FIXME: Hack as count returns a string for some reason
     count = parseInt(count, 10);
 
     return {

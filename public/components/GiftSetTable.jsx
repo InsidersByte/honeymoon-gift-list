@@ -83,7 +83,6 @@ export default function GiftSetTable({
                     <TableBody deselectOnClickaway={false}>
                         {giftSets
                             .map((giftSet, index) => {
-                                // FIXME: Material-ui doesn't seem to like this in another component
                                 const { id, giver, createdAt, total: giftSetTotal, paid, paymentDetailsSent, paymentMethod } = giftSet;
                                 const { forename, surname, email, phoneNumber } = giver;
 

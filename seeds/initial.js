@@ -16,7 +16,6 @@ function createSection(knex, { title, position, content }) {
 exports.seed = knex =>
     knex('wedding_profiles').count('id')
         .then(([{ count: countString }]) => {
-            // FIXME: Hack as count returns a string for some reason
             const count = parseInt(countString, 10);
 
             if (count >= 1) {

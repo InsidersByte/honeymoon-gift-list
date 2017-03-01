@@ -1,6 +1,5 @@
 /* @flow */
 
-// TODO: Look at how much polyfilling we actually need
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
