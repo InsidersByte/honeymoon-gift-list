@@ -11,7 +11,7 @@ export default function reducer(state = new Map(), action) {
         const { id } = item;
 
         const existingItem = state.get(id) || { quantity: 0 };
-        const updatedItem = { ...existingItem, ...item};
+        const updatedItem = { ...existingItem, ...item };
         updatedItem.quantity += 1;
 
         if (updatedItem.quantity > updatedItem.remaining) {
