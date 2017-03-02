@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvitedUserListItem should render correctly 1`] = `
+<ListItem
+  autoGenerateNestedIndicator={true}
+  disableKeyboardFocus={false}
+  disabled={false}
+  initiallyOpen={false}
+  insetChildren={false}
+  leftAvatar={
+    <Avatar
+      icon={<CommunicationEmail />}
+      size={40}
+    />
+  }
+  nestedItems={Array []}
+  nestedLevel={0}
+  onKeyboardFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onNestedListToggle={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  open={null}
+  primaryText="email@email.com"
+  primaryTogglesNestedList={false}
+  rightIconButton={
+    <IconButton
+      disableTouchRipple={false}
+      disabled={false}
+      iconStyle={Object {}}
+      onClick={[Function]}
+      tooltipPosition="bottom-center"
+      touch={false}
+    >
+      <ActionDelete />
+    </IconButton>
+  }
+  secondaryTextLines={1}
+/>
+`;

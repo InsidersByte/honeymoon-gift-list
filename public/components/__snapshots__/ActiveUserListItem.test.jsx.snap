@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loader should render deletable correctly 1`] = `
+exports[`ActiveUserListItem should render deletable correctly 1`] = `
 <ListItem
   autoGenerateNestedIndicator={true}
   disableKeyboardFocus={false}
@@ -41,7 +41,7 @@ exports[`Loader should render deletable correctly 1`] = `
 />
 `;
 
-exports[`Loader should render not deletable correctly 1`] = `
+exports[`ActiveUserListItem should render not deletable correctly 1`] = `
 <ListItem
   autoGenerateNestedIndicator={true}
   disableKeyboardFocus={false}
