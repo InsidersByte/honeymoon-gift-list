@@ -6,7 +6,7 @@ import ActiveUserListItem from './ActiveUserListItem';
 
 type PropsType = {
     users: Array<{
-        id: string,
+        id: number,
         name: string,
         email: string,
     }>,

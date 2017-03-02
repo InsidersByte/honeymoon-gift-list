@@ -10,12 +10,12 @@ import InvitedUserList from './InvitedUserList';
 type PropsType = {
     loading: boolean,
     activeUsers: Array<{
-        id: string,
+        id: number,
         name: string,
         email: string,
     }>,
     invitedUsers: Array<{
-        id: string,
+        id: number,
         email: string,
     }>,
     loggedInUser: {

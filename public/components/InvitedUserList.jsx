@@ -6,7 +6,7 @@ import InvitedUserListItem from './InvitedUserListItem';
 
 type PropsType = {
     users: Array<{
-        id: string,
+        id: number,
         email: string,
     }>,
     onDelete: Function,

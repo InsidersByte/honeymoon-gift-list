@@ -7,7 +7,7 @@ import Delete from 'material-ui/svg-icons/action/delete';
 
 type PropsType = {
     user: {
-        id: string,
+        id: number,
         email: string,
     },
     onDelete: Function,

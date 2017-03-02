@@ -13,12 +13,12 @@ type PropsType = {
     deleting: boolean,
     userModalOpen: boolean,
     activeUsers: Array<{
-        id: string,
+        id: number,
         name: string,
         email: string,
     }>,
     invitedUsers: Array<{
-        id: string,
+        id: number,
         email: string,
     }>,
     loggedInUser: {
