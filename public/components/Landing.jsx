@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import Loader from '../components/Loader';
+import Loader from './Loader';
 import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
 import LandingWeddingPartyMembers from './LandingWeddingPartyMembers';

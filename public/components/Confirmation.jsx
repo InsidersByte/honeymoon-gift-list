@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { RaisedButton } from 'material-ui';
 import { HOME_ROUTE } from '../constants/routes';
-import Loader from '../components/Loader';
+import Loader from './Loader';
 import { PAYMENT_METHODS } from '../../lib/constants';
 import css from '../components/Confirmation.styl';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import InvitedUserList from './InvitedUserList';
+import InvitedUserList from './';
 
 describe('InvitedUserList', () => {
     it('should render correctly', () => {

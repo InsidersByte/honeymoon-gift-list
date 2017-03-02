@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { IconButton, MuiThemeProvider } from 'material-ui';
 import { getMuiTheme } from 'material-ui/styles';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import InvitedUserListItem from './InvitedUserListItem';
+import InvitedUserListItem from './';
 
 injectTapEventPlugin();
 

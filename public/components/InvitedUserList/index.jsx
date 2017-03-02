@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { List, Subheader, Divider } from 'material-ui';
-import InvitedUserListItem from './InvitedUserListItem';
+import InvitedUserListItem from '../InvitedUserListItem';
 
 type PropsType = {
     users: Array<{

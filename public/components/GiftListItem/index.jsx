@@ -4,7 +4,7 @@ import React from 'react';
 import { IconButton } from 'material-ui';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
-import css from './GiftListItem.styl';
+import css from './index.styl';
 
 type PropsType = {
     gift: {
