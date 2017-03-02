@@ -16,23 +16,23 @@ type PropsType = {
     onDelete: Function,
 };
 
-export default function ActiveUserList({ users, loggedInUser, onDelete }: PropsType) {
-    return (
-        <List>
-            <Subheader>
-                Active users
-            </Subheader>
+const ActiveUserList = ({ users, loggedInUser, onDelete }: PropsType) => (
+    <List>
+        <Subheader>
+            Active users
+        </Subheader>
 
-            <Divider />
+        <Divider />
 
-            {users.map(user =>
-                <ActiveUserListItem
-                    key={user.id}
-                    user={user}
-                    loggedInUser={loggedInUser}
-                    onDelete={onDelete}
-                />,
-            )}
-        </List>
-    );
-}
+        {users.map(user =>
+            <ActiveUserListItem
+                key={user.id}
+                user={user}
+                loggedInUser={loggedInUser}
+                onDelete={onDelete}
+            />,
+        )}
+    </List>
+);
+
+export default ActiveUserList;

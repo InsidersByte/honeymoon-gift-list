@@ -18,6 +18,7 @@ describe('ActiveUserListItem', () => {
         );
 
         expect(wrapper).toMatchSnapshot();
+        expect(onDelete).not.toHaveBeenCalled();
     });
 
     it('should handle delete correctly', () => {
@@ -47,5 +48,6 @@ describe('ActiveUserListItem', () => {
         );
 
         expect(wrapper).toMatchSnapshot();
+        expect(onDelete).not.toHaveBeenCalled();
     });
 });

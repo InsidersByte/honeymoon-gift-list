@@ -12,7 +12,7 @@ type PropsType = {
     onDelete: Function,
 };
 
-export default function InvitedUserList({ users, onDelete }: PropsType) {
+const InvitedUserList = ({ users, onDelete }: PropsType) => {
     if (users.length === 0) {
         return null;
     }
@@ -34,4 +34,6 @@ export default function InvitedUserList({ users, onDelete }: PropsType) {
             )}
         </List>
     );
-}
+};
+
+export default InvitedUserList;

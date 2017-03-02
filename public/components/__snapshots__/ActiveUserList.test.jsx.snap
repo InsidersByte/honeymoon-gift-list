@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveUserList should render correctly 1`] = `
+<List>
+  <Subheader
+    inset={false}
+  >
+    Active users
+  </Subheader>
+  <Divider
+    inset={false}
+  />
+  <ActiveUserListItem
+    loggedInUser={
+      Object {
+        "email": "person@email.com",
+      }
+    }
+    onDelete={[Function]}
+    user={
+      Object {
+        "email": "email@email.com",
+        "id": 1,
+        "name": "person",
+      }
+    }
+  />
+  <ActiveUserListItem
+    loggedInUser={
+      Object {
+        "email": "person@email.com",
+      }
+    }
+    onDelete={[Function]}
+    user={
+      Object {
+        "email": "anotheremail@email.com",
+        "id": 2,
+        "name": "foo",
+      }
+    }
+  />
+</List>
+`;
