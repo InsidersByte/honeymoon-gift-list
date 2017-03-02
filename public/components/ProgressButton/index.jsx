@@ -7,7 +7,7 @@ type PropsType = {
     saving: boolean,
 };
 
-export default function ProgressButton({ saving, ...props }: PropsType) {
+const ProgressButton = ({ saving, ...props }: PropsType) => {
     if (saving) {
         return (
             <RaisedButton
@@ -27,4 +27,6 @@ export default function ProgressButton({ saving, ...props }: PropsType) {
             type="submit"
         />
     );
-}
+};
+
+export default ProgressButton;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressButton should render correctly when not saving 1`] = `
+<RaisedButton
+  disabled={false}
+  fullWidth={false}
+  label="Save"
+  labelPosition="after"
+  primary={true}
+  secondary={false}
+  type="submit"
+/>
+`;
+
+exports[`ProgressButton should render correctly when saving 1`] = `
+<RaisedButton
+  disabled={true}
+  fullWidth={false}
+  label="Saving..."
+  labelPosition="after"
+  primary={true}
+  secondary={false}
+  type="submit"
+/>
+`;

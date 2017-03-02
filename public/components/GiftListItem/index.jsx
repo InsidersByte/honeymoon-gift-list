@@ -19,39 +19,31 @@ type PropsType = {
     onDelete: Function,
 };
 
-export default class GiftListItem extends React.Component {
-    props: PropsType;
+const GiftListItem = ({ gift, onSelect, onDelete }: PropsType) => {
+    const { name, imageUrl, requested, remaining, price } = gift;
+    const handleSelect = () => onSelect(gift);
+    const handleDelete = () => onDelete(gift);
 
-    onSelect = () => {
-        this.props.onSelect(this.props.gift);
-    };
+    return (
+        <div className={css.root}>
+            <img className={css.avatar} src={imageUrl} alt={name} />
 
-    onDelete = () => {
-        this.props.onDelete(this.props.gift);
-    };
-
-    render() {
-        const { gift: { name, imageUrl, requested, remaining, price } } = this.props;
-
-        return (
-            <div className={css.root}>
-                <img className={css.avatar} src={imageUrl} alt={name} />
-
-                <div className={css.textContainer}>
-                    <h3 className={css.name}>{name}</h3>
-                    <h4 className={css.title}>Price: £{price}</h4>
-                    <h4 className={css.title}>Requested: {requested}</h4>
-                    <h4 className={css.title}>Remaining: {remaining}</h4>
-                </div>
-
-                <IconButton touch onClick={this.onSelect}>
-                    <Edit />
-                </IconButton>
-
-                <IconButton touch onClick={this.onDelete}>
-                    <Delete />
-                </IconButton>
+            <div className={css.textContainer}>
+                <h3 className={css.name}>{name}</h3>
+                <h4 className={css.title}>Price: £{price}</h4>
+                <h4 className={css.title}>Requested: {requested}</h4>
+                <h4 className={css.title}>Remaining: {remaining}</h4>
             </div>
-        );
-    }
-}
+
+            <IconButton touch onClick={handleSelect}>
+                <Edit />
+            </IconButton>
+
+            <IconButton touch onClick={handleDelete}>
+                <Delete />
+            </IconButton>
+        </div>
+    );
+};
+
+export default GiftListItem;
