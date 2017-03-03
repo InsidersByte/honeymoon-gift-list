@@ -1,11 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Admin from './Admin';
+import Root from './Root.prod';
 
-describe('Admin', () => {
+describe('Root', () => {
     it('should render correctly', () => {
         const wrapper = shallow(
-            <Admin />,
+            <Root>
+                <h1>Hello World</h1>
+            </Root>,
         );
 
         expect(wrapper).toMatchSnapshot();

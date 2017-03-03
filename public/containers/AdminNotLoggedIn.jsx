@@ -19,12 +19,12 @@ const styles = {
     },
 };
 
-export default function AdminLoggedIn({ children }: PropsType) {
-    return (
-        <div style={styles.root}>
-            <div style={styles.container}>
-                {children}
-            </div>
+const AdminLoggedIn = ({ children }: PropsType) => (
+    <div style={styles.root}>
+        <div style={styles.container}>
+            {children}
         </div>
-    );
-}
+    </div>
+);
+
+export default AdminLoggedIn;

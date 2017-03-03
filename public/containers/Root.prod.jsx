@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React from 'react';
 import App from './App';
 
 const styles = {
@@ -10,12 +10,10 @@ const styles = {
     },
 };
 
-export default class Root extends Component { // eslint-disable-line react/prefer-stateless-function
-    render() {
-        return (
-            <div style={styles.root}>
-                <App {...this.props} />
-            </div>
-        );
-    }
-}
+const Root = props => (
+    <div style={styles.root}>
+        <App {...props} />
+    </div>
+);
+
+export default Root;

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminNotLoggedIn should render correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "height": "100%",
+      "justifyContent": "center",
+      "paddingBottom": "8vh",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "margin": "0 5%",
+      }
+    }
+  >
+    <h1>
+      Hello World
+    </h1>
+  </div>
+</div>
+`;

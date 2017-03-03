@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Root should render correctly 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <Connect(App)>
+    <h1>
+      Hello World
+    </h1>
+  </Connect(App)>
+  <DevTools />
+</div>
+`;
