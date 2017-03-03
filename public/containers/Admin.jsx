@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { getMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 
 type PropsType = {
@@ -9,16 +9,10 @@ type PropsType = {
 
 const muiTheme = getMuiTheme();
 
-export default class Admin extends Component { // eslint-disable-line react/prefer-stateless-function
-    props: PropsType;
+const Admin = ({ children }: PropsType) => (
+    <MuiThemeProvider muiTheme={muiTheme}>
+        {children}
+    </MuiThemeProvider>
+);
 
-    render() {
-        const { children } = this.props;
-
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                {children}
-            </MuiThemeProvider>
-        );
-    }
-}
+export default Admin;

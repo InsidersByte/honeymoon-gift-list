@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { getMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { lightGreen500 } from 'material-ui/styles/colors';
 
@@ -14,16 +14,10 @@ const muiTheme = getMuiTheme({
     },
 });
 
-export default class Main extends Component { // eslint-disable-line react/prefer-stateless-function
-    props: PropsType;
+const Main = ({ children }: PropsType) => (
+    <MuiThemeProvider muiTheme={muiTheme}>
+        {children}
+    </MuiThemeProvider>
+);
 
-    render() {
-        const { children } = this.props;
-
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                {children}
-            </MuiThemeProvider>
-        );
-    }
-}
+export default Main;
