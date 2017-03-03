@@ -7,7 +7,10 @@ const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
 const DELETE_FROM_BASKET = 'our-wedding-heroes/basket/DELETE_FROM_BASKET';
 const EMPTY_BASKET = 'our-wedding-heroes/basket/EMPTY_BASKET';
 
-export default function reducer(state = new Map(), action) {
+type StateType = Map<number, { id: number, quantity: number, remaining: number }>;
+type ActionType = Object;
+
+export default function reducer(state: StateType = new Map(), action: ActionType) {
     if (action.type === ADD_TO_BASKET) {
         const { payload: item } = action;
         const { id } = item;
@@ -29,6 +32,10 @@ export default function reducer(state = new Map(), action) {
         const { id } = item;
 
         const existingItem = state.get(id);
+
+        if (!existingItem) {
+            throw new Error(`Cannot find item with id: '${id}'`);
+        }
 
         if (existingItem.quantity <= 1) {
             return state;

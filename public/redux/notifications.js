@@ -7,6 +7,9 @@ const SUCCESS_NOTIFICATION = 'our-wedding-heroes/notifications/SUCCESS_NOTIFICAT
 const ERROR_NOTIFICATION = 'our-wedding-heroes/notifications/ERROR_NOTIFICATION';
 const HIDE_NOTIFICATION = 'our-wedding-heroes/notifications/HIDE_NOTIFICATION';
 
+type StateType = Array<{ id: string, message: string, position: 'bl', show: boolean, level: 'success' | 'error' }>;
+type ActionType = Object;
+
 function createNotification(notification) {
     return { ...notification, id: uuid.v4(), position: 'bl', show: true };
 }
@@ -35,7 +38,7 @@ function createErrorNotifications({ payload }) {
     return notifications;
 }
 
-export default function reducer(state = [], action) {
+export default function reducer(state: StateType = [], action: ActionType) {
     if (action.type === HIDE_NOTIFICATION) {
         return state.map((notification) => {
             if (action.payload.id !== notification.id) {

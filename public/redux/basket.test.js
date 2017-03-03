@@ -96,6 +96,11 @@ describe('basket', () => {
 
             expect(reducer(initialState, { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
+
+            initialState.clear();
+
+            expect(() => reducer(initialState, { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
+                .toThrowError('Cannot find item with id: \'1\'');
         });
 
         it('should handle DELETE_FROM_BASKET', () => {

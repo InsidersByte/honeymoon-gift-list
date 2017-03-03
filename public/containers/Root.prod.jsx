@@ -10,7 +10,7 @@ const styles = {
     },
 };
 
-const Root = props => (
+const Root = (props: Object) => (
     <div style={styles.root}>
         <App {...props} />
     </div>
