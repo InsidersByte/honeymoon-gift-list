@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import auth from '../reducers/auth';
 import users from '../reducers/users';
-import notifications from '../reducers/notifications';
+import notifications from './notifications';
 import weddingProfile from '../reducers/weddingProfile';
 import signUp from '../reducers/signUp';
 import setup from '../reducers/setup';

@@ -5,7 +5,7 @@ import { isEmail } from 'validator';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../actions/auth';
-import * as notificationActions from '../actions/notifications';
+import * as notificationActions from '../redux/notifications';
 import LoginForm from '../components/LoginForm';
 
 type PropsType = {

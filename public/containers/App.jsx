@@ -4,7 +4,7 @@ import React from 'react';
 import NotificationSystem from 'react-notification-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/notifications';
+import * as actions from '../redux/notifications';
 
 type PropsType = {
     children: React$Element<any>,

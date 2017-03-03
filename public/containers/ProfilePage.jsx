@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../actions/users';
-import * as notificationActions from '../actions/notifications';
+import * as notificationActions from '../redux/notifications';
 import ProfileForm from '../components/ProfileForm';
 import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
 

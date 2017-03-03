@@ -1,9 +1,11 @@
+/* @flow */
+
 import { createAction } from 'redux-actions';
 
-const ADD_TO_BASKET = 'our-wedding-hereos/basket/ADD_TO_BASKET';
-const REMOVE_FROM_BASKET = 'our-wedding-hereos/basket/REMOVE_FROM_BASKET';
-const DELETE_FROM_BASKET = 'our-wedding-hereos/basket/DELETE_FROM_BASKET';
-const EMPTY_BASKET = 'our-wedding-hereos/basket/EMPTY_BASKET';
+const ADD_TO_BASKET = 'our-wedding-heroes/basket/ADD_TO_BASKET';
+const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
+const DELETE_FROM_BASKET = 'our-wedding-heroes/basket/DELETE_FROM_BASKET';
+const EMPTY_BASKET = 'our-wedding-heroes/basket/EMPTY_BASKET';
 
 export default function reducer(state = new Map(), action) {
     if (action.type === ADD_TO_BASKET) {

@@ -6,7 +6,7 @@ describe('basket', () => {
             const item = { id: 1 };
 
             const expectedAction = {
-                type: 'our-wedding-hereos/basket/ADD_TO_BASKET',
+                type: 'our-wedding-heroes/basket/ADD_TO_BASKET',
                 payload: item,
             };
 
@@ -17,7 +17,7 @@ describe('basket', () => {
             const item = { id: 1 };
 
             const expectedAction = {
-                type: 'our-wedding-hereos/basket/REMOVE_FROM_BASKET',
+                type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET',
                 payload: item,
             };
 
@@ -28,7 +28,7 @@ describe('basket', () => {
             const item = { id: 1 };
 
             const expectedAction = {
-                type: 'our-wedding-hereos/basket/DELETE_FROM_BASKET',
+                type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET',
                 payload: item,
             };
 
@@ -39,7 +39,7 @@ describe('basket', () => {
             const item = { id: 1 };
 
             const expectedAction = {
-                type: 'our-wedding-hereos/basket/EMPTY_BASKET',
+                type: 'our-wedding-heroes/basket/EMPTY_BASKET',
                 payload: item,
             };
 
@@ -56,7 +56,7 @@ describe('basket', () => {
             const expectedState = new Map();
             expectedState.set(1, { id: 1, quantity: 1 });
 
-            expect(reducer(new Map(), { type: 'our-wedding-hereos/basket/ADD_TO_BASKET', payload: { id: 1 } }))
+            expect(reducer(new Map(), { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
 
             const initialState = new Map();
@@ -65,7 +65,7 @@ describe('basket', () => {
             expectedState.clear();
             expectedState.set(1, { id: 1, quantity: 2 });
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/ADD_TO_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
 
             initialState.clear();
@@ -74,7 +74,7 @@ describe('basket', () => {
             expectedState.clear();
             expectedState.set(1, { id: 1, quantity: 1, remaining: 1 });
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/ADD_TO_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
         });
 
@@ -85,7 +85,7 @@ describe('basket', () => {
             const expectedState = new Map();
             expectedState.set(1, { id: 1, quantity: 1 });
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
 
             initialState.clear();
@@ -94,7 +94,7 @@ describe('basket', () => {
             expectedState.clear();
             expectedState.set(1, { id: 1, quantity: 1 });
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
         });
 
@@ -104,13 +104,13 @@ describe('basket', () => {
 
             const expectedState = new Map();
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/DELETE_FROM_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
 
             initialState.clear();
             expectedState.clear();
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/DELETE_FROM_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
         });
 
@@ -120,7 +120,7 @@ describe('basket', () => {
 
             const expectedState = new Map();
 
-            expect(reducer(initialState, { type: 'our-wedding-hereos/basket/EMPTY_BASKET', payload: { id: 1 } }))
+            expect(reducer(initialState, { type: 'our-wedding-heroes/basket/EMPTY_BASKET', payload: { id: 1 } }))
                 .toEqual(expectedState);
         });
     });

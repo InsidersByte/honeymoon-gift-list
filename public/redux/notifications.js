@@ -1,5 +1,11 @@
+/* @flow */
+
+import { createAction } from 'redux-actions';
 import uuid from 'uuid';
-import { SUCCESS_NOTIFICATION, ERROR_NOTIFICATION, HIDE_NOTIFICATION } from '../constants/actionTypes';
+
+const SUCCESS_NOTIFICATION = 'our-wedding-heroes/notifications/SUCCESS_NOTIFICATION';
+const ERROR_NOTIFICATION = 'our-wedding-heroes/notifications/ERROR_NOTIFICATION';
+const HIDE_NOTIFICATION = 'our-wedding-heroes/notifications/HIDE_NOTIFICATION';
 
 function createNotification(notification) {
     return { ...notification, id: uuid.v4(), position: 'bl', show: true };
@@ -29,14 +35,14 @@ function createErrorNotifications({ payload }) {
     return notifications;
 }
 
-export default function notificationReducer(state = [], action) {
+export default function reducer(state = [], action) {
     if (action.type === HIDE_NOTIFICATION) {
-        return state.map((o) => {
-            if (action.payload.id !== o.id) {
-                return o;
+        return state.map((notification) => {
+            if (action.payload.id !== notification.id) {
+                return notification;
             }
 
-            return Object.assign({}, o, { show: false });
+            return { ...notification, show: false };
         });
     }
 
@@ -54,3 +60,7 @@ export default function notificationReducer(state = [], action) {
 
     return state;
 }
+
+export const success = createAction(SUCCESS_NOTIFICATION);
+export const error = createAction(ERROR_NOTIFICATION);
+export const hideNotification = createAction(HIDE_NOTIFICATION);
