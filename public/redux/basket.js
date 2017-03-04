@@ -62,4 +62,7 @@ export default function reducer(state: BasketType = new Map(), action: ActionTyp
 export const addToBasket = createAction(ADD_TO_BASKET);
 export const removeFromBasket = createAction(REMOVE_FROM_BASKET);
 export const deleteFromBasket = createAction(DELETE_FROM_BASKET);
-export const emptyBasket = createAction(EMPTY_BASKET);
+
+export const emptyBasket = (): ActionType => ({
+    type: EMPTY_BASKET,
+});

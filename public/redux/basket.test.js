@@ -36,14 +36,11 @@ describe('basket', () => {
         });
 
         it('should create an action to empty the basket', () => {
-            const item = { id: 1 };
-
             const expectedAction = {
                 type: 'our-wedding-heroes/basket/EMPTY_BASKET',
-                payload: item,
             };
 
-            expect(actions.emptyBasket(item)).toEqual(expectedAction);
+            expect(actions.emptyBasket()).toEqual(expectedAction);
         });
     });
 
