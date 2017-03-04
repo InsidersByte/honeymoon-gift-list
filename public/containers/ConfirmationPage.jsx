@@ -1,17 +1,16 @@
 /* @flow */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import type { Connector } from 'react-redux';
 import * as actions from '../actions/giftSet';
 import Confirmation from '../components/Confirmation';
+import type { StateType, DispatchType, GiftSetType } from '../types';
 
 type PropsType = {
     loading: boolean,
-    giftSet: {
-        paymentMethod: string,
-        paypalLink: string,
-    },
+    giftSet: GiftSetType,
     params: {
         giftSetId: string,
     },
@@ -20,13 +19,14 @@ type PropsType = {
     },
 };
 
-@connect(
-    ({ giftSet }) => giftSet,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
-)
-export default class ConfirmationPage extends React.Component {
-    props: PropsType;
+type LocalStateType = {
+    linkClicked: boolean,
+};
 
+const mapStateToProps = ({ giftSet }: StateType) => giftSet;
+const mapDispatchToProps = (dispatch: DispatchType) => ({ actions: bindActionCreators(actions, dispatch) });
+
+export class ConfirmationPage extends Component<void, PropsType, LocalStateType> {
     state = { linkClicked: false };
 
     componentDidMount() {
@@ -52,3 +52,10 @@ export default class ConfirmationPage extends React.Component {
         );
     }
 }
+
+const connector: Connector<PropsType, PropsType> = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+);
+
+export default connector(ConfirmationPage);

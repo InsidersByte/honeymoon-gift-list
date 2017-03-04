@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmationPage should render correctly 1`] = `
+<Confirmation
+  giftSet={
+    Object {
+      "paymentMethod": "method",
+      "paypalLink": "http://paypal.me",
+    }
+  }
+  linkClicked={false}
+  loading={true}
+  onLinkClicked={[Function]}
+/>
+`;

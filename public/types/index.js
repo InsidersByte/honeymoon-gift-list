@@ -1,0 +1,55 @@
+/* @flow */
+
+import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+
+export type BasketType = Map<number, { id: number, quantity: number, remaining: number }>;
+
+export type GiftType = {
+    +id: number,
+    +remaining: number,
+};
+
+export type GiftSetType = {
+    +paymentMethod: string,
+    +paypalLink: string,
+};
+
+export type NotificationType = {
+    +id: string,
+    +message: string,
+    +position: 'bl',
+    +show: boolean,
+    +level: 'success' | 'error',
+};
+
+export type NotificationsType = Array<NotificationType>;
+
+type ErrorType = {
+    +message: string,
+    +response?: {
+        +body: {
+            +message?: string,
+            +errors: Array<{ message: string }>,
+        },
+    }
+};
+
+export type StateType = {
+    +basket: BasketType,
+    +giftSet: GiftSetType,
+    +notifications: NotificationsType,
+};
+
+export type ActionType =
+    { type: 'our-wedding-heroes/notifications/SUCCESS_NOTIFICATION', +payload: { +message: string } } |
+    { type: 'our-wedding-heroes/notifications/ERROR_NOTIFICATION', +payload: { +message: string } } |
+    { type: 'our-wedding-heroes/notifications/HIDE_NOTIFICATION', +payload: { +id: string } } |
+
+    { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', +payload: GiftType } |
+    { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', +payload: GiftType } |
+    { type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET', +payload: GiftType } |
+    { type: 'our-wedding-heroes/basket/EMPTY_BASKET' }
+;
+
+export type StoreType = ReduxStore<StateType, ActionType>;
+export type DispatchType = ReduxDispatch<ActionType>;

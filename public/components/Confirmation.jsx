@@ -6,16 +6,14 @@ import { RaisedButton } from 'material-ui';
 import { HOME_ROUTE } from '../constants/routes';
 import Loader from './Loader';
 import { PAYMENT_METHODS } from '../../lib/constants';
+import type { GiftSetType } from '../types';
 import css from '../components/Confirmation.styl';
 
 type PropsType = {
     loading: boolean,
     linkClicked: boolean,
-    giftSet: {
-        paymentMethod: string,
-        paypalLink: string,
-    },
-    onLinkClicked: Function,
+    giftSet: GiftSetType,
+    onLinkClicked: () => void,
 };
 
 const styles = {
@@ -40,7 +38,7 @@ function renderPaymentMessage({ paymentMethod }: { paymentMethod: string }) {
     );
 }
 
-export default function Confirmation({ loading, giftSet: { paymentMethod, paypalLink }, onLinkClicked, linkClicked }: PropsType) {
+const Confirmation = ({ loading, giftSet: { paymentMethod, paypalLink }, onLinkClicked, linkClicked }: PropsType) => {
     const showPaypalLink = paymentMethod === PAYMENT_METHODS.PAYPAL;
     const showHomeLink = paymentMethod !== PAYMENT_METHODS.PAYPAL || linkClicked;
 
@@ -82,4 +80,6 @@ export default function Confirmation({ loading, giftSet: { paymentMethod, paypal
             </div>
         </Loader>
     );
-}
+};
+
+export default Confirmation;

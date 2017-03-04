@@ -14,6 +14,7 @@
         ],
         "no-alert": "off",
 
+        "import/no-named-as-default": 0,
         "import/no-extraneous-dependencies": ["error", {
             "devDependencies": [
                 "**/*.test.{js,jsx}",
@@ -22,8 +23,9 @@
             "optionalDependencies": false
         }],
 
-        "react/no-unused-prop-types": "off",
-        "react/require-default-props": "off",
+        "react/prop-types": 1,
+        "react/no-unused-prop-types": 0,
+        "react/require-default-props": 0,
 
         "react/jsx-indent-props": [2, 4],
         "react/jsx-indent": [2, 4],

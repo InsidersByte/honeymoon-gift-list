@@ -1,65 +1,62 @@
 /* @flow */
 
 import { createAction } from 'redux-actions';
+import type { BasketType, ActionType } from '../types';
 
 const ADD_TO_BASKET = 'our-wedding-heroes/basket/ADD_TO_BASKET';
 const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
 const DELETE_FROM_BASKET = 'our-wedding-heroes/basket/DELETE_FROM_BASKET';
 const EMPTY_BASKET = 'our-wedding-heroes/basket/EMPTY_BASKET';
 
-type StateType = Map<number, { id: number, quantity: number, remaining: number }>;
-type ActionType = Object;
+export default function reducer(state: BasketType = new Map(), action: ActionType): BasketType {
+    switch (action.type) {
+        case ADD_TO_BASKET: {
+            const { payload: item } = action;
+            const { id } = item;
 
-export default function reducer(state: StateType = new Map(), action: ActionType) {
-    if (action.type === ADD_TO_BASKET) {
-        const { payload: item } = action;
-        const { id } = item;
+            const existingItem = state.get(id) || { quantity: 0 };
+            const updatedItem = { ...existingItem, ...item };
+            updatedItem.quantity += 1;
 
-        const existingItem = state.get(id) || { quantity: 0 };
-        const updatedItem = { ...existingItem, ...item };
-        updatedItem.quantity += 1;
+            if (updatedItem.quantity > updatedItem.remaining) {
+                updatedItem.quantity = updatedItem.remaining;
+            }
 
-        if (updatedItem.quantity > updatedItem.remaining) {
-            updatedItem.quantity = updatedItem.remaining;
+            state.set(id, updatedItem);
+            return new Map(state);
         }
 
-        state.set(id, updatedItem);
-        return new Map(state);
-    }
+        case REMOVE_FROM_BASKET: {
+            const { payload: item } = action;
+            const { id } = item;
 
-    if (action.type === REMOVE_FROM_BASKET) {
-        const { payload: item } = action;
-        const { id } = item;
+            const existingItem = state.get(id);
 
-        const existingItem = state.get(id);
+            if (!existingItem) {
+                throw new Error(`Cannot find item with id: '${id}'`);
+            }
 
-        if (!existingItem) {
-            throw new Error(`Cannot find item with id: '${id}'`);
+            if (existingItem.quantity <= 1) {
+                return state;
+            }
+
+            const updatedItem = { ...existingItem, quantity: existingItem.quantity -= 1 };
+
+            state.set(id, updatedItem);
+            return new Map(state);
         }
 
-        if (existingItem.quantity <= 1) {
+        case DELETE_FROM_BASKET: {
+            state.delete(action.payload.id);
+            return new Map(state);
+        }
+
+        case EMPTY_BASKET:
+            return new Map();
+
+        default:
             return state;
-        }
-
-        const updatedItem = { ...existingItem, quantity: existingItem.quantity -= 1 };
-
-        state.set(id, updatedItem);
-        return new Map(state);
     }
-
-    if (action.type === DELETE_FROM_BASKET) {
-        const { payload: item } = action;
-        const { id } = item;
-
-        state.delete(id);
-        return new Map(state);
-    }
-
-    if (action.type === EMPTY_BASKET) {
-        return new Map();
-    }
-
-    return state;
 }
 
 export const addToBasket = createAction(ADD_TO_BASKET);
