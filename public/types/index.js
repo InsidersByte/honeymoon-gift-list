@@ -24,16 +24,6 @@ export type NotificationType = {
 
 export type NotificationsType = Array<NotificationType>;
 
-type ErrorType = {
-    +message: string,
-    +response?: {
-        +body: {
-            +message?: string,
-            +errors: Array<{ message: string }>,
-        },
-    }
-};
-
 export type StateType = {
     +basket: BasketType,
     +giftSet: GiftSetType,
