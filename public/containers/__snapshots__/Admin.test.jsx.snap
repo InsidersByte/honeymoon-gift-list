@@ -57,6 +57,7 @@ exports[`Admin should render correctly 1`] = `
           "iconSize": 24,
         },
       },
+      "borderRadius": 2,
       "bottomNavigation": Object {
         "backgroundColor": "#ffffff",
         "height": 56,

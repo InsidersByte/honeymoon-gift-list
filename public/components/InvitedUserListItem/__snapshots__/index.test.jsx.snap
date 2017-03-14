@@ -3,6 +3,7 @@
 exports[`InvitedUserListItem should render correctly 1`] = `
 <ListItem
   autoGenerateNestedIndicator={true}
+  containerElement="span"
   disableKeyboardFocus={false}
   disabled={false}
   initiallyOpen={false}

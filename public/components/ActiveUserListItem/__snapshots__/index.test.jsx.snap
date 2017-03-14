@@ -3,6 +3,7 @@
 exports[`ActiveUserListItem should render deletable correctly 1`] = `
 <ListItem
   autoGenerateNestedIndicator={true}
+  containerElement="span"
   disableKeyboardFocus={false}
   disabled={false}
   initiallyOpen={false}
@@ -44,6 +45,7 @@ exports[`ActiveUserListItem should render deletable correctly 1`] = `
 exports[`ActiveUserListItem should render not deletable correctly 1`] = `
 <ListItem
   autoGenerateNestedIndicator={true}
+  containerElement="span"
   disableKeyboardFocus={false}
   disabled={false}
   initiallyOpen={false}
