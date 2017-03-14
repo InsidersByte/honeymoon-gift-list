@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasketSummary should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="container"
+  >
+    <h1
+      className="title"
+    >
+      Subtotal (
+      3
+       item
+      s
+      ): £
+      5
+    </h1>
+    <Divider
+      inset={false}
+    />
+    <div
+      className="content"
+    >
+      <div>
+        <BasketSummaryListItem
+          addToBasket={[Function]}
+          deleteFromBasket={[Function]}
+          item={
+            Object {
+              "id": 1,
+              "price": 1,
+              "quantity": 1,
+              "remaining": 10,
+            }
+          }
+          removeFromBasket={[Function]}
+        />
+        <Divider
+          inset={false}
+        />
+      </div>
+      <div>
+        <BasketSummaryListItem
+          addToBasket={[Function]}
+          deleteFromBasket={[Function]}
+          item={
+            Object {
+              "id": 2,
+              "price": 2,
+              "quantity": 2,
+              "remaining": 20,
+            }
+          }
+          removeFromBasket={[Function]}
+        />
+        <Divider
+          inset={false}
+        />
+      </div>
+    </div>
+    <div
+      className="actions"
+    >
+      <RaisedButton
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="giver"
+          >
+            Proceed to Checkout
+          </Link>
+        }
+        disabled={false}
+        fullWidth={false}
+        label="Proceed to Checkout"
+        labelPosition="after"
+        linkButton={true}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "marginRight": 12,
+            "marginTop": 12,
+          }
+        }
+      />
+      <RaisedButton
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/"
+          >
+            Back to Home
+          </Link>
+        }
+        disabled={false}
+        fullWidth={false}
+        label="Back to Home"
+        labelPosition="after"
+        linkButton={true}
+        primary={false}
+        secondary={false}
+        style={
+          Object {
+            "marginRight": 12,
+            "marginTop": 12,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BasketSummary should render if the basket count is 0 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="container"
+  >
+    <h1
+      className="title"
+    >
+      Your Basket is empty!
+    </h1>
+    <div
+      className="actions"
+    >
+      <RaisedButton
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/"
+          >
+            Back to Home
+          </Link>
+        }
+        disabled={false}
+        fullWidth={false}
+        label="Back to Home"
+        labelPosition="after"
+        linkButton={true}
+        primary={true}
+        secondary={false}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BasketSummary should singularise items if there is only one item in the basket 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="container"
+  >
+    <h1
+      className="title"
+    >
+      Subtotal (
+      1
+       item
+      ): £
+      5
+    </h1>
+    <Divider
+      inset={false}
+    />
+    <div
+      className="content"
+    >
+      <div>
+        <BasketSummaryListItem
+          addToBasket={[Function]}
+          deleteFromBasket={[Function]}
+          item={
+            Object {
+              "id": 1,
+              "price": 1,
+              "quantity": 1,
+              "remaining": 10,
+            }
+          }
+          removeFromBasket={[Function]}
+        />
+        <Divider
+          inset={false}
+        />
+      </div>
+      <div>
+        <BasketSummaryListItem
+          addToBasket={[Function]}
+          deleteFromBasket={[Function]}
+          item={
+            Object {
+              "id": 2,
+              "price": 2,
+              "quantity": 2,
+              "remaining": 20,
+            }
+          }
+          removeFromBasket={[Function]}
+        />
+        <Divider
+          inset={false}
+        />
+      </div>
+    </div>
+    <div
+      className="actions"
+    >
+      <RaisedButton
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="giver"
+          >
+            Proceed to Checkout
+          </Link>
+        }
+        disabled={false}
+        fullWidth={false}
+        label="Proceed to Checkout"
+        labelPosition="after"
+        linkButton={true}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "marginRight": 12,
+            "marginTop": 12,
+          }
+        }
+      />
+      <RaisedButton
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/"
+          >
+            Back to Home
+          </Link>
+        }
+        disabled={false}
+        fullWidth={false}
+        label="Back to Home"
+        labelPosition="after"
+        linkButton={true}
+        primary={false}
+        secondary={false}
+        style={
+          Object {
+            "marginRight": 12,
+            "marginTop": 12,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

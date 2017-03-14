@@ -3,17 +3,18 @@
 import React from 'react';
 import { RaisedButton, Divider } from 'material-ui';
 import { Link } from 'react-router';
-import { GIVER_ROUTE, HOME_ROUTE } from '../constants/routes';
-import BasketSummaryListItem from './BasketSummaryListItem';
-import css from './BasketSummary.styl';
+import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routes';
+import BasketSummaryListItem from '../BasketSummaryListItem';
+import type { BasketType, ItemType } from '../../types';
+import css from './index.styl';
 
 type PropsType = {
-    basket: Map<number, Object>,
+    basket: BasketType,
     basketCount: number,
     basketTotal: number,
-    addToBasket: Function,
-    removeFromBasket: Function,
-    deleteFromBasket: Function,
+    addToBasket: (item: ItemType) => void,
+    removeFromBasket: (item: ItemType) => void,
+    deleteFromBasket: (item: ItemType) => void,
 };
 
 const styles = {
@@ -23,7 +24,7 @@ const styles = {
     },
 };
 
-export default function BasketSummary({ basket, basketCount, basketTotal, addToBasket, removeFromBasket, deleteFromBasket }: PropsType) {
+const BasketSummary = ({ basket, basketCount, basketTotal, addToBasket, removeFromBasket, deleteFromBasket }: PropsType) => {
     if (basketCount <= 0) {
         return (
             <div className={css.root}>
@@ -90,4 +91,6 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
             </div>
         </div>
     );
-}
+};
+
+export default BasketSummary;

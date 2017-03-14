@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasketSummaryListItem should render correctly 1`] = `
+<div
+  className="root"
+>
+  <img
+    className="avatar"
+  />
+  <div
+    className="textContainer"
+  >
+    <h3
+      className="name"
+    />
+    <div>
+      <RaisedButton
+        disableFocusRipple={true}
+        disableKeyboardFocus={true}
+        disableTouchRipple={true}
+        disabled={false}
+        fullWidth={false}
+        icon={
+          <ContentRemove
+            style={
+              Object {
+                "height": 18,
+                "width": 18,
+              }
+            }
+          />
+        }
+        labelPosition="after"
+        onClick={[Function]}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "height": 24,
+            "minWidth": 24,
+          }
+        }
+      />
+      <span
+        className="quantity"
+      >
+        2
+      </span>
+      <RaisedButton
+        disableFocusRipple={true}
+        disableKeyboardFocus={true}
+        disableTouchRipple={true}
+        disabled={false}
+        fullWidth={false}
+        icon={
+          <ContentAdd
+            style={
+              Object {
+                "height": 18,
+                "width": 18,
+              }
+            }
+          />
+        }
+        labelPosition="after"
+        onClick={[Function]}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "height": 24,
+            "minWidth": 24,
+          }
+        }
+      />
+    </div>
+    <h4
+      className="total"
+    >
+      £
+      4
+    </h4>
+  </div>
+  <IconButton
+    disableTouchRipple={false}
+    disabled={false}
+    iconStyle={Object {}}
+    onClick={[Function]}
+    tooltipPosition="bottom-center"
+    touch={true}
+  >
+    <ContentClear />
+  </IconButton>
+</div>
+`;

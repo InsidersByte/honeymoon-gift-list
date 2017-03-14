@@ -4,9 +4,12 @@ import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 
 export type ItemType = {
     +id: number,
+    +name: string,
+    +imageUrl: string,
     +price: number,
     +quantity: number,
     +remaining: number,
+    +total: number,
 };
 
 export type BasketType = Map<number, ItemType>;

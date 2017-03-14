@@ -11,7 +11,7 @@ const removeFromBasket = jest.fn();
 const deleteFromBasket = jest.fn();
 
 const props = {
-    basket: basket,
+    basket,
     basketCount: 3,
     basketTotal: 5,
     actions: {

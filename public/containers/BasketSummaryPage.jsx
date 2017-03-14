@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import type { Connector } from 'react-redux';
 import { addToBasket, removeFromBasket, deleteFromBasket } from '../redux/basket';
 import BasketSummary from '../components/BasketSummary';
-import type { StateType, DispatchType, BasketType } from '../types';
+import type { StateType, DispatchType, BasketType, ItemType } from '../types';
 
 type PropsType = {
     basket: BasketType,
@@ -39,15 +39,15 @@ const mapStateToProps = ({ basket }: StateType) => {
 const mapDispatchToProps = (dispatch: DispatchType) => ({ actions: bindActionCreators({ addToBasket, removeFromBasket, deleteFromBasket }, dispatch) });
 
 export class BasketSummaryPage extends Component<void, PropsType, void> {
-    addToBasket = (item: BasketType): void => {
+    addToBasket = (item: ItemType): void => {
         this.props.actions.addToBasket(item);
     };
 
-    removeFromBasket = (item: BasketType): void => {
+    removeFromBasket = (item: ItemType): void => {
         this.props.actions.removeFromBasket(item);
     };
 
-    deleteFromBasket = (item: BasketType): void => {
+    deleteFromBasket = (item: ItemType): void => {
         this.props.actions.deleteFromBasket(item);
     };
 
