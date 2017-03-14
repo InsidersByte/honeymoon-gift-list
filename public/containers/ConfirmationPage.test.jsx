@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ConfirmationPage } from './ConfirmationPage';
 
+const loadGiftSet = jest.fn();
+
 const props = {
     loading: true,
     giftSet: {
@@ -9,7 +11,7 @@ const props = {
         paypalLink: 'http://paypal.me',
     },
     params: { giftSetId: 1 },
-    actions: { loadGiftSet: jest.fn() },
+    actions: { loadGiftSet },
 };
 
 describe('ConfirmationPage', () => {
@@ -28,7 +30,7 @@ describe('ConfirmationPage', () => {
     it('should load giftSet on componentDidMount', () => {
         mount(<ConfirmationPage {...props} />);
 
-        expect(props.actions.loadGiftSet).toHaveBeenCalledWith(1);
+        expect(loadGiftSet).toHaveBeenCalledWith(1);
     });
 
     it('should render a <Confirmation /> component', () => {

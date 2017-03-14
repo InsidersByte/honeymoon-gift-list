@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasketSummaryPage should render correctly 1`] = `
+<BasketSummary
+  addToBasket={[Function]}
+  basket={
+    Array [
+      Array [
+        1,
+        Object {
+          "id": 1,
+          "price": 1,
+          "quantity": 1,
+          "remaining": 10,
+        },
+      ],
+      Array [
+        2,
+        Object {
+          "id": 2,
+          "price": 2,
+          "quantity": 2,
+          "remaining": 20,
+        },
+      ],
+    ]
+  }
+  basketCount={3}
+  basketTotal={5}
+  deleteFromBasket={[Function]}
+  removeFromBasket={[Function]}
+/>
+`;

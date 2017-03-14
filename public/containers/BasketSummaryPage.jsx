@@ -1,13 +1,15 @@
 /* @flow */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../redux/basket';
+import type { Connector } from 'react-redux';
+import { addToBasket, removeFromBasket, deleteFromBasket } from '../redux/basket';
 import BasketSummary from '../components/BasketSummary';
+import type { StateType, DispatchType, BasketType } from '../types';
 
 type PropsType = {
-    basket: Map<number, Object>,
+    basket: BasketType,
     basketCount: number,
     basketTotal: number,
     actions: {
@@ -17,37 +19,35 @@ type PropsType = {
     },
 };
 
-@connect(
-    ({ basket }) => {
-        let basketCount = 0;
-        let basketTotal = 0;
+const mapStateToProps = ({ basket }: StateType) => {
+    let basketCount = 0;
+    let basketTotal = 0;
 
-        for (const item of basket.values()) {
-            const { quantity, price } = item;
-            basketCount += quantity;
-            basketTotal += price * quantity;
-        }
+    for (const item of basket.values()) {
+        const { quantity, price } = item;
+        basketCount += quantity;
+        basketTotal += price * quantity;
+    }
 
-        return {
-            basket,
-            basketCount,
-            basketTotal,
-        };
-    },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
-)
-export default class BasketSummaryPage extends React.Component {
-    props: PropsType;
+    return {
+        basket,
+        basketCount,
+        basketTotal,
+    };
+};
 
-    addToBasket = (item: Object) => {
+const mapDispatchToProps = (dispatch: DispatchType) => ({ actions: bindActionCreators({ addToBasket, removeFromBasket, deleteFromBasket }, dispatch) });
+
+export class BasketSummaryPage extends Component<void, PropsType, void> {
+    addToBasket = (item: BasketType): void => {
         this.props.actions.addToBasket(item);
     };
 
-    removeFromBasket = (item: Object) => {
+    removeFromBasket = (item: BasketType): void => {
         this.props.actions.removeFromBasket(item);
     };
 
-    deleteFromBasket = (item: Object) => {
+    deleteFromBasket = (item: BasketType): void => {
         this.props.actions.deleteFromBasket(item);
     };
 
@@ -66,3 +66,10 @@ export default class BasketSummaryPage extends React.Component {
         );
     }
 }
+
+const connector: Connector<PropsType, PropsType> = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+);
+
+export default connector(BasketSummaryPage);

@@ -3,9 +3,10 @@
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 
 export type ItemType = {
-    id: number,
-    quantity: number,
-    remaining: number,
+    +id: number,
+    +price: number,
+    +quantity: number,
+    +remaining: number,
 };
 
 export type BasketType = Map<number, ItemType>;
