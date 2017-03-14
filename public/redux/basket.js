@@ -1,7 +1,6 @@
 /* @flow */
 
-import { createAction } from 'redux-actions';
-import type { BasketType, ActionType } from '../types';
+import type { BasketType, ActionType, ItemType } from '../types';
 
 const ADD_TO_BASKET = 'our-wedding-heroes/basket/ADD_TO_BASKET';
 const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
@@ -59,9 +58,20 @@ export default function reducer(state: BasketType = new Map(), action: ActionTyp
     }
 }
 
-export const addToBasket = createAction(ADD_TO_BASKET);
-export const removeFromBasket = createAction(REMOVE_FROM_BASKET);
-export const deleteFromBasket = createAction(DELETE_FROM_BASKET);
+export const addToBasket = (item: ItemType): ActionType => ({
+    type: ADD_TO_BASKET,
+    payload: item,
+});
+
+export const removeFromBasket = (item: ItemType): ActionType => ({
+    type: REMOVE_FROM_BASKET,
+    payload: item,
+});
+
+export const deleteFromBasket = (item: ItemType): ActionType => ({
+    type: DELETE_FROM_BASKET,
+    payload: item,
+});
 
 export const emptyBasket = (): ActionType => ({
     type: EMPTY_BASKET,

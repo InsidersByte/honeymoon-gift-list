@@ -2,7 +2,13 @@
 
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 
-export type BasketType = Map<number, { id: number, quantity: number, remaining: number }>;
+export type ItemType = {
+    id: number,
+    quantity: number,
+    remaining: number,
+};
+
+export type BasketType = Map<number, ItemType>;
 
 export type GiftType = {
     +id: number,

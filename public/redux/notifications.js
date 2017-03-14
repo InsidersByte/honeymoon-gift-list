@@ -1,6 +1,5 @@
 /* @flow */
 
-import { createAction } from 'redux-actions';
 import uuid from 'uuid';
 import type { NotificationType, NotificationsType, ActionType } from '../types';
 
@@ -69,6 +68,17 @@ export default function reducer(state: NotificationsType = [], action: ActionTyp
     }
 }
 
-export const success = createAction(SUCCESS_NOTIFICATION);
-export const error = createAction(ERROR_NOTIFICATION);
-export const hideNotification = createAction(HIDE_NOTIFICATION);
+export const success = ({ message }: { message: string }): ActionType => ({
+    type: SUCCESS_NOTIFICATION,
+    payload: { message },
+});
+
+export const error = ({ message }: { message: string }): ActionType => ({
+    type: ERROR_NOTIFICATION,
+    payload: { message },
+});
+
+export const hideNotification = (notification: NotificationType): ActionType => ({
+    type: HIDE_NOTIFICATION,
+    payload: notification,
+});
