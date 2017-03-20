@@ -1,6 +1,7 @@
 # our-wedding-heroes
 
 [![Build Status](https://travis-ci.org/InsidersByte/our-wedding-heroes.svg)](https://travis-ci.org/InsidersByte/our-wedding-heroes)
+[![Coverage Status](https://coveralls.io/repos/github/InsidersByte/our-wedding-heroes/badge.svg?branch=master)](https://coveralls.io/github/InsidersByte/our-wedding-heroes?branch=master)
 [![Code Climate](https://codeclimate.com/github/InsidersByte/honeymoon-gift-list/badges/gpa.svg)](https://codeclimate.com/github/InsidersByte/honeymoon-gift-list)
 [![bitHound Overall Score](https://www.bithound.io/github/InsidersByte/our-wedding-heroes/badges/score.svg)](https://www.bithound.io/github/InsidersByte/our-wedding-heroes)  
 [![Dependency Status](https://david-dm.org/insidersbyte/our-wedding-heroes.svg)](https://david-dm.org/insidersbyte/our-wedding-heroes)
