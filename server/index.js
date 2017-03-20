@@ -9,9 +9,7 @@ if (!Object.values) {
 const environment = process.env.NODE_ENV || environmentConstants.DEVELOPMENT;
 process.env.NODE_ENV = environment;
 
-if (environment === environmentConstants.DEVELOPMENT) {
-    require('dotenv').config({ silent: true }); // eslint-disable-line global-require, import/no-extraneous-dependencies
-}
+require('dotenv').config({ silent: true });
 
 const app = express();
 
