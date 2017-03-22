@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
@@ -13,7 +13,7 @@ export function setup(data) { // eslint-disable-line import/prefer-default-expor
             method: HTTP_METHODS.POST,
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'You are all setup up' }));
-                dispatch(push(ADMIN_ROUTE));
+                browserHistory.push(ADMIN_ROUTE);
             },
             types: [TYPES.SETUP_REQUEST, TYPES.SETUP_SUCCESS, TYPES.SETUP_ERROR],
         },

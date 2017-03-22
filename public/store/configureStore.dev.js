@@ -2,16 +2,15 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { routerMiddleware } from 'react-router-redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'; // eslint-disable-line import/no-extraneous-dependencies
 import createLogger from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import DevTools from '../containers/DevTools';
 import rootReducer from '../redux';
 import api from '../middleware/api';
 
-module.exports = (initialState: Object, history: any) => {
+module.exports = (initialState: Object) => {
     const enhancer = compose(
-        applyMiddleware(thunk, api, routerMiddleware(history), reduxImmutableStateInvariant(), createLogger()),
+        applyMiddleware(thunk, api, reduxImmutableStateInvariant(), createLogger()),
         DevTools.instrument(),
     );
 

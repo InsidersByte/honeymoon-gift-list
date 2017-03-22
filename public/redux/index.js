@@ -1,7 +1,6 @@
 /* @flow */
 
 import { combineReducers } from 'redux';
-import { routerReducer as routing } from 'react-router-redux';
 import auth from '../reducers/auth';
 import users from '../reducers/users';
 import notifications from './notifications';
@@ -32,5 +31,4 @@ export default combineReducers({
     basket,
     giftSet,
     giftSets,
-    routing,
 });

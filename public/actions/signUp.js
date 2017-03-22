@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
@@ -23,7 +23,7 @@ export function signUp(data) {
             method: HTTP_METHODS.PUT,
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'You are all signed up' }));
-                dispatch(push(ADMIN_ROUTE));
+                browserHistory.push(ADMIN_ROUTE);
             },
             types: [TYPES.SIGN_UP_REQUEST, TYPES.SIGN_UP_SUCCESS, TYPES.SIGN_UP_ERROR],
         },

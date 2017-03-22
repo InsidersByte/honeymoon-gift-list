@@ -26,7 +26,23 @@ exports[`Root should render correctly 1`] = `
     }
   >
     <Router
-      history={Object {}}
+      history={
+        Object {
+          "createHref": [Function],
+          "createKey": [Function],
+          "createLocation": [Function],
+          "createPath": [Function],
+          "getCurrentLocation": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "listen": [Function],
+          "listenBefore": [Function],
+          "push": [Function],
+          "replace": [Function],
+          "transitionTo": [Function],
+        }
+      }
       render={[Function]}
     >
       <Route

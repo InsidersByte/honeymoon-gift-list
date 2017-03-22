@@ -1,5 +1,5 @@
+import { browserHistory } from 'react-router';
 import { createAction } from 'redux-actions';
-import { push } from 'react-router-redux';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
@@ -38,7 +38,7 @@ export function createWeddingPartyMember(data) {
             authenticated: true,
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'Wedding party member created successfully' }));
-                dispatch(push(WEDDING_PARTY_MEMBERS_ROUTE));
+                browserHistory.push(WEDDING_PARTY_MEMBERS_ROUTE);
             },
             types: [TYPES.CREATE_WEDDING_PARTY_MEMBER_REQUEST, TYPES.CREATE_WEDDING_PARTY_MEMBER_SUCCESS, TYPES.CREATE_WEDDING_PARTY_MEMBER_ERROR],
         },

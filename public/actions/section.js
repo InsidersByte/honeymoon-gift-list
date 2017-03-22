@@ -1,5 +1,5 @@
+import { browserHistory } from 'react-router';
 import { createAction } from 'redux-actions';
-import { push } from 'react-router-redux';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
@@ -38,7 +38,7 @@ export function createSection(data) {
             authenticated: true,
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'Section created successfully' }));
-                dispatch(push(SECTIONS_ROUTE));
+                browserHistory.push(SECTIONS_ROUTE);
             },
             types: [TYPES.CREATE_SECTION_REQUEST, TYPES.CREATE_SECTION_SUCCESS, TYPES.CREATE_SECTION_ERROR],
         },

@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
@@ -35,7 +35,7 @@ export function createGiftSet(data) {
             method: HTTP_METHODS.POST,
             afterSuccess: (dispatch, { id }) => {
                 dispatch(success({ message: 'Gift set created successfully' }));
-                dispatch(push(confirmationPageRoute(id)));
+                browserHistory.push(confirmationPageRoute(id));
                 dispatch(emptyBasket());
             },
             types: [TYPES.CREATE_GIFT_SET_REQUEST, TYPES.CREATE_GIFT_SET_SUCCESS, TYPES.CREATE_GIFT_SET_ERROR],

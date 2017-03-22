@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { CALL_API } from '../middleware/api';
 import { success } from '../redux/notifications';
 import * as TYPES from '../constants/actionTypes';
@@ -16,7 +16,7 @@ export function login({ email, password }) {
             afterSuccess: (dispatch, { token }) => {
                 setItem(TOKEN, token);
                 dispatch(success({ message: 'Successfully logged in' }));
-                dispatch(push(ADMIN_ROUTE));
+                browserHistory.push(ADMIN_ROUTE);
             },
             types: [TYPES.LOGIN_REQUEST, TYPES.LOGIN_SUCCESS, TYPES.LOGIN_ERROR],
         },
@@ -28,7 +28,7 @@ export function logout() {
         removeItem(TOKEN);
         dispatch({ type: TYPES.LOGOUT });
         dispatch(success({ message: 'Successfully logged out' }));
-        dispatch(push(LOGIN_ROUTE));
+        browserHistory.push(LOGIN_ROUTE);
     };
 }
 
@@ -54,7 +54,7 @@ export function resetPassword(data) {
             method: HTTP_METHODS.PUT,
             onSuccess: (dispatch) => {
                 dispatch(success({ message: 'Password reset successfully' }));
-                dispatch(push(LOGIN_ROUTE));
+                browserHistory.push(LOGIN_ROUTE);
             },
             types: [TYPES.PASSWORD_RESET_REQUEST, TYPES.PASSWORD_RESET_SUCCESS, TYPES.PASSWORD_RESET_ERROR],
         },
