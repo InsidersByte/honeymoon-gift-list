@@ -76,3 +76,25 @@ export const deleteFromBasket = (item: ItemType): ActionType => ({
 export const emptyBasket = (): ActionType => ({
     type: EMPTY_BASKET,
 });
+
+export const getBasketCount = (state: BasketType): number => {
+    let count = 0;
+
+    for (const item of state.values()) {
+        const { quantity } = item;
+        count += quantity;
+    }
+
+    return count;
+};
+
+export const getBasketTotal = (state: BasketType): number => {
+    let total = 0;
+
+    for (const item of state.values()) {
+        const { quantity, price } = item;
+        total += price * quantity;
+    }
+
+    return total;
+};

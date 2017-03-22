@@ -12,9 +12,10 @@ import weddingPartyMember from '../reducers/weddingPartyMember';
 import gifts from '../reducers/gifts';
 import sections from '../reducers/sections';
 import section from '../reducers/section';
-import basket from './basket';
+import basket, * as fromBasket from './basket';
 import giftSet from '../reducers/giftSet';
 import giftSets from '../reducers/giftSets';
+import type { StateType } from '../types';
 
 export default combineReducers({
     auth,
@@ -32,3 +33,6 @@ export default combineReducers({
     giftSet,
     giftSets,
 });
+
+export const getBasketCount = (state: StateType) => fromBasket.getBasketCount(state.basket);
+export const getBasketTotal = (state: StateType) => fromBasket.getBasketTotal(state.basket);

@@ -44,6 +44,42 @@ describe('basket', () => {
         });
     });
 
+    describe('getBasketCount', () => {
+        it('should return the total count of the items in the basket', () => {
+            let state = new Map();
+            state.set(1, { id: 1, quantity: 9 });
+            state.set(2, { id: 2, quantity: 3 });
+            state.set(3, { id: 3, quantity: 3 });
+
+            expect(actions.getBasketCount(state)).toBe(15);
+
+            state = new Map();
+            state.set(1, { id: 1, quantity: 5 });
+            state.set(2, { id: 2, quantity: 4 });
+            state.set(3, { id: 3, quantity: 1 });
+
+            expect(actions.getBasketCount(state)).toBe(10);
+        });
+    });
+
+    describe('getBasketTotal', () => {
+        it('should return the total cost of the items in the basket', () => {
+            let state = new Map();
+            state.set(1, { id: 1, quantity: 9, price: 3 });
+            state.set(2, { id: 2, quantity: 3, price: 5 });
+            state.set(3, { id: 3, quantity: 2, price: 4 });
+
+            expect(actions.getBasketTotal(state)).toBe(50);
+
+            state = new Map();
+            state.set(1, { id: 1, quantity: 9, price: 1 });
+            state.set(2, { id: 2, quantity: 3, price: 3 });
+            state.set(3, { id: 3, quantity: 2, price: 1 });
+
+            expect(actions.getBasketTotal(state)).toBe(20);
+        });
+    });
+
     describe('reducer', () => {
         it('should return the initial state', () => {
             expect(reducer(undefined, {})).toEqual(new Map());
