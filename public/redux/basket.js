@@ -7,7 +7,7 @@ const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
 const DELETE_FROM_BASKET = 'our-wedding-heroes/basket/DELETE_FROM_BASKET';
 const EMPTY_BASKET = 'our-wedding-heroes/basket/EMPTY_BASKET';
 
-export default function reducer(state: BasketType = new Map(), action: ActionType): BasketType {
+const reducer = (state: BasketType = new Map(), action: ActionType): BasketType => {
     switch (action.type) {
         case ADD_TO_BASKET: {
             const { payload: item } = action;
@@ -56,7 +56,9 @@ export default function reducer(state: BasketType = new Map(), action: ActionTyp
         default:
             return state;
     }
-}
+};
+
+export default reducer;
 
 export const addToBasket = (item: ItemType): ActionType => ({
     type: ADD_TO_BASKET,

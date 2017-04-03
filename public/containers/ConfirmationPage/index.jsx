@@ -15,7 +15,7 @@ type PropsType = {
         giftSetId: string,
     },
     actions: {
-        loadGiftSet: Function,
+        loadGiftSet: (giftSetId: string) => void,
     },
 };
 

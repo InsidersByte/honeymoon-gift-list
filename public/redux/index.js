@@ -6,7 +6,6 @@ import users from '../reducers/users';
 import notifications from './notifications';
 import weddingProfile from '../reducers/weddingProfile';
 import signUp from '../reducers/signUp';
-import setup from '../reducers/setup';
 import weddingPartyMembers from '../reducers/weddingPartyMembers';
 import weddingPartyMember from '../reducers/weddingPartyMember';
 import gifts from '../reducers/gifts';
@@ -23,7 +22,6 @@ export default combineReducers({
     notifications,
     weddingProfile,
     signUp,
-    setup,
     weddingPartyMembers,
     weddingPartyMember,
     gifts,

@@ -24,12 +24,14 @@ export type GiftSetType = {
     +paypalLink: string,
 };
 
+export type NotificationLevelType = 'success' | 'error';
+
 export type NotificationType = {
     +id: string,
     +message: string,
     +position: 'bl',
     +show: boolean,
-    +level: 'success' | 'error',
+    +level: NotificationLevelType,
 };
 
 export type NotificationsType = Array<NotificationType>;
