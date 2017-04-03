@@ -8,135 +8,120 @@ import GiftDialog from '../components/GiftDialog';
 import GiftList from '../components/GiftList';
 
 type PropsType = {
-    gifts: Array<{
-        id: number,
-        name: string,
-        imageUrl: string,
-        requested: number,
-        remaining: number,
-        price: number,
-    }>,
-    giftModalOpen: boolean,
-    loading: boolean,
-    saving: boolean,
-    deleting: boolean,
-    actions: {
-        loadGifts: Function,
-        createGift: Function,
-        updateGift: Function,
-        deleteGift: Function,
-        moveGift: Function,
-        openGiftModal: Function,
-        closeGiftModal: Function,
-    },
+  gifts: Array<{
+    id: number,
+    name: string,
+    imageUrl: string,
+    requested: number,
+    remaining: number,
+    price: number,
+  }>,
+  giftModalOpen: boolean,
+  loading: boolean,
+  saving: boolean,
+  deleting: boolean,
+  actions: {
+    loadGifts: Function,
+    createGift: Function,
+    updateGift: Function,
+    deleteGift: Function,
+    moveGift: Function,
+    openGiftModal: Function,
+    closeGiftModal: Function,
+  },
 };
 
 const initialGift = {
-    name: '',
-    imageUrl: '',
-    requested: 0,
-    price: 0,
+  name: '',
+  imageUrl: '',
+  requested: 0,
+  price: 0,
 };
 
 @connect(
-    ({ gifts: { gifts, ...state } }) => {
-        const sortedGifts = gifts.sort((a, b) => a.position - b.position);
+  ({ gifts: { gifts, ...state } }) => {
+    const sortedGifts = gifts.sort((a, b) => a.position - b.position);
 
-        return {
-            ...state,
-            gifts: sortedGifts,
-        };
-    },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
+    return {
+      ...state,
+      gifts: sortedGifts,
+    };
+  },
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class HoneymoonGiftListItemPage extends React.Component {
-    props: PropsType;
+  props: PropsType;
 
-    state = { gift: { ...initialGift } };
+  state = { gift: { ...initialGift } };
 
-    componentDidMount() {
-        this.props.actions.loadGifts();
+  componentDidMount() {
+    this.props.actions.loadGifts();
+  }
+
+  // FIXME: This seems like a bit of a hack
+  componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
+    const { saving, deleting, actions: { loadGifts } } = this.props;
+
+    if (deleting && !nextDeleting) {
+      loadGifts();
     }
 
-    // FIXME: This seems like a bit of a hack
-    componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
-        const { saving, deleting, actions: { loadGifts } } = this.props;
+    if (saving && !nextSaving) {
+      loadGifts();
+    }
+  }
 
-        if (deleting && !nextDeleting) {
-            loadGifts();
-        }
+  onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
+    const gift = Object.assign(this.state.gift, { [name]: value });
+    this.setState({ gift });
+  };
 
-        if (saving && !nextSaving) {
-            loadGifts();
-        }
+  onAdd = () => {
+    this.props.actions.openGiftModal();
+    this.setState({ gift: { ...initialGift } });
+  };
+
+  onSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    const { actions: { createGift, updateGift } } = this.props;
+    const { gift } = this.state;
+
+    if (!gift.id) {
+      createGift(gift);
+    } else {
+      updateGift(gift);
+    }
+  };
+
+  onSelect = (gift: Object) => {
+    this.props.actions.openGiftModal();
+    this.setState({ gift: { ...gift } });
+  };
+
+  onDrop = ({ id }: Object) => {
+    const gift = this.props.gifts.find(o => o.id === id);
+    this.props.actions.updateGift(gift);
+  };
+
+  onDelete = (item: Object) => {
+    if (!confirm('Are you sure you want to delete this gift?')) {
+      return;
     }
 
-    onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
-        const gift = Object.assign(this.state.gift, { [name]: value });
-        this.setState({ gift });
-    };
+    this.props.actions.deleteGift(item);
+  };
 
-    onAdd = () => {
-        this.props.actions.openGiftModal();
-        this.setState({ gift: { ...initialGift } });
-    };
+  render() {
+    const { gifts, giftModalOpen, loading, saving, actions: { moveGift, closeGiftModal } } = this.props;
+    const { gift } = this.state;
 
-    onSubmit = (event: SyntheticEvent) => {
-        event.preventDefault();
+    return (
+      <div>
+        <GiftList gifts={gifts} loading={loading} onAdd={this.onAdd} onSelect={this.onSelect} onMove={moveGift} onDrop={this.onDrop} onDelete={this.onDelete} />
 
-        const { actions: { createGift, updateGift } } = this.props;
-        const { gift } = this.state;
-
-        if (!gift.id) {
-            createGift(gift);
-        } else {
-            updateGift(gift);
-        }
-    };
-
-    onSelect = (gift: Object) => {
-        this.props.actions.openGiftModal();
-        this.setState({ gift: { ...gift } });
-    };
-
-    onDrop = ({ id }: Object) => {
-        const gift = this.props.gifts.find(o => o.id === id);
-        this.props.actions.updateGift(gift);
-    };
-
-    onDelete = (item: Object) => {
-        if (!confirm('Are you sure you want to delete this gift?')) {
-            return;
-        }
-
-        this.props.actions.deleteGift(item);
-    };
-
-    render() {
-        const { gifts, giftModalOpen, loading, saving, actions: { moveGift, closeGiftModal } } = this.props;
-        const { gift } = this.state;
-
-        return (
-            <div>
-                <GiftList
-                    gifts={gifts}
-                    loading={loading}
-                    onAdd={this.onAdd}
-                    onSelect={this.onSelect}
-                    onMove={moveGift}
-                    onDrop={this.onDrop}
-                    onDelete={this.onDelete}
-                />
-
-                <GiftDialog
-                    gift={gift}
-                    open={giftModalOpen}
-                    onHide={closeGiftModal}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit}
-                    saving={saving}
-                />
-            </div>
-        );
-    }
+        <GiftDialog gift={gift} open={giftModalOpen} onHide={closeGiftModal} onChange={this.onChange} onSubmit={this.onSubmit} saving={saving} />
+      </div>
+    );
+  }
 }

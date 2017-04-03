@@ -8,30 +8,28 @@ import InvitedUserListItem from './';
 injectTapEventPlugin();
 
 describe('InvitedUserListItem', () => {
-    it('should render correctly', () => {
-        const user = { id: 1, email: 'email@email.com', name: 'person' };
-        const onDelete = jest.fn();
+  it('should render correctly', () => {
+    const user = { id: 1, email: 'email@email.com', name: 'person' };
+    const onDelete = jest.fn();
 
-        const wrapper = shallow(
-            <InvitedUserListItem user={user} onDelete={onDelete} />,
-        );
+    const wrapper = shallow(<InvitedUserListItem user={user} onDelete={onDelete} />);
 
-        expect(wrapper).toMatchSnapshot();
-    });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should handle delete correctly', () => {
-        const user = { id: 1, email: 'email@email.com', name: 'person' };
-        const onDelete = jest.fn();
+  it('should handle delete correctly', () => {
+    const user = { id: 1, email: 'email@email.com', name: 'person' };
+    const onDelete = jest.fn();
 
-        const wrapper = mount(
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
-                <InvitedUserListItem user={user} onDelete={onDelete} />
-            </MuiThemeProvider>,
-        );
+    const wrapper = mount(
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <InvitedUserListItem user={user} onDelete={onDelete} />
+      </MuiThemeProvider>
+    );
 
-        expect(wrapper.find(IconButton).length).toBe(1);
-        wrapper.find(IconButton).simulate('click');
+    expect(wrapper.find(IconButton).length).toBe(1);
+    wrapper.find(IconButton).simulate('click');
 
-        expect(onDelete).toBeCalledWith(user);
-    });
+    expect(onDelete).toBeCalledWith(user);
+  });
 });

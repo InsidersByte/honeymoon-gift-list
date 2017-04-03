@@ -9,21 +9,20 @@ import rootReducer from '../redux';
 import api from '../middleware/api';
 
 module.exports = (initialState: Object) => {
-    const enhancer = compose(
-        applyMiddleware(thunk, api, reduxImmutableStateInvariant(), createLogger()),
-        DevTools.instrument(),
-    );
+  const enhancer = compose(applyMiddleware(thunk, api, reduxImmutableStateInvariant(), createLogger()), DevTools.instrument());
 
-    const store = createStore(rootReducer, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
 
-    // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
-    if (module.hot) {
+  // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
+  if (module.hot) {
+    // FIXME:FLOW ignore error
+    module.hot.accept(
+      '../redux',
+      () =>
         // FIXME:FLOW ignore error
-        module.hot.accept('../redux', () =>
-            // FIXME:FLOW ignore error
-            store.replaceReducer(require('../redux')), // eslint-disable-line global-require
-        );
-    }
+        store.replaceReducer(require('../redux')) // eslint-disable-line global-require
+    );
+  }
 
-    return store;
+  return store;
 };

@@ -5,14 +5,15 @@ import { DragDropContext as dragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 type PropsType = {
-    children?: React$Element<any>,
+  children?: React$Element<any>,
 };
 
 @dragDropContext(HTML5Backend)
-export default class SortableContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
-    props: PropsType;
+export default // eslint-disable-next-line react/prefer-stateless-function
+class SortableContainer extends React.Component {
+  props: PropsType;
 
-    render() {
-        return <div>{this.props.children}</div>;
-    }
+  render() {
+    return <div>{this.props.children}</div>;
+  }
 }

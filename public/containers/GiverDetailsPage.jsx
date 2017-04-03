@@ -9,89 +9,81 @@ import GiverDetailsForm from '../components/GiverDetailsForm';
 import { HOME_ROUTE } from '../constants/routes';
 
 type PropsType = {
-    saving: boolean,
-    basket: Map<number, Object>,
-    basketCount: number,
-    router: {
-        replace: Function,
-    },
-    actions: {
-        createGiftSet: Function,
-    },
+  saving: boolean,
+  basket: Map<number, Object>,
+  basketCount: number,
+  router: {
+    replace: Function,
+  },
+  actions: {
+    createGiftSet: Function,
+  },
 };
 
 @withRouter
 @connect(
-    ({ basket, giftSet: { saving } }) => {
-        let basketCount = 0;
+  ({ basket, giftSet: { saving } }) => {
+    let basketCount = 0;
 
-        for (const item of basket.values()) {
-            const { quantity } = item;
-            basketCount += quantity;
-        }
+    for (const item of basket.values()) {
+      const { quantity } = item;
+      basketCount += quantity;
+    }
 
-        return {
-            saving,
-            basket,
-            basketCount,
-        };
-    },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
+    return {
+      saving,
+      basket,
+      basketCount,
+    };
+  },
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class GiverDetailsPage extends React.Component {
-    props: PropsType;
+  props: PropsType;
 
-    state = {
-        giver: {
-            forename: '',
-            surname: '',
-            email: '',
-            phoneNumber: '',
-            paymentMethod: '',
-        },
-    };
+  state = {
+    giver: {
+      forename: '',
+      surname: '',
+      email: '',
+      phoneNumber: '',
+      paymentMethod: '',
+    },
+  };
 
-    componentWillMount() {
-        const { basketCount, router: { replace } } = this.props;
+  componentWillMount() {
+    const { basketCount, router: { replace } } = this.props;
 
-        if (basketCount <= 0) {
-            replace(HOME_ROUTE);
-        }
+    if (basketCount <= 0) {
+      replace(HOME_ROUTE);
     }
+  }
 
-    onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
-        const giver = Object.assign({}, this.state.giver, { [name]: value });
-        this.setState({ giver });
-    };
+  onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
+    const giver = Object.assign({}, this.state.giver, { [name]: value });
+    this.setState({ giver });
+  };
 
-    onRadioChange = ({ target: { name } }: { target: { name: string } }, value: string) => {
-        const giver = Object.assign({}, this.state.giver, { [name]: value });
-        this.setState({ giver });
-    };
+  onRadioChange = ({ target: { name } }: { target: { name: string } }, value: string) => {
+    const giver = Object.assign({}, this.state.giver, { [name]: value });
+    this.setState({ giver });
+  };
 
-    onSubmit = (event: SyntheticEvent) => {
-        event.preventDefault();
+  onSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
 
-        const { basket, actions: { createGiftSet } } = this.props;
+    const { basket, actions: { createGiftSet } } = this.props;
 
-        createGiftSet({
-            giver: this.state.giver,
-            basket: [...basket.values()],
-        });
-    };
+    createGiftSet({
+      giver: this.state.giver,
+      basket: [...basket.values()],
+    });
+  };
 
-    render() {
-        const { saving } = this.props;
-        const { giver } = this.state;
+  render() {
+    const { saving } = this.props;
+    const { giver } = this.state;
 
-        return (
-            <GiverDetailsForm
-                giver={giver}
-                saving={saving}
-                onChange={this.onChange}
-                onRadioChange={this.onRadioChange}
-                onSubmit={this.onSubmit}
-            />
-        );
-    }
+    return <GiverDetailsForm giver={giver} saving={saving} onChange={this.onChange} onRadioChange={this.onRadioChange} onSubmit={this.onSubmit} />;
+  }
 }

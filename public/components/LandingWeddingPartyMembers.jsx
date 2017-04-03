@@ -6,30 +6,25 @@ import LandingItem from './LandingItem';
 import css from './LandingWeddingPartyMembers.styl';
 
 type PropsType = {
-    weddingPartyMembers: Array<{
-        id: number,
-        name: string,
-        title: string,
-        imageUrl: string,
-        description: string,
-    }>,
+  weddingPartyMembers: Array<{
+    id: number,
+    name: string,
+    title: string,
+    imageUrl: string,
+    description: string,
+  }>,
 };
 
 export default function LandingWeddingPartyMembers({ weddingPartyMembers }: PropsType) {
-    if (weddingPartyMembers.length === 0) {
-        return null;
-    }
+  if (weddingPartyMembers.length === 0) {
+    return null;
+  }
 
-    return (
-        <LandingItem title="Wedding Party Members">
-            <div className={css.root}>
-                {weddingPartyMembers.map(({ id, ...weddingPartyMember }) =>
-                    <LandingWeddingPartyMember
-                        key={id}
-                        weddingPartyMember={weddingPartyMember}
-                    />,
-                )}
-            </div>
-        </LandingItem>
-    );
+  return (
+    <LandingItem title="Wedding Party Members">
+      <div className={css.root}>
+        {weddingPartyMembers.map(({ id, ...weddingPartyMember }) => <LandingWeddingPartyMember key={id} weddingPartyMember={weddingPartyMember} />)}
+      </div>
+    </LandingItem>
+  );
 }

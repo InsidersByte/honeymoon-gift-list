@@ -6,7 +6,7 @@ import api from '../middleware/api';
 import rootReducer from '../redux';
 
 module.exports = (initialState: Object) => {
-    const enhancer = applyMiddleware(thunk, api);
+  const enhancer = applyMiddleware(thunk, api);
 
-    return createStore(rootReducer, initialState, enhancer);
+  return createStore(rootReducer, initialState, enhancer);
 };

@@ -6,42 +6,40 @@ import { TOKEN } from '../constants';
 import { getItem } from '../utils/localStorage';
 
 function createRequest({ endpoint, method, authenticated }: { endpoint: string, method: string, authenticated: boolean }): any {
-    const url = `${BASE_API_URL}${endpoint}`;
-    const req = request(method, url);
+  const url = `${BASE_API_URL}${endpoint}`;
+  const req = request(method, url);
 
-    if (authenticated) {
-        const token = getItem(TOKEN) || null;
+  if (authenticated) {
+    const token = getItem(TOKEN) || null;
 
-        if (token) {
-            req.set('Authorization', `Bearer ${token}`);
-        } else {
-            throw new Error('No token saved!');
-        }
+    if (token) {
+      req.set('Authorization', `Bearer ${token}`);
+    } else {
+      throw new Error('No token saved!');
     }
+  }
 
-    return req;
+  return req;
 }
 
 function createResult(req: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-        req.end((error, response) => {
-            if (error) {
-                return reject(error);
-            }
+  return new Promise((resolve, reject) => {
+    req.end((error, response) => {
+      if (error) {
+        return reject(error);
+      }
 
-            return resolve(response.body ? response.body : response.text);
-        });
+      return resolve(response.body ? response.body : response.text);
     });
+  });
 }
 
-export default (
-    { endpoint, method, data, authenticated = false }: { endpoint: string, method: string, data: any, authenticated?: boolean },
-): Promise<any> => {
-    const req = createRequest({ endpoint, method, authenticated });
+export default ({ endpoint, method, data, authenticated = false }: { endpoint: string, method: string, data: any, authenticated?: boolean }): Promise<any> => {
+  const req = createRequest({ endpoint, method, authenticated });
 
-    if (data) {
-        req.send(data);
-    }
+  if (data) {
+    req.send(data);
+  }
 
-    return createResult(req);
+  return createResult(req);
 };

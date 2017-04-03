@@ -4,135 +4,118 @@ const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
 module.exports = ({ express, secure }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      wrap(function* getSections(req, res) {
+        const sections = yield Section.forge({ weddingProfileId: WEDDING_PROFILE_ID }).fetchAll();
 
-        .get(wrap(function* getSections(req, res) {
-            const sections = yield Section
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .fetchAll();
+        return res.json(sections);
+      })
+    )
+    .post(
+      secure,
+      wrap(function* createSection(req, res) {
+        req.checkBody('title').notEmpty();
+        req.checkBody('content').notEmpty();
 
-            return res.json(sections);
-        }))
+        const errors = req.validationErrors();
 
-        .post(secure, wrap(function* createSection(req, res) {
-            req.checkBody('title').notEmpty();
-            req.checkBody('content').notEmpty();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const { title, content } = req.body;
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        const max = yield Section.forge({ weddingProfileId: WEDDING_PROFILE_ID }).query({ max: 'position' }).fetch();
 
-            const { title, content } = req.body;
+        const maximumPosition = max.get('max') || 0;
 
-            const max = yield Section
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .query({ max: 'position' })
-                .fetch();
+        const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
-            const maximumPosition = max.get('max') || 0;
+        const section = new Section({
+          title,
+          content,
+          position,
+          weddingProfileId: WEDDING_PROFILE_ID,
+        });
 
-            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
+        yield section.save();
 
-            const section = new Section({
-                title,
-                content,
-                position,
-                weddingProfileId: WEDDING_PROFILE_ID,
-            });
+        return res.status(201).json(section);
+      })
+    );
 
-            yield section.save();
+  router
+    .route('/:id')
+    .get(
+      wrap(function* getSection(req, res) {
+        const { id } = req.params;
 
-            return res
-                .status(201)
-                .json(section);
-        }));
+        const section = yield Section.forge({ id }).fetch();
 
-    router
-        .route('/:id')
+        if (!section) {
+          return res.status(404).send();
+        }
 
-        .get(wrap(function* getSection(req, res) {
-            const { id } = req.params;
+        return res.json(section);
+      })
+    )
+    .put(
+      secure,
+      wrap(function* updateSection(req, res) {
+        req.checkParams('id').equals(`${req.body.id}`);
+        req.checkBody('title').notEmpty();
+        req.checkBody('content').notEmpty();
+        req.checkBody('hidden').isBoolean();
+        req.checkBody('position').isFloat();
 
-            const section = yield Section
-                .forge({ id })
-                .fetch();
+        const errors = req.validationErrors();
 
-            if (!section) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            return res.json(section);
-        }))
+        const { id } = req.params;
 
-        .put(secure, wrap(function* updateSection(req, res) {
-            req.checkParams('id').equals(`${req.body.id}`);
-            req.checkBody('title').notEmpty();
-            req.checkBody('content').notEmpty();
-            req.checkBody('hidden').isBoolean();
-            req.checkBody('position').isFloat();
+        const section = yield Section.forge({ id }).fetch();
 
-            const errors = req.validationErrors();
+        if (!section) {
+          return res.status(404).send();
+        }
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        const { title, content, hidden, position } = req.body;
 
-            const { id } = req.params;
+        section.set({
+          title,
+          content,
+          hidden,
+          position,
+        });
 
-            const section = yield Section
-                .forge({ id })
-                .fetch();
+        yield section.save();
 
-            if (!section) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        return res.json(section);
+      })
+    )
+    .delete(
+      secure,
+      wrap(function* deleteSection(req, res) {
+        const { id } = req.params;
 
-            const { title, content, hidden, position } = req.body;
+        const section = yield Section.forge({ id }).fetch();
 
-            section.set({
-                title,
-                content,
-                hidden,
-                position,
-            });
+        if (!section) {
+          return res.status(404).send();
+        }
 
-            yield section.save();
+        yield section.destroy();
 
-            return res.json(section);
-        }))
+        return res.status(204).send();
+      })
+    );
 
-        .delete(secure, wrap(function* deleteSection(req, res) {
-            const { id } = req.params;
-
-            const section = yield Section
-                .forge({ id })
-                .fetch();
-
-            if (!section) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            yield section.destroy();
-
-            return res
-                .status(204)
-                .send();
-        }));
-
-    return router;
+  return router;
 };

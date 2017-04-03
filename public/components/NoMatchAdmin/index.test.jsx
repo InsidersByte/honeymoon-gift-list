@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import NoMatchAdmin from './';
 
 describe('NoMatchAdmin', () => {
-    it('should render correctly', () => {
-        const wrapper = shallow(<NoMatchAdmin />);
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render correctly', () => {
+    const wrapper = shallow(<NoMatchAdmin />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

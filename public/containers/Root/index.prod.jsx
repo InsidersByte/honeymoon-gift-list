@@ -6,15 +6,15 @@ import { Router, browserHistory } from 'react-router';
 import routes from '../../routes';
 
 type PropsType = {
-    store: Object,
+  store: Object,
 };
 
 const Root = ({ store }: PropsType) => (
-    <Provider store={store}>
-        <Router history={browserHistory}>
-            {routes(store)}
-        </Router>
-    </Provider>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      {routes(store)}
+    </Router>
+  </Provider>
 );
 
 export default Root;

@@ -9,34 +9,30 @@ const removeFromBasket = jest.fn();
 const deleteFromBasket = jest.fn();
 
 const props = {
-    item,
-    addToBasket,
-    removeFromBasket,
-    deleteFromBasket,
+  item,
+  addToBasket,
+  removeFromBasket,
+  deleteFromBasket,
 };
 
 describe('BasketSummaryListItem', () => {
-    it('should render correctly', () => {
-        const wrapper = shallow(
-            <BasketSummaryListItem {...props} />,
-        );
+  it('should render correctly', () => {
+    const wrapper = shallow(<BasketSummaryListItem {...props} />);
 
-        expect(wrapper).toMatchSnapshot();
-    });
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should handle deleteFromBasket correctly', () => {
-        const wrapper = shallow(
-            <BasketSummaryListItem {...props} />,
-        );
+  it('should handle deleteFromBasket correctly', () => {
+    const wrapper = shallow(<BasketSummaryListItem {...props} />);
 
-        const deleteButton = wrapper.find('IconButton');
+    const deleteButton = wrapper.find('IconButton');
 
-        expect(deleteButton.length).toBe(1);
-        expect(deleteFromBasket).not.toHaveBeenCalled();
+    expect(deleteButton.length).toBe(1);
+    expect(deleteFromBasket).not.toHaveBeenCalled();
 
-        deleteButton.simulate('click');
+    deleteButton.simulate('click');
 
-        expect(deleteFromBasket).toHaveBeenCalledTimes(1);
-        expect(deleteFromBasket).toHaveBeenCalledWith(item);
-    });
+    expect(deleteFromBasket).toHaveBeenCalledTimes(1);
+    expect(deleteFromBasket).toHaveBeenCalledWith(item);
+  });
 });

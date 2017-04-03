@@ -4,125 +4,111 @@ const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
 module.exports = ({ express, secure }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      wrap(function* getGifts(req, res) {
+        const gifts = yield Gift.forge({ weddingProfileId: WEDDING_PROFILE_ID }).fetchAll({ withRelated: ['giftSets'] });
 
-        .get(wrap(function* getGifts(req, res) {
-            const gifts = yield Gift
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .fetchAll({ withRelated: ['giftSets'] });
+        return res.json(gifts);
+      })
+    )
+    .post(
+      secure,
+      wrap(function* createGift(req, res) {
+        req.checkBody('imageUrl').isURL();
+        req.checkBody('name').notEmpty();
+        req.checkBody('requested').isInt();
+        req.checkBody('price').isInt();
 
-            return res.json(gifts);
-        }))
+        const errors = req.validationErrors();
 
-        .post(secure, wrap(function* createGift(req, res) {
-            req.checkBody('imageUrl').isURL();
-            req.checkBody('name').notEmpty();
-            req.checkBody('requested').isInt();
-            req.checkBody('price').isInt();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const { name, imageUrl, requested, price } = req.body;
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        const max = yield Gift.forge({ weddingProfileId: WEDDING_PROFILE_ID }).query({ max: 'position' }).fetch();
 
-            const { name, imageUrl, requested, price } = req.body;
+        const maximumPosition = max.get('max') || 0;
 
-            const max = yield Gift
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .query({ max: 'position' })
-                .fetch();
+        const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
-            const maximumPosition = max.get('max') || 0;
+        const gift = new Gift({
+          name,
+          imageUrl,
+          requested,
+          price,
+          position,
+          weddingProfileId: WEDDING_PROFILE_ID,
+        });
 
-            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
+        yield gift.save();
 
-            const gift = new Gift({
-                name,
-                imageUrl,
-                requested,
-                price,
-                position,
-                weddingProfileId: WEDDING_PROFILE_ID,
-            });
+        return res.status(201).json(gift);
+      })
+    );
 
-            yield gift.save();
+  router
+    .route('/:id')
+    .put(
+      secure,
+      wrap(function* updateGift(req, res) {
+        req.checkParams('id').equals(`${req.body.id}`);
+        req.checkBody('imageUrl').isURL();
+        req.checkBody('name').notEmpty();
+        req.checkBody('requested').isInt();
+        req.checkBody('price').isInt();
+        req.checkBody('position').isFloat();
 
-            return res
-                .status(201)
-                .json(gift);
-        }));
+        const errors = req.validationErrors();
 
-    router
-        .route('/:id')
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-        .put(secure, wrap(function* updateGift(req, res) {
-            req.checkParams('id').equals(`${req.body.id}`);
-            req.checkBody('imageUrl').isURL();
-            req.checkBody('name').notEmpty();
-            req.checkBody('requested').isInt();
-            req.checkBody('price').isInt();
-            req.checkBody('position').isFloat();
+        const { id } = req.params;
 
-            const errors = req.validationErrors();
+        const gift = yield Gift.forge({ id }).fetch();
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        if (!gift) {
+          return res.status(404).send();
+        }
 
-            const { id } = req.params;
+        const { name, imageUrl, requested, price, position } = req.body;
 
-            const gift = yield Gift
-                .forge({ id })
-                .fetch();
+        gift.set({
+          name,
+          imageUrl,
+          requested,
+          price,
+          position,
+        });
 
-            if (!gift) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        yield gift.save();
 
-            const { name, imageUrl, requested, price, position } = req.body;
+        return res.json(gift);
+      })
+    )
+    .delete(
+      secure,
+      wrap(function* deleteGift(req, res) {
+        const { id } = req.params;
 
-            gift.set({
-                name,
-                imageUrl,
-                requested,
-                price,
-                position,
-            });
+        const gift = yield Gift.forge({ id }).fetch();
 
-            yield gift.save();
+        if (!gift) {
+          return res.status(404).send();
+        }
 
-            return res.json(gift);
-        }))
+        yield gift.destroy();
 
-        .delete(secure, wrap(function* deleteGift(req, res) {
-            const { id } = req.params;
+        return res.status(204).send();
+      })
+    );
 
-            const gift = yield Gift
-                .forge({ id })
-                .fetch();
-
-            if (!gift) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            yield gift.destroy();
-
-            return res
-                .status(204)
-                .send();
-        }));
-
-    return router;
+  return router;
 };

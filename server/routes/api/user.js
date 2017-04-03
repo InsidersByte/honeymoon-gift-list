@@ -8,163 +8,139 @@ const { ONE_DAY_MS } = require('../../constants');
 const mailer = new Mailer();
 
 module.exports = ({ express }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      wrap(function* getUsers(req, res) {
+        const users = yield User.fetchAll();
+        return res.json(users);
+      })
+    )
+    .post(
+      wrap(function* createUser(req, res) {
+        req.checkBody('email').isEmail();
 
-        .get(wrap(function* getUsers(req, res) {
-            const users = yield User.fetchAll();
-            return res.json(users);
-        }))
+        const errors = req.validationErrors();
 
-        .post(wrap(function* createUser(req, res) {
-            req.checkBody('email').isEmail();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const { email } = req.body;
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        let user;
+        const existingUser = yield User.forge({ email }).fetch();
 
-            const { email } = req.body;
+        if (existingUser) {
+          const status = existingUser.get('status');
 
-            let user;
-            const existingUser = yield User
-                .forge({ email })
-                .fetch();
+          if (status !== STATUS.INVITED && status !== STATUS.INVITE_PENDING) {
+            return res.status(400).json({ message: 'This user has already registered.' });
+          }
 
-            if (existingUser) {
-                const status = existingUser.get('status');
+          user = existingUser;
+        } else {
+          user = new User({
+            email,
+            password: uuid.v4(),
+            status: STATUS.INVITED,
+          });
 
-                if (status !== STATUS.INVITED && status !== STATUS.INVITE_PENDING) {
-                    return res
-                        .status(400)
-                        .json({ message: 'This user has already registered.' });
-                }
+          yield user.save();
+        }
 
-                user = existingUser;
-            } else {
-                user = new User({
-                    email,
-                    password: uuid.v4(),
-                    status: STATUS.INVITED,
-                });
+        try {
+          const resetPasswordToken = uuid.v4();
 
-                yield user.save();
-            }
+          user.set({
+            resetPasswordToken,
+            resetPasswordExpires: Date.now() + ONE_DAY_MS * 14,
+          });
 
-            try {
-                const resetPasswordToken = uuid.v4();
+          yield user.save();
 
-                user.set({
-                    resetPasswordToken,
-                    resetPasswordExpires: Date.now() + (ONE_DAY_MS * 14),
-                });
+          const { name } = req.user;
 
-                yield user.save();
+          yield mailer.send(
+            {
+              to: email,
+              subject: `${name} has invited you to join Our Wedding Heroes`,
+              signUpUrl: `http://${req.headers.host}/admin/signup/${resetPasswordToken}`,
+              inviter: req.user,
+              invitee: user.toJSON(),
+            },
+            'inviteUser'
+          );
+        } catch (error) {
+          user.set({ status: STATUS.INVITE_PENDING });
+          yield user.save();
+          throw error;
+        }
 
-                const { name } = req.user;
+        if (user.get('status') === STATUS.INVITE_PENDING) {
+          user.set({ status: STATUS.INVITED });
+          yield user.save();
+        }
 
-                yield mailer.send(
-                    {
-                        to: email,
-                        subject: `${name} has invited you to join Our Wedding Heroes`,
-                        signUpUrl: `http://${req.headers.host}/admin/signup/${resetPasswordToken}`,
-                        inviter: req.user,
-                        invitee: user.toJSON(),
-                    },
-                    'inviteUser'
-                );
-            } catch (error) {
-                user.set({ status: STATUS.INVITE_PENDING });
-                yield user.save();
-                throw error;
-            }
+        return res.status(201).json(user);
+      })
+    );
 
-            if (user.get('status') === STATUS.INVITE_PENDING) {
-                user.set({ status: STATUS.INVITED });
-                yield user.save();
-            }
+  router.route('/password').put(
+    wrap(function* changePassword(req, res) {
+      req.checkBody('currentPassword').notEmpty();
+      req.checkBody('newPassword', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
+      req.checkBody('confirmPassword').equals(req.body.confirmPassword);
 
-            return res
-                .status(201)
-                .json(user);
-        }));
+      const errors = req.validationErrors();
 
-    router
-        .route('/password')
+      if (errors) {
+        return res.status(400).send(errors);
+      }
 
-        .put(wrap(function* changePassword(req, res) {
-            req.checkBody('currentPassword').notEmpty();
-            req.checkBody('newPassword', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
-            req.checkBody('confirmPassword').equals(req.body.confirmPassword);
+      const { email } = req.user;
 
-            const errors = req.validationErrors();
+      const user = yield User.forge({ email }).fetch();
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+      if (!user) {
+        return res.status(404).send();
+      }
 
-            const { email } = req.user;
+      const validPassword = user.comparePassword(req.body.currentPassword);
 
-            const user = yield User
-                .forge({ email })
-                .fetch();
+      if (!validPassword) {
+        return res.status(400).json({ message: 'Your password is incorrect.' });
+      }
 
-            if (!user) {
-                return res
-                    .status(404)
-                    .send();
-            }
+      user.set({ password: req.body.newPassword });
 
-            const validPassword = user.comparePassword(req.body.currentPassword);
+      yield user.save();
 
-            if (!validPassword) {
-                return res
-                    .status(400)
-                    .json({ message: 'Your password is incorrect.' });
-            }
+      return res.json({ message: 'Password Changed Successfully!' });
+    })
+  );
 
-            user.set({ password: req.body.newPassword });
+  router.route('/:id').delete(
+    wrap(function* deleteUser(req, res) {
+      const { id } = req.params;
 
-            yield user.save();
+      const user = yield User.forge({ id }).fetch();
 
-            return res.json({ message: 'Password Changed Successfully!' });
-        }));
+      if (!user) {
+        return res.status(404).send();
+      }
 
-    router
-        .route('/:id')
+      if (user.get('email') === req.user.email) {
+        return res.status(400).json({ message: 'You cannot delete yourself!' });
+      }
 
-        .delete(wrap(function* deleteUser(req, res) {
-            const { id } = req.params;
+      yield user.destroy();
 
-            const user = yield User
-                .forge({ id })
-                .fetch();
+      return res.status(204).send();
+    })
+  );
 
-            if (!user) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            if (user.get('email') === req.user.email) {
-                return res
-                    .status(400)
-                    .json({ message: 'You cannot delete yourself!' });
-            }
-
-            yield user.destroy();
-
-            return res
-                .status(204)
-                .send();
-        }));
-
-    return router;
+  return router;
 };

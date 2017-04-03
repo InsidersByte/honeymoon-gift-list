@@ -10,89 +10,83 @@ import LandingBasket from './LandingBasket';
 import css from './Landing.styl';
 
 type PropsType = {
-    loading: boolean,
-    onScrollDown: Function,
-    addToBasket: Function,
-    basket: Map<number, Object>,
-    basketCount: number,
-    basketTotal: number,
-    weddingProfile: {
-        id: number,
-        coverTitle: string,
-        coverImageUrl: string,
-        weddingDate: Date,
-        giftListContent: string,
-        showPaymentMessage: boolean,
-        paymentMessage: string,
-        showDisclaimerMessage: boolean,
-        disclaimerMessage: string,
-        daysToGo?: number,
-    },
-    sections: Array<{
-        id: number,
-        title: string,
-        content: string,
-    }>,
-    weddingPartyMembers: Array<{
-        id: number,
-        name: string,
-        title: string,
-        imageUrl: string,
-        description: string,
-    }>,
-    gifts: Array<{
-        id: number,
-        name: string,
-        imageUrl: string,
-        price: number,
-        remaining: number,
-        inStock: number,
-    }>,
+  loading: boolean,
+  onScrollDown: Function,
+  addToBasket: Function,
+  basket: Map<number, Object>,
+  basketCount: number,
+  basketTotal: number,
+  weddingProfile: {
+    id: number,
+    coverTitle: string,
+    coverImageUrl: string,
+    weddingDate: Date,
+    giftListContent: string,
+    showPaymentMessage: boolean,
+    paymentMessage: string,
+    showDisclaimerMessage: boolean,
+    disclaimerMessage: string,
+    daysToGo?: number,
+  },
+  sections: Array<{
+    id: number,
+    title: string,
+    content: string,
+  }>,
+  weddingPartyMembers: Array<{
+    id: number,
+    name: string,
+    title: string,
+    imageUrl: string,
+    description: string,
+  }>,
+  gifts: Array<{
+    id: number,
+    name: string,
+    imageUrl: string,
+    price: number,
+    remaining: number,
+    inStock: number,
+  }>,
 };
 
 export default class Landing extends Component {
-    props: PropsType;
+  props: PropsType;
 
-    firstSection: LandingSection;
+  firstSection: LandingSection;
 
-    scrollToFirstSection = () => {
-        this.firstSection.scrollTo();
-    };
+  scrollToFirstSection = () => {
+    this.firstSection.scrollTo();
+  };
 
-    render() {
-        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts, basketCount, basketTotal } = this.props;
+  render() {
+    const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts, basketCount, basketTotal } = this.props;
 
-        return (
-            <Loader loading={loading} className={css.root}>
-                <LandingHeader weddingProfile={weddingProfile} onScrollDown={onScrollDown} />
+    return (
+      <Loader loading={loading} className={css.root}>
+        <LandingHeader weddingProfile={weddingProfile} onScrollDown={onScrollDown} />
 
-                {
-                    sections.map(({ id, title, content }, i) => {
-                        if (i === 0) {
-                            return (
-                                <LandingSection
-                                    ref={(c) => { this.firstSection = c; }}
-                                    key={id}
-                                    title={title}
-                                    content={content}
-                                />
-                            );
-                        }
+        {sections.map(({ id, title, content }, i) => {
+          if (i === 0) {
+            return (
+              <LandingSection
+                ref={c => {
+                  this.firstSection = c;
+                }}
+                key={id}
+                title={title}
+                content={content}
+              />
+            );
+          }
 
-                        return (
-                            <LandingSection
-                                key={id}
-                                title={title}
-                                content={content}
-                            />
-                        );
-                    })
-                }
+          return <LandingSection key={id} title={title} content={content} />;
+        })}
 
-                <LandingWeddingPartyMembers weddingPartyMembers={weddingPartyMembers} />
-                <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} />
-                <LandingBasket count={basketCount} total={basketTotal} />
-            </Loader>
-        );
-    }
+        <LandingWeddingPartyMembers weddingPartyMembers={weddingPartyMembers} />
+        <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} />
+        <LandingBasket count={basketCount} total={basketTotal} />
+      </Loader>
+    );
+  }
 }

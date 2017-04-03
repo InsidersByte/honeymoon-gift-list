@@ -10,7 +10,6 @@
     },
 
     "rules": {
-        "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 160, 2],
         "no-continue": 1,
         "comma-dangle": ["error", "always-multiline"],

@@ -9,7 +9,6 @@
     ],
 
     "rules": {
-        "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 160, 2],
         "no-continue": 1,
         "no-restricted-syntax": [
@@ -32,9 +31,8 @@
         "react/prop-types": 1,
         "react/no-unused-prop-types": 0,
         "react/require-default-props": 0,
+        "react/no-unescaped-entities": 0,
 
-        "react/jsx-indent-props": [2, 4],
-        "react/jsx-indent": [2, 4],
         "react/sort-comp": [2, {
             "order": [
                 "static-methods",

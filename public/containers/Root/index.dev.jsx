@@ -7,26 +7,26 @@ import DevTools from '../DevTools';
 import routes from '../../routes';
 
 type PropsType = {
-    store: Object,
+  store: Object,
 };
 
 const styles = {
-    root: {
-        height: '100%',
-        width: '100%',
-    },
+  root: {
+    height: '100%',
+    width: '100%',
+  },
 };
 
 const Root = ({ store }: PropsType) => (
-    <Provider store={store}>
-        <div style={styles.root}>
-            <Router history={browserHistory}>
-                {routes(store)}
-            </Router>
+  <Provider store={store}>
+    <div style={styles.root}>
+      <Router history={browserHistory}>
+        {routes(store)}
+      </Router>
 
-            <DevTools />
-        </div>
-    </Provider>
+      <DevTools />
+    </div>
+  </Provider>
 );
 
 export default Root;

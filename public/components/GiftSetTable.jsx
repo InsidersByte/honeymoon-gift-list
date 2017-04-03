@@ -2,7 +2,17 @@
 
 import React from 'react';
 import {
-    Paper, Toolbar, ToolbarGroup, ToolbarTitle, Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, IconButton,
+  Paper,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle,
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+  IconButton,
 } from 'material-ui';
 import Mail from 'material-ui/svg-icons/content/mail';
 import View from 'material-ui/svg-icons/action/pageview';
@@ -13,109 +23,120 @@ import moment from 'moment';
 import Loader from './Loader';
 
 type PropsType = {
-    loading: boolean,
+  loading: boolean,
+  total: number,
+  giftSets: Array<{
+    id: number,
+    giver: {
+      forename: string,
+      surname: string,
+      email: string,
+      phoneNumber: string,
+    },
+    createdAt: string,
     total: number,
-    giftSets: Array<{
-        id: number,
-        giver: {
-            forename: string,
-            surname: string,
-            email: string,
-            phoneNumber: string,
-        },
-        createdAt: string,
-        total: number,
-        paid: boolean,
-        paymentDetailsSent: boolean,
-        paymentMethod: string,
-    }>,
-    selectedGiftSets: Array<number>,
-    canView: boolean,
-    canDelete: boolean,
-    canMarkAsDetailsSent: boolean,
-    onSelect: Function,
-    onView: Function,
-    canMarkAsPaid: boolean,
-    onMarkAsPaid: Function,
-    onMarkAsDetailsSent: Function,
-    onDelete: Function,
+    paid: boolean,
+    paymentDetailsSent: boolean,
+    paymentMethod: string,
+  }>,
+  selectedGiftSets: Array<number>,
+  canView: boolean,
+  canDelete: boolean,
+  canMarkAsDetailsSent: boolean,
+  onSelect: Function,
+  onView: Function,
+  canMarkAsPaid: boolean,
+  onMarkAsPaid: Function,
+  onMarkAsDetailsSent: Function,
+  onDelete: Function,
 };
 
-export default function GiftSetTable({
-    giftSets, selectedGiftSets, total, loading, onSelect, canView, canDelete, canMarkAsDetailsSent, canMarkAsPaid, onView, onMarkAsPaid,
-    onMarkAsDetailsSent, onDelete,
-}: PropsType) {
-    return (
-        <Paper>
-            <Toolbar>
-                <ToolbarGroup>
-                    <ToolbarTitle text="Gift Sets" />
-                </ToolbarGroup>
+export default function GiftSetTable(
+  {
+    giftSets,
+    selectedGiftSets,
+    total,
+    loading,
+    onSelect,
+    canView,
+    canDelete,
+    canMarkAsDetailsSent,
+    canMarkAsPaid,
+    onView,
+    onMarkAsPaid,
+    onMarkAsDetailsSent,
+    onDelete,
+  }: PropsType
+) {
+  return (
+    <Paper>
+      <Toolbar>
+        <ToolbarGroup>
+          <ToolbarTitle text="Gift Sets" />
+        </ToolbarGroup>
 
-                <ToolbarGroup>
-                    <ToolbarTitle text={`${giftSets.length} Gift Sets totalling £${total}`} />
-                </ToolbarGroup>
-            </Toolbar>
+        <ToolbarGroup>
+          <ToolbarTitle text={`${giftSets.length} Gift Sets totalling £${total}`} />
+        </ToolbarGroup>
+      </Toolbar>
 
-            <Loader loading={loading}>
-                <Table onRowSelection={onSelect}>
-                    <TableHeader displaySelectAll={false}>
-                        <TableRow>
-                            <TableHeaderColumn colSpan="7" style={{ textAlign: 'right' }}>
-                                <IconButton disabled={!canView} tooltip="View" onClick={onView}><View /></IconButton>
-                                <IconButton disabled={!canMarkAsDetailsSent} tooltip="Mark as Details Sent" onClick={onMarkAsDetailsSent}><Sent /></IconButton>
-                                <IconButton disabled={!canMarkAsPaid} tooltip="Mark as Paid" onClick={onMarkAsPaid}><Paid /></IconButton>
-                                <IconButton disabled={!canDelete} tooltip="Delete" onClick={onDelete}><Delete /></IconButton>
-                            </TableHeaderColumn>
-                        </TableRow>
+      <Loader loading={loading}>
+        <Table onRowSelection={onSelect}>
+          <TableHeader displaySelectAll={false}>
+            <TableRow>
+              <TableHeaderColumn colSpan="7" style={{ textAlign: 'right' }}>
+                <IconButton disabled={!canView} tooltip="View" onClick={onView}><View /></IconButton>
+                <IconButton disabled={!canMarkAsDetailsSent} tooltip="Mark as Details Sent" onClick={onMarkAsDetailsSent}><Sent /></IconButton>
+                <IconButton disabled={!canMarkAsPaid} tooltip="Mark as Paid" onClick={onMarkAsPaid}><Paid /></IconButton>
+                <IconButton disabled={!canDelete} tooltip="Delete" onClick={onDelete}><Delete /></IconButton>
+              </TableHeaderColumn>
+            </TableRow>
 
-                        <TableRow>
-                            <TableHeaderColumn>Giver Name</TableHeaderColumn>
-                            <TableHeaderColumn>Giver Email</TableHeaderColumn>
-                            <TableHeaderColumn>Giver Phone Number</TableHeaderColumn>
-                            <TableHeaderColumn>Total (£)</TableHeaderColumn>
-                            <TableHeaderColumn>Payment Method</TableHeaderColumn>
-                            <TableHeaderColumn>Date</TableHeaderColumn>
-                            <TableHeaderColumn>Status</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
+            <TableRow>
+              <TableHeaderColumn>Giver Name</TableHeaderColumn>
+              <TableHeaderColumn>Giver Email</TableHeaderColumn>
+              <TableHeaderColumn>Giver Phone Number</TableHeaderColumn>
+              <TableHeaderColumn>Total (£)</TableHeaderColumn>
+              <TableHeaderColumn>Payment Method</TableHeaderColumn>
+              <TableHeaderColumn>Date</TableHeaderColumn>
+              <TableHeaderColumn>Status</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
 
-                    <TableBody deselectOnClickaway={false}>
-                        {giftSets
-                            .map((giftSet, index) => {
-                                const { id, giver, createdAt, total: giftSetTotal, paid, paymentDetailsSent, paymentMethod } = giftSet;
-                                const { forename, surname, email, phoneNumber } = giver;
+          <TableBody deselectOnClickaway={false}>
+            {giftSets.map((giftSet, index) => {
+              const { id, giver, createdAt, total: giftSetTotal, paid, paymentDetailsSent, paymentMethod } = giftSet;
+              const { forename, surname, email, phoneNumber } = giver;
 
-                                const createdAtMoment = moment(createdAt);
-                                const createdAtFormatted = createdAtMoment.format('DD/MM/YY HH:MM');
-                                const selected = selectedGiftSets.includes(index);
+              const createdAtMoment = moment(createdAt);
+              const createdAtFormatted = createdAtMoment.format('DD/MM/YY HH:MM');
+              const selected = selectedGiftSets.includes(index);
 
-                                let statusIcon;
+              let statusIcon;
 
-                                if (paid) {
-                                    statusIcon = <Paid />;
-                                } else if (paymentDetailsSent) {
-                                    statusIcon = <Sent />;
-                                } else {
-                                    statusIcon = <Mail />;
-                                }
+              if (paid) {
+                statusIcon = <Paid />;
+              } else if (paymentDetailsSent) {
+                statusIcon = <Sent />;
+              } else {
+                statusIcon = <Mail />;
+              }
 
-                                return (
-                                    <TableRow key={id} selected={selected}>
-                                        <TableRowColumn>{forename} {surname}</TableRowColumn>
-                                        <TableRowColumn>{email}</TableRowColumn>
-                                        <TableRowColumn>{phoneNumber}</TableRowColumn>
-                                        <TableRowColumn>{giftSetTotal}</TableRowColumn>
-                                        <TableRowColumn>{paymentMethod}</TableRowColumn>
-                                        <TableRowColumn>{createdAtFormatted}</TableRowColumn>
-                                        <TableRowColumn>{statusIcon}</TableRowColumn>
-                                    </TableRow>
-                                );
-                            })
-                        }
-                    </TableBody>
-                </Table>
-            </Loader>
-        </Paper>
-    );
+              return (
+                <TableRow key={id} selected={selected}>
+                  <TableRowColumn>{forename} {surname}</TableRowColumn>
+                  <TableRowColumn>{email}</TableRowColumn>
+                  <TableRowColumn>{phoneNumber}</TableRowColumn>
+                  <TableRowColumn>{giftSetTotal}</TableRowColumn>
+                  <TableRowColumn>{paymentMethod}</TableRowColumn>
+                  <TableRowColumn>{createdAtFormatted}</TableRowColumn>
+                  <TableRowColumn>{statusIcon}</TableRowColumn>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Loader>
+    </Paper>
+  );
 }

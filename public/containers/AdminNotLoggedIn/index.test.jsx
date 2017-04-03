@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import AdminNotLoggedIn from './';
 
 describe('AdminNotLoggedIn', () => {
-    it('should render correctly', () => {
-        const wrapper = shallow(
-            <AdminNotLoggedIn>
-                <h1>Hello World</h1>
-            </AdminNotLoggedIn>,
-        );
+  it('should render correctly', () => {
+    const wrapper = shallow(
+      <AdminNotLoggedIn>
+        <h1>Hello World</h1>
+      </AdminNotLoggedIn>
+    );
 
-        expect(wrapper).toMatchSnapshot();
-    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

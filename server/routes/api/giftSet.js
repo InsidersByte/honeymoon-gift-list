@@ -9,183 +9,150 @@ const { generatePaypalMeLink } = require('../../../lib/paypal');
 const mailer = new Mailer();
 
 module.exports = ({ express, config, secure }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      secure,
+      wrap(function* getGiftSets(req, res) {
+        const giftSets = yield GiftSet.forge().orderBy('created_at', 'DESC').fetchAll({ withRelated: ['gifts', 'giver'] });
 
-        .get(secure, wrap(function* getGiftSets(req, res) {
-            const giftSets = yield GiftSet
-                .forge()
-                .orderBy('created_at', 'DESC')
-                .fetchAll({ withRelated: ['gifts', 'giver'] });
+        return res.json(giftSets);
+      })
+    )
+    .post(
+      wrap(function* createGiftSet(req, res) {
+        req.checkBody('giver').notEmpty();
+        req.checkBody('giver.forename').notEmpty();
+        req.checkBody('giver.surname').notEmpty();
+        req.checkBody('giver.email').isEmail();
+        req.checkBody('giver.phoneNumber').notEmpty();
+        req.checkBody('giver.paymentMethod').isIn([PAYMENT_METHODS.PAYPAL, PAYMENT_METHODS.BANK_TRANSFER]);
+        req.checkBody('basket').notEmpty();
 
-            return res.json(giftSets);
-        }))
+        const errors = req.validationErrors();
 
-        .post(wrap(function* createGiftSet(req, res) {
-            req.checkBody('giver').notEmpty();
-            req.checkBody('giver.forename').notEmpty();
-            req.checkBody('giver.surname').notEmpty();
-            req.checkBody('giver.email').isEmail();
-            req.checkBody('giver.phoneNumber').notEmpty();
-            req.checkBody('giver.paymentMethod').isIn([PAYMENT_METHODS.PAYPAL, PAYMENT_METHODS.BANK_TRANSFER]);
-            req.checkBody('basket').notEmpty();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const { giver: { forename, surname, email, phoneNumber, paymentMethod }, basket } = req.body;
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        let giver = yield Giver.forge({ email }).fetch();
 
-            const { giver: { forename, surname, email, phoneNumber, paymentMethod }, basket } = req.body;
+        if (!giver) {
+          giver = yield Giver.forge({ forename, surname, email, phoneNumber }).save();
+        }
 
-            let giver = yield Giver
-                .forge({ email })
-                .fetch();
+        const giverId = giver.get('id');
+        const giftIds = basket.map(({ id, quantity, price }) => ({ gift_id: id, quantity, price }));
 
-            if (!giver) {
-                giver = yield Giver
-                    .forge({ forename, surname, email, phoneNumber })
-                    .save();
-            }
+        const giftSet = yield GiftSet.forge({ giverId, paymentMethod }).save();
 
-            const giverId = giver.get('id');
-            const giftIds = basket.map(({ id, quantity, price }) => ({ gift_id: id, quantity, price }));
+        yield giftSet.gifts().attach(giftIds);
 
-            const giftSet = yield GiftSet
-                .forge({ giverId, paymentMethod })
-                .save();
+        yield giftSet.refresh({ withRelated: ['gifts'] });
 
-            yield giftSet
-                .gifts()
-                .attach(giftIds);
+        const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
 
-            yield giftSet.refresh({ withRelated: ['gifts'] });
+        yield mailer.send({ to: giver.get('email'), subject: 'Gift Confirmation', giftSet: giftSet.toJSON(), PAYMENT_METHODS, paypalLink }, 'confirmation');
 
-            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
+        const users = yield User.fetchAll();
 
-            yield mailer.send({ to: giver.get('email'), subject: 'Gift Confirmation', giftSet: giftSet.toJSON(), PAYMENT_METHODS, paypalLink }, 'confirmation');
+        const userEmails = users.map(user => user.get('email'));
 
-            const users = yield User.fetchAll();
+        yield mailer.send({ to: userEmails, subject: 'Woop we just got a gift!', giver: giver.toJSON(), giftSet: giftSet.toJSON() }, 'adminConfirmation');
 
-            const userEmails = users.map(user => user.get('email'));
+        giftSet.set({ emailSent: true });
 
-            yield mailer.send({ to: userEmails, subject: 'Woop we just got a gift!', giver: giver.toJSON(), giftSet: giftSet.toJSON() }, 'adminConfirmation');
+        yield giftSet.save();
 
-            giftSet.set({ emailSent: true });
+        return res.status(201).json(giftSet);
+      })
+    );
 
-            yield giftSet.save();
+  router
+    .route('/:id')
+    .get(
+      wrap(function* getGiftSet(req, res) {
+        const { id } = req.params;
 
-            return res
-                .status(201)
-                .json(giftSet);
-        }));
+        const giftSet = yield GiftSet.forge({ id }).fetch({ withRelated: ['gifts', 'giver'] });
 
-    router
-        .route('/:id')
+        if (!giftSet) {
+          return res.status(404).send();
+        }
 
-        .get(wrap(function* getGiftSet(req, res) {
-            const { id } = req.params;
+        const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
+        const giftSetWithPaypalLink = Object.assign({}, giftSet.toJSON(), { paypalLink });
 
-            const giftSet = yield GiftSet
-                .forge({ id })
-                .fetch({ withRelated: ['gifts', 'giver'] });
+        return res.json(giftSetWithPaypalLink);
+      })
+    )
+    .delete(
+      secure,
+      wrap(function* deleteGiftSet(req, res) {
+        const { id } = req.params;
 
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        const giftSet = yield GiftSet.forge({ id }).fetch({ withRelated: ['gifts'] });
 
-            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.get('total') });
-            const giftSetWithPaypalLink = Object.assign({}, giftSet.toJSON(), { paypalLink });
+        if (!giftSet) {
+          return res.status(404).send();
+        }
 
-            return res.json(giftSetWithPaypalLink);
-        }))
+        const paid = giftSet.get('paid');
 
-        .delete(secure, wrap(function* deleteGiftSet(req, res) {
-            const { id } = req.params;
+        if (paid) {
+          return res.status(400).send({ message: 'A Gift Set marked as paid cannot be deleted' });
+        }
 
-            const giftSet = yield GiftSet
-                .forge({ id })
-                .fetch({ withRelated: ['gifts'] });
+        const gifts = giftSet.related('gifts');
+        const giftIds = gifts.map(o => o.get('id'));
+        yield giftSet.gifts().detach(giftIds);
+        yield giftSet.destroy();
 
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        return res.status(204).send();
+      })
+    );
 
-            const paid = giftSet.get('paid');
+  router.route('/:id/paid').put(
+    secure,
+    wrap(function* markAsPaid(req, res) {
+      const { id } = req.params;
 
-            if (paid) {
-                return res
-                    .status(400)
-                    .send({ message: 'A Gift Set marked as paid cannot be deleted' });
-            }
+      const giftSet = yield GiftSet.forge({ id }).fetch({ withRelated: ['gifts', 'giver'] });
 
-            const gifts = giftSet.related('gifts');
-            const giftIds = gifts.map(o => o.get('id'));
-            yield giftSet.gifts().detach(giftIds);
-            yield giftSet.destroy();
+      if (!giftSet) {
+        return res.status(404).send();
+      }
 
-            return res
-                .status(204)
-                .send();
-        }));
+      giftSet.set({ paid: true });
 
-    router
-        .route('/:id/paid')
+      yield giftSet.save();
 
-        .put(secure, wrap(function* markAsPaid(req, res) {
-            const { id } = req.params;
+      return res.status(200).json(giftSet);
+    })
+  );
 
-            const giftSet = yield GiftSet
-                .forge({ id })
-                .fetch({ withRelated: ['gifts', 'giver'] });
+  router.route('/:id/detailsSent').put(
+    secure,
+    wrap(function* markAsDetailsSent(req, res) {
+      const { id } = req.params;
 
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
+      const giftSet = yield GiftSet.forge({ id }).fetch({ withRelated: ['gifts', 'giver'] });
 
-            giftSet.set({ paid: true });
+      if (!giftSet) {
+        return res.status(404).send();
+      }
 
-            yield giftSet.save();
+      giftSet.set({ paymentDetailsSent: true });
 
-            return res
-                .status(200)
-                .json(giftSet);
-        }));
+      yield giftSet.save();
 
-    router
-        .route('/:id/detailsSent')
+      return res.status(200).send(giftSet);
+    })
+  );
 
-        .put(secure, wrap(function* markAsDetailsSent(req, res) {
-            const { id } = req.params;
-
-            const giftSet = yield GiftSet
-                .forge({ id })
-                .fetch({ withRelated: ['gifts', 'giver'] });
-
-            if (!giftSet) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            giftSet.set({ paymentDetailsSent: true });
-
-            yield giftSet.save();
-
-            return res
-                .status(200)
-                .send(giftSet);
-        }));
-
-    return router;
+  return router;
 };

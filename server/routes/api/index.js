@@ -10,26 +10,24 @@ const weddingPartyMember = require('./weddingPartyMember');
 const section = require('./section');
 
 module.exports = ({ express, config }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    const secure = expressJwt({ secret: config.secret });
+  const secure = expressJwt({ secret: config.secret });
 
-    router.use('/setup', setup({ express, config }));
-    router.use('/signUp', signUp({ express, config }));
-    router.use('/authenticate', authenticate({ express, config }));
-    router.use('/weddingProfile', weddingProfile({ express, config, secure }));
-    router.use('/section', section({ express, config, secure }));
-    router.use('/gift', gift({ express, config, secure }));
-    router.use('/giftSet', giftSet({ express, config, secure }));
-    router.use('/weddingPartyMember', weddingPartyMember({ express, config, secure }));
+  router.use('/setup', setup({ express, config }));
+  router.use('/signUp', signUp({ express, config }));
+  router.use('/authenticate', authenticate({ express, config }));
+  router.use('/weddingProfile', weddingProfile({ express, config, secure }));
+  router.use('/section', section({ express, config, secure }));
+  router.use('/gift', gift({ express, config, secure }));
+  router.use('/giftSet', giftSet({ express, config, secure }));
+  router.use('/weddingPartyMember', weddingPartyMember({ express, config, secure }));
 
-    router.use(secure);
+  router.use(secure);
 
-    router.use('/user', user({ express, config }));
+  router.use('/user', user({ express, config }));
 
-    router.all('/*', (req, res) =>
-        res.sendStatus(404)
-    );
+  router.all('/*', (req, res) => res.sendStatus(404));
 
-    return router;
+  return router;
 };

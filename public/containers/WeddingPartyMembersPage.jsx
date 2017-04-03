@@ -9,88 +9,88 @@ import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from
 import WeddingPartyMembersList from '../components/WeddingPartyMemberList';
 
 type PropsType = {
-    weddingPartyMembers: Array<{
-        id: number,
-        name: string,
-        title: string,
-        imageUrl: string,
-        description: string,
-    }>,
-    loading: boolean,
-    deleting: boolean,
-    actions: {
-        loadWeddingPartyMembers: Function,
-        updateWeddingPartyMember: Function,
-        deleteWeddingPartyMember: Function,
-        moveWeddingPartyMember: Function,
-    },
-    router: {
-        push: Function,
-    },
+  weddingPartyMembers: Array<{
+    id: number,
+    name: string,
+    title: string,
+    imageUrl: string,
+    description: string,
+  }>,
+  loading: boolean,
+  deleting: boolean,
+  actions: {
+    loadWeddingPartyMembers: Function,
+    updateWeddingPartyMember: Function,
+    deleteWeddingPartyMember: Function,
+    moveWeddingPartyMember: Function,
+  },
+  router: {
+    push: Function,
+  },
 };
 
 @withRouter
 @connect(
-    ({ weddingPartyMembers: { weddingPartyMembers, ...state } }) => {
-        const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+  ({ weddingPartyMembers: { weddingPartyMembers, ...state } }) => {
+    const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
 
-        return {
-            ...state,
-            weddingPartyMembers: sortedWeddingPartyMembers,
-        };
-    },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
+    return {
+      ...state,
+      weddingPartyMembers: sortedWeddingPartyMembers,
+    };
+  },
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class WeddingPartyMembersPage extends React.Component {
-    props: PropsType;
+  props: PropsType;
 
-    componentDidMount() {
-        this.props.actions.loadWeddingPartyMembers();
+  componentDidMount() {
+    this.props.actions.loadWeddingPartyMembers();
+  }
+
+  // FIXME: This seems like a bit of a hack
+  componentWillReceiveProps({ deleting: nextDeleting }: PropsType) {
+    const { deleting, actions: { loadWeddingPartyMembers } } = this.props;
+
+    if (deleting && !nextDeleting) {
+      loadWeddingPartyMembers();
+    }
+  }
+
+  onAdd = () => {
+    this.props.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
+  };
+
+  onSelect = ({ id }: Object) => {
+    this.props.router.push(updateWeddingPartyMemberRoute(id));
+  };
+
+  onDrop = ({ id }: Object) => {
+    const member = this.props.weddingPartyMembers.find(o => o.id === id);
+    this.props.actions.updateWeddingPartyMember(member);
+  };
+
+  onDelete = (member: Object) => {
+    if (!confirm('Are you sure you want to delete this member?')) {
+      return;
     }
 
-    // FIXME: This seems like a bit of a hack
-    componentWillReceiveProps({ deleting: nextDeleting }: PropsType) {
-        const { deleting, actions: { loadWeddingPartyMembers } } = this.props;
+    this.props.actions.deleteWeddingPartyMember(member);
+  };
 
-        if (deleting && !nextDeleting) {
-            loadWeddingPartyMembers();
-        }
-    }
+  render() {
+    const { weddingPartyMembers, loading, actions: { moveWeddingPartyMember } } = this.props;
 
-    onAdd = () => {
-        this.props.router.push(CREATE_WEDDING_PARTY_MEMBER_ROUTE);
-    };
-
-    onSelect = ({ id }: Object) => {
-        this.props.router.push(updateWeddingPartyMemberRoute(id));
-    };
-
-    onDrop = ({ id }: Object) => {
-        const member = this.props.weddingPartyMembers.find(o => o.id === id);
-        this.props.actions.updateWeddingPartyMember(member);
-    };
-
-    onDelete = (member: Object) => {
-        if (!confirm('Are you sure you want to delete this member?')) {
-            return;
-        }
-
-        this.props.actions.deleteWeddingPartyMember(member);
-    };
-
-    render() {
-        const { weddingPartyMembers, loading, actions: { moveWeddingPartyMember } } = this.props;
-
-        return (
-            <WeddingPartyMembersList
-                weddingPartyMembers={weddingPartyMembers}
-                loading={loading}
-                onAdd={this.onAdd}
-                onSelect={this.onSelect}
-                onMove={moveWeddingPartyMember}
-                onDrop={this.onDrop}
-                onDelete={this.onDelete}
-            />
-        );
-    }
+    return (
+      <WeddingPartyMembersList
+        weddingPartyMembers={weddingPartyMembers}
+        loading={loading}
+        onAdd={this.onAdd}
+        onSelect={this.onSelect}
+        onMove={moveWeddingPartyMember}
+        onDrop={this.onDrop}
+        onDelete={this.onDelete}
+      />
+    );
+  }
 }

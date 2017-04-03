@@ -17,19 +17,19 @@ import giftSets from '../reducers/giftSets';
 import type { StateType } from '../types';
 
 export default combineReducers({
-    auth,
-    users,
-    notifications,
-    weddingProfile,
-    signUp,
-    weddingPartyMembers,
-    weddingPartyMember,
-    gifts,
-    sections,
-    section,
-    basket,
-    giftSet,
-    giftSets,
+  auth,
+  users,
+  notifications,
+  weddingProfile,
+  signUp,
+  weddingPartyMembers,
+  weddingPartyMember,
+  gifts,
+  sections,
+  section,
+  basket,
+  giftSet,
+  giftSets,
 });
 
 export const getBasketCount = (state: StateType) => fromBasket.getBasketCount(state.basket);

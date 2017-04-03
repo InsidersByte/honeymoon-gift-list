@@ -3,11 +3,9 @@ import { shallow } from 'enzyme';
 import Main from './';
 
 describe('Main', () => {
-    it('should render correctly', () => {
-        const wrapper = shallow(
-            <Main />,
-        );
+  it('should render correctly', () => {
+    const wrapper = shallow(<Main />);
 
-        expect(wrapper).toMatchSnapshot();
-    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

@@ -1,3 +1,3 @@
 export default {
-    v4: jest.fn(() => 999999999),
+  v4: jest.fn(() => 999999999),
 };

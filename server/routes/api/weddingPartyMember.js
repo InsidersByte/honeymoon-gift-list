@@ -4,141 +4,125 @@ const { integer } = require('../../../lib/random');
 const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
 module.exports = ({ express, secure }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      wrap(function* getWeddingPartyMembers(req, res) {
+        const weddingPartyMembers = yield WeddingPartyMember.forge({ weddingProfileId: WEDDING_PROFILE_ID }).fetchAll();
 
-        .get(wrap(function* getWeddingPartyMembers(req, res) {
-            const weddingPartyMembers = yield WeddingPartyMember
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .fetchAll();
+        return res.json(weddingPartyMembers);
+      })
+    )
+    .post(
+      secure,
+      wrap(function* createWeddingPartyMember(req, res) {
+        req.checkBody('name').notEmpty();
+        req.checkBody('title').notEmpty();
+        req.checkBody('imageUrl').isURL();
+        req.checkBody('description').notEmpty();
 
-            return res.json(weddingPartyMembers);
-        }))
+        const errors = req.validationErrors();
 
-        .post(secure, wrap(function* createWeddingPartyMember(req, res) {
-            req.checkBody('name').notEmpty();
-            req.checkBody('title').notEmpty();
-            req.checkBody('imageUrl').isURL();
-            req.checkBody('description').notEmpty();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const { name, title, imageUrl, description } = req.body;
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        const max = yield WeddingPartyMember.forge({ weddingProfileId: WEDDING_PROFILE_ID }).query({ max: 'position' }).fetch();
 
-            const { name, title, imageUrl, description } = req.body;
+        const maximumPosition = max.get('max') || 0;
 
-            const max = yield WeddingPartyMember
-                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
-                .query({ max: 'position' })
-                .fetch();
+        const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
-            const maximumPosition = max.get('max') || 0;
+        const weddingPartyMember = new WeddingPartyMember({
+          name,
+          title,
+          imageUrl,
+          description,
+          position,
+          weddingProfileId: WEDDING_PROFILE_ID,
+        });
 
-            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
+        yield weddingPartyMember.save();
 
-            const weddingPartyMember = new WeddingPartyMember({
-                name,
-                title,
-                imageUrl,
-                description,
-                position,
-                weddingProfileId: WEDDING_PROFILE_ID,
-            });
+        return res.status(201).json(weddingPartyMember);
+      })
+    );
 
-            yield weddingPartyMember.save();
+  router
+    .route('/:id')
+    .get(
+      secure,
+      wrap(function* getWeddingPartyMember(req, res) {
+        const { id } = req.params;
 
-            return res
-                .status(201)
-                .json(weddingPartyMember);
-        }));
+        const weddingPartyMember = yield WeddingPartyMember.forge({ id }).fetch();
 
-    router
-        .route('/:id')
+        if (!weddingPartyMember) {
+          return res.status(404).send();
+        }
 
-        .get(secure, wrap(function* getWeddingPartyMember(req, res) {
-            const { id } = req.params;
+        return res.json(weddingPartyMember);
+      })
+    )
+    .put(
+      secure,
+      wrap(function* updateWeddingPartyMember(req, res) {
+        req.checkBody('id').equals(req.params.id);
+        req.checkBody('name').notEmpty();
+        req.checkBody('title').notEmpty();
+        req.checkBody('imageUrl').isURL();
+        req.checkBody('description').notEmpty();
+        req.checkBody('position').isFloat();
 
-            const weddingPartyMember = yield WeddingPartyMember
-                .forge({ id })
-                .fetch();
+        const errors = req.validationErrors();
 
-            if (!weddingPartyMember) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            return res.json(weddingPartyMember);
-        }))
+        const { id } = req.params;
 
-        .put(secure, wrap(function* updateWeddingPartyMember(req, res) {
-            req.checkBody('id').equals(req.params.id);
-            req.checkBody('name').notEmpty();
-            req.checkBody('title').notEmpty();
-            req.checkBody('imageUrl').isURL();
-            req.checkBody('description').notEmpty();
-            req.checkBody('position').isFloat();
+        const weddingPartyMember = yield WeddingPartyMember.forge({ id }).fetch();
 
-            const errors = req.validationErrors();
+        if (!weddingPartyMember) {
+          return res.status(404).send();
+        }
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        const { name, title, imageUrl, description, position } = req.body;
 
-            const { id } = req.params;
+        weddingPartyMember.set({
+          name,
+          title,
+          imageUrl,
+          description,
+          position,
+        });
 
-            const weddingPartyMember = yield WeddingPartyMember
-                .forge({ id })
-                .fetch();
+        yield weddingPartyMember.save();
 
-            if (!weddingPartyMember) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        return res.json(weddingPartyMember);
+      })
+    )
+    .delete(
+      secure,
+      wrap(function* deleteWeddingPartyMember(req, res) {
+        const { id } = req.params;
 
-            const { name, title, imageUrl, description, position } = req.body;
+        const weddingPartyMember = yield WeddingPartyMember.forge({ id }).fetch();
 
-            weddingPartyMember.set({
-                name,
-                title,
-                imageUrl,
-                description,
-                position,
-            });
+        if (!weddingPartyMember) {
+          return res.status(404).send();
+        }
 
-            yield weddingPartyMember.save();
+        yield weddingPartyMember.destroy();
 
-            return res.json(weddingPartyMember);
-        }))
+        return res.status(204).send();
+      })
+    );
 
-        .delete(secure, wrap(function* deleteWeddingPartyMember(req, res) {
-            const { id } = req.params;
-
-            const weddingPartyMember = yield WeddingPartyMember
-                .forge({ id })
-                .fetch();
-
-            if (!weddingPartyMember) {
-                return res
-                    .status(404)
-                    .send();
-            }
-
-            yield weddingPartyMember.destroy();
-
-            return res
-                .status(204)
-                .send();
-        }));
-
-    return router;
+  return router;
 };

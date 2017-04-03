@@ -8,124 +8,117 @@ import UserList from '../components/UserList';
 import User from '../components/UserDialog';
 
 type PropsType = {
-    loading: boolean,
-    saving: boolean,
-    deleting: boolean,
-    userModalOpen: boolean,
-    activeUsers: Array<{
-        id: number,
-        name: string,
-        email: string,
-    }>,
-    invitedUsers: Array<{
-        id: number,
-        email: string,
-    }>,
-    loggedInUser: {
-        email: string,
-    },
-    actions: {
-        loadUsers: Function,
-        createUser: Function,
-        deleteUser: Function,
-        openUserModal: Function,
-        closeUserModal: Function,
-    },
+  loading: boolean,
+  saving: boolean,
+  deleting: boolean,
+  userModalOpen: boolean,
+  activeUsers: Array<{
+    id: number,
+    name: string,
+    email: string,
+  }>,
+  invitedUsers: Array<{
+    id: number,
+    email: string,
+  }>,
+  loggedInUser: {
+    email: string,
+  },
+  actions: {
+    loadUsers: Function,
+    createUser: Function,
+    deleteUser: Function,
+    openUserModal: Function,
+    closeUserModal: Function,
+  },
 };
 
 const initialUser = {
-    email: '',
+  email: '',
 };
 
 @connect(
-    ({ auth: { user: loggedInUser }, users: { users, ...state } }) => {
-        const activeUsers = users.filter(({ status }) => status === 'active');
-        const invitedUsers = users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
+  ({ auth: { user: loggedInUser }, users: { users, ...state } }) => {
+    const activeUsers = users.filter(({ status }) => status === 'active');
+    const invitedUsers = users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
 
-        return {
-            loggedInUser,
-            ...state,
-            activeUsers,
-            invitedUsers,
-        };
-    },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
+    return {
+      loggedInUser,
+      ...state,
+      activeUsers,
+      invitedUsers,
+    };
+  },
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class Users extends React.Component {
-    props: PropsType;
+  props: PropsType;
 
-    state = { user: { ...initialUser } };
+  state = { user: { ...initialUser } };
 
-    componentDidMount() {
-        this.props.actions.loadUsers();
+  componentDidMount() {
+    this.props.actions.loadUsers();
+  }
+
+  // FIXME: This seems like a bit of a hack
+  componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
+    const { saving, deleting, actions: { loadUsers } } = this.props;
+
+    if (deleting && !nextDeleting) {
+      loadUsers();
     }
 
-    // FIXME: This seems like a bit of a hack
-    componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
-        const { saving, deleting, actions: { loadUsers } } = this.props;
+    if (saving && !nextSaving) {
+      loadUsers();
+    }
+  }
 
-        if (deleting && !nextDeleting) {
-            loadUsers();
-        }
+  setUserState = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
+    const user = Object.assign(this.state.user, { [name]: value });
+    return this.setState({ user });
+  };
 
-        if (saving && !nextSaving) {
-            loadUsers();
-        }
+  save = (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    const { actions: { createUser } } = this.props;
+    const { user } = this.state;
+
+    createUser(user);
+  };
+
+  delete = (user: Object) => {
+    if (!confirm('Are you sure you want to delete this user?')) {
+      return;
     }
 
-    setUserState = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
-        const user = Object.assign(this.state.user, { [name]: value });
-        return this.setState({ user });
-    };
+    const { actions: { deleteUser } } = this.props;
 
-    save = (event: SyntheticEvent) => {
-        event.preventDefault();
+    deleteUser(user);
+  };
 
-        const { actions: { createUser } } = this.props;
-        const { user } = this.state;
+  onAdd = () => {
+    this.props.actions.openUserModal();
+    this.setState({ user: { ...initialUser } });
+  };
 
-        createUser(user);
-    };
+  render() {
+    const { activeUsers, invitedUsers, saving, loggedInUser, loading, userModalOpen: open, actions: { closeUserModal } } = this.props;
+    const { user } = this.state;
 
-    delete = (user: Object) => {
-        if (!confirm('Are you sure you want to delete this user?')) {
-            return;
-        }
+    return (
+      <div>
+        <UserList
+          loading={loading}
+          activeUsers={activeUsers}
+          invitedUsers={invitedUsers}
+          loggedInUser={loggedInUser}
+          onAdd={this.onAdd}
+          onDelete={this.delete}
+        />
 
-        const { actions: { deleteUser } } = this.props;
-
-        deleteUser(user);
-    };
-
-    onAdd = () => {
-        this.props.actions.openUserModal();
-        this.setState({ user: { ...initialUser } });
-    };
-
-    render() {
-        const { activeUsers, invitedUsers, saving, loggedInUser, loading, userModalOpen: open, actions: { closeUserModal } } = this.props;
-        const { user } = this.state;
-
-        return (
-            <div>
-                <UserList
-                    loading={loading}
-                    activeUsers={activeUsers}
-                    invitedUsers={invitedUsers}
-                    loggedInUser={loggedInUser}
-                    onAdd={this.onAdd}
-                    onDelete={this.delete}
-                />
-
-                <User
-                    user={user}
-                    open={open}
-                    onHide={closeUserModal}
-                    onSubmit={this.save}
-                    onChange={this.setUserState}
-                    saving={saving}
-                />
-            </div>
-        );
-    }
+        <User user={user} open={open} onHide={closeUserModal} onSubmit={this.save} onChange={this.setUserState} saving={saving} />
+      </div>
+    );
+  }
 }

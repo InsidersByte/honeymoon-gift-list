@@ -6,70 +6,80 @@ const localStorageSetItem = localStorage.setItem;
 const localStorageRemoveItem = localStorage.removeItem;
 
 describe('localStorage', () => {
-    beforeEach(() => {
-        localStorage.clear();
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    localStorage.getItem = localStorageGetItem;
+    localStorage.setItem = localStorageSetItem;
+    localStorage.removeItem = localStorageRemoveItem;
+  });
+
+  describe('getItem', () => {
+    it('should return undefined if key is not in storage', () => {
+      expect(getItem('foobar')).toBe(undefined);
     });
 
-    afterEach(() => {
-        localStorage.getItem = localStorageGetItem;
-        localStorage.setItem = localStorageSetItem;
-        localStorage.removeItem = localStorageRemoveItem;
+    it('should return value if key is present in storage', () => {
+      localStorage.setItem('key', 'some value');
+
+      expect(getItem('key')).toBe('some value');
     });
 
-    describe('getItem', () => {
-        it('should return undefined if key is not in storage', () => {
-            expect(getItem('foobar')).toBe(undefined);
-        });
+    it('should return undefined if an error is thrown', () => {
+      localStorage.setItem('key', 'value');
+      localStorage.getItem = () => {
+        throw new Error('error');
+      };
 
-        it('should return value if key is present in storage', () => {
-            localStorage.setItem('key', 'some value');
+      expect(getItem('key')).toBe(undefined);
+    });
+  });
 
-            expect(getItem('key')).toBe('some value');
-        });
+  describe('setItem', () => {
+    it('should add the item to localStorage', () => {
+      expect(getItem('key')).toBe(undefined);
 
-        it('should return undefined if an error is thrown', () => {
-            localStorage.setItem('key', 'value');
-            localStorage.getItem = () => { throw new Error('error'); };
+      setItem('key', 'a value');
 
-            expect(getItem('key')).toBe(undefined);
-        });
+      expect(getItem('key')).toBe('a value');
     });
 
-    describe('setItem', () => {
-        it('should add the item to localStorage', () => {
-            expect(getItem('key')).toBe(undefined);
+    it('should return error silently if an error is thrown', () => {
+      localStorage.setItem = () => {
+        throw new Error('error');
+      };
 
-            setItem('key', 'a value');
+      expect(() => {
+        setItem('key', 'value');
+      }).not.toThrow();
+    });
+  });
 
-            expect(getItem('key')).toBe('a value');
-        });
+  describe('removeItem', () => {
+    it('should remove item from storage when it exists', () => {
+      localStorage.setItem('key', 'value');
 
-        it('should return error silently if an error is thrown', () => {
-            localStorage.setItem = () => { throw new Error('error'); };
-
-            expect(() => { setItem('key', 'value'); }).not.toThrow();
-        });
+      expect(getItem('key')).toBe('value');
+      removeItem('key');
+      expect(getItem('key')).toBe(undefined);
     });
 
-    describe('removeItem', () => {
-        it('should remove item from storage when it exists', () => {
-            localStorage.setItem('key', 'value');
-
-            expect(getItem('key')).toBe('value');
-            removeItem('key');
-            expect(getItem('key')).toBe(undefined);
-        });
-
-        it('should not error when key does not exist in storage', () => {
-            expect(getItem('key')).toBe(undefined);
-            removeItem('key');
-            expect(getItem('key')).toBe(undefined);
-        });
-
-        it('should return error silently if an error is thrown', () => {
-            localStorage.removeItem = () => { throw new Error('error'); };
-
-            expect(() => { removeItem('key'); }).not.toThrow();
-        });
+    it('should not error when key does not exist in storage', () => {
+      expect(getItem('key')).toBe(undefined);
+      removeItem('key');
+      expect(getItem('key')).toBe(undefined);
     });
+
+    it('should return error silently if an error is thrown', () => {
+      localStorage.removeItem = () => {
+        throw new Error('error');
+      };
+
+      expect(() => {
+        removeItem('key');
+      }).not.toThrow();
+    });
+  });
 });

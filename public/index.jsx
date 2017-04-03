@@ -21,18 +21,18 @@ const jwt = getItem(TOKEN);
 const user = jwtDecoder(jwt);
 
 if (user) {
-    initialState = {
-        auth: {
-            user,
-            isAuthenticated: true,
-        },
-    };
+  initialState = {
+    auth: {
+      user,
+      isAuthenticated: true,
+    },
+  };
 }
 
 const store = configureStore(initialState);
 
 ReactDOM.render(
-    // FIXME:FLOW works
-    <Root store={store} />,
-    document.getElementById('app'),
+  // FIXME:FLOW works
+  <Root store={store} />,
+  document.getElementById('app')
 );

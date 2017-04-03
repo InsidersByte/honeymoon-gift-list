@@ -15,15 +15,12 @@
     "test:watch": "jest --watch",
     "start": "node ./server/index.js",
     "start:dev": "nodemon --ignore public ./server/index.js",
+    "format": "prettier --print-width 160 --trailing-comma es5 --single-quote --write './*.js' './!(flow-typed|node_modules|coverage)/**/*.{js,jsx}'",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --trailing-comma es5 --single-quote --tab-width 4 --write",
-      "git add"
-    ],
-    "*.jsx": [
-      "prettier --trailing-comma es5 --single-quote --tab-width 4 --write",
+    "*.{js,jsx}": [
+      "prettier --print-width 160 --trailing-comma es5 --single-quote --write",
       "git add"
     ]
   },

@@ -5,24 +5,24 @@ const EXPIRED_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBE
 const NO_EXPIRY_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.xuEv8qrfXu424LZk8bVgr9MQJUIrp1rHcPyZw_KSsds';
 
 describe('jwtDecoder', () => {
-    it('should return null if the token is null', () => {
-        expect(jwtDecoder(null)).toBe(null);
-    });
+  it('should return null if the token is null', () => {
+    expect(jwtDecoder(null)).toBe(null);
+  });
 
-    it('should return null if the token does not have an expiry date', () => {
-        expect(jwtDecoder(NO_EXPIRY_TOKEN)).toBe(null);
-    });
+  it('should return null if the token does not have an expiry date', () => {
+    expect(jwtDecoder(NO_EXPIRY_TOKEN)).toBe(null);
+  });
 
-    it('should return null if the token is expired', () => {
-        expect(jwtDecoder(EXPIRED_TOKEN)).toBe(null);
-    });
+  it('should return null if the token is expired', () => {
+    expect(jwtDecoder(EXPIRED_TOKEN)).toBe(null);
+  });
 
-    it('should return the decoded token if it is valid', () => {
-        const expected = {
-            exp: 2490183511,
-            name: 'John Doe',
-        };
+  it('should return the decoded token if it is valid', () => {
+    const expected = {
+      exp: 2490183511,
+      name: 'John Doe',
+    };
 
-        expect(jwtDecoder(VALID_TOKEN)).toEqual(expected);
-    });
+    expect(jwtDecoder(VALID_TOKEN)).toEqual(expected);
+  });
 });

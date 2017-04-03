@@ -2,57 +2,66 @@ const WeddingProfile = require('../../models/WeddingProfile');
 const wrap = require('../../utilities/wrap');
 
 module.exports = ({ express, secure }) => {
-    const router = new express.Router();
+  const router = new express.Router();
 
-    router
-        .route('/')
+  router
+    .route('/')
+    .get(
+      wrap(function* getWeddingProfile(req, res) {
+        const weddingProfile = yield WeddingProfile.forge({}).fetch();
 
-        .get(wrap(function* getWeddingProfile(req, res) {
-            const weddingProfile = yield WeddingProfile
-                .forge({})
-                .fetch();
+        return res.json(weddingProfile);
+      })
+    )
+    .put(
+      secure,
+      wrap(function* updateWeddingProfile(req, res) {
+        req.checkBody('coverTitle').notEmpty();
+        req.checkBody('coverImageUrl').isURL();
+        req.checkBody('weddingDate').isDate();
+        req.checkBody('giftListContent').notEmpty();
+        req.sanitizeBody('showPaymentMessage').toBoolean();
+        req.sanitizeBody('showDisclaimerMessage').toBoolean();
 
-            return res.json(weddingProfile);
-        }))
+        const errors = req.validationErrors();
 
-        .put(secure, wrap(function* updateWeddingProfile(req, res) {
-            req.checkBody('coverTitle').notEmpty();
-            req.checkBody('coverImageUrl').isURL();
-            req.checkBody('weddingDate').isDate();
-            req.checkBody('giftListContent').notEmpty();
-            req.sanitizeBody('showPaymentMessage').toBoolean();
-            req.sanitizeBody('showDisclaimerMessage').toBoolean();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
 
-            const errors = req.validationErrors();
+        const weddingProfile = yield WeddingProfile.forge({}).fetch();
 
-            if (errors) {
-                return res
-                    .status(400)
-                    .send(errors);
-            }
+        if (!weddingProfile) {
+          return res.status(404).send();
+        }
 
-            const weddingProfile = yield WeddingProfile
-                .forge({})
-                .fetch();
+        const {
+          coverTitle,
+          coverImageUrl,
+          weddingDate,
+          giftListContent,
+          showPaymentMessage,
+          paymentMessage,
+          showDisclaimerMessage,
+          disclaimerMessage,
+        } = req.body;
 
-            if (!weddingProfile) {
-                return res
-                    .status(404)
-                    .send();
-            }
+        weddingProfile.set({
+          coverTitle,
+          coverImageUrl,
+          weddingDate,
+          giftListContent,
+          showPaymentMessage,
+          paymentMessage,
+          showDisclaimerMessage,
+          disclaimerMessage,
+        });
 
-            const {
-                coverTitle, coverImageUrl, weddingDate, giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage, disclaimerMessage,
-            } = req.body;
+        yield weddingProfile.save();
 
-            weddingProfile.set({
-                coverTitle, coverImageUrl, weddingDate, giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage, disclaimerMessage,
-            });
+        return res.json(weddingProfile);
+      })
+    );
 
-            yield weddingProfile.save();
-
-            return res.json(weddingProfile);
-        }));
-
-    return router;
+  return router;
 };

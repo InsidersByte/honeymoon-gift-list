@@ -9,53 +9,43 @@ import Confirmation from '../../components/Confirmation';
 import type { StateType, DispatchType, GiftSetType } from '../../types';
 
 type PropsType = {
-    loading: boolean,
-    giftSet: GiftSetType,
-    params: {
-        giftSetId: string,
-    },
-    actions: {
-        loadGiftSet: (giftSetId: string) => void,
-    },
+  loading: boolean,
+  giftSet: GiftSetType,
+  params: {
+    giftSetId: string,
+  },
+  actions: {
+    loadGiftSet: (giftSetId: string) => void,
+  },
 };
 
 type LocalStateType = {
-    linkClicked: boolean,
+  linkClicked: boolean,
 };
 
 const mapStateToProps = ({ giftSet }: StateType) => giftSet;
 const mapDispatchToProps = (dispatch: DispatchType) => ({ actions: bindActionCreators(actions, dispatch) });
 
 export class ConfirmationPage extends Component<void, PropsType, LocalStateType> {
-    state = { linkClicked: false };
+  state = { linkClicked: false };
 
-    componentDidMount() {
-        const { params: { giftSetId }, actions: { loadGiftSet } } = this.props;
-        loadGiftSet(giftSetId);
-    }
+  componentDidMount() {
+    const { params: { giftSetId }, actions: { loadGiftSet } } = this.props;
+    loadGiftSet(giftSetId);
+  }
 
-    onLinkClicked = () => {
-        this.setState({ linkClicked: true });
-    };
+  onLinkClicked = () => {
+    this.setState({ linkClicked: true });
+  };
 
-    render() {
-        const { loading, giftSet } = this.props;
-        const { linkClicked } = this.state;
+  render() {
+    const { loading, giftSet } = this.props;
+    const { linkClicked } = this.state;
 
-        return (
-            <Confirmation
-                loading={loading}
-                giftSet={giftSet}
-                onLinkClicked={this.onLinkClicked}
-                linkClicked={linkClicked}
-            />
-        );
-    }
+    return <Confirmation loading={loading} giftSet={giftSet} onLinkClicked={this.onLinkClicked} linkClicked={linkClicked} />;
+  }
 }
 
-const connector: Connector<PropsType, PropsType> = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-);
+const connector: Connector<PropsType, PropsType> = connect(mapStateToProps, mapDispatchToProps);
 
 export default connector(ConfirmationPage);

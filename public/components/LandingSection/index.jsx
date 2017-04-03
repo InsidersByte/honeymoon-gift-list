@@ -5,25 +5,30 @@ import MarkdownRenderer from 'react-markdown-renderer';
 import LandingItem from '../LandingItem';
 
 type PropsType = {
-    title: string,
-    content: string,
+  title: string,
+  content: string,
 };
 
 export default class LandingSection extends Component<void, PropsType, void> {
-    landingItem: LandingItem;
+  landingItem: LandingItem;
 
-    scrollTo = () => {
-        const landingItem = this.landingItem;
-        landingItem.scrollTo();
-    };
+  scrollTo = () => {
+    const landingItem = this.landingItem;
+    landingItem.scrollTo();
+  };
 
-    render() {
-        const { title, content } = this.props;
+  render() {
+    const { title, content } = this.props;
 
-        return (
-            <LandingItem title={title} ref={(c) => { this.landingItem = c; }}>
-                <MarkdownRenderer markdown={content} />
-            </LandingItem>
-        );
-    }
+    return (
+      <LandingItem
+        title={title}
+        ref={c => {
+          this.landingItem = c;
+        }}
+      >
+        <MarkdownRenderer markdown={content} />
+      </LandingItem>
+    );
+  }
 }

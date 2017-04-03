@@ -9,58 +9,46 @@ import SortableItem from './SortableItem';
 import SectionListItem from './SectionListItem';
 
 type PropsType = {
-    loading: boolean,
-    sections: Array<{
-        id: number,
-        title: string,
-        hidden: boolean,
-    }>,
-    onAdd: Function,
-    onSelect: Function,
-    onMove: Function,
-    onDrop: Function,
-    onToggleVisibility: Function,
-    onDelete: Function,
+  loading: boolean,
+  sections: Array<{
+    id: number,
+    title: string,
+    hidden: boolean,
+  }>,
+  onAdd: Function,
+  onSelect: Function,
+  onMove: Function,
+  onDrop: Function,
+  onToggleVisibility: Function,
+  onDelete: Function,
 };
 
 export default function SectionList({ loading, sections, onAdd, onSelect, onMove, onDrop, onToggleVisibility, onDelete }: PropsType) {
-    return (
-        <Paper>
-            <Toolbar>
-                <ToolbarGroup>
-                    <ToolbarTitle text="Sections" />
-                </ToolbarGroup>
+  return (
+    <Paper>
+      <Toolbar>
+        <ToolbarGroup>
+          <ToolbarTitle text="Sections" />
+        </ToolbarGroup>
 
-                <ToolbarGroup>
-                    <IconButton touch onClick={onAdd}>
-                        <Add />
-                    </IconButton>
-                </ToolbarGroup>
-            </Toolbar>
+        <ToolbarGroup>
+          <IconButton touch onClick={onAdd}>
+            <Add />
+          </IconButton>
+        </ToolbarGroup>
+      </Toolbar>
 
-            <Loader loading={loading}>
-                <SortableContainer>
-                    {
-                        sections.map(section =>
-                            <SortableItem
-                                key={section.id}
-                                id={section.id}
-                                onMove={onMove}
-                                onDrop={onDrop}
-                            >
-                                <SectionListItem
-                                    section={section}
-                                    onSelect={onSelect}
-                                    onToggleVisibility={onToggleVisibility}
-                                    onDelete={onDelete}
-                                />
+      <Loader loading={loading}>
+        <SortableContainer>
+          {sections.map(section => (
+            <SortableItem key={section.id} id={section.id} onMove={onMove} onDrop={onDrop}>
+              <SectionListItem section={section} onSelect={onSelect} onToggleVisibility={onToggleVisibility} onDelete={onDelete} />
 
-                                <Divider />
-                            </SortableItem>,
-                        )
-                    }
-                </SortableContainer>
-            </Loader>
-        </Paper>
-    );
+              <Divider />
+            </SortableItem>
+          ))}
+        </SortableContainer>
+      </Loader>
+    </Paper>
+  );
 }

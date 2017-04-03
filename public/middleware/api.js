@@ -2,46 +2,48 @@ import api from '../api';
 
 export const CALL_API = Symbol('Call API');
 
-export default () => next => async (action) => {
-    const callAPI = action && action[CALL_API];
+export default () =>
+  next =>
+    async action => {
+      const callAPI = action && action[CALL_API];
 
-    if (typeof callAPI === 'undefined') {
+      if (typeof callAPI === 'undefined') {
         next(action);
         return;
-    }
+      }
 
-    const { data, endpoint, method, types, authenticated, onSuccess, afterSuccess, suppressGlobalError = false, onError } = callAPI;
-    const [requestType, successType, errorType] = types;
+      const { data, endpoint, method, types, authenticated, onSuccess, afterSuccess, suppressGlobalError = false, onError } = callAPI;
+      const [requestType, successType, errorType] = types;
 
-    next({ type: requestType });
+      next({ type: requestType });
 
-    try {
+      try {
         const payload = await api({ data, endpoint, method, authenticated });
 
         if (onSuccess) {
-            onSuccess(next, payload);
+          onSuccess(next, payload);
         }
 
         next({
-            payload,
-            type: successType,
+          payload,
+          type: successType,
         });
 
         if (afterSuccess) {
-            afterSuccess(next, payload);
+          afterSuccess(next, payload);
         }
-    } catch (error) {
+      } catch (error) {
         const payload = {
-            error: true,
-            suppressGlobalError,
-            payload: error,
-            type: errorType,
+          error: true,
+          suppressGlobalError,
+          payload: error,
+          type: errorType,
         };
 
         if (onError) {
-            onError(next, payload);
+          onError(next, payload);
         } else {
-            next(payload);
+          next(payload);
         }
-    }
-};
+      }
+    };

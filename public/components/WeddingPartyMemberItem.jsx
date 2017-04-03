@@ -7,49 +7,49 @@ import Delete from 'material-ui/svg-icons/action/delete';
 import css from './WeddingPartyMemberItem.styl';
 
 type PropsType = {
-    weddingPartyMember: {
-        id: number,
-        name: string,
-        title: string,
-        imageUrl: string,
-        description: string,
-    },
-    onSelect: Function,
-    onDelete: Function,
+  weddingPartyMember: {
+    id: number,
+    name: string,
+    title: string,
+    imageUrl: string,
+    description: string,
+  },
+  onSelect: Function,
+  onDelete: Function,
 };
 
 export default class WeddingPartyMemberItem extends Component {
-    props: PropsType;
+  props: PropsType;
 
-    onSelect = () => {
-        this.props.onSelect(this.props.weddingPartyMember);
-    };
+  onSelect = () => {
+    this.props.onSelect(this.props.weddingPartyMember);
+  };
 
-    onDelete = () => {
-        this.props.onDelete(this.props.weddingPartyMember);
-    };
+  onDelete = () => {
+    this.props.onDelete(this.props.weddingPartyMember);
+  };
 
-    render() {
-        const { weddingPartyMember: { name, title, description, imageUrl } } = this.props;
+  render() {
+    const { weddingPartyMember: { name, title, description, imageUrl } } = this.props;
 
-        return (
-            <div className={css.root}>
-                <img className={css.avatar} src={imageUrl} alt={name} />
+    return (
+      <div className={css.root}>
+        <img className={css.avatar} src={imageUrl} alt={name} />
 
-                <div className={css.textContainer}>
-                    <h3 className={css.name}>{name}</h3>
-                    <h4 className={css.title}>{title}</h4>
-                    <p className={css.description}>{description}</p>
-                </div>
+        <div className={css.textContainer}>
+          <h3 className={css.name}>{name}</h3>
+          <h4 className={css.title}>{title}</h4>
+          <p className={css.description}>{description}</p>
+        </div>
 
-                <IconButton touch onClick={this.onSelect}>
-                    <Edit />
-                </IconButton>
+        <IconButton touch onClick={this.onSelect}>
+          <Edit />
+        </IconButton>
 
-                <IconButton touch onClick={this.onDelete}>
-                    <Delete />
-                </IconButton>
-            </div>
-        );
-    }
+        <IconButton touch onClick={this.onDelete}>
+          <Delete />
+        </IconButton>
+      </div>
+    );
+  }
 }
