@@ -18,13 +18,17 @@ export function login({ email, password }) {
                 dispatch(success({ message: 'Successfully logged in' }));
                 browserHistory.push(ADMIN_ROUTE);
             },
-            types: [TYPES.LOGIN_REQUEST, TYPES.LOGIN_SUCCESS, TYPES.LOGIN_ERROR],
+            types: [
+                TYPES.LOGIN_REQUEST,
+                TYPES.LOGIN_SUCCESS,
+                TYPES.LOGIN_ERROR,
+            ],
         },
     };
 }
 
 export function logout() {
-    return (dispatch) => {
+    return dispatch => {
         removeItem(TOKEN);
         dispatch({ type: TYPES.LOGOUT });
         dispatch(success({ message: 'Successfully logged out' }));
@@ -38,10 +42,18 @@ export function requestPasswordReset(data) {
             data,
             endpoint: 'authenticate/resetPassword',
             method: HTTP_METHODS.POST,
-            onSuccess: (dispatch) => {
-                dispatch(success({ message: 'Please check your email for instructions' }));
+            onSuccess: dispatch => {
+                dispatch(
+                    success({
+                        message: 'Please check your email for instructions',
+                    })
+                );
             },
-            types: [TYPES.REQUEST_PASSWORD_RESET_REQUEST, TYPES.REQUEST_PASSWORD_RESET_SUCCESS, TYPES.REQUEST_PASSWORD_RESET_ERROR],
+            types: [
+                TYPES.REQUEST_PASSWORD_RESET_REQUEST,
+                TYPES.REQUEST_PASSWORD_RESET_SUCCESS,
+                TYPES.REQUEST_PASSWORD_RESET_ERROR,
+            ],
         },
     };
 }
@@ -52,11 +64,15 @@ export function resetPassword(data) {
             data,
             endpoint: `authenticate/resetPassword/${data.token}`,
             method: HTTP_METHODS.PUT,
-            onSuccess: (dispatch) => {
+            onSuccess: dispatch => {
                 dispatch(success({ message: 'Password reset successfully' }));
                 browserHistory.push(LOGIN_ROUTE);
             },
-            types: [TYPES.PASSWORD_RESET_REQUEST, TYPES.PASSWORD_RESET_SUCCESS, TYPES.PASSWORD_RESET_ERROR],
+            types: [
+                TYPES.PASSWORD_RESET_REQUEST,
+                TYPES.PASSWORD_RESET_SUCCESS,
+                TYPES.PASSWORD_RESET_ERROR,
+            ],
         },
     };
 }

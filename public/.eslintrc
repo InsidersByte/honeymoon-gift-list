@@ -1,6 +1,12 @@
 {
     "plugins": ["flowtype"],
-    "extends": ["airbnb", "plugin:flowtype/recommended"],
+    "extends": [
+        "airbnb",
+        "plugin:flowtype/recommended",
+        "prettier",
+        "prettier/flowtype",
+        "prettier/react"
+    ],
 
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
