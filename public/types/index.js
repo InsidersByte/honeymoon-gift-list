@@ -52,15 +52,30 @@ export type StateType = {
 };
 
 export type ActionType =
+  // Notification Actions
   | { type: 'our-wedding-heroes/notifications/SUCCESS_NOTIFICATION', +payload: { +message: string } }
   | { type: 'our-wedding-heroes/notifications/ERROR_NOTIFICATION', +payload: { +message: string } }
   | { type: 'our-wedding-heroes/notifications/HIDE_NOTIFICATION', +payload: { +id: string } }
+  // Basket Actions
   | { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', +payload: GiftType }
   | { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', +payload: GiftType }
   | { type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET', +payload: GiftType }
   | { type: 'our-wedding-heroes/basket/EMPTY_BASKET' }
+  // Users Actions
   | { type: 'our-wedding-heroes/users/OPEN_USER_MODAL' }
-  | { type: 'our-wedding-heroes/users/CLOSE_USER_MODAL' };
+  | { type: 'our-wedding-heroes/users/CLOSE_USER_MODAL' }
+  | { type: 'our-wedding-heroes/users/LOAD_USERS_REQUEST' }
+  | { type: 'our-wedding-heroes/users/LOAD_USERS_SUCCESS', +payload: UsersType }
+  | { type: 'our-wedding-heroes/users/LOAD_USERS_ERROR' }
+  | { type: 'our-wedding-heroes/users/CREATE_USER_REQUEST' }
+  | { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS' }
+  | { type: 'our-wedding-heroes/users/CREATE_USER_ERROR' }
+  | { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST' }
+  | { type: 'our-wedding-heroes/users/DELETE_USER_SUCCESS' }
+  | { type: 'our-wedding-heroes/users/DELETE_USER_ERROR' }
+  | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_REQUEST' }
+  | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_SUCCESS' }
+  | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_ERROR' };
 
 export type StoreType = ReduxStore<StateType, ActionType>;
 export type DispatchType = ReduxDispatch<ActionType>;
