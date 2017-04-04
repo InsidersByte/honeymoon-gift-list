@@ -6,21 +6,13 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Loader from './Loader';
 import ActiveUserList from './ActiveUserList';
 import InvitedUserList from './InvitedUserList';
+import type { UsersType, AuthUser } from '../types';
 
 type PropsType = {
   loading: boolean,
-  activeUsers: Array<{
-    id: number,
-    name: string,
-    email: string,
-  }>,
-  invitedUsers: Array<{
-    id: number,
-    email: string,
-  }>,
-  loggedInUser: {
-    email: string,
-  },
+  activeUsers: UsersType,
+  invitedUsers: UsersType,
+  loggedInUser: AuthUser,
   onAdd: Function,
   onDelete: Function,
 };

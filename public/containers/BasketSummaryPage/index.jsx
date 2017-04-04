@@ -22,6 +22,8 @@ const mapStateToProps = (state: StateType) => ({
   basketTotal: getBasketTotal(state),
 });
 
-const connector: Connector<PropsType, PropsType> = connect(mapStateToProps, { addToBasket, removeFromBasket, deleteFromBasket });
+const mapDispatchToProps = { addToBasket, removeFromBasket, deleteFromBasket };
+
+const connector: Connector<PropsType, PropsType> = connect(mapStateToProps, mapDispatchToProps);
 
 export default connector(BasketSummary);

@@ -4,12 +4,10 @@ import React from 'react';
 import { Avatar, ListItem, IconButton } from 'material-ui';
 import Email from 'material-ui/svg-icons/communication/email';
 import Delete from 'material-ui/svg-icons/action/delete';
+import type { UserType } from '../../types';
 
 type PropsType = {
-  user: {
-    id: number,
-    email: string,
-  },
+  user: UserType,
   onDelete: Function,
 };
 

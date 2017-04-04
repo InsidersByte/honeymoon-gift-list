@@ -43,12 +43,28 @@ export type UserType = {
   +status: 'active' | 'invite_pending' | 'invited',
 };
 
-export type UsersType = Array<UsersType>;
+export type UsersType = Array<UserType>;
+
+export type AuthUser = {
+  +email: string,
+};
 
 export type StateType = {
+  +auth: {
+    +user: AuthUser,
+    +isAuthenticated: boolean,
+    +saving: boolean,
+  },
   +basket: BasketType,
   +giftSet: GiftSetType,
   +notifications: NotificationsType,
+  +users: {
+    +userModalOpen: boolean,
+    +loading: boolean,
+    +saving: boolean,
+    +deleting: boolean,
+    +users: UsersType,
+  },
 };
 
 export type ActionType =
