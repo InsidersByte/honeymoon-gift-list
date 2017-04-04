@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/users';
+import * as actions from '../redux/users';
 import UserList from '../components/UserList';
 import User from '../components/UserDialog';
 

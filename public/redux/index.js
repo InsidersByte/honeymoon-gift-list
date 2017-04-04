@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 import auth from '../reducers/auth';
-import users from '../reducers/users';
+import users from './users';
 import notifications from './notifications';
 import weddingProfile from '../reducers/weddingProfile';
 import signUp from '../reducers/signUp';

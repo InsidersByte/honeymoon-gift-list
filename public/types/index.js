@@ -36,6 +36,15 @@ export type NotificationType = {
 
 export type NotificationsType = Array<NotificationType>;
 
+export type UserType = {
+  +id: number,
+  +name: string,
+  +email: string,
+  +status: 'active' | 'invite_pending' | 'invited',
+};
+
+export type UsersType = Array<UsersType>;
+
 export type StateType = {
   +basket: BasketType,
   +giftSet: GiftSetType,
@@ -49,7 +58,9 @@ export type ActionType =
   | { type: 'our-wedding-heroes/basket/ADD_TO_BASKET', +payload: GiftType }
   | { type: 'our-wedding-heroes/basket/REMOVE_FROM_BASKET', +payload: GiftType }
   | { type: 'our-wedding-heroes/basket/DELETE_FROM_BASKET', +payload: GiftType }
-  | { type: 'our-wedding-heroes/basket/EMPTY_BASKET' };
+  | { type: 'our-wedding-heroes/basket/EMPTY_BASKET' }
+  | { type: 'our-wedding-heroes/users/OPEN_USER_MODAL' }
+  | { type: 'our-wedding-heroes/users/CLOSE_USER_MODAL' };
 
 export type StoreType = ReduxStore<StateType, ActionType>;
 export type DispatchType = ReduxDispatch<ActionType>;
