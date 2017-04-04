@@ -1,33 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LandingWeddingPartyMember should render correctly 1`] = `
-<div
-  className="root"
->
-  <div
-    className="image"
-    style={
-      Object {
-        "backgroundImage": "url(http://image.png)",
-      }
-    }
+<styled.div>
+  <styled.div
+    imageUrl="http://image.png"
   />
-  <h1
-    className="name"
-  >
+  <styled.h1>
     Person
-  </h1>
-  <h3
-    className="title"
-  >
+  </styled.h1>
+  <styled.h3>
     "
     Title
     "
-  </h3>
-  <p
-    className="description"
-  >
+  </styled.h3>
+  <styled.p>
     this is a person
-  </p>
-</div>
+  </styled.p>
+</styled.div>
 `;

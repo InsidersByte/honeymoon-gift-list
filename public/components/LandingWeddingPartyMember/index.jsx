@@ -4,12 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 type PropsType = {
-  weddingPartyMember: {
-    name: string,
-    title: string,
-    imageUrl: string,
-    description: string,
-  },
+  +name: string,
+  +title: string,
+  +imageUrl: string,
+  +description: string,
 };
 
 const Root = styled.div`
@@ -53,7 +51,7 @@ const Description = styled.p`
   white-space: pre-wrap;
 `;
 
-const LandingWeddingPartyMember = ({ weddingPartyMember: { name, title, imageUrl, description } }: PropsType) => (
+const LandingWeddingPartyMember = ({ name, title, imageUrl, description }: PropsType) => (
   <Root>
     <BackgroundImage imageUrl={imageUrl} />
     <Title>{name}</Title>

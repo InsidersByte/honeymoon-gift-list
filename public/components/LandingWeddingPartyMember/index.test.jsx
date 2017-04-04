@@ -11,7 +11,7 @@ describe('LandingWeddingPartyMember', () => {
       description: 'this is a person',
     };
 
-    const wrapper = shallow(<LandingWeddingPartyMember weddingPartyMember={weddingPartyMember} />);
+    const wrapper = shallow(<LandingWeddingPartyMember {...weddingPartyMember} />);
 
     expect(wrapper).toMatchSnapshot();
   });
