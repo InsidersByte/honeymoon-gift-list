@@ -11,7 +11,7 @@
     "lint-css": "stylelint \"./public/**/*.{js,jsx}\"",
     "lint-stylus": "stylint ./public",
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern flow-typed/ --ext .js,.jsx .",
-    "lint": "yarn run lint-css && lint-stylus && yarn run lint-js",
+    "lint": "yarn run lint-css && yarn run lint-stylus && yarn run lint-js",
     "test": "yarn run lint && yarn run flow check && jest --coverage",
     "test:watch": "jest --watch",
     "start": "node ./server/index.js",
