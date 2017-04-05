@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 import auth from '../reducers/auth';
-import users from './users';
+import users, * as fromUsers from './users';
 import notifications from './notifications';
 import weddingProfile from '../reducers/weddingProfile';
 import signUp from '../reducers/signUp';
@@ -32,5 +32,15 @@ export default combineReducers({
   giftSets,
 });
 
+// TODO: Refactor to auth when it's refactored
+export const getLoggedInUser = (state: StateType) => state.auth.user;
+
 export const getBasketCount = (state: StateType) => fromBasket.getBasketCount(state.basket);
 export const getBasketTotal = (state: StateType) => fromBasket.getBasketTotal(state.basket);
+
+export const getActiveUsers = (state: StateType) => fromUsers.getActiveUsers(state.users);
+export const getInvitedUsers = (state: StateType) => fromUsers.getInvitedUsers(state.users);
+export const getIsModalOpen = (state: StateType) => fromUsers.getIsModalOpen(state.users);
+export const getIsLoading = (state: StateType) => fromUsers.getIsLoading(state.users);
+export const getIsSaving = (state: StateType) => fromUsers.getIsSaving(state.users);
+export const getIsDeleting = (state: StateType) => fromUsers.getIsDeleting(state.users);

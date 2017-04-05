@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { success } from './notifications';
 import { CALL_API } from '../middleware/api';
 import { HTTP_METHODS } from '../constants/api';
-import type { ActionType, UsersType, UserType } from '../types';
+import type { ActionType, UsersType, UserType, UsersStateType } from '../types';
 
 const OPEN_USER_MODAL = 'our-wedding-heroes/users/OPEN_USER_MODAL';
 const CLOSE_USER_MODAL = 'our-wedding-heroes/users/CLOSE_USER_MODAL';
@@ -21,7 +21,7 @@ const CHANGE_PASSWORD_REQUEST = 'our-wedding-heroes/users/CHANGE_PASSWORD_REQUES
 const CHANGE_PASSWORD_SUCCESS = 'our-wedding-heroes/users/CHANGE_PASSWORD_SUCCESS';
 const CHANGE_PASSWORD_ERROR = 'our-wedding-heroes/users/CHANGE_PASSWORD_ERROR';
 
-const userModalOpen = (state: boolean = false, action: ActionType) => {
+const isModalOpen = (state: boolean = false, action: ActionType) => {
   switch (action.type) {
     case OPEN_USER_MODAL:
       return true;
@@ -32,7 +32,7 @@ const userModalOpen = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const loading = (state: boolean = false, action: ActionType) => {
+const isLoading = (state: boolean = false, action: ActionType) => {
   switch (action.type) {
     case LOAD_USERS_REQUEST:
       return true;
@@ -44,7 +44,7 @@ const loading = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const saving = (state: boolean = false, action: ActionType) => {
+const isSaving = (state: boolean = false, action: ActionType) => {
   switch (action.type) {
     case CREATE_USER_REQUEST:
       return true;
@@ -56,7 +56,7 @@ const saving = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const deleting = (state: boolean = false, action: ActionType) => {
+const isDeleting = (state: boolean = false, action: ActionType) => {
   switch (action.type) {
     case DELETE_USER_REQUEST:
       return true;
@@ -83,7 +83,7 @@ const users = (state: UsersType = [], action: ActionType) => {
   }
 };
 
-export default combineReducers({ userModalOpen, loading, saving, deleting, users });
+export default combineReducers({ isModalOpen, isLoading, isSaving, isDeleting, users });
 
 export const openUserModal = (): ActionType => ({ type: OPEN_USER_MODAL });
 export const closeUserModal = (): ActionType => ({ type: CLOSE_USER_MODAL });
@@ -137,3 +137,10 @@ export const changePassword = (user: UserType) => ({
     types: [CHANGE_PASSWORD_REQUEST, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_ERROR],
   },
 });
+
+export const getActiveUsers = (state: UsersStateType): UsersType => state.users.filter(({ status }) => status === 'active');
+export const getInvitedUsers = (state: UsersStateType): UsersType => state.users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
+export const getIsLoading = (state: UsersStateType): boolean => state.isLoading;
+export const getIsSaving = (state: UsersStateType): boolean => state.isSaving;
+export const getIsDeleting = (state: UsersStateType): boolean => state.isDeleting;
+export const getIsModalOpen = (state: UsersStateType): boolean => state.isModalOpen;

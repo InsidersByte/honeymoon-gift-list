@@ -45,6 +45,14 @@ export type UserType = {
 
 export type UsersType = Array<UserType>;
 
+export type UsersStateType = {
+  +isModalOpen: boolean,
+  +isLoading: boolean,
+  +isSaving: boolean,
+  +isDeleting: boolean,
+  +users: UsersType,
+};
+
 export type AuthUser = {
   +email: string,
 };
@@ -58,13 +66,7 @@ export type StateType = {
   +basket: BasketType,
   +giftSet: GiftSetType,
   +notifications: NotificationsType,
-  +users: {
-    +userModalOpen: boolean,
-    +loading: boolean,
-    +saving: boolean,
-    +deleting: boolean,
-    +users: UsersType,
-  },
+  +users: UsersStateType,
 };
 
 export type ActionType =

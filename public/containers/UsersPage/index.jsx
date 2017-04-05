@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { loadUsers, createUser, deleteUser, openUserModal, closeUserModal } from '../../redux/users';
+import { getLoggedInUser, getActiveUsers, getInvitedUsers, getIsModalOpen, getIsLoading, getIsSaving, getIsDeleting } from '../../redux';
 import UserList from '../../components/UserList';
 import UserDialog from '../../components/UserDialog';
 import type { StateType, UserType, UsersType, AuthUser } from '../../types';
@@ -35,17 +36,15 @@ const initialUser = {
   email: '',
 };
 
-const mapStateToProps = ({ auth: { user: loggedInUser }, users: { users, ...state } }: StateType) => {
-  const activeUsers = users.filter(({ status }) => status === 'active');
-  const invitedUsers = users.filter(({ status }) => status === 'invited' || status === 'invite_pending');
-
-  return {
-    loggedInUser,
-    ...state,
-    activeUsers,
-    invitedUsers,
-  };
-};
+const mapStateToProps = (state: StateType) => ({
+  userModalOpen: getIsModalOpen(state),
+  loading: getIsLoading(state),
+  saving: getIsSaving(state),
+  deleting: getIsDeleting(state),
+  loggedInUser: getLoggedInUser(state),
+  activeUsers: getActiveUsers(state),
+  invitedUsers: getInvitedUsers(state),
+});
 
 const mapDispatchToProps = { loadUsers, createUser, deleteUser, openUserModal, closeUserModal };
 
