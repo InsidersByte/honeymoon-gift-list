@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { loadUsers, createUser, deleteUser, openUserModal, closeUserModal } from '../../redux/users';
 import UserList from '../../components/UserList';
-import User from '../../components/UserDialog';
+import UserDialog from '../../components/UserDialog';
 import type { StateType, UserType, UsersType, AuthUser } from '../../types';
 
 type UnsavedUserType = {
@@ -49,29 +49,21 @@ const mapStateToProps = ({ auth: { user: loggedInUser }, users: { users, ...stat
 
 const mapDispatchToProps = { loadUsers, createUser, deleteUser, openUserModal, closeUserModal };
 
-class UsersPage extends Component<void, PropsType, LocalStateType> {
+export class UsersPage extends Component<void, PropsType, LocalStateType> {
   state = { user: { ...initialUser } };
 
   componentDidMount() {
     this.props.loadUsers();
   }
 
-  // FIXME: This seems like a bit of a hack
-  componentWillReceiveProps({ saving: nextSaving, deleting: nextDeleting }: PropsType) {
-    const { saving, deleting } = this.props;
-
-    if (deleting && !nextDeleting) {
-      this.props.loadUsers();
+  setUserState = ({ target }: SyntheticEvent) => {
+    if (!(target instanceof HTMLInputElement)) {
+      return;
     }
 
-    if (saving && !nextSaving) {
-      this.props.loadUsers();
-    }
-  }
-
-  setUserState = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
-    const user = Object.assign(this.state.user, { [name]: value });
-    return this.setState({ user });
+    const { name, value } = target;
+    const user = { ...this.state.user, [name]: value };
+    this.setState({ user });
   };
 
   save = (event: SyntheticEvent) => {
@@ -107,7 +99,7 @@ class UsersPage extends Component<void, PropsType, LocalStateType> {
           onDelete={this.delete}
         />
 
-        <User user={user} open={open} onHide={onHide} onSubmit={this.save} onChange={this.setUserState} saving={saving} />
+        <UserDialog user={user} open={open} saving={saving} onHide={onHide} onSubmit={this.save} onChange={this.setUserState} />
       </div>
     );
   }

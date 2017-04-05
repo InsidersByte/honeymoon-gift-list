@@ -72,6 +72,12 @@ const users = (state: UsersType = [], action: ActionType) => {
   switch (action.type) {
     case LOAD_USERS_SUCCESS:
       return action.payload;
+    case CREATE_USER_SUCCESS:
+      return [...state, action.payload];
+    case DELETE_USER_REQUEST: {
+      const idToRemove = action.payload.id;
+      return state.filter(({ id }) => id !== idToRemove);
+    }
     default:
       return state;
   }

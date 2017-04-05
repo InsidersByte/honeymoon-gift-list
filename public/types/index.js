@@ -84,9 +84,9 @@ export type ActionType =
   | { type: 'our-wedding-heroes/users/LOAD_USERS_SUCCESS', +payload: UsersType }
   | { type: 'our-wedding-heroes/users/LOAD_USERS_ERROR' }
   | { type: 'our-wedding-heroes/users/CREATE_USER_REQUEST' }
-  | { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS' }
+  | { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS', +payload: UserType }
   | { type: 'our-wedding-heroes/users/CREATE_USER_ERROR' }
-  | { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST' }
+  | { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST', +payload: UserType }
   | { type: 'our-wedding-heroes/users/DELETE_USER_SUCCESS' }
   | { type: 'our-wedding-heroes/users/DELETE_USER_ERROR' }
   | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_REQUEST' }

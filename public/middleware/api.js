@@ -15,7 +15,7 @@ export default () =>
       const { data, endpoint, method, types, authenticated, onSuccess, afterSuccess, suppressGlobalError = false, onError } = callAPI;
       const [requestType, successType, errorType] = types;
 
-      next({ type: requestType });
+      next({ type: requestType, payload: data });
 
       try {
         const payload = await api({ data, endpoint, method, authenticated });

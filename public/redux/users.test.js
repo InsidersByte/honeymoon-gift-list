@@ -153,20 +153,22 @@ describe('users', () => {
     });
 
     it('should handle CREATE_USER_SUCCESS', () => {
-      expect(reducer({ ...initialState, saving: true }, { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS' })).toEqual({
+      expect(reducer({ ...initialState, saving: true }, { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS', payload: { id: 1 } })).toEqual({
         loading: false,
         saving: false,
         deleting: false,
         userModalOpen: false,
-        users: [],
+        users: [{ id: 1 }],
       });
 
-      expect(reducer({ ...initialState, saving: false }, { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS' })).toEqual({
+      expect(
+        reducer({ ...initialState, saving: false, users: [{ id: 1 }] }, { type: 'our-wedding-heroes/users/CREATE_USER_SUCCESS', payload: { id: 2 } })
+      ).toEqual({
         loading: false,
         saving: false,
         deleting: false,
         userModalOpen: false,
-        users: [],
+        users: [{ id: 1 }, { id: 2 }],
       });
     });
 
@@ -189,15 +191,22 @@ describe('users', () => {
     });
 
     it('should handle DELETE_USER_REQUEST', () => {
-      expect(reducer({ ...initialState, deleting: true }, { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST' })).toEqual({
+      expect(
+        reducer(
+          { ...initialState, deleting: true, users: [{ id: 1 }, { id: 2 }] },
+          { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST', payload: { id: 1 } }
+        )
+      ).toEqual({
         loading: false,
         saving: false,
         deleting: true,
         userModalOpen: false,
-        users: [],
+        users: [{ id: 2 }],
       });
 
-      expect(reducer({ ...initialState, deleting: false }, { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST' })).toEqual({
+      expect(
+        reducer({ ...initialState, deleting: false, users: [{ id: 1 }] }, { type: 'our-wedding-heroes/users/DELETE_USER_REQUEST', payload: { id: 1 } })
+      ).toEqual({
         loading: false,
         saving: false,
         deleting: true,
