@@ -14,7 +14,7 @@ import section from '../reducers/section';
 import basket, * as fromBasket from './basket';
 import giftSet from '../reducers/giftSet';
 import giftSets from '../reducers/giftSets';
-import type { StateType } from '../types';
+import type { StateType, AuthUser, UsersType } from '../types';
 
 export default combineReducers({
   auth,
@@ -33,14 +33,14 @@ export default combineReducers({
 });
 
 // TODO: Refactor to auth when it's refactored
-export const getLoggedInUser = (state: StateType) => state.auth.user;
+export const getLoggedInUser = (state: StateType): AuthUser => state.auth.user;
 
-export const getBasketCount = (state: StateType) => fromBasket.getBasketCount(state.basket);
-export const getBasketTotal = (state: StateType) => fromBasket.getBasketTotal(state.basket);
+export const getBasketCount = (state: StateType): number => fromBasket.getBasketCount(state.basket);
+export const getBasketTotal = (state: StateType): number => fromBasket.getBasketTotal(state.basket);
 
-export const getActiveUsers = (state: StateType) => fromUsers.getActiveUsers(state.users);
-export const getInvitedUsers = (state: StateType) => fromUsers.getInvitedUsers(state.users);
-export const getIsModalOpen = (state: StateType) => fromUsers.getIsModalOpen(state.users);
-export const getIsLoading = (state: StateType) => fromUsers.getIsLoading(state.users);
-export const getIsSaving = (state: StateType) => fromUsers.getIsSaving(state.users);
-export const getIsDeleting = (state: StateType) => fromUsers.getIsDeleting(state.users);
+export const getActiveUsers = (state: StateType): UsersType => fromUsers.getActiveUsers(state.users);
+export const getInvitedUsers = (state: StateType): UsersType => fromUsers.getInvitedUsers(state.users);
+export const getIsModalOpen = (state: StateType): boolean => fromUsers.getIsModalOpen(state.users);
+export const getIsLoading = (state: StateType): boolean => fromUsers.getIsLoading(state.users);
+export const getIsSaving = (state: StateType): boolean => fromUsers.getIsSaving(state.users);
+export const getIsDeleting = (state: StateType): boolean => fromUsers.getIsDeleting(state.users);
