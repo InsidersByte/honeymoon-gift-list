@@ -9,7 +9,7 @@ import type { UserType, AuthUser } from '../../types';
 type PropsType = {
   user: UserType,
   loggedInUser: AuthUser,
-  onDelete: Function,
+  onDelete: (user: UserType) => void,
 };
 
 const ActiveUserListItem = ({ user, loggedInUser, onDelete }: PropsType) => {

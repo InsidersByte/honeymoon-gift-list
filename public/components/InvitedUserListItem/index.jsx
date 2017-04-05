@@ -8,7 +8,7 @@ import type { UserType } from '../../types';
 
 type PropsType = {
   user: UserType,
-  onDelete: Function,
+  onDelete: (user: UserType) => void,
 };
 
 const InvitedUserListItem = ({ user, onDelete }: PropsType) => {
