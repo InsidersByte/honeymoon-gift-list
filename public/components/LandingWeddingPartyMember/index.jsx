@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-// FIXME:FLOW waiting for lib def pr to be merged
 import styled from 'styled-components';
 
 type PropsType = {

@@ -1,7 +1,6 @@
 [ignore]
-# We vendor our src directory, which is not needed for type-checking
-.*/styled-components/.*
 .*/node_modules/stylelint/lib/.*
+.*/node_modules/styled-components/.*
 
 [include]
 
