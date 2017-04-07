@@ -3,17 +3,12 @@
 import React from 'react';
 import { List, Subheader, Divider } from 'material-ui';
 import ActiveUserListItem from '../ActiveUserListItem';
+import type { UsersType, UserType, AuthUser } from '../../types';
 
 type PropsType = {
-  users: Array<{
-    id: number,
-    name: string,
-    email: string,
-  }>,
-  loggedInUser: {
-    email: string,
-  },
-  onDelete: Function,
+  users: UsersType,
+  loggedInUser: AuthUser,
+  onDelete: (user: UserType) => void,
 };
 
 const ActiveUserList = ({ users, loggedInUser, onDelete }: PropsType) => (

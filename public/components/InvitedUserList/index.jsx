@@ -3,13 +3,11 @@
 import React from 'react';
 import { List, Subheader, Divider } from 'material-ui';
 import InvitedUserListItem from '../InvitedUserListItem';
+import type { UsersType, UserType } from '../../types';
 
 type PropsType = {
-  users: Array<{
-    id: number,
-    email: string,
-  }>,
-  onDelete: Function,
+  users: UsersType,
+  onDelete: (user: UserType) => void,
 };
 
 const InvitedUserList = ({ users, onDelete }: PropsType) => {

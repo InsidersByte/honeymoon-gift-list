@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserList should render correctly 1`] = `
+<Paper
+  circle={false}
+  rounded={true}
+  transitionEnabled={true}
+  zDepth={1}
+>
+  <Toolbar
+    noGutter={false}
+  >
+    <ToolbarGroup
+      firstChild={false}
+      lastChild={false}
+    >
+      <ToolbarTitle
+        text="Users"
+      />
+    </ToolbarGroup>
+    <ToolbarGroup
+      firstChild={false}
+      lastChild={false}
+    >
+      <IconButton
+        disableTouchRipple={false}
+        disabled={false}
+        iconStyle={Object {}}
+        onClick={[Function]}
+        tooltipPosition="bottom-center"
+        touch={true}
+      >
+        <SocialPersonAdd />
+      </IconButton>
+    </ToolbarGroup>
+  </Toolbar>
+  <Loader
+    loading={true}
+  >
+    <InvitedUserList
+      onDelete={[Function]}
+      users={
+        Array [
+          Object {
+            "id": 2,
+          },
+        ]
+      }
+    />
+    <ActiveUserList
+      loggedInUser={
+        Object {
+          "email": "test@test.com",
+        }
+      }
+      onDelete={[Function]}
+      users={
+        Array [
+          Object {
+            "id": 1,
+          },
+        ]
+      }
+    />
+  </Loader>
+</Paper>
+`;

@@ -4,17 +4,12 @@ import React from 'react';
 import { Avatar, ListItem, IconButton } from 'material-ui';
 import Person from 'material-ui/svg-icons/social/person';
 import Delete from 'material-ui/svg-icons/action/delete';
+import type { UserType, AuthUser } from '../../types';
 
 type PropsType = {
-  user: {
-    id: number,
-    name: string,
-    email: string,
-  },
-  loggedInUser: {
-    email: string,
-  },
-  onDelete: Function,
+  user: UserType,
+  loggedInUser: AuthUser,
+  onDelete: (user: UserType) => void,
 };
 
 const ActiveUserListItem = ({ user, loggedInUser, onDelete }: PropsType) => {

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserDialog should render correctly 1`] = `
+<Dialog
+  autoDetectWindowHeight={true}
+  autoScrollBodyContent={false}
+  contentStyle={
+    Object {
+      "maxWidth": 550,
+    }
+  }
+  modal={false}
+  onRequestClose={[Function]}
+  open={true}
+  repositionOnUpdate={true}
+  title="Invite a New User"
+>
+  <Form
+    loading={false}
+    onSubmit={[Function]}
+    saving={true}
+  >
+    <TextField
+      disabled={false}
+      floatingLabelFixed={false}
+      floatingLabelText="Email"
+      fullWidth={true}
+      multiLine={false}
+      name="email"
+      onChange={[Function]}
+      required={true}
+      rows={1}
+      style={
+        Object {
+          "margin": "6px 0",
+        }
+      }
+      type="email"
+      underlineShow={true}
+      value="test@test.com"
+    />
+    <ProgressButton
+      fullWidth={true}
+      label="Send Invitation Now"
+      saving={true}
+      style={
+        Object {
+          "marginTop": 12,
+        }
+      }
+    />
+  </Form>
+</Dialog>
+`;

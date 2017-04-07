@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersPage should render correctly 1`] = `
+<div>
+  <UserList
+    activeUsers={
+      Array [
+        Object {
+          "id": 1,
+        },
+      ]
+    }
+    invitedUsers={
+      Array [
+        Object {
+          "id": 2,
+        },
+      ]
+    }
+    loading={true}
+    loggedInUser={
+      Object {
+        "email": "test@test.com",
+      }
+    }
+    onAdd={[Function]}
+    onDelete={[Function]}
+  />
+  <UserDialog
+    onChange={[Function]}
+    onHide={[Function]}
+    onSubmit={[Function]}
+    open={true}
+    saving={true}
+    user={
+      Object {
+        "email": "",
+      }
+    }
+  />
+</div>
+`;
