@@ -45,16 +45,34 @@ export type UserType = {
 
 export type UsersType = Array<UserType>;
 
+export type SectionIdType = number;
+
+export type SectionType = {
+  +id: SectionIdType,
+  +title: string,
+  +hidden: boolean,
+  +position: number,
+};
+
+export type SectionsType = Array<SectionType>;
+
+export type AuthUser = {
+  +email: string,
+};
+
+export type SectionsStateType = {
+  +isLoading: boolean,
+  +isSaving: boolean,
+  +isDeleting: boolean,
+  +sections: SectionsType,
+};
+
 export type UsersStateType = {
   +isModalOpen: boolean,
   +isLoading: boolean,
   +isSaving: boolean,
   +isDeleting: boolean,
   +users: UsersType,
-};
-
-export type AuthUser = {
-  +email: string,
 };
 
 export type StateType = {
@@ -93,7 +111,24 @@ export type ActionType =
   | { type: 'our-wedding-heroes/users/DELETE_USER_ERROR' }
   | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_REQUEST' }
   | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_SUCCESS' }
-  | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_ERROR' };
+  | { type: 'our-wedding-heroes/users/CHANGE_PASSWORD_ERROR' }
+  // Sections Actions
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTIONS_REQUEST' }
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTIONS_SUCCESS', +payload: SectionsType }
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTIONS_ERROR' }
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTION_REQUEST' }
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTION_SUCCESS', +payload: SectionType }
+  | { type: 'our-wedding-heroes/sections/LOAD_SECTION_ERROR' }
+  | { type: 'our-wedding-heroes/sections/CREATE_SECTION_REQUEST' }
+  | { type: 'our-wedding-heroes/sections/CREATE_SECTION_SUCCESS', +payload: SectionType }
+  | { type: 'our-wedding-heroes/sections/CREATE_SECTION_ERROR' }
+  | { type: 'our-wedding-heroes/sections/UPDATE_SECTION_REQUEST' }
+  | { type: 'our-wedding-heroes/sections/UPDATE_SECTION_SUCCESS', +payload: SectionType }
+  | { type: 'our-wedding-heroes/sections/UPDATE_SECTION_ERROR' }
+  | { type: 'our-wedding-heroes/sections/DELETE_SECTION_REQUEST', +payload: SectionType }
+  | { type: 'our-wedding-heroes/sections/DELETE_SECTION_SUCCESS' }
+  | { type: 'our-wedding-heroes/sections/DELETE_SECTION_ERROR' }
+  | { type: 'our-wedding-heroes/sections/MOVE_SECTION', +payload: { sourceId: SectionIdType, targetId: SectionIdType } };
 
 export type StoreType = ReduxStore<StateType, ActionType>;
 export type DispatchType = ReduxDispatch<ActionType>;

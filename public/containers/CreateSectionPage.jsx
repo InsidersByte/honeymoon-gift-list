@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/section';
+import * as actions from '../redux/sections';
 import SectionForm from '../components/SectionForm';
 
 type PropsType = {

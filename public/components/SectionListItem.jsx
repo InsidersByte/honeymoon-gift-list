@@ -6,27 +6,18 @@ import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
 import Visibility from 'material-ui/svg-icons/action/visibility';
 import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
+import type { SectionType } from '../types';
 import css from './SectionListItem.styl';
 
 type PropsType = {
-  section: {
-    title: string,
-    hidden: boolean,
-  },
+  section: SectionType,
   onSelect: Function,
-  onToggleVisibility: Function,
   onDelete: Function,
 };
 
-export default class SectionListItem extends Component {
-  props: PropsType;
-
+export default class SectionListItem extends Component<void, PropsType, void> {
   onSelect = () => {
     this.props.onSelect(this.props.section);
-  };
-
-  onToggleVisibility = () => {
-    this.props.onToggleVisibility(this.props.section);
   };
 
   onDelete = () => {
@@ -48,7 +39,7 @@ export default class SectionListItem extends Component {
           <Edit />
         </IconButton>
 
-        <IconButton touch onClick={this.onToggleVisibility} disabled>
+        <IconButton disabled>
           {hidden ? <VisibilityOff /> : <Visibility />}
         </IconButton>
 

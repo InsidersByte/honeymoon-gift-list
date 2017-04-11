@@ -7,23 +7,19 @@ import Loader from './Loader';
 import SortableContainer from './SortableContainer';
 import SortableItem from './SortableItem';
 import SectionListItem from './SectionListItem';
+import type { SectionsType } from '../types';
 
 type PropsType = {
   loading: boolean,
-  sections: Array<{
-    id: number,
-    title: string,
-    hidden: boolean,
-  }>,
+  sections: SectionsType,
   onAdd: Function,
   onSelect: Function,
   onMove: Function,
   onDrop: Function,
-  onToggleVisibility: Function,
   onDelete: Function,
 };
 
-export default function SectionList({ loading, sections, onAdd, onSelect, onMove, onDrop, onToggleVisibility, onDelete }: PropsType) {
+export default function SectionList({ loading, sections, onAdd, onSelect, onMove, onDrop, onDelete }: PropsType) {
   return (
     <Paper>
       <Toolbar>
@@ -42,7 +38,7 @@ export default function SectionList({ loading, sections, onAdd, onSelect, onMove
         <SortableContainer>
           {sections.map(section => (
             <SortableItem key={section.id} id={section.id} onMove={onMove} onDrop={onDrop}>
-              <SectionListItem section={section} onSelect={onSelect} onToggleVisibility={onToggleVisibility} onDelete={onDelete} />
+              <SectionListItem section={section} onSelect={onSelect} onDelete={onDelete} />
 
               <Divider />
             </SortableItem>

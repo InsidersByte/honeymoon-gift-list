@@ -9,8 +9,7 @@ import signUp from '../reducers/signUp';
 import weddingPartyMembers from '../reducers/weddingPartyMembers';
 import weddingPartyMember from '../reducers/weddingPartyMember';
 import gifts from '../reducers/gifts';
-import sections from '../reducers/sections';
-import section from '../reducers/section';
+import sections from '../redux/sections';
 import basket, * as fromBasket from './basket';
 import giftSet from '../reducers/giftSet';
 import giftSets from '../reducers/giftSets';
@@ -26,7 +25,6 @@ export default combineReducers({
   weddingPartyMember,
   gifts,
   sections,
-  section,
   basket,
   giftSet,
   giftSets,

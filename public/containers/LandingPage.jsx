@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import * as weddingProfileActions from '../actions/weddingProfile';
-import * as sectionActions from '../actions/section';
+import * as sectionActions from '../redux/sections';
 import * as weddingPartyMembersActions from '../actions/weddingPartyMember';
 import * as giftActions from '../actions/gift';
 import * as basketActions from '../redux/basket';

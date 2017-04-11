@@ -97,7 +97,7 @@
     "errorhandler": "1.5.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
-    "eslint-config-prettier": "1.5.0",
+    "eslint-config-prettier": "1.6.0",
     "eslint-loader": "1.7.1",
     "eslint-plugin-flowtype": "2.30.4",
     "eslint-plugin-import": "2.2.0",

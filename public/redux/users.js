@@ -21,7 +21,7 @@ const CHANGE_PASSWORD_REQUEST = 'our-wedding-heroes/users/CHANGE_PASSWORD_REQUES
 const CHANGE_PASSWORD_SUCCESS = 'our-wedding-heroes/users/CHANGE_PASSWORD_SUCCESS';
 const CHANGE_PASSWORD_ERROR = 'our-wedding-heroes/users/CHANGE_PASSWORD_ERROR';
 
-const isModalOpen = (state: boolean = false, action: ActionType) => {
+const isModalOpen = (state: boolean = false, action: ActionType): boolean => {
   switch (action.type) {
     case OPEN_USER_MODAL:
       return true;
@@ -32,7 +32,7 @@ const isModalOpen = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const isLoading = (state: boolean = false, action: ActionType) => {
+const isLoading = (state: boolean = false, action: ActionType): boolean => {
   switch (action.type) {
     case LOAD_USERS_REQUEST:
       return true;
@@ -44,7 +44,7 @@ const isLoading = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const isSaving = (state: boolean = false, action: ActionType) => {
+const isSaving = (state: boolean = false, action: ActionType): boolean => {
   switch (action.type) {
     case CREATE_USER_REQUEST:
       return true;
@@ -56,7 +56,7 @@ const isSaving = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const isDeleting = (state: boolean = false, action: ActionType) => {
+const isDeleting = (state: boolean = false, action: ActionType): boolean => {
   switch (action.type) {
     case DELETE_USER_REQUEST:
       return true;
@@ -68,7 +68,7 @@ const isDeleting = (state: boolean = false, action: ActionType) => {
   }
 };
 
-const users = (state: UsersType = [], action: ActionType) => {
+const users = (state: UsersType = [], action: ActionType): UsersType => {
   switch (action.type) {
     case LOAD_USERS_SUCCESS:
       return action.payload;
