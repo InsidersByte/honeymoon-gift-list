@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { GIFT_SETS_ROUTE } from '../constants/routes';
 import Loader from './Loader';
 import GiftTable from './GiftTable';

@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router-dom';
 import { createAction } from 'redux-actions';
 import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';

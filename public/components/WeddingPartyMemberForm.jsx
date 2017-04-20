@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton } from 'material-ui';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routes';
 import ProgressButton from './ProgressButton';
 import Form from './Form';

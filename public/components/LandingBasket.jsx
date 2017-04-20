@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Badge } from 'material-ui';
 import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
 import { white } from 'material-ui/styles/colors';

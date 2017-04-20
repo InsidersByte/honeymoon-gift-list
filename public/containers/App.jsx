@@ -1,13 +1,15 @@
 /* @flow */
 
-import React from 'react';
+import React, { Component } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import * as actions from '../redux/notifications';
+import Main from './Main';
+import Admin from './Admin';
 
 type PropsType = {
-  children: React$Element<any>,
   notifications: Array<Object>,
   actions: {
     hideNotification: Function,
@@ -35,7 +37,7 @@ const styles = {
   },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-export default class App extends React.Component {
+export default class App extends Component {
   props: PropsType;
 
   componentWillReceiveProps({ notifications, actions: { hideNotification } }: PropsType) {
@@ -57,7 +59,10 @@ export default class App extends React.Component {
     return (
       <div style={styles.root}>
         <div style={styles.container}>
-          {this.props.children}
+          <Switch>
+            <Route path="/admin" component={Admin} />
+            <Route component={Main} />
+          </Switch>
         </div>
 
         <NotificationSystem

@@ -3,7 +3,7 @@
 import React from 'react';
 
 type PropsType = {
-  children: React$Element<any>,
+  children?: ReactClass<*>,
 };
 
 const styles = {
@@ -19,7 +19,7 @@ const styles = {
   },
 };
 
-const AdminLoggedIn = ({ children }: PropsType) => (
+const AdminContainerUnauthenticated = ({ children }: PropsType) => (
   <div style={styles.root}>
     <div style={styles.container}>
       {children}
@@ -27,4 +27,4 @@ const AdminLoggedIn = ({ children }: PropsType) => (
   </div>
 );
 
-export default AdminLoggedIn;
+export default AdminContainerUnauthenticated;

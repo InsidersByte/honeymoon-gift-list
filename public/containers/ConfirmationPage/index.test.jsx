@@ -10,7 +10,7 @@ const props = {
     paymentMethod: 'method',
     paypalLink: 'http://paypal.me',
   },
-  params: { giftSetId: 1 },
+  match: { params: { giftSetId: 1 } },
   actions: { loadGiftSet },
 };
 

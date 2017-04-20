@@ -1,17 +1,35 @@
 /* @flow */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { ADMIN_ROUTE } from '../../constants/routes';
 
-const NoMatchAdmin = () => (
-  <div>
-    <h1>Page not found</h1>
+const styles = {
+  root: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    minHeight: '75%',
+  },
+  title: {
+    marginBottom: 15,
+  },
+  content: {
+    marginBottom: 20,
+  },
+};
 
-    <p>Woops! Sorry, there is nothing to see here.</p>
+const NoMatch = () => (
+  <div style={styles.root}>
+    <h1 style={styles.title}>Page not found</h1>
 
-    <p><Link to={ADMIN_ROUTE}>Back to Admin</Link></p>
+    <div style={styles.content}>
+      Woops! Sorry, there is nothing to see here.
+    </div>
+
+    <Link to={ADMIN_ROUTE}>Back to Admin</Link>
   </div>
 );
 
-export default NoMatchAdmin;
+export default NoMatch;

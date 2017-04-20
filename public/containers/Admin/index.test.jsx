@@ -4,7 +4,7 @@ import Admin from './';
 
 describe('Admin', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<Admin />);
+    const wrapper = shallow(<Admin match={{ url: '/admin' }} />);
 
     expect(wrapper).toMatchSnapshot();
   });

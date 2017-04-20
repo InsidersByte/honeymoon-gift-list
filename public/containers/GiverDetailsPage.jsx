@@ -1,23 +1,22 @@
 /* @flow */
 
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import type { RouterHistory } from 'react-router-dom';
 import * as actions from '../actions/giftSet';
 import GiverDetailsForm from '../components/GiverDetailsForm';
-import { HOME_ROUTE } from '../constants/routes';
+import { HOME_ROUTE, confirmationPageRoute } from '../constants/routes';
 
 type PropsType = {
   saving: boolean,
   basket: Map<number, Object>,
   basketCount: number,
-  router: {
-    replace: Function,
-  },
   actions: {
     createGiftSet: Function,
   },
+  history: RouterHistory,
 };
 
 @withRouter
@@ -52,10 +51,10 @@ export default class GiverDetailsPage extends React.Component {
   };
 
   componentWillMount() {
-    const { basketCount, router: { replace } } = this.props;
+    const { basketCount, history } = this.props;
 
     if (basketCount <= 0) {
-      replace(HOME_ROUTE);
+      history.replace(HOME_ROUTE);
     }
   }
 
@@ -72,12 +71,15 @@ export default class GiverDetailsPage extends React.Component {
   onSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const { basket, actions: { createGiftSet } } = this.props;
+    const { basket, actions: { createGiftSet }, history } = this.props;
 
-    createGiftSet({
-      giver: this.state.giver,
-      basket: [...basket.values()],
-    });
+    createGiftSet(
+      {
+        giver: this.state.giver,
+        basket: [...basket.values()],
+      },
+      ({ id }) => history.push(confirmationPageRoute(id))
+    );
   };
 
   render() {

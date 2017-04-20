@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, RaisedButton, RadioButton, RadioButtonGroup } from 'material-ui';
 import { BASKET_ROUTE } from '../constants/routes';
 import Form from './Form';

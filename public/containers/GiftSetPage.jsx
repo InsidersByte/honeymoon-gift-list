@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

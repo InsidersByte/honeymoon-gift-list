@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { RaisedButton, Divider } from 'material-ui';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routes';
 import BasketSummaryListItem from '../BasketSummaryListItem';
 import type { BasketType, ItemType } from '../../types';

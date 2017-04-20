@@ -1,12 +1,14 @@
 /* @flow */
 
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { getMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { lightGreen500 } from 'material-ui/styles/colors';
-
-type PropsType = {
-  children: React$Element<any>,
-};
+import LandingPage from '../LandingPage';
+import BasketSummaryPage from '../BasketSummaryPage';
+import GiverDetailsPage from '../GiverDetailsPage';
+import ConfirmationPage from '../ConfirmationPage';
+import NoMatch from '../../components/NoMatch';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -14,9 +16,15 @@ const muiTheme = getMuiTheme({
   },
 });
 
-const Main = ({ children }: PropsType) => (
+const Main = () => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    {children}
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/basket" component={BasketSummaryPage} />
+      <Route path="/giver" component={GiverDetailsPage} />
+      <Route path="/confirmation/:giftSetId" component={ConfirmationPage} />
+      <Route component={NoMatch} />
+    </Switch>
   </MuiThemeProvider>
 );
 

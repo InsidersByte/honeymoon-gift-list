@@ -418,5 +418,82 @@ exports[`Admin should render correctly 1`] = `
       },
     }
   }
-/>
+>
+  <Connect(AdminContainer)>
+    <Switch>
+      <Route
+        exact={true}
+        path="/admin"
+        render={[Function]}
+      />
+      <Connect(UnauthenticatedRoute)
+        component={[Function]}
+        path="/admin/setup"
+      />
+      <Connect(UnauthenticatedRoute)
+        component={[Function]}
+        path="/admin/login"
+      />
+      <Connect(UnauthenticatedRoute)
+        component={[Function]}
+        path="/admin/reset/:token"
+      />
+      <Connect(UnauthenticatedRoute)
+        component={[Function]}
+        path="/admin/signUp/:token"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/profile"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/weddingProfile"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/gift"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/section"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/section/create"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/section/:id"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/user"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/giftSet"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/giftSet/:giftSetId"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/weddingPartyMember"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/weddingPartyMember/create"
+      />
+      <Connect(AuthenticatedRoute)
+        component={[Function]}
+        path="/admin/weddingPartyMember/:id"
+      />
+      <Route
+        component={[Function]}
+      />
+    </Switch>
+  </Connect(AdminContainer)>
+</MuiThemeProvider>
 `;

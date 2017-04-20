@@ -31,8 +31,7 @@ exports[`NoMatch should render correctly 1`] = `
     Woops! Sorry, there is nothing to see here.
   </div>
   <Link
-    onlyActiveOnIndex={false}
-    style={Object {}}
+    replace={false}
     to="/"
   >
     Back to Home

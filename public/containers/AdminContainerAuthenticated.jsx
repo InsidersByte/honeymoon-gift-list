@@ -1,26 +1,31 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { AppBar } from 'material-ui';
 import { spacing } from 'material-ui/styles';
 import withWidth, { LARGE } from 'material-ui/utils/withWidth';
-import * as actions from '../actions/auth';
+import type { Connector } from 'react-redux';
+import type { RouterHistory } from 'react-router-dom';
+import { logout } from '../actions/auth';
 import NavigationDrawer from '../components/NavigationDrawer';
 
-type PropsType = {
+type OwnPropsType = {};
+
+type PropsType = OwnPropsType & {
   isAuthenticated: boolean,
   width: number,
   user: {
     name: string,
   },
-  actions: {
-    logout: Function,
-  },
-  router: Object,
-  children: React$Element<any>,
+  logout: () => void,
+  history: RouterHistory,
+  children?: ReactClass<*>,
+};
+
+type StateType = {
+  navDrawerOpen: boolean,
 };
 
 const getStyles = () => ({
@@ -30,12 +35,10 @@ const getStyles = () => ({
   },
 });
 
-@withWidth({ largeWidth: 1200 })
-@withRouter
-@connect(({ auth }) => auth, dispatch => ({ actions: bindActionCreators(actions, dispatch) }))
-export default class AdminLoggedIn extends Component {
-  props: PropsType;
+const mapStateToProps = ({ auth }) => auth;
+const mapDispatchToProps = { logout };
 
+export class AdminContainerAuthenticated extends Component<void, PropsType, StateType> {
   state = {
     navDrawerOpen: false,
   };
@@ -49,16 +52,16 @@ export default class AdminLoggedIn extends Component {
   };
 
   handleChangeList = (event: SyntheticEvent, value: string) => {
-    const { router } = this.props;
+    const { history } = this.props;
 
-    router.push(value);
+    history.push(value);
 
     this.setState({ navDrawerOpen: false });
   };
 
   logout = (event: SyntheticEvent) => {
     event.preventDefault();
-    this.props.actions.logout();
+    this.props.logout();
     this.setState({ navDrawerOpen: false });
   };
 
@@ -101,3 +104,7 @@ export default class AdminLoggedIn extends Component {
     );
   }
 }
+
+const connector: Connector<OwnPropsType, PropsType> = connect(mapStateToProps, mapDispatchToProps);
+
+export default withWidth({ largeWidth: 1200 })(withRouter(connector(AdminContainerAuthenticated)));

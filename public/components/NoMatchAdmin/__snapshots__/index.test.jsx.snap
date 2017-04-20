@@ -1,21 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoMatchAdmin should render correctly 1`] = `
-<div>
-  <h1>
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "minHeight": "75%",
+    }
+  }
+>
+  <h1
+    style={
+      Object {
+        "marginBottom": 15,
+      }
+    }
+  >
     Page not found
   </h1>
-  <p>
+  <div
+    style={
+      Object {
+        "marginBottom": 20,
+      }
+    }
+  >
     Woops! Sorry, there is nothing to see here.
-  </p>
-  <p>
-    <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/admin"
-    >
-      Back to Admin
-    </Link>
-  </p>
+  </div>
+  <Link
+    replace={false}
+    to="/admin"
+  >
+    Back to Admin
+  </Link>
 </div>
 `;

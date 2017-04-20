@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, TextField, Checkbox, IconButton, RaisedButton } from 'material-ui';
 import InfoOutline from 'material-ui/svg-icons/action/info-outline';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';

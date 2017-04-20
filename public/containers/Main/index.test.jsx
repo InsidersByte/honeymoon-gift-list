@@ -4,7 +4,7 @@ import Main from './';
 
 describe('Main', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<Main />);
+    const wrapper = shallow(<Main match={{ url: '/' }} />);
 
     expect(wrapper).toMatchSnapshot();
   });

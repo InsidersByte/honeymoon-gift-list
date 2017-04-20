@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import DevTools from '../DevTools';
-import routes from '../../routes';
+import App from '../App';
 
 type PropsType = {
   store: Object,
@@ -20,8 +20,8 @@ const styles = {
 const Root = ({ store }: PropsType) => (
   <Provider store={store}>
     <div style={styles.root}>
-      <Router history={browserHistory}>
-        {routes(store)}
+      <Router>
+        <Route component={App} />
       </Router>
 
       <DevTools />

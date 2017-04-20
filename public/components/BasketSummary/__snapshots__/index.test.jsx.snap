@@ -66,8 +66,7 @@ exports[`BasketSummary should render correctly 1`] = `
       <RaisedButton
         containerElement={
           <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="giver"
           >
             Proceed to Checkout
@@ -90,8 +89,7 @@ exports[`BasketSummary should render correctly 1`] = `
       <RaisedButton
         containerElement={
           <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="/"
           >
             Back to Home
@@ -134,8 +132,7 @@ exports[`BasketSummary should render if the basket count is 0 1`] = `
       <RaisedButton
         containerElement={
           <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="/"
           >
             Back to Home
@@ -219,8 +216,7 @@ exports[`BasketSummary should singularise items if there is only one item in the
       <RaisedButton
         containerElement={
           <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="giver"
           >
             Proceed to Checkout
@@ -243,8 +239,7 @@ exports[`BasketSummary should singularise items if there is only one item in the
       <RaisedButton
         containerElement={
           <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="/"
           >
             Back to Home

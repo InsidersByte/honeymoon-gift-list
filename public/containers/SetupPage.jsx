@@ -1,9 +1,10 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import type { RouterHistory } from 'react-router-dom';
 import type { Connector } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { success, error } from '../redux/notifications';
 import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
 import SetupForm from '../components/SetupForm';
@@ -14,6 +15,7 @@ import { ADMIN_ROUTE } from '../constants/routes';
 type PropsType = {
   onSuccess: Function,
   onError: Function,
+  history: RouterHistory,
 };
 
 type LocalStateType = {
@@ -50,7 +52,7 @@ export class SetupPage extends Component<void, PropsType, LocalStateType> {
   submit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const { onSuccess, onError } = this.props;
+    const { onSuccess, onError, history } = this.props;
     const { user } = this.state;
     const { password, confirmPassword } = user;
 
@@ -69,7 +71,7 @@ export class SetupPage extends Component<void, PropsType, LocalStateType> {
     try {
       await api({ endpoint: 'setup', method: HTTP_METHODS.POST, data: user });
       onSuccess({ message: 'You are all setup up' });
-      browserHistory.push(ADMIN_ROUTE);
+      history.push(ADMIN_ROUTE);
     } catch (err) {
       onError(err);
     } finally {
@@ -86,4 +88,4 @@ export class SetupPage extends Component<void, PropsType, LocalStateType> {
 
 const connector: Connector<PropsType, PropsType> = connect(null, { onSuccess: success, onError: error });
 
-export default connector(SetupPage);
+export default withRouter(connector(SetupPage));
